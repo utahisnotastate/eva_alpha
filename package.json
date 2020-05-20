@@ -3,18 +3,51 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fav/type.to-date": "^1.0.2",
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "chartist": "^0.11.4",
+    "classnames": "^2.2.6",
+    "electron-is-dev": "^1.2.0",
+    "formik": "^2.1.4",
+    "lodash": "^4.17.15",
+    "lodash-move": "^1.1.1",
+    "moment": "^2.25.3",
+    "mui-datatables": "^2.14.0",
+    "node-sass": "^4.14.1",
+    "perfect-scrollbar": "^1.5.0",
     "react": "^16.13.1",
+    "react-autosuggest": "^10.0.2",
+    "react-big-calendar": "^0.24.6",
+    "react-bootstrap-typeahead": "^5.0.0-rc.1",
+    "react-chartist": "^0.14.3",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-formik-ui": "^4.1.2",
+    "react-hanger": "^2.2.1",
+    "react-hook-form": "^5.7.2",
+    "react-hook-form-input": "^1.1.10",
+    "react-jsonschema-form": "^1.8.1",
+    "react-modal-hook": "^3.0.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-select": "^3.1.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "rhfa-material-ui": "^1.1.0",
+    "rjsf-material-ui": "^0.3.9"
   },
+  "main": "public/electron.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +63,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
+    "wait-on": "^5.0.0"
   }
 }
