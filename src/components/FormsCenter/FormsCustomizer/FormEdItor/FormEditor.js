@@ -31,6 +31,11 @@ const useStyles = makeStyles({
     }
 });
 
+function NoOptionsField(props) {
+
+}
+
+
 function FieldOptionsEditor(props) {
     switch(props.type) {
         case 'checkbox_group':
@@ -38,7 +43,7 @@ function FieldOptionsEditor(props) {
         case 'radio':
             return <TextField name={`new_field_options`} inputRef={props.register}  multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />
         default:
-            return <Typography>No Options for this field</Typography> ;
+            return <TextField name={`new_field_options`} inputRef={props.register} variant={`filled`} disabled helperText={`No options available for this type of field`} value={false} />;
     }
 }
 
@@ -65,6 +70,26 @@ export default function FormEditor(props) {
     const handleNewFieldTypeChange = event => {
         setNewFieldType(event.target.value);
     }
+
+    const handleAddField = (methods) => {
+        const values = methods.getValues();
+        console.log('New Form Field Values are: ' + JSON.stringify(values));
+        // console.log('New FOrm Field options is ' + values.new_field_options);
+        const formField = {
+            label: values.new_field_label,
+            type: values.new_field_type
+        }
+
+        if (values.new_field_options === 'false') {
+            console.log("It's false!!");
+            addSimpleNewFormField(formId, formField ).then(response => {
+                fetchFormFields(formId).then(response => {
+                    dispatch({type: 'load_updated_array', newarray: response})
+                })
+            })
+        }
+
+    }
     useEffect(() => {
         fetchFormFields(formId).then(response => {
             dispatch({type: 'load_updated_array', newarray: response})
@@ -81,9 +106,10 @@ export default function FormEditor(props) {
                                 as={<TextField variant={`outlined`}  />}
                                 control={methods.control}
                                         />
-                                        <NavLink to={`/formscenter/${formId}/preview`}>
-                                            <Button color={`primary`}>Preview Form</Button>
-                                        </NavLink>
+
+                            <NavLink to={`/formscenter/${formId}/preview`}>
+                                <Button color={`primary`}>Preview Form</Button>
+                            </NavLink>
                         </Grid>
                     </Grid>
                     <Grid item>
@@ -127,7 +153,7 @@ export default function FormEditor(props) {
                                         <FieldOptionsEditor type={newfieldtype} register={methods.register} />
                                     </Grid>
                                     <Grid item className={classes.addfielditem}>
-                                        <Button onClick={() => {console.log('Clicked!')}}>Add Fields</Button>
+                                        <Button onClick={() => {handleAddField(methods)}}>Add Field</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
