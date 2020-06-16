@@ -4,7 +4,7 @@ import axios from "axios";
 import {useArray} from "react-hanger";
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm, Controller, FormContext } from 'react-hook-form';
-import {fetchFormFields} from "../../../api/forms.api";
+import {fetchForm} from "../../../api/forms.api";
 import {TextField, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "../../basestyledcomponents/Button";
@@ -22,34 +22,34 @@ export default function FormPreview(props) {
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
     let { formId } = useParams();
-    const previewtitle = useSelector(state => state.formsmanager.formpreview.previewtitle);
-    const previewfields = useSelector(state => state.formsmanager.formpreview.previewfields);
+    const [title, setTitle] = useState('');
+    const [fields, setFields] = useState({});
+    // const previewtitle = useSelector(state => state.formsmanager.formpreview.previewtitle);
+    // const previewfields = useSelector(state => state.formsmanager.formpreview.previewfields);
     console.log('form preview url is: ' + url);
 
     useEffect(() => {
-        const fetchFormDetails = async () => {
-            const result = await axios(`${API_URL}/forms/${formId}/`);
-            return result.data;
-        };
-        fetchFormDetails().then(response => {
+
+        fetchForm(formId).then(response => {
             console.log(response);
-            dispatch({type: 'update_preview_title', title: response.title})
-            fetchFormFields(formId).then(response => {
+            setTitle(response.title);
+            setFields(response.form);
+            // dispatch({type: 'update_preview_title', title: response.title})
+            /*fetchFormFields(formId).then(response => {
                 dispatch({type: 'load_fields', fields: response});
-            })
+            })*/
 
         })
     }, []);
-    console.log(previewfields);
     return (
         <Grid container>
             <Grid item xs={10}>
                 <Card>
                     <CardHeader color={`primary`}>
-                        <h4>{previewtitle}</h4>
+                        <h4>{title}</h4>
                     </CardHeader>
                     <CardBody>
-                        <FormGenerator formfields={previewfields}/>
+                        <FormGenerator formfields={fields}/>
                     </CardBody>
                     <CardFooter>
                         <NavLink to={`/formscenter/${formId}/edit`}>
@@ -61,3 +61,10 @@ export default function FormPreview(props) {
         </Grid>
     );
 }
+
+/*
+const fetchFormDetails = async () => {
+            const result = await axios(`${API_URL}/forms/${formId}/`);
+            return result.data;
+        };
+ */

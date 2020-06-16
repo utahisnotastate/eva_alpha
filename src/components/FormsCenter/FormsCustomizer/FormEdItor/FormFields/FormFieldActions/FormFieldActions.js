@@ -23,11 +23,11 @@ export default function FormFieldActions(props) {
         <Grid item xs={4}>
             <Grid container direction={`row`} justify={`space-around`}>
             <Grid item>
-                {props.index === 0 ? null : (<Button justIcon round color={`primary`}><ArrowUpwardIcon/></Button>)}
+
 
             </Grid>
             <Grid item>
-                {props.length === props.index + 1 ? null: (<Button justIcon round color={`primary`} onClick={() => handleMove(props.index, props.index + 1)}><ArrowDownwardIcon/></Button>)}
+
 
             </Grid>
             <Grid item>
@@ -37,3 +37,9 @@ export default function FormFieldActions(props) {
         </Grid>
     )
 }
+
+/*
+{props.index === 0 ? null : (<Button justIcon round color={`primary`}><ArrowUpwardIcon/></Button>)}
+{props.length === props.index + 1 ? null: (<Button justIcon round color={`primary`} onClick={() => handleMove(props.index, props.index + 1)}><ArrowDownwardIcon/></Button>)}
+
+ */

@@ -10,14 +10,20 @@ import SingleField from "./singlefield";
 export default function FormGenerator(props) {
     return (
         <Grid container direction={`column`}>
-            {props.formfields.map(formfield => (
-                <SingleField label={formfield.label} type={formfield.type} checked={false} name={formfield.name}/>
-            ))}
+            {Object.keys(props.formfields).map(field => {
+                return (
+                    <SingleField label={props.formfields[field].label} type={props.formfields[field].type} checked={false} />
+                );
+            })}
         </Grid>
     );
 }
 
 /*
+
+props.formfields.map(formfield => (
+                <SingleField label={formfield.label} type={formfield.type} checked={false} name={formfield.name}/>
+            ))
 <Grid container direction={`row`}>
             <Grid item xs={4}>
                 <Grid container direction={`column`}>

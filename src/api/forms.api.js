@@ -11,20 +11,29 @@ export const fetchForm = async  (formId) => {
     return result.data;
 };
 
-export const fetchFormFields = async  (formId) => {
+export const updateForm = async (formId, formData) => {
+   const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
+       form_type: formData.form_type,
+       title: formData.form_title,
+       form: formData.formfields
+   });
+   return result.data;
+}
+
+/*export const fetchFormFields = async  (formId) => {
     const result = await axios(`${API_URL}/forms/${formId}/formfields/`);
     return result.data;
-};
+};*/
 
-export const addFormFieldOption = async (formId, formFieldId, option) => {
+/*export const addFormFieldOption = async (formId, formFieldId, option) => {
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/${formFieldId}/options/`, {
         form_field: formFieldId,
         label: option.label,
     });
     return result.data;
-}
+}*/
 
-const createFormFieldWithOption = async (formId, formField) => {
+/*const createFormFieldWithOption = async (formId, formField) => {
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/`, {
         form: formId,
         label: formField.label,
@@ -32,10 +41,10 @@ const createFormFieldWithOption = async (formId, formField) => {
         has_options: true,
     });
     return result.data;
-}
+}*/
 
 
-export const addNewFormFieldWithOptions = async (formId, formField, options) => {
+/*export const addNewFormFieldWithOptions = async (formId, formField, options) => {
     createFormFieldWithOption(formId, formField).then(response => {
         let optionposts = []
         options.forEach(option => {
@@ -45,8 +54,8 @@ export const addNewFormFieldWithOptions = async (formId, formField, options) => 
         return axios.all(optionposts)
     })
 
-}
-export const addSimpleNewFormField = async (formId, formField) => {
+}*/
+/*export const addSimpleNewFormField = async (formId, formField) => {
     console.log('adding field!')
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/`, {
         form: formId,
@@ -56,9 +65,9 @@ export const addSimpleNewFormField = async (formId, formField) => {
     });
     console.log(result);
     return result;
-}
+}*/
 
-export const addNewFormField = async(formId, formField) => {
+/*export const addNewFormField = async(formId, formField) => {
     let fieldOptions = formField.options;
     if(fieldOptions === undefined) {
         const result = await axios.post(`${API_URL}/forms/${formId}/formfields/`, {
@@ -76,8 +85,8 @@ export const addNewFormField = async(formId, formField) => {
 
     }
 
-}
-export const addNewFormFieldOption = async(formfield, formOptions) => {
+}*/
+/*export const addNewFormFieldOption = async(formfield, formOptions) => {
     let options = formOptions.split(";");
     let convertedoptions = [];
     for (const option of options) {
@@ -86,7 +95,7 @@ export const addNewFormFieldOption = async(formfield, formOptions) => {
     }
     console.log(convertedoptions);
 
-}
+}*/
 
 
 export const updateFormProp = async  (formId, formChanges) => {

@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "../../../basestyledcomponents/Button";
 import FormFields from './FormFields/FormFields';
 import {useParams, useRouteMatch, NavLink} from "react-router-dom";
-import {fetchFormFields, addNewFormField, addNewFormFieldWithOptions, addSimpleNewFormField} from "../../../../api/forms.api";
+import {updateForm} from "../../../../api/forms.api";
 import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
 
 
@@ -46,6 +46,17 @@ export default function FormEditor(props) {
     const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
     const handleFormSave = (formData) => {
         console.log(formData);
+        updateForm(formId, formData).then(response => {
+            console.log('form response is: ' + JSON.stringify(response) );
+            dispatch({type: 'update_form_title', newtitle: response.title})
+            dispatch({type: 'update_form_type', newtype: response.form_type })
+            if (response.form) {
+                dispatch({type: 'load_form_fields', newformfields: response.form })
+            } else {
+                dispatch({type: 'load_form_fields', newformfields: {} })
+            }
+            // dispatch({type: 'load_form_fields', newformfields: response.form })
+        })
     };
     const methods = useForm({
         defaultValues: {
@@ -64,42 +75,21 @@ export default function FormEditor(props) {
         const values = methods.getValues();
         console.log('New Form Field Values are: ' + JSON.stringify(values));
         // console.log('New FOrm Field options is ' + values.new_field_options);
-        const formField = {
+        const randomNumber = Math.floor((Math.random() * 10000) + 1);
+        let fieldpropname = `customfield${randomNumber}`;
+        let formField = {};
+        formField[fieldpropname] = {
             label: values.new_field_label,
             type: values.new_field_type
         }
-
-        if (values.new_field_type === 'TextInput') {
-            console.log("It's text input!!");
-            addSimpleNewFormField(formId, formField ).then(response => {
-                console.log(response);
-                fetchFormFields(formId).then(response => {
-                    dispatch({type: 'load_updated_array', newarray: response})
-                    methods.setValue("new_field_label", '');
-                    methods.setValue("new_field_type", '');
-                })
-            })
-        }
-        else if( values.new_field_type === "radio_with_text") {
-                addNewFormFieldWithOptions(formId, formField, textvalueoptions).then(response => {
-                    console.log(response);
-                    fetchFormFields(formId).then(response => {
-                        dispatch({type: 'load_updated_array', newarray: response})
-                        methods.setValue("new_field_label", '');
-                        methods.setValue("new_field_type", '');
-                        dispatch({type: 'reset_options_to_none'})
-                    })
-                })
-        }
-        else {
-            console.log("It's something else!!");
-        }
+        console.log(formField);
+        dispatch({type: 'add_field', newfield: formField});
 
     }
     useEffect(() => {
-        fetchFormFields(formId).then(response => {
+        /*fetchFormFields(formId).then(response => {
             dispatch({type: 'load_updated_array', newarray: response})
-        })
+        })*/
     }, [])
     return (
         <FormContext {...methods}>
@@ -112,7 +102,6 @@ export default function FormEditor(props) {
                                 as={<TextField variant={`outlined`}  />}
                                 control={methods.control}
                                         />
-
                             <NavLink to={`/formscenter/${formId}/preview`}>
                                 <Button color={`primary`}>Preview Form</Button>
                             </NavLink>
@@ -241,4 +230,41 @@ function FieldOptionsEditor(props) {
 // console.log(props.formfields);
 
 }}>Add Field</Button>
+
+const handleAddField = (methods) => {
+        const values = methods.getValues();
+        console.log('New Form Field Values are: ' + JSON.stringify(values));
+        // console.log('New FOrm Field options is ' + values.new_field_options);
+        const formField = {
+            label: values.new_field_label,
+            type: values.new_field_type
+        }
+
+        if (values.new_field_type === 'TextInput') {
+            console.log("It's text input!!");
+            addSimpleNewFormField(formId, formField ).then(response => {
+                console.log(response);
+                fetchFormFields(formId).then(response => {
+                    dispatch({type: 'load_updated_array', newarray: response})
+                    methods.setValue("new_field_label", '');
+                    methods.setValue("new_field_type", '');
+                })
+            })
+        }
+        else if( values.new_field_type === "radio_with_text") {
+                addNewFormFieldWithOptions(formId, formField, textvalueoptions).then(response => {
+                    console.log(response);
+                    fetchFormFields(formId).then(response => {
+                        dispatch({type: 'load_updated_form', newarray: response})
+                        methods.setValue("new_field_label", '');
+                        methods.setValue("new_field_type", '');
+                        dispatch({type: 'reset_options_to_none'})
+                    })
+                })
+        }
+        else {
+            console.log("It's something else!!");
+        }
+
+    }
  */

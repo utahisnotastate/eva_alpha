@@ -6,6 +6,7 @@ import Card from "../../basestyledcomponents/Card/Card";
 import CardHeader from "../../basestyledcomponents/Card/CardHeader";
 import CardBody from "../../basestyledcomponents/Card/CardBody";
 import Modal from "../../basestyledcomponents/Modal/modal";
+import {fetchForm} from "../../../api/forms.api";
 import {Button, Typography} from "@material-ui/core";
 import Form from "react-jsonschema-form";
 import CreateCustomField from "../../Forms/FormsCenter/createCustomField";
@@ -27,14 +28,17 @@ export default function FormsCustomizer(props) {
     const formfields = useSelector(state => state.formsmanager.newform.newformfields);
 
     useEffect(() => {
-        const fetchFormInfo = async () => {
-            const result = await axios(`${API_URL}/forms/${formId}/`);
-            return result.data;
-        }
-        fetchFormInfo().then(response => {
+
+        fetchForm(formId).then(response => {
             console.log('form response is: ' + response.title);
             dispatch({type: 'update_form_title', newtitle: response.title})
             dispatch({type: 'update_form_type', newtype: response.form_type })
+            if (response.form) {
+                dispatch({type: 'load_form_fields', newformfields: response.form })
+            } else {
+                dispatch({type: 'load_form_fields', newformfields: {} })
+            }
+            // dispatch({type: 'load_form_fields', newformfields: response.form })
         })
     },[]);
 
@@ -88,6 +92,10 @@ export default function FormsCustomizer(props) {
 }
 
 /*
+const fetchFormInfo = async () => {
+            const result = await axios(`${API_URL}/forms/${formId}/`);
+            return result.data;
+        }
     const schema = useSelector(state => state[formId][`${formId}schema`]);
     const uiSchema = useSelector(state => state[formId][`${formId}uischema`]);
 

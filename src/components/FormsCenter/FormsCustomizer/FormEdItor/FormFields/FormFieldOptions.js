@@ -23,7 +23,7 @@ export default function FormFieldOptions(props) {
                 <Grid item xs={12}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <select name={`formfields[${props.index}].type`} defaultValue={props.type} ref={register}>
+                            <select name={`formfields.${props.index}.type`} defaultValue={props.type} ref={register}>
                                 <option value="">Choose Field Type</option>
                                 <option value="TextInput">string</option>
                                 <option value="checkbox">checkbox</option>

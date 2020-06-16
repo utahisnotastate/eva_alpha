@@ -10,7 +10,7 @@ export default function FormFieldLabel(props) {
     return (
         <Grid item xs={4}>
             <Grid container>
-                <Controller name={`formfields[${props.index}].label`}  label={`Field Label`} as={<TextField inputRef={register}  variant={`outlined`}/>} control={control}
+                <Controller name={`formfields.${props.index}.label`}  label={`Field Label`} as={<TextField inputRef={register}  variant={`outlined`}/>} control={control}
                             defaultValue={props.label}/>
             </Grid>
         </Grid>

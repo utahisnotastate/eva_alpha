@@ -47,7 +47,7 @@ export function forms(state = [], action) {
             return state;
     }
 }
-
+// new form can either be a completely new/blank form that user is creating, or it can be used in edit form to edit form already saved to db.
 export function newformtitle(state = '', action) {
     switch (action.type) {
         case 'update_form_title':
@@ -57,6 +57,7 @@ export function newformtitle(state = '', action) {
 
     }
 }
+
 
 export function newformtype(state = '', action) {
     switch (action.type) {
@@ -79,12 +80,21 @@ export function newformproperties(state={title: '', form_type: ''}, action) {
     }
 }
 
-export function newformfields (state = [], action) {
+export function newformfields (state = {
+    customfield7221: {
+        label: 'testing some more',
+        type: 'TextInput'
+    },
+    customfield321: {
+        label: '2 testing some more',
+        type: 'radio_with_text'
+    }
+}, action) {
     switch (action.type) {
         case 'add_field':
-            return [...state, action.newfield];
-        case 'load_updated_array':
-            return action.newarray;
+            return {...state, ...action.newfield};
+        case 'load_form_fields':
+            return action.newformfields;
         default:
             return state;
 
