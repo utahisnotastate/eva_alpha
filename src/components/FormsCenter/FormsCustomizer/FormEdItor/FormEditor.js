@@ -10,6 +10,7 @@ import Button from "../../../basestyledcomponents/Button";
 import FormFields from './FormFields/FormFields';
 import {useParams, useRouteMatch, NavLink} from "react-router-dom";
 import {fetchFormFields, addNewFormField, addNewFormFieldWithOptions, addSimpleNewFormField} from "../../../../api/forms.api";
+import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
 
 
 const API_URL = "http://127.0.0.1:8000/api";
@@ -35,19 +36,6 @@ function NoOptionsField(props) {
 
 }
 
-
-function FieldOptionsEditor(props) {
-    switch(props.type) {
-        case 'checkbox_group':
-            return <TextField name={`new_field_options`} inputRef={props.register} multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />
-        case 'radio':
-            return <TextField name={`new_field_options`} inputRef={props.register}  multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />
-        default:
-            return <TextField name={`new_field_options`} inputRef={props.register} variant={`filled`} disabled helperText={`No options available for this type of field`} value={false} />;
-    }
-}
-
-
 export default function FormEditor(props) {
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
@@ -55,6 +43,7 @@ export default function FormEditor(props) {
     const classes = useStyles();
     const [newfieldtype, setNewFieldType] = useState('');
     const formfields = useSelector(state => state.formsmanager.newform.newformfields);
+    const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
     const handleFormSave = (formData) => {
         console.log(formData);
     };
@@ -80,13 +69,30 @@ export default function FormEditor(props) {
             type: values.new_field_type
         }
 
-        if (values.new_field_options === 'false') {
-            console.log("It's false!!");
+        if (values.new_field_type === 'TextInput') {
+            console.log("It's text input!!");
             addSimpleNewFormField(formId, formField ).then(response => {
+                console.log(response);
                 fetchFormFields(formId).then(response => {
                     dispatch({type: 'load_updated_array', newarray: response})
+                    methods.setValue("new_field_label", '');
+                    methods.setValue("new_field_type", '');
                 })
             })
+        }
+        else if( values.new_field_type === "radio_with_text") {
+                addNewFormFieldWithOptions(formId, formField, textvalueoptions).then(response => {
+                    console.log(response);
+                    fetchFormFields(formId).then(response => {
+                        dispatch({type: 'load_updated_array', newarray: response})
+                        methods.setValue("new_field_label", '');
+                        methods.setValue("new_field_type", '');
+                        dispatch({type: 'reset_options_to_none'})
+                    })
+                })
+        }
+        else {
+            console.log("It's something else!!");
         }
 
     }
@@ -139,7 +145,8 @@ export default function FormEditor(props) {
                                             <option value="TextInput">string</option>
                                             <option value="checkbox">checkbox</option>
                                             <option value="checkbox_group">checkbox group(Select multiple options)</option>
-                                            <option value="radio">radio</option>
+                                            <option value="radio_with_text">Radio With Text options</option>
+                                            <option value="radio_with_numbers">Radio With Number options</option>
                                             <option value="number">number</option>
                                             <option value="textarea">textarea</option>
                                             <option value="select">select</option>
@@ -178,6 +185,17 @@ export default function FormEditor(props) {
 }
 
 /*
+
+function FieldOptionsEditor(props) {
+    switch(props.type) {
+        case 'checkbox_group':
+            return <TextField name={`new_field_options`} inputRef={props.register} multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />
+        case 'radio':
+            return <TextField name={`new_field_options`} inputRef={props.register}  multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />
+        default:
+            return <TextField name={`new_field_options`} inputRef={props.register} variant={`filled`} disabled helperText={`No options available for this type of field`} value={false} />;
+    }
+}
 
     const { register, errors, handleSubmit, setValue, control, getValues } = useForm({
     });

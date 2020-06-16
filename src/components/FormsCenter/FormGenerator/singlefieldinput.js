@@ -16,6 +16,6 @@ export default function SingleFieldInput(props) {
         case 'normal_abnormal':
             return <RadioChoicesInput choices={normalabnormalchoices} />
         default:
-            return <TextField fullWidth />
+            return <TextField disabled={props.disabled ? false : true} fullWidth />
     }
 }

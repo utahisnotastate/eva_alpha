@@ -16,7 +16,15 @@ export const fetchFormFields = async  (formId) => {
     return result.data;
 };
 
-export const addNewFormFieldWithOptions = async (formId, formField) => {
+export const addFormFieldOption = async (formId, formFieldId, option) => {
+    const result = await axios.post(`${API_URL}/forms/${formId}/formfields/${formFieldId}/options/`, {
+        form_field: formFieldId,
+        label: option.label,
+    });
+    return result.data;
+}
+
+const createFormFieldWithOption = async (formId, formField) => {
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/`, {
         form: formId,
         label: formField.label,
@@ -24,6 +32,19 @@ export const addNewFormFieldWithOptions = async (formId, formField) => {
         has_options: true,
     });
     return result.data;
+}
+
+
+export const addNewFormFieldWithOptions = async (formId, formField, options) => {
+    createFormFieldWithOption(formId, formField).then(response => {
+        let optionposts = []
+        options.forEach(option => {
+            console.log(option);
+            optionposts.push(addFormFieldOption(formId, response.id, option))
+        })
+        return axios.all(optionposts)
+    })
+
 }
 export const addSimpleNewFormField = async (formId, formField) => {
     console.log('adding field!')

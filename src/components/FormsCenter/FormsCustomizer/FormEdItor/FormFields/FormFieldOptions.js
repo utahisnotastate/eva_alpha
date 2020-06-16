@@ -14,7 +14,6 @@ function FieldOptionsEditor(props) {
 
 export default function FormFieldOptions(props) {
     const {control, register} = useFormContext();
-    console.log('options: ' + props);
     return (
         <Grid item xs={4}>
             <Grid container direction={`column`}>
@@ -28,7 +27,8 @@ export default function FormFieldOptions(props) {
                                 <option value="">Choose Field Type</option>
                                 <option value="TextInput">string</option>
                                 <option value="checkbox">checkbox</option>
-                                <option value="radio">radio</option>
+                                <option value="radio_with_text">Radio With Text options</option>
+                                <option value="radio_with_numbers">Radio With Number options</option>
                                 <option value="number">number</option>
                                 <option value="textarea">textarea</option>
                                 <option value="select">select</option>

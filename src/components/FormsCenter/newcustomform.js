@@ -33,7 +33,7 @@ export default function CreateNewForm(props) {
                 dispatch({type: 'load_forms', forms: response});
 
             })
-        });
+        }).catch(error => console.log(error));
 
         /*axios.post('http://127.0.0.1:8000/api/forms/', {
             form_type: formData.type,

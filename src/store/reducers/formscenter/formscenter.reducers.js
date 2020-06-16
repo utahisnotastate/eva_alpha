@@ -99,8 +99,6 @@ export function previewtitle(state = '', action) {
             return state;
 
     }
-
-
 }
 
 export function previewfields(state = [], action) {
@@ -112,6 +110,18 @@ export function previewfields(state = [], action) {
 
     }
 
+}
+
+export function newtextvalueoptions(state = [], action) {
+    switch (action.type) {
+        case 'add_new_text_option':
+            return [...state, action.newoption];
+        case 'reset_options_to_none':
+            return [];
+        default:
+            return state;
+
+    }
 }
 
 

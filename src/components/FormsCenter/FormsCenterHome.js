@@ -80,7 +80,7 @@ export default function FormsCenterHome(props) {
                         <CardBody>
                             <Typography>Physical Exam Forms</Typography>
                             <List>
-                                {forms.filter(form => form.form_type === "physical_exam").map(physicalexam => (
+                                { forms.length === 0 ? (<div><Typography>There are no physical exam forms. Create one! </Typography></div>) : forms.filter(form => form.form_type === "physical_exam").map(physicalexam => (
                                     <ListItem>
                                     <NavLink to={`${url}/${physicalexam.id}/edit`}>
                                         <ListItemText primary={<Typography>{physicalexam.title}</Typography>} />
@@ -109,7 +109,7 @@ export default function FormsCenterHome(props) {
                         <CardBody>
                             <Typography>Customize Review of System Forms</Typography>
                             <List>
-                                {forms.filter(form => form.form_type === "review_of_systems").map(ros => (
+                                {forms.length === 0 ? (<div><Typography>There are no review of system forms. Create one!</Typography></div>): forms.filter(form => form.form_type === "review_of_systems").map(ros => (
                                     <ListItem>
                                         <NavLink to={`${url}/${ros.id}/edit`}>
                                             <ListItemText primary={<Typography>{ros.title}</Typography>} />
@@ -146,44 +146,4 @@ export default function FormsCenterHome(props) {
 }
 
 
-/*
-<ul className="w3-ul">
-                                {forms.map(system => (
-                                    <li><Typography>{system.label}</Typography></li>
-                                ))}
-                            </ul>
-
-
-const fetchForms = async () => {
-            const result = await axios(`${API_URL}/forms`);
-            return result.data;
-        };
-
-                const [systems, setSystems] = useState([{ label: 'Constitutional', component: 'ROSConstitutional' },
-        { label: 'Allergic Immunologic', component: 'ROSAllergicImmunologic' },
-        { label: 'Integumentary', component: 'ROSIntegumentary' },
-        { label: 'Eyes',component: 'ROSEyes' },
-        { label: 'Cardiovascular',component: 'ROSCardiovascular' },
-        { label: 'Respiratory', component: 'ROSRespiratory' },
-        { label: 'Musculoskeletal', component: 'ROSMusculoskeletal' },
-        { label: 'Gastrointestinal', component: 'ROSGastrointestinal' },
-        { label: 'Neurological',component: 'ROSNeurological' },
-        { label: 'Genitourinary', component: 'ROSGenitourinary' },
-        { label: 'Endocrine',component: 'ROSEndocrine' },
-        { label: 'Hematologic',component: 'ROSHematologic' },
-        { label: 'Psychiatric',component: 'ROSPsychiatric' },
-        { label: 'Ears Nose Throat',component: 'ROSEarsNoseThroat' }]);
-
-    const [physicalexams, setPhysicalExams] = useState([
-        { label: 'HEENT', route: 'HEENTExam' },
-        { label: 'Integumentary', route: 'IntegumentaryExam' },
-        { label: 'Cardiovascular', route: 'CardiovascularExam' },
-        { label: 'Musculoskeletal', route: 'MusculoskeletalExam' },
-        { label: 'Gastrointestinal', route: 'GastrointestinalExam' },
-        { label: 'Neurological', route: 'NeurologicalExam' },
-        { label: 'Male Genitoruinary', route: 'MaleGenitourinaryExam' },
-        { label: 'Female Genitourinary',route: 'FemaleGenitourinaryExam' },
-        { label: 'Hematologic Lymphatic', route: 'HematologicLymphaticExam' },
-        { label: 'Psychiatric',route: 'PsychiatricExam' },
-    ]);
- */
+/* */

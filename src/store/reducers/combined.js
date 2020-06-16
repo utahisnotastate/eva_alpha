@@ -10,7 +10,7 @@ import {
     reviewofsystemforms
 } from './appointment/appointment.reducers'
 
-import {reviewofsystemsforms, physicalexamforms, medicalhistoryforms, forms} from "./formscenter/formscenter.reducers";
+import {reviewofsystemsforms, physicalexamforms, medicalhistoryforms, forms, newtextvalueoptions} from "./formscenter/formscenter.reducers";
 
 import {newformproperties, newformfields, newformtitle, newformtype, previewtitle, previewfields} from "./formscenter/formscenter.reducers";
 
@@ -81,6 +81,7 @@ const newform = combineReducers({
     newformtitle,
     newformtype,
     newformfields,
+    newtextvalueoptions
 });
 
 const formsmanager = combineReducers({
