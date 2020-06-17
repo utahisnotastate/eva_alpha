@@ -6,6 +6,19 @@ export const fetchAllForms = async () => {
     return result.data;
 };
 
+export const getAppointmentForms = async (appointmentId) => {
+    const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/`)
+    return result.data;
+}
+
+
+
+export const checkIfAppointmentHasForms = async() => {
+    getAppointmentForms().then(response => {
+        console.log('appointment forms = ' + response)
+    }).catch(error => console.log(error))
+}
+
 export const fetchForm = async  (formId) => {
     const result = await axios(`${API_URL}/forms/${formId}/`);
     return result.data;

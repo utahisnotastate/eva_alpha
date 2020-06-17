@@ -37,7 +37,6 @@ function patientToSchedule(state = null, action) {
     switch(action.type) {
         case 'set_patient_to_schedule':
             return action.patient;
-
         default:
             return state;
     }

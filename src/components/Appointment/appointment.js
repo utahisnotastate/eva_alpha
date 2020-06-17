@@ -10,13 +10,13 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import ListItemText from '@material-ui/core/ListItemText';
 import PatientComplaints from "./Complaints/PatientComplaints";
 import AppointmentROS from "./AppointmentROS/AppointmentROS";
-import AppointmentPhysicalExam from "./AppointmentPhysicalExam/AppointmentPhysicalExam";
+// import AppointmentPhysicalExam from "./AppointmentPhysicalExam/AppointmentPhysicalExam";
 import AppointmentAssessment from "./Assessment/AppointmentAssessment";
 import AppointmentPlan from "./AppointmentPlan/AppointmentPlan";
 import AppointmentFollowUp from "./AppointmentFollowUp/AppointmentFollowUp";
 import AppointmentSummary from "./AppointmentSummary/AppointmentSummary"
 import {useParams, useRouteMatch, Switch, Route, Link, NavLink} from "react-router-dom";
-import routes from "../Patient/routes";
+import patientroutes from "../Patient/routes";
 import AppointmentComplaints from "./Complaints/AppointmentComplaints/AppointmentComplaints";
 import NewComplaint from "./Complaints/NewComplaint/NewComplaint.FunComp";
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -25,8 +25,9 @@ import Card from "../basestyledcomponents/Card/Card";
 import Collapse from '@material-ui/core/Collapse';
 import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSComponent";
 import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
-import {ROSRoutes, PhysicalExamRoutes} from "./appointmentroutes";
+// import {ROSRoutes, PhysicalExamRoutes} from "./appointmentroutes";
 import AppointmentForm from "./appointmentform";
+import {getAppointmentForms, createAppointmentForm} from '../../api/appointment.api.js';
 import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
@@ -58,6 +59,8 @@ export default function Appointment() {
     let { id } = useParams();
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
+    console.log('appointment path is ' + path)
+    console.log('appointment url is ' + url);
     const clinicalexamforms = useSelector(state => state.appointment.appointmentforms.clinicalexamforms);
     const reviewofsystemsforms = useSelector(state => state.appointment.appointmentforms.reviewofsystemforms);
     const [appointmentinfoopen, setAppointmentInfoOpen] = useState(true)
@@ -92,7 +95,7 @@ export default function Appointment() {
             component: AppointmentROS,
         },
         {
-            path: '/appointmentexam',
+            path: '/appointmentexam/',
             label: 'Physical Exam',
             nestedroutes: true,
             menuopen: examopen,
@@ -100,7 +103,7 @@ export default function Appointment() {
                 setExamOpen(!examopen);
             },
             subroutes: clinicalexamforms,
-            component: AppointmentPhysicalExam,
+            component: AppointmentForm,
         },
         {
             path: '/assessment',
@@ -136,7 +139,7 @@ export default function Appointment() {
             <List component="div" disablePadding>
                 {subroutes.map((subroute) => (
                     <ListItem className={classes.deepnested} key={subroute.title}>
-                        <NavLink exact activeStyle={{color: 'white'}} to={`${url}${path}${subroute.route}`}>
+                        <NavLink exact activeStyle={{color: 'white'}} to={`${url}${path}${subroute.id}`}>
                             <ListItemText primary={`${subroute.title}`}/>
                         </NavLink>
                     </ListItem>
@@ -158,14 +161,46 @@ export default function Appointment() {
     const filterAppointmentForms = (forms, form_type) => {
 
         let filteredforms = forms.filter(form => form.form_type === form_type && form.active );
+
         let fixedfilteredforms = [];
+        // loop through forms and give it route property
         for (const form of filteredforms) {
             console.log(`Title is: ${form.title}`);
             console.log(`Route is /${form.title.replace(/\s/g, '').toLocaleLowerCase()}`)
-            fixedfilteredforms.push({title: form.title, route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`})
+            fixedfilteredforms.push({id: form.id, title: form.title,form:form.form, route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`})
+        }
+        let convertedforms = [];
+        for (const filteredform of fixedfilteredforms) {
+            for (let field in filteredform.form) {
+                //console.log(`Form field label is ${filteredform.form[field].label}`)
+                filteredform.form[field].checked = false;
+                filteredform.form[field].value = null;
+            }
         }
         if (form_type === "physical_exam") {
             dispatch({type: 'load_all_clinical_exam_forms', forms: fixedfilteredforms})
+            let promiseforms = [];
+            fixedfilteredforms.forEach(form => {
+                promiseforms.push(createAppointmentForm(id, form));
+            });
+            Promise.all(promiseforms).then(results => {
+                console.log(results);
+                getAppointmentForms(id).then(response => {
+                    if(response.length > 0) {
+                        console.log('Some forms have already been created!. Use those!')
+                        dispatch({type: 'load_all_clinical_exam_forms', forms: response})
+                    } else {
+                        console.log('appointment forms need to be created!!Create them!');
+                        fetchAllForms().then(response => {
+                            console.log('Template forms are ' + JSON.stringify(response))
+                            filterAppointmentForms(response, "physical_exam");
+                            filterAppointmentForms(response, "review_of_systems");
+                        })
+                    }
+
+                }).catch(err => console.log(err));
+
+            })
 
         } else {
             dispatch({type: 'load_all_ROS_forms', forms: fixedfilteredforms})
@@ -175,10 +210,22 @@ export default function Appointment() {
 
 
     useEffect(() => {
-        fetchAllForms().then(response => {
-            filterAppointmentForms(response, "physical_exam");
-            filterAppointmentForms(response, "review_of_systems");
-        })
+        //check if appointment has any forms associated with it
+        getAppointmentForms(id).then(response => {
+            if(response.length > 0) {
+                console.log('Forms were created already!');
+                dispatch({type: 'load_all_clinical_exam_forms', forms: response})
+            } else {
+                console.log('appointment forms need to be created!!Create them!');
+                fetchAllForms().then(response => {
+                    console.log('Template forms are ' + JSON.stringify(response))
+                    filterAppointmentForms(response, "physical_exam");
+                    filterAppointmentForms(response, "review_of_systems");
+                })
+            }
+
+        }).catch(err => console.log(err));
+
     }, []);
     return (
         <Grid container spacing={2}>
@@ -227,7 +274,7 @@ export default function Appointment() {
                     </ListItem>
                     <Collapse in={patientoptionsopen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        {routes.map((route) => (
+                        {patientroutes.map((route) => (
                             <ListItem className={classes.nested} key={route.label}>
                                 <NavLink exact activeStyle={{color: 'white'}} to={`${url}${route.path}`}>
                                     <ListItemText primary={<Typography variant="body1">{route.label}</Typography>}/>
@@ -244,22 +291,15 @@ export default function Appointment() {
                     <Typography>Allergies</Typography>
                 </Card>
                     <Switch>
+                        <Route path={`${path}/appointmentexam/:formid`}>
+                            <AppointmentForm appointmentId={id} />
+                        </Route>
                         {appointmentroutes.map ((route) => (
                             <Route exact key={route.label} path={`${path}${route.path}`} component={route.component} />
                         ))}
-                        {routes.map((route) => (
+                        {patientroutes.map((route) => (
                             <Route exact key={route.label} path={`${path}${route.path}`} component={route.component} />
 
-                        ))}
-                        {ROSRoutes.map((route) => (
-                            <Route exact key={route.label} path={`${path}${route.path}`}>
-                                <AppointmentForm schema={route.schema} label={route.label} />
-                            </Route>
-                        ))}
-                        {PhysicalExamRoutes.map((route) => (
-                            <Route exact key={route.label} path={`${path}${route.path}`}>
-                                <AppointmentForm schema={route.schema} label={`${route.label} Exam`} />
-                            </Route>
                         ))}
                     </Switch>
 
@@ -269,7 +309,16 @@ export default function Appointment() {
 }
 
 /*
-
+{ROSRoutes.map((route) => (
+                            <Route exact key={route.label} path={`${path}${route.path}`}>
+                                <AppointmentForm label={route.title} formId={id} />
+                            </Route>
+                        ))}
+                        {PhysicalExamRoutes.map((route) => (
+                            <Route exact key={route.label} path={`${path}${route.path}`}>
+                                <AppointmentForm label={`${route.title} Exam`} formId={id} />
+                            </Route>
+                        ))}
 [{ label: 'Constitutional', route: '/ROSConstitutional' },
                 { label: 'Allergic Immunologic', route: '/ROSAllergicImmunologic' },
                 { label: 'Integumentary', route: '/ROSIntegumentary' },

@@ -39,7 +39,6 @@ export function assessmentinputfields(state = {
     switch (action.type) {
         case 'updated_icd10':
             return action.icd10value;
-
         case 'clear_inputs':
             return {icdcode: '', icd_description: ''};
 
