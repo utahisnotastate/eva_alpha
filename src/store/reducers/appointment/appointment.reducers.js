@@ -47,7 +47,14 @@ export function assessmentinputfields(state = {
     }
 
 }
-
+export function appointmentforms(state = [], action){
+    switch (action.type) {
+        case 'load_all_appointment_forms':
+            return action.forms;
+        default:
+            return state
+    }
+}
 export function clinicalexamforms(state = [], action) {
     switch (action.type) {
         case 'load_all_clinical_exam_forms':

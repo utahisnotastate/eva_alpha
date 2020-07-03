@@ -27,7 +27,7 @@ import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSC
 import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
 // import {ROSRoutes, PhysicalExamRoutes} from "./appointmentroutes";
 import AppointmentForm from "./appointmentform";
-import {getAppointmentForms, createAppointmentForm} from '../../api/appointment.api.js';
+import {getAppointmentForms, getAllActiveForms, createAppointmentForm} from '../../api/appointment.api.js';
 import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
@@ -61,8 +61,9 @@ export default function Appointment() {
     let { path, url } = useRouteMatch();
     console.log('appointment path is ' + path)
     console.log('appointment url is ' + url);
-    const clinicalexamforms = useSelector(state => state.appointment.appointmentforms.clinicalexamforms);
-    const reviewofsystemsforms = useSelector(state => state.appointment.appointmentforms.reviewofsystemforms);
+    const appointmentforms = useSelector(state => state.appointment.appointmentforms);
+    const clinicalexamforms = useSelector(state => state.appointment.appointmentforms.filter(form => form.form_type === "physical_exam"));
+    const reviewofsystemsforms = useSelector(state => state.appointment.appointmentforms.filter(form => form.form_type === "review_of_systems"));
     const [appointmentinfoopen, setAppointmentInfoOpen] = useState(true)
     const [rosopen, setROSOpen] = useState(false);
     const [examopen, setExamOpen] = useState(false);
@@ -84,7 +85,8 @@ export default function Appointment() {
             component: PatientComplaints,
         },
         {
-            path: '/appointmentros',
+            //path: '/appointmentros/',
+            path: '/appointmentforms/',
             label: 'Review of Systems',
             nestedroutes: true,
             menuopen: rosopen,
@@ -95,7 +97,8 @@ export default function Appointment() {
             component: AppointmentROS,
         },
         {
-            path: '/appointmentexam/',
+            // path: '/appointmentexam/',
+            path: '/appointmentforms/',
             label: 'Physical Exam',
             nestedroutes: true,
             menuopen: examopen,
@@ -157,71 +160,58 @@ export default function Appointment() {
             </ListItem>
         );
     }
-
-    const filterAppointmentForms = (forms, form_type) => {
-
-        let filteredforms = forms.filter(form => form.form_type === form_type && form.active );
-
-        let fixedfilteredforms = [];
-        // loop through forms and give it route property
-        for (const form of filteredforms) {
+    const saveAppointmentFormsToDB = (forms) => {
+        console.log('save appointment forms is ' + JSON.stringify(forms));
+        let promiseforms = [];
+        forms.forEach(form => {
+            promiseforms.push(createAppointmentForm(id, form));
+        });
+        Promise.all(promiseforms).then(results => {
+            console.log(results);
+            getAppointmentForms(id).then(response => {
+                dispatch({type: 'load_all_appointment_forms', forms: response})
+            });
+        });
+    }
+    const convertAppointmentForms = (forms) => {
+        let activeforms = forms;
+        let appointmentforms = [];
+        for (const form of activeforms) {
             console.log(`Title is: ${form.title}`);
-            console.log(`Route is /${form.title.replace(/\s/g, '').toLocaleLowerCase()}`)
-            fixedfilteredforms.push({id: form.id, title: form.title,form:form.form, route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`})
+            console.log(`Route is /${form.title.replace(/\s/g, '').toLocaleLowerCase()}`);
+            appointmentforms.push({title: form.title, form_type: form.form_type, form:form.form, route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`});
         }
-        let convertedforms = [];
-        for (const filteredform of fixedfilteredforms) {
-            for (let field in filteredform.form) {
+        for (const appointmentform of appointmentforms) {
+            for (let field in appointmentform.form) {
                 //console.log(`Form field label is ${filteredform.form[field].label}`)
-                filteredform.form[field].checked = false;
-                filteredform.form[field].value = null;
+                appointmentform.form[field].checked = false;
+                appointmentform.form[field].value = null;
             }
         }
-        if (form_type === "physical_exam") {
-            dispatch({type: 'load_all_clinical_exam_forms', forms: fixedfilteredforms})
-            let promiseforms = [];
-            fixedfilteredforms.forEach(form => {
-                promiseforms.push(createAppointmentForm(id, form));
-            });
-            Promise.all(promiseforms).then(results => {
-                console.log(results);
-                getAppointmentForms(id).then(response => {
-                    if(response.length > 0) {
-                        console.log('Some forms have already been created!. Use those!')
-                        dispatch({type: 'load_all_clinical_exam_forms', forms: response})
-                    } else {
-                        console.log('appointment forms need to be created!!Create them!');
-                        fetchAllForms().then(response => {
-                            console.log('Template forms are ' + JSON.stringify(response))
-                            filterAppointmentForms(response, "physical_exam");
-                            filterAppointmentForms(response, "review_of_systems");
-                        })
-                    }
-
-                }).catch(err => console.log(err));
-
-            })
-
-        } else {
-            dispatch({type: 'load_all_ROS_forms', forms: fixedfilteredforms})
-        }
-
-    };
-
+        console.log('Appointment forms are ' + JSON.stringify(appointmentforms));
+        //save the converted forms to the db
+        saveAppointmentFormsToDB(appointmentforms);
+    }
 
     useEffect(() => {
         //check if appointment has any forms associated with it
         getAppointmentForms(id).then(response => {
             if(response.length > 0) {
                 console.log('Forms were created already!');
-                dispatch({type: 'load_all_clinical_exam_forms', forms: response})
+                console.log('already created forms are ' + JSON.stringify(response));
+                dispatch({type: 'load_all_appointment_forms', forms: response})
             } else {
                 console.log('appointment forms need to be created!!Create them!');
-                fetchAllForms().then(response => {
+                getAllActiveForms().then(response => {
+                    convertAppointmentForms(response);
+                    console.log('appointment forms are ' + JSON.stringify(appointmentforms));
+                    // saveAppointmentFormsToDB(appointmentforms)
+                });
+                /*fetchAllForms().then(response => {
                     console.log('Template forms are ' + JSON.stringify(response))
-                    filterAppointmentForms(response, "physical_exam");
-                    filterAppointmentForms(response, "review_of_systems");
-                })
+                    filterAppointmentFormsAndLoadThem(response, "physical_exam");
+                    filterAppointmentFormsAndLoadThem(response, "review_of_systems");
+                })*/
             }
 
         }).catch(err => console.log(err));
@@ -291,7 +281,7 @@ export default function Appointment() {
                     <Typography>Allergies</Typography>
                 </Card>
                     <Switch>
-                        <Route path={`${path}/appointmentexam/:formid`}>
+                        <Route path={`${path}/appointmentforms/:formId`}>
                             <AppointmentForm appointmentId={id} />
                         </Route>
                         {appointmentroutes.map ((route) => (
@@ -309,52 +299,4 @@ export default function Appointment() {
 }
 
 /*
-{ROSRoutes.map((route) => (
-                            <Route exact key={route.label} path={`${path}${route.path}`}>
-                                <AppointmentForm label={route.title} formId={id} />
-                            </Route>
-                        ))}
-                        {PhysicalExamRoutes.map((route) => (
-                            <Route exact key={route.label} path={`${path}${route.path}`}>
-                                <AppointmentForm label={`${route.title} Exam`} formId={id} />
-                            </Route>
-                        ))}
-[{ label: 'Constitutional', route: '/ROSConstitutional' },
-                { label: 'Allergic Immunologic', route: '/ROSAllergicImmunologic' },
-                { label: 'Integumentary', route: '/ROSIntegumentary' },
-                { label: 'Eyes', route: '/ROSEyes' },
-                { label: 'Cardiovascular',route: '/ROSCardiovascular' },
-                { label: 'Respiratory', route: '/ROSRespiratory' },
-                { label: 'Musculoskeletal', route: '/ROSMusculoskeletal' },
-                { label: 'Gastrointestinal', route: '/ROSGastrointestinal' },
-                { label: 'Neurological',route: '/ROSNeurological' },
-                { label: 'Genitourinary', route: '/ROSGenitourinary' },
-                { label: 'Endocrine',route: '/ROSEndocrine' },
-                { label: 'Hematologic', route: '/ROSHematologic' },
-                { label: 'Psychiatric', route: '/ROSPsychiatric' },
-                { label: 'Ears Nose Throat', route: '/ROSEarsNoseThroat' }]
-[
-                { label: 'HEENT', route: '/HEENTExam' },
-                { label: 'Integumentary', route: '/IntegumentaryExam' },
-                { label: 'Cardiovascular', route: '/CardiovascularExam' },
-                { label: 'Musculoskeletal', route: '/MusculoskeletalExam' },
-                { label: 'Gastrointestinal', route: '/GastrointestinalExam' },
-                { label: 'Neurological', route: '/NeurologicalExam' },
-                { label: 'Male Genitoruinary', route: '/MaleGenitourinaryExam' },
-                { label: 'Female Genitourinary',route: '/FemaleGenitourinaryExam' },
-                { label: 'Hematologic Lymphatic', route: '/HematologicLymphaticExam' },
-                { label: 'Psychiatric',route: '/PsychiatricExam' },
-            ]
-<BasePhysicalExamComponent fields={route.fields} label={route.label}/>
-<BaseROSComponent fields={route.fields} label={route.label}/>
-
- let clinicalexamforms = response.filter(form => form.form_type === 'physical_exam' && form.active );
-console.log(clinicalexamforms);
-let fixedclinicalexamforms = [];
-for (const form of clinicalexamforms) {
-    console.log(`Title is: ${form.title}`);
-    console.log(`Route is /${form.title.replace(/\s/g, '').toLocaleLowerCase()}`)
-    fixedclinicalexamforms.push({title: form.title, route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`})
-}
-//console.log('fixed forms is ' + fixedclinicalexamforms);
-dispatch({type: 'load_all_clinical_exam_forms', forms: fixedclinicalexamforms})*/
+*/

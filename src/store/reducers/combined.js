@@ -6,6 +6,7 @@ import {
     assessmentinputfields,
     appointmentcomplaints,
     newcomplaintinputfields,
+    appointmentforms,
     clinicalexamforms,
     reviewofsystemforms
 } from './appointment/appointment.reducers'
@@ -110,10 +111,10 @@ const assessments = combineReducers({
     inputfields: assessmentinputfields
 });
 
-const appointmentforms = combineReducers({
+/*const appointmentforms = combineReducers({
     clinicalexamforms,
     reviewofsystemforms
-})
+})*/
 
 const appointment = combineReducers({
     complaints,

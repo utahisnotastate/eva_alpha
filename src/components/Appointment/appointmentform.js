@@ -15,20 +15,18 @@ import {fetchAllForms} from "../../api/forms.api";
 
 export default function AppointmentForm(props) {
 
-    let { formid } = useParams();
+    let { formId } = useParams();
     const [title, setTitle] = useState('')
     const [form, setForm] = useState({});
 
     useEffect(() => {
         //check if appointment has any forms associated with it
-        getAppointmentForm(props.appointmentId, formid).then(result => {
+        getAppointmentForm(props.appointmentId, formId).then(result => {
             console.log('form id response is ' + JSON.stringify(result));
             setTitle(result.title);
-            setForm(result.findings);
-        })
-
-
-    }, []);
+            setForm(result.form);
+        });
+    }, [props.appointmentId,formId]);
     return (
 
         <Card>
