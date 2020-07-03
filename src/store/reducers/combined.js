@@ -7,6 +7,7 @@ import {
     appointmentcomplaints,
     newcomplaintinputfields,
     appointmentforms,
+    appointmentformfields,
     clinicalexamforms,
     reviewofsystemforms
 } from './appointment/appointment.reducers'
@@ -120,6 +121,7 @@ const appointment = combineReducers({
     complaints,
     assessments,
     appointmentforms,
+    appointmentformfields,
 });
 const patient = combineReducers({
     patientdiagnoses,

@@ -26,7 +26,7 @@ import Collapse from '@material-ui/core/Collapse';
 import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSComponent";
 import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
 // import {ROSRoutes, PhysicalExamRoutes} from "./appointmentroutes";
-import AppointmentForm from "./appointmentform";
+import AppointmentForm from "./AppointmentForm/appointmentform";
 import {getAppointmentForms, getAllActiveForms, createAppointmentForm} from '../../api/appointment.api.js';
 import {useDispatch, useSelector} from "react-redux";
 
@@ -207,11 +207,6 @@ export default function Appointment() {
                     console.log('appointment forms are ' + JSON.stringify(appointmentforms));
                     // saveAppointmentFormsToDB(appointmentforms)
                 });
-                /*fetchAllForms().then(response => {
-                    console.log('Template forms are ' + JSON.stringify(response))
-                    filterAppointmentFormsAndLoadThem(response, "physical_exam");
-                    filterAppointmentFormsAndLoadThem(response, "review_of_systems");
-                })*/
             }
 
         }).catch(err => console.log(err));

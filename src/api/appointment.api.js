@@ -24,7 +24,9 @@ export const getAllActiveForms = async() => {
     const result = await axios(`${API_URL}/activeforms`);
     return result.data;
 }
+export const saveAppointmentForm = (appointmentId, form ) => {
 
+}
 export const checkIfAppointmentHasForms = async() => {
     getAppointmentForms().then(response => {
         console.log('appointment forms = ' + response)
