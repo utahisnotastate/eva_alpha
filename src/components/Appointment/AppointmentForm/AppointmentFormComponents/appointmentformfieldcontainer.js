@@ -13,15 +13,21 @@ const useStyles = makeStyles({
 })
 
 export default function AppointmentFormFieldContainer(props) {
-    const {control, register} = useFormContext();
+    const {control, register, watch, formState, setValue} = useFormContext();
     const classes = useStyles();
+    const watchInput = watch(props.name)
+    const resetInput = () => {
+        setValue(`${props.name}.value`, props.fieldprops.value, {shouldDirty: false})
+
+    }
+    // const showResetButton = ()
 
     const determineInput = (inputtype) => {
         switch(inputtype) {
             case 'TextInput':
-                return <TextField name={`${props.name}.value`} inputRef={register} defaultValue={`Test`} />
+                return <TextField name={`${props.name}.value`} inputRef={register}  />
             default:
-                return <TextField name={`${props.name}.value`} inputRef={register} defaultValue={props.fieldprops.value} />
+                return <TextField name={`${props.name}.value`} inputRef={register} />
         }
     }
     return (
@@ -32,13 +38,10 @@ export default function AppointmentFormFieldContainer(props) {
                         <Typography>{props.fieldprops.label}</Typography>
                     </Grid>
                     <Grid item>
-                        <Controller
-                            as={Switch}
-                            type="checkbox"
-                            inputRef={register}
-                            name={`${props.name}.checked`}
-                            control={control}
-                        />
+                        <Typography>{formState.dirtyFields[props.name] ? "Checked" : "Unchecked" }</Typography>
+                        {formState.dirtyFields[props.name] &&
+                        <Typography onClick={() => resetInput()}>Reset</Typography> }
+
                     </Grid>
                 </Grid>
             </Grid>
@@ -50,3 +53,9 @@ export default function AppointmentFormFieldContainer(props) {
         </Grid>
     );
 }
+
+/*
+{formState.dirtyFields[props.name] &&
+                       <div onClick={() => resetInput()}><p>Reset</p></div> }
+<Typography>{formState.dirtyFields[props.name] ? <Typography onClick={() => resetInput()}>Reset</Typography> : null }</Typography>
+ */

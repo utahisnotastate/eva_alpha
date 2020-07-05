@@ -34,7 +34,6 @@ export default function AppointmentForm(props) {
     }, [props.appointmentId,formId]);
 
     return (
-
         <Card>
             <CardHeader color={`primary`}>
                 <h4>{appointmentform.title}</h4>

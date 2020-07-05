@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import _ from "lodash";
-import {useForm, FormContext, useFormContext, Controller} from "react-hook-form";
+import {useForm, FormContext,FormProvider, useFormContext } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,27 +19,29 @@ const useStyles = makeStyles({
 
 
 export default function FormTemplate(props) {
-    const methods = useForm();
-    const classes = useStyles();
     const formfields = useSelector(state => state.appointment.appointmentformfields);
-    const { register, handleSubmit, watch, control, errors } = useForm({defaultValues: {
-            customfield3213: {checked: true}
-        }});
+    const methods = useForm({ defaultValues: formfields});
+    const classes = useStyles();
+
     const onSubmit = data => console.log((data));
     const appointmentForm = props.appointmentform;
-    const appointmentFields = appointmentForm.form
+    console.log('form fields are ' + JSON.stringify(formfields));
+
     return (
-        <FormContext {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <Fragment>
+            <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
                 {Object.keys(formfields).map(field => (
                     <div key={field}>
-                        <AppointmentFormFieldContainer name={field} fieldprops={formfields[field]} />
+                        <AppointmentFormFieldContainer name={field} fieldprops={formfields[field]}/>
                     </div>
 
                 ))}
-                <input type="submit" value="Save" />
+                <input type="submit" value="Save"/>
             </form>
-        </FormContext>
+        </FormProvider>
+            <DevTool control={methods.control} />
+        </Fragment>
     )
 }
 /*
