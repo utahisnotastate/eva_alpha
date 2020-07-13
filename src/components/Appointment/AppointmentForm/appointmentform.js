@@ -15,8 +15,8 @@ import './appointmentform.css';
 export default function AppointmentForm(props) {
     let { formId } = useParams();
     const dispatch = useDispatch();
-    const [appointmentform, setForm] = useState({});
-    const formfields = useSelector(state => state.appointment.appointmentformfields);
+    const appointmentform = useSelector(state => state.appointment.activeappointmentform.activeAppointmentFormDetails);
+    // const formfields = useSelector(state => state.appointment.appointmentformfields);
     const getAppointmentForm = async(appointmentId, formId) => {
         const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/${formId}/`)
         return result.data;
@@ -26,10 +26,12 @@ export default function AppointmentForm(props) {
         //check if appointment has any forms associated with it
         getAppointmentForm(props.appointmentId, formId).then(result => {
             console.log('form id response is ' + JSON.stringify(result));
-            // setTitle(result.title);
-            setForm(result);
-            // setFormFields(result.form);
-            dispatch({type: 'load_appointment_form_fields', fields: result.form})
+            dispatch({ type: 'load_active_appointment_form_details', details: {
+                title: result.title,
+                id: result.id,
+                form_type: result.form_type
+                }});
+            dispatch({ type: 'load_active_form_fields', fields: result.form})
         });
     }, [props.appointmentId,formId]);
 
@@ -40,13 +42,15 @@ export default function AppointmentForm(props) {
                 <h4>{appointmentform.form_type}</h4>
             </CardHeader>
             <CardBody>
-                <FormTemplate  appointmentform={appointmentform} formfields={formfields} />
+                <FormTemplate appointmentId={props.appointmentId} formId={formId} />
             </CardBody>
         </Card>
     )
 }
 
 /*
+<FormTemplate appointmentId={props.appointmentId} formId={formId} />
+
 <Card>
             <CardHeader color={`primary`}>
                 <h4>{title}</h4>

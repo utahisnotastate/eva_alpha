@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState} from "react";
 import { Formik } from "formik";
-import { useForm, FormContext, useFormContext } from "react-hook-form"
+import { useForm, FormProvider, useFormContext } from "react-hook-form"
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
@@ -38,7 +38,7 @@ export default function Demographics(props) {
     let { id } = useParams();
     const [demographics, setDemographics] = useState();
     return (
-        <FormContext {...methods}>
+        <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
                 <Grid container className={classes.root} alignItems="flex-start">
                 <div>
@@ -77,7 +77,7 @@ export default function Demographics(props) {
                 </Grid>
                 <input type="submit" value={`Save`} />
             </form>
-        </FormContext>
+        </FormProvider>
     )
 }
 

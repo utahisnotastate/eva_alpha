@@ -63,6 +63,41 @@ export function appointmentformfields(state = {}, action) {
             return state
     }
 }
+export function masteractiveappointmentformfields(state = {}, action) {
+    switch (action.type) {
+        case 'set_master_active_appointment_form_fields':
+            return action.form;
+        default:
+            return state
+    }
+}
+
+export function activeAppointmentFormDetails(state = {}, action) {
+    switch (action.type) {
+        case 'load_active_appointment_form_details':
+            return action.details;
+        default:
+            return state
+    }
+}
+export function activeAppointmentFormFields(state = {}, action) {
+    switch (action.type) {
+        case 'load_active_form_fields':
+            return action.fields
+        default:
+            return state
+    }
+}
+
+export function activeAppointmentForm(state ={ }, action) {
+    switch (action.type) {
+        case 'load_active_form':
+            return action.form;
+
+        default:
+            return state
+    }
+}
 export function clinicalexamforms(state = [], action) {
     switch (action.type) {
         case 'load_all_clinical_exam_forms':

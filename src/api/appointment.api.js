@@ -24,7 +24,15 @@ export const getAllActiveForms = async() => {
     const result = await axios(`${API_URL}/activeforms`);
     return result.data;
 }
-export const saveAppointmentForm = (appointmentId, form ) => {
+export const updateAppointmentForm = async(appointmentId, form) => {
+    const result = await axios.patch(`${API_URL}/appointments/${appointmentId}/forms/${form.id}/`, {
+        id: form.id,
+        title: form.title,
+        form_type: form.form_type,
+        form: form.form,
+        appointment: appointmentId
+    });
+    return result.data;
 
 }
 export const checkIfAppointmentHasForms = async() => {

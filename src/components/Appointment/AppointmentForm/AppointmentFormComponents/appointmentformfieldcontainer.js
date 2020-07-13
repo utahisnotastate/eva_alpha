@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 export default function AppointmentFormFieldContainer(props) {
     const {control, register, watch, formState, setValue} = useFormContext();
     const classes = useStyles();
-    const watchInput = watch(props.name)
     const resetInput = () => {
         setValue(`${props.name}.value`, props.fieldprops.value, {shouldDirty: false})
 
@@ -25,9 +24,9 @@ export default function AppointmentFormFieldContainer(props) {
     const determineInput = (inputtype) => {
         switch(inputtype) {
             case 'TextInput':
-                return <TextField name={`${props.name}.value`} inputRef={register}  />
+                return <TextField name={`${props.name}.value`} inputRef={register} defaultValue={props.fieldprops.value}  />
             default:
-                return <TextField name={`${props.name}.value`} inputRef={register} />
+                return <TextField name={`${props.name}.value`} inputRef={register} defaultValue={props.fieldprops.value} />
         }
     }
     return (
@@ -38,7 +37,7 @@ export default function AppointmentFormFieldContainer(props) {
                         <Typography>{props.fieldprops.label}</Typography>
                     </Grid>
                     <Grid item>
-                        <Typography>{formState.dirtyFields[props.name] ? "Checked" : "Unchecked" }</Typography>
+                        <Typography>{formState.dirtyFields[props.name] || props.fieldprops.checked ? "Checked" : "Unchecked" }</Typography>
                         {formState.dirtyFields[props.name] &&
                         <Typography onClick={() => resetInput()}>Reset</Typography> }
 
