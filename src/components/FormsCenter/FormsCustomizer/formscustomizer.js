@@ -92,6 +92,7 @@ export default function FormsCustomizer(props) {
 }
 
 /*
+
 const fetchFormInfo = async () => {
             const result = await axios(`${API_URL}/forms/${formId}/`);
             return result.data;

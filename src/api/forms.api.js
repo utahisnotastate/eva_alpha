@@ -33,10 +33,10 @@ export const updateForm = async (formId, formData) => {
    return result.data;
 }
 
-/*export const fetchFormFields = async  (formId) => {
+export const fetchFormFields = async  (formId) => {
     const result = await axios(`${API_URL}/forms/${formId}/formfields/`);
     return result.data;
-};*/
+};
 
 /*export const addFormFieldOption = async (formId, formFieldId, option) => {
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/${formFieldId}/options/`, {

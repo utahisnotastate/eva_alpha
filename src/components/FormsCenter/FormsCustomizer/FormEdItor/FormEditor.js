@@ -3,13 +3,13 @@ import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import {useArray} from "react-hanger";
 import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller, FormContext } from 'react-hook-form';
+import { useForm, Controller, FormContext, FormProvider } from 'react-hook-form';
 import {TextField, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../basestyledcomponents/Button";
 import FormFields from './FormFields/FormFields';
 import {useParams, useRouteMatch, NavLink} from "react-router-dom";
-import {updateForm} from "../../../../api/forms.api";
+import {updateForm, fetchFormFields} from "../../../../api/forms.api";
 import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
 
 
@@ -87,12 +87,12 @@ export default function FormEditor(props) {
 
     }
     useEffect(() => {
-        /*fetchFormFields(formId).then(response => {
+        fetchFormFields(formId).then(response => {
             dispatch({type: 'load_updated_array', newarray: response})
-        })*/
+        })
     }, [])
     return (
-        <FormContext {...methods}>
+        <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleFormSave)}>
                 <Grid container direction={`column`}>
                     <Grid item>
@@ -169,7 +169,7 @@ export default function FormEditor(props) {
                     </Grid>
                 </Grid>
             </form>
-        </FormContext>
+        </FormProvider>
     );
 }
 
