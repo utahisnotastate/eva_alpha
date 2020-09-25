@@ -7,11 +7,15 @@ import { useForm, Controller, FormContext, FormProvider } from 'react-hook-form'
 import {TextField, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../basestyledcomponents/Button";
+import Card from '../../../basestyledcomponents/Card/Card';
+import CardHeader from '../../../basestyledcomponents/Card/CardHeader';
+import CardBody from '../../../basestyledcomponents/Card/CardBody';
 import FormFields from './FormFields/FormFields';
 import {useParams, useRouteMatch, NavLink} from "react-router-dom";
-import {updateForm, fetchFormFields} from "../../../../api/forms.api";
+import {updateForm, fetchForm} from "../../../../api/forms.api";
 import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
-
+import EditorHeader from './EditorHeader/EditorHeader';
+import EditorInput from './EditorInput/EditorInput';
 
 const API_URL = "http://127.0.0.1:8000/api";
 
@@ -20,7 +24,7 @@ const useStyles = makeStyles({
         border: 1,
         borderColor: 'black',
        padding: '10px',
-       backgroundColor: 'lightgrey'
+       // backgroundColor: 'lightgrey'
     },
     addfieldcontainer: {
             backgroundColor: 'white',
@@ -39,14 +43,15 @@ function NoOptionsField(props) {
 export default function FormEditor(props) {
     const dispatch = useDispatch();
     let { path, url } = useRouteMatch();
-    let { formId } = useParams();
+    // let { formId } = useParams();
     const classes = useStyles();
+    const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
     const [newfieldtype, setNewFieldType] = useState('');
     const formfields = useSelector(state => state.formsmanager.newform.newformfields);
     const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
     const handleFormSave = (formData) => {
-        console.log(formData);
-        updateForm(formId, formData).then(response => {
+        console.log({...formData, ...{id: props.formId}});
+        /*updateForm(props.formId, formData).then(response => {
             console.log('form response is: ' + JSON.stringify(response) );
             dispatch({type: 'update_form_title', newtitle: response.title})
             dispatch({type: 'update_form_type', newtype: response.form_type })
@@ -56,17 +61,11 @@ export default function FormEditor(props) {
                 dispatch({type: 'load_form_fields', newformfields: {} })
             }
             // dispatch({type: 'load_form_fields', newformfields: response.form })
-        })
+        })*/
     };
-    const methods = useForm({
-        defaultValues: {
-            form_type: props.type,
-            form_title: props.title
-
-        }
-    });
-    methods.setValue("form_title", props.title);
-    methods.setValue("form_type", props.type);
+    const methods = useForm();
+    // methods.setValue("form_title", props.title);
+    // methods.setValue("form_type", props.type);
     const handleNewFieldTypeChange = event => {
         setNewFieldType(event.target.value);
     }
@@ -87,15 +86,87 @@ export default function FormEditor(props) {
 
     }
     useEffect(() => {
-        fetchFormFields(formId).then(response => {
-            dispatch({type: 'load_updated_array', newarray: response})
+        console.log('Calling fetch form now!');
+        fetchForm(props.formId).then(response => {
+            console.log('Form editor API call is: ' + JSON.stringify(response));
+            dispatch({type: 'update_form_title', newtitle: response.title})
+            methods.setValue("form_title", response.title);
+            dispatch({type: 'update_form_type', newtype: response.form_type })
+            methods.setValue("form_type", response.form_type)
+            if(response.form) {
+                dispatch({type: 'load_form_fields', newformfields: response.form })
+                methods.setValue("form", response.form_type)
+            } else {
+                dispatch({type: 'load_form_fields', newformfields: {} })
+                methods.setValue("form", {})
+            }
         })
-    }, [])
+    }, [props.formId, dispatch])
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleFormSave)}>
                 <Grid container direction={`column`}>
                     <Grid item>
+                        <Card>
+                            <CardBody>
+                                <Grid container direction="column">
+                                    <Grid item>
+                                        <TextField inputRef={methods.register} name={`form_title`} variant={`outlined`} />
+                                    </Grid>
+                                    <Grid item>
+                                        <select  name="form_type" ref={methods.register}>
+                                            <option value="">Select Form Type</option>
+                                            <option value="physical_exam">Physical Exam</option>
+                                            <option value="review_of_systems">Review Of Systems</option>
+                                            <option value="medical_history">Medical History</option>
+                                        </select>
+                                    </Grid>
+                                </Grid>
+
+                            </CardBody>
+                        </Card>
+
+                    </Grid>
+                    <Grid item>
+                        <FormFields formfields={formfields} />
+                    </Grid>
+                    <Grid item>
+                        <EditorInput methods={methods} handleAddField={handleAddField} />
+                    </Grid>
+                    <Grid item>
+                        <Grid container direction={`row`} justify={`space-between`}>
+                            <Grid item>
+                                <input type="submit"/>
+                            </Grid>
+                            <Grid item>
+                                <Button color={`danger`}>Delete</Button>
+                            </Grid>
+                        </Grid>
+
+
+                    </Grid>
+                </Grid>
+            </form>
+        </FormProvider>
+    );
+}
+
+/*
+<EditorHeader formId={props.formId}  />
+fetchFormFields(formId).then(response => {
+            dispatch({type: 'load_updated_array', newarray: response})
+        })
+
+<Grid item>
+                        <Grid container direction={`column`} className={classes.addfieldcontainer}>
+                            <Grid item>
+                                <FormFields formfields={formfields} />
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+className={classes.builderroot}
+<Grid item>
                         <Grid container direction={`row`} justify={`space-between`}>
                             <Controller
                                 name={`form_title`}
@@ -107,7 +178,7 @@ export default function FormEditor(props) {
                             </NavLink>
                         </Grid>
                     </Grid>
-                    <Grid item>
+ <Grid item>
                         <select  name="form_type" ref={methods.register}>
                             <option value="">Select Form Type</option>
                             <option value="physical_exam">Physical Exam</option>
@@ -115,18 +186,13 @@ export default function FormEditor(props) {
                             <option value="medical_history">Medical History</option>
                         </select>
                     </Grid>
-
-                    <Grid item className={classes.builderroot}>
-                        <Grid container direction={`column`} className={classes.addfieldcontainer}>
-                            <Grid item>
-                                <FormFields formfields={formfields} />
-                            </Grid>
-                            <Grid item>
-                                <Grid container direction={`row`}>
-                                    <Grid item className={classes.addfielditem}>
+                    <Grid item className={classes.addfielditem}>
                                         <TextField fullWidth variant={`outlined`} placeholder={`Enter Field Label`}
                                                defaultValue={``} inputRef={methods.register} name="new_field_label"/>
                                     </Grid>
+
+                                    <Grid item>
+                                <Grid container direction={`row`}>
                                     <Grid item className={classes.addfielditem}>
                                         <Typography>Choose Field Type</Typography>
                                         <select name={`new_field_type`} value={newfieldtype} onChange={handleNewFieldTypeChange} ref={methods.register}>
@@ -153,28 +219,6 @@ export default function FormEditor(props) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item>
-                        <Grid container direction={`row`} justify={`space-between`}>
-                            <Grid item>
-                                <input type="submit"/>
-                            </Grid>
-                            <Grid item>
-                                <Button color={`danger`}>Delete</Button>
-                            </Grid>
-                        </Grid>
-
-
-                    </Grid>
-                </Grid>
-            </form>
-        </FormProvider>
-    );
-}
-
-/*
-
 function FieldOptionsEditor(props) {
     switch(props.type) {
         case 'checkbox_group':

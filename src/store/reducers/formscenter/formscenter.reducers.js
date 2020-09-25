@@ -80,16 +80,7 @@ export function newformproperties(state={title: '', form_type: ''}, action) {
     }
 }
 
-export function newformfields (state = {
-    customfield7221: {
-        label: 'testing some more',
-        type: 'TextInput'
-    },
-    customfield321: {
-        label: '2 testing some more',
-        type: 'radio_with_text'
-    }
-}, action) {
+export function newformfields (state = {}, action) {
     switch (action.type) {
         case 'add_field':
             return {...state, ...action.newfield};
@@ -100,6 +91,18 @@ export function newformfields (state = {
 
     }
 }
+/*
+{
+    customfield7221: {
+        label: 'testing some more',
+        type: 'TextInput'
+    },
+    customfield321: {
+        label: '2 testing some more',
+        type: 'radio_with_text'
+    }
+}
+ */
 
 export function previewtitle(state = '', action) {
     switch (action.type) {

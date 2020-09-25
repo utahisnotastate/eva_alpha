@@ -22,16 +22,36 @@ const log = (type) => console.log.bind(console, type);
 export default function FormsCustomizer(props) {
     const dispatch = useDispatch();
     let { formId } = useParams();
-    console.log(formId);
-    const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
+
+
+
+
+    return (
+        <div style={{padding: 15}}>
+            <GridContainer>
+                <GridItem xs={10}>
+                            <FormEditor formId={formId}/>
+                </GridItem>
+
+            </GridContainer>
+        </div>
+    )
+}
+
+/*
+    // console.log(formId);
+    // const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
+    const [formtitle, setFormTitle] = useState("");
     const formtype = useSelector(state => state.formsmanager.newform.newformtype);
     const formfields = useSelector(state => state.formsmanager.newform.newformfields);
+
 
     useEffect(() => {
 
         fetchForm(formId).then(response => {
-            console.log('form response is: ' + response.title);
-            dispatch({type: 'update_form_title', newtitle: response.title})
+            console.log('form response is: ' + JSON.stringify(response));
+            setFormTitle(response.title);
+            // dispatch({type: 'update_form_title', newtitle: response.title})
             dispatch({type: 'update_form_type', newtype: response.form_type })
             if (response.form) {
                 dispatch({type: 'load_form_fields', newformfields: response.form })
@@ -40,19 +60,10 @@ export default function FormsCustomizer(props) {
             }
             // dispatch({type: 'load_form_fields', newformfields: response.form })
         })
-    },[]);
+    },[formId]);
 
-    return (
-        <div style={{padding: 15}}>
-            <GridContainer>
-                <GridItem xs={10}>
-                    <Card>
-                        <CardBody>
-                            <FormEditor title={formtitle} type={formtype} formfields={formfields}/>
-                        </CardBody>
-                    </Card>
-                </GridItem>
-                <GridItem xs={2}>
+
+<GridItem xs={2}>
                     <Card>
                         <CardHeader>Add Template Inputs</CardHeader>
                         <CardBody>
@@ -68,7 +79,17 @@ export default function FormsCustomizer(props) {
                             </GridContainer>
                         </CardBody>
                     </Card>
-                    <Card>
+
+                </GridItem>
+
+<Card>
+                        <CardBody>
+                            <FormEditor title={formtitle} type={formtype} formfields={formfields}/>
+                        </CardBody>
+                    </Card>
+
+
+<Card>
                         <CardHeader>Add Custom Form Inputs</CardHeader>
                         <CardBody>
                             <GridContainer direction={`column`}>
@@ -85,13 +106,6 @@ export default function FormsCustomizer(props) {
                             </GridContainer>
                         </CardBody>
                     </Card>
-                </GridItem>
-            </GridContainer>
-        </div>
-    )
-}
-
-/*
 
 const fetchFormInfo = async () => {
             const result = await axios(`${API_URL}/forms/${formId}/`);
