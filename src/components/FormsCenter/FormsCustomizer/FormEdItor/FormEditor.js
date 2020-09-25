@@ -33,6 +33,12 @@ const useStyles = makeStyles({
     addfielditem: {
         padding: '10px',
         flexGrow: 2,
+    },
+    formTitle: {
+        padding: '15px'
+    },
+    formTypeSelectContainer: {
+        marginTop: '5px'
     }
 });
 
@@ -46,6 +52,7 @@ export default function FormEditor(props) {
     // let { formId } = useParams();
     const classes = useStyles();
     const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
+    const formtype = useSelector(state => state.formsmanager.newform.newformtype);
     const [newfieldtype, setNewFieldType] = useState('');
     const formfields = useSelector(state => state.formsmanager.newform.newformfields);
     const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
@@ -111,10 +118,11 @@ export default function FormEditor(props) {
                             <CardBody>
                                 <Grid container direction="column">
                                     <Grid item>
-                                        <TextField inputRef={methods.register} name={`form_title`} variant={`outlined`} />
+                                        <TextField className={classes.formTitle} label={`Form Title`}  fullWidth inputRef={methods.register} name={`form_title`} variant={`standard`} />
                                     </Grid>
                                     <Grid item>
-                                        <select  name="form_type" ref={methods.register}>
+                                        <Typography>Form type</Typography>
+                                        <select className={classes.formTypeSelectContainer} name="form_type" ref={methods.register}>
                                             <option value="">Select Form Type</option>
                                             <option value="physical_exam">Physical Exam</option>
                                             <option value="review_of_systems">Review Of Systems</option>

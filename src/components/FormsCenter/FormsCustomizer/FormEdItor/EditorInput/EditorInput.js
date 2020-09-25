@@ -12,6 +12,7 @@ import CardHeader from '../../../../basestyledcomponents/Card/CardHeader';
 import CardFooter from '../../../../basestyledcomponents/Card/CardFooter';
 import Button from '../../../../basestyledcomponents/Button';
 import InputPreview from "../FieldPreview/InputPreview/InputPreview";
+import '../../../../../styles/w3.css';
 
 const useStyles = makeStyles({
     builderroot: {
@@ -27,6 +28,12 @@ const useStyles = makeStyles({
     addfielditem: {
         padding: '10px',
         flexGrow: 2,
+    },
+    fieldPreviewContainer: {
+        borderStyle: 'solid',
+        borderColor: '#000',
+        borderWidth: '3',
+        padding: '10px'
     }
 });
 
@@ -48,18 +55,17 @@ export default function EditorInput(props) {
             <CardBody>
                 <Grid container direction="column" justify="space-between">
                         <Grid item className={classes.addfielditem}>
-                            <TextField fullWidth variant={`outlined`} placeholder={`Enter Field Label`}
-                                       defaultValue={``} inputRef={register} name="new_field_label"/>
+                            <TextField fullWidth placeholder={`Enter Field Label`}
+                                        inputRef={register} name="new_field_label"/>
                         </Grid>
                         <Grid item className={classes.addfielditem}>
                             <Typography variant="subtitle2">Field Type</Typography>
-                            <select name={`new_field_type`} value={newfieldtype} onChange={handleNewFieldTypeChange} ref={register}>
+                            <select name={`new_field_type`}  ref={register}>
                                 <option value="">Choose Field Type</option>
                                 <option value="TextInput">string</option>
                                 <option value="checkbox">checkbox</option>
                                 <option value="checkbox_group">checkbox group(Select multiple options)</option>
-                                <option value="radio_with_text">Radio With Text options</option>
-                                <option value="radio_with_numbers">Radio With Number options</option>
+                                <option value="radio">Radio select(Choose only 1 option)</option>
                                 <option value="number">number</option>
                                 <option value="textarea">textarea</option>
                                 <option value="select">select</option>
@@ -78,12 +84,9 @@ export default function EditorInput(props) {
                                     <Typography variant="subtitle2">Field Preview:</Typography>
                                 </Grid>
                                 <Grid item>
-                                    <Grid container direction="row">
-                                        <Grid item xs={2}>
-                                            <Typography>Field Label</Typography>
-                                        </Grid>
-                                        <Grid item xs={10}>
-
+                                    <Grid container className={`w3-border w3-padding`} direction="row">
+                                        <Grid item xs={12}>
+                                            <InputPreview className={classes.fieldPreviewContainer} input={{type: watchfieldtype, label: newfieldlabel}} />
                                         </Grid>
                                     </Grid>
                                 </Grid>
