@@ -3,28 +3,48 @@ import {useSelector, useDispatch} from "react-redux";
 import axios from "axios";
 import {useArray} from "react-hanger";
 import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller, FormContext } from 'react-hook-form';
+import {useFormContext } from "react-hook-form";
 import {TextField, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import {useParams, useRouteMatch, NavLink} from "react-router-dom";
 import RadioOptionsEditor from "./RadioOptionsEditor/RadioOptionsEditor";
 import RangeValueOptionsEditor from "./RangeValueOptionsEditor/RangeValueOptionsEditor";
-import TextValueOptionsEditor from "./TextValueOptionsEditor/TextValueOptionsEditor";
+// import TextValueOptionsEditor from "./TextValueOptionsEditor/TextValueOptionsEditor";
+import TextFieldOptionsEditor from "./TextFieldOptionsEditor/TextFieldOptionsEditor"
 import CheckboxGroupEditor from "./CheckboxGroupEditor/CheckBoxGroupEditor";
+import CheckboxEditor from "./CheckboxEditor/CheckboxEditor";
+import NumberOptionsEditor from './NumberOptionsEditor/NumberOptionsEditor';
+import TextAreaOptionsEditor from "./TextAreaOptionsEditor/TextAreaOptionsEditor";
+import DateFieldOptionsEditor from './DateFieldOptionsEditor/DateFieldOptionsEditor';
+import PresentNotPresentOptionsEditor from './PresentNotPresentOptionsEditor/PresentNotPresentOptionsEditor';
+import NormalAbnormalOptionsEditor from './NormalAbnormalOptionsEditor/NormalAbnormalOptionsEditor';
 
 function NoOptionsForField(){
     return <Typography>This field does not have any options that are configurable</Typography>
 }
 
 export default function FieldOptionsEditor(props) {
+    const {register} = useFormContext();
     const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
     switch(props.fieldtype) {
+        case 'checkbox':
+            return <CheckboxEditor />
         case 'checkbox_group':
-            return <CheckboxGroupEditor label={props.label} checkboxfields={props.checkboxfields} />
-        case 'radio_with_text':
-            return <TextValueOptionsEditor options={textvalueoptions} />
-        case 'radio_with_numbers':
-            return <RangeValueOptionsEditor name={`new_field_options`} />
+            return <CheckboxGroupEditor />
+        case 'radio':
+            return <RadioOptionsEditor />
+        case 'TextInput':
+            return <TextFieldOptionsEditor />
+        case 'textarea':
+            return <TextAreaOptionsEditor />
+        case 'number':
+            return <NumberOptionsEditor />
+        case 'date':
+            return <DateFieldOptionsEditor />
+        case 'present_not_present':
+            return <PresentNotPresentOptionsEditor />
+        case 'normal_abnormal':
+            return <NormalAbnormalOptionsEditor />
         default:
             return <NoOptionsForField />
     }

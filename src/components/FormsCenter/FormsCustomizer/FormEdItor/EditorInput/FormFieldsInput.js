@@ -37,36 +37,33 @@ const useStyles = makeStyles({
     }
 });
 
-export default function EditorInput(props) {
+export default function FormFieldsInput(props) {
     const {register, watch} = useFormContext();
     const classes = useStyles();
     const watchfieldtype = watch('new_field.type')
 
     return (
         <Card>
-            <CardHeader>
-                <Typography variant="h6">Create New Field</Typography>
-            </CardHeader>
             <CardBody>
                 <Grid container direction="column" justify="space-between">
-                        <Grid item className={classes.addfielditem}>
-                            <Typography variant="subtitle2">Field Type</Typography>
-                            <select name={`new_field.type`}  ref={register}>
-                                <option value="">Choose Field Type</option>
-                                <option value="TextInput">string/Simple text</option>
-                                <option value="checkbox">Checkbox</option>
-                                <option value="checkbox_group">checkbox group(Select multiple options)</option>
-                                <option value="radio">Radio select(Choose only 1 option from a group of options)</option>
-                                <option value="number">Number</option>
-                                <option value="textarea">Textarea/Long text</option>
-                                <option value="date">Date</option>
-                                <option value="present_not_present">Present/Not Present</option>
-                                <option value="normal_abnormal">Normal/Abnormal</option>
-                            </select>
-                        </Grid>
-                        <Grid item className={classes.addfielditem}>
-                            {watchfieldtype && <FieldOptionsEditor fieldtype={watchfieldtype} /> }
-                        </Grid>
+                    <Grid item className={classes.addfielditem}>
+                        <Typography variant="subtitle2">Field Type</Typography>
+                        <select name={props.label} value={props.type} disabled  ref={register}>
+                            <option value="">Choose Field Type</option>
+                            <option value="TextInput">string/Simple text</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="checkbox_group">checkbox group(Select multiple options)</option>
+                            <option value="radio">Radio select(Choose only 1 option from a group of options)</option>
+                            <option value="number">Number</option>
+                            <option value="textarea">Textarea/Long text</option>
+                            <option value="date">Date</option>
+                            <option value="present_not_present">Present/Not Present</option>
+                            <option value="normal_abnormal">Normal/Abnormal</option>
+                        </select>
+                    </Grid>
+                    <Grid item className={classes.addfielditem}>
+                        {watchfieldtype && <FieldOptionsEditor fieldtype={watchfieldtype} /> }
+                    </Grid>
                 </Grid>
             </CardBody>
             <CardFooter>

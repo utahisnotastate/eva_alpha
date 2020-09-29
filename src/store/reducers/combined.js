@@ -73,9 +73,6 @@ function clinicalqueue(state = [], action) {
     }
 }
 
-
-
-
 const formpreview = combineReducers({
     previewtitle,
     previewfields

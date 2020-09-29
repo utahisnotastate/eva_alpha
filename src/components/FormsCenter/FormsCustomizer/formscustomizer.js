@@ -28,17 +28,18 @@ export default function FormsCustomizer(props) {
 
     return (
         <div style={{padding: 15}}>
-            <GridContainer>
-                <GridItem xs={10}>
-                            <FormEditor formId={formId}/>
-                </GridItem>
-
-            </GridContainer>
+            <FormEditor formId={formId}/>
         </div>
     )
 }
 
 /*
+<GridContainer justify>
+                <GridItem xs={12}>
+                            <FormEditor formId={formId}/>
+                </GridItem>
+
+            </GridContainer>
     // console.log(formId);
     // const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
     const [formtitle, setFormTitle] = useState("");

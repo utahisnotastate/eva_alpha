@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
+import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import {useArray} from "react-hanger";
 import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller, FormContext, FormProvider } from 'react-hook-form';
+import { useForm, Controller, FormContext, FormProvider, useFieldArray } from 'react-hook-form';
 import {TextField, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../basestyledcomponents/Button";
@@ -48,14 +49,27 @@ function NoOptionsField(props) {
 
 export default function FormEditor(props) {
     const dispatch = useDispatch();
+    const customfields = useSelector(state => state.formsmanager.newform.newformfields);
+    const defaultValues = {
+        form_title: 'Testing',
+        form_type: 'physical_exam',
+        customformfields: customfields,
+        new_checkbox_field: ''
+
+    }
+    const methods = useForm({
+        defaultValues
+    });
+
     let { path, url } = useRouteMatch();
     // let { formId } = useParams();
     const classes = useStyles();
-    const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
-    const formtype = useSelector(state => state.formsmanager.newform.newformtype);
-    const [newfieldtype, setNewFieldType] = useState('');
-    const formfields = useSelector(state => state.formsmanager.newform.newformfields);
-    const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
+    // const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
+    // const formtype = useSelector(state => state.formsmanager.newform.newformtype);
+    //const [newfieldtype, setNewFieldType] = useState('');
+    // const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
+
+
     const handleFormSave = (formData) => {
         console.log({...formData, ...{id: props.formId}});
         /*updateForm(props.formId, formData).then(response => {
@@ -70,18 +84,44 @@ export default function FormEditor(props) {
             // dispatch({type: 'load_form_fields', newformfields: response.form })
         })*/
     };
-    const methods = useForm();
-    // methods.setValue("form_title", props.title);
-    // methods.setValue("form_type", props.type);
-    const handleNewFieldTypeChange = event => {
-        setNewFieldType(event.target.value);
-    }
+
+    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+        control: methods.control, // control props comes from useForm (optional: if you are using FormContext)
+        name: 'customformfields', // unique name for your Field Array
+        // keyName: "id", default to "id", you can change the key name
+    });
 
     const handleAddField = (methods) => {
         const values = methods.getValues();
-        console.log('New Form Field Values are: ' + JSON.stringify(values));
+
+        let fieldToBeAdded = {
+            label: values.new_field.label,
+            type: values.new_field.type,
+        }
+        console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
+
+
+        let choices = values.choices;
+        if (choices) {
+            let fieldchoices = [];
+            choices.forEach(choice => {
+                let choicekey = Object.keys(choice)
+                let choicelabel = {label: choicekey[0]};
+                fieldchoices.push(choicelabel);
+
+            });
+
+            fieldToBeAdded.choices = fieldchoices;
+            // let randomNum = Math.floor(Math.random() * 10000) + 1000;
+            // let fieldname = `custom${randomNum}`
+            // let fieldobj = {[fieldname]: fieldToBeAdded}
+            // console.log(fieldobj)
+            dispatch({type: 'add_field', newfield: fieldToBeAdded});
+        }
+
+
         // console.log('New FOrm Field options is ' + values.new_field_options);
-        const randomNumber = Math.floor((Math.random() * 10000) + 1);
+        /*const randomNumber = Math.floor((Math.random() * 10000) + 1);
         let fieldpropname = `customfield${randomNumber}`;
         let formField = {};
         formField[fieldpropname] = {
@@ -89,11 +129,12 @@ export default function FormEditor(props) {
             type: values.new_field_type
         }
         console.log(formField);
-        dispatch({type: 'add_field', newfield: formField});
+        dispatch({type: 'add_field', newfield: formField});*/
 
     }
-    useEffect(() => {
+    /*useEffect(() => {
         console.log('Calling fetch form now!');
+
         fetchForm(props.formId).then(response => {
             console.log('Form editor API call is: ' + JSON.stringify(response));
             dispatch({type: 'update_form_title', newtitle: response.title})
@@ -108,9 +149,11 @@ export default function FormEditor(props) {
                 methods.setValue("form", {})
             }
         })
-    }, [props.formId, dispatch])
+    }, [props.formId, dispatch])*/
     return (
-        <FormProvider {...methods}>
+
+        <div>
+            <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleFormSave)}>
                 <Grid container direction={`column`}>
                     <Grid item>
@@ -118,11 +161,14 @@ export default function FormEditor(props) {
                             <CardBody>
                                 <Grid container direction="column">
                                     <Grid item>
-                                        <TextField className={classes.formTitle} label={`Form Title`}  fullWidth inputRef={methods.register} name={`form_title`} variant={`standard`} />
+                                        <TextField className={classes.formTitle} label={`Form Title`} fullWidth
+                                                   inputRef={methods.register} name={`form_title`}
+                                                   variant={`standard`}/>
                                     </Grid>
                                     <Grid item>
                                         <Typography>Form type</Typography>
-                                        <select className={classes.formTypeSelectContainer} name="form_type" ref={methods.register}>
+                                        <select className={classes.formTypeSelectContainer} name="form_type"
+                                                ref={methods.register}>
                                             <option value="">Select Form Type</option>
                                             <option value="physical_exam">Physical Exam</option>
                                             <option value="review_of_systems">Review Of Systems</option>
@@ -136,10 +182,10 @@ export default function FormEditor(props) {
 
                     </Grid>
                     <Grid item>
-                        <FormFields formfields={formfields} />
+                        <FormFields customfields={fields} />
                     </Grid>
                     <Grid item>
-                        <EditorInput methods={methods} handleAddField={handleAddField} />
+                        <EditorInput methods={methods} handleAddField={handleAddField}/>
                     </Grid>
                     <Grid item>
                         <Grid container direction={`row`} justify={`space-between`}>
@@ -156,6 +202,9 @@ export default function FormEditor(props) {
                 </Grid>
             </form>
         </FormProvider>
+            <DevTool control={methods.control} />
+        </div>
+
     );
 }
 

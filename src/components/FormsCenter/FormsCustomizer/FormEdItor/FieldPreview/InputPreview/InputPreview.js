@@ -2,8 +2,10 @@ import React, {useEffect, useState, Fragment} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import {TextField,Checkbox, Typography,FormControl, FormControlLabel,FormLabel,FormGroup, InputLabel,RadioGroup,Radio, Input} from "@material-ui/core";
+import { useForm, Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../../../basestyledcomponents/Button";
+import CheckboxGroupPreview from './CheckboxGroupPreview';
 
 const useStyles = makeStyles({
     fullsize: {
@@ -13,41 +15,47 @@ const useStyles = makeStyles({
 
 export default function InputPreview(props) {
     const classes = useStyles();
+    const {register, control} = useFormContext();
+    const {fields, append, remove} = useFieldArray({
+        control,
+        name: `customformfields[${props.input.fieldindex}].choices`,
+
+    })
     switch(props.input.type) {
         case "checkbox":
             return (<FormControlLabel
                 control={<Checkbox   />}
                 label={props.input.label}
-                labelPlacement="Top"
+                labelPlacement="top"
             />)
         case "checkbox_group":
-            return(<FormControl component={`fieldset`}>
-                <FormLabel component="legend">{props.input.label}</FormLabel>
-                <FormGroup>
-                    <FormControlLabel
-                        control={<Checkbox   />}
-                        label={`Checkbox 1`}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox   />}
-                        label={`Checkbox 2`}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox   />}
-                        label={`Checkbox 3`}
-                    />
-                </FormGroup>
-            </FormControl>)
+            return(<CheckboxGroupPreview input={{fieldindex: props.input.fieldindex, label: props.input.label, type: props.input.type, choices: {fields: fields, append: append, remove: remove}  } }  />)
         case "radio":
             return (
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">{props.input.label}</FormLabel>
-                    <RadioGroup>
-                        <FormControlLabel value={`Radio 1`} control={<Radio />} label={`Radio 1`} />
-                        <FormControlLabel value={`Radio 2`} control={<Radio />} label={`Radio 2`} />
-                        <FormControlLabel value={`Radio 3`} control={<Radio />} label={`Radio 3`} />
-                    </RadioGroup>
-                </FormControl>
+                <Grid container direction="column">
+                    <Grid item>
+                        <FormControl component="fieldset">
+                        <FormLabel component="legend">{props.input.label}</FormLabel>
+                        <RadioGroup>
+                            {fields.length > 0 ? fields.map((field, index) => (
+                                <div key={index}>
+                                    <FormControlLabel
+                                        control={<Radio checked={false}
+                                                        inputRef={register()}
+                                                        name={`customformfields[${props.input.fieldindex}].choices[${index}].label`}/>}
+                                        label={field.label}
+                                    />
+                                    <Button color="danger" onClick={() => remove(index)}>X</Button>
+                                </div>
+                            )) : <Typography></Typography>}
+
+                        </RadioGroup>
+                    </FormControl>
+                    </Grid>
+                    <Grid item>
+
+                    </Grid>
+                </Grid>
             )
         case "number":
             return (
