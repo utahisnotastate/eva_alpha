@@ -24,33 +24,34 @@ function NoOptionsForField(){
 }
 
 export default function FieldOptionsEditor(props) {
-    const {register} = useFormContext();
-    const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
+
     switch(props.fieldtype) {
         case 'checkbox':
-            return <CheckboxEditor />
+            return <CheckboxEditor handleAddField={props.handleAddField} />
         case 'checkbox_group':
-            return <CheckboxGroupEditor />
+            return <CheckboxGroupEditor fieldtype={props.fieldtype}  handleAddField={props.handleAddField} append={props.append} />
         case 'radio':
-            return <RadioOptionsEditor />
+            return <RadioOptionsEditor handleAddField={props.handleAddField} append={props.append} />
         case 'TextInput':
-            return <TextFieldOptionsEditor />
+            return <TextFieldOptionsEditor handleAddField={props.handleAddField} />
         case 'textarea':
-            return <TextAreaOptionsEditor />
+            return <TextAreaOptionsEditor handleAddField={props.handleAddField} />
         case 'number':
-            return <NumberOptionsEditor />
+            return <NumberOptionsEditor handleAddField={props.handleAddField} />
         case 'date':
-            return <DateFieldOptionsEditor />
+            return <DateFieldOptionsEditor handleAddField={props.handleAddField} />
         case 'present_not_present':
-            return <PresentNotPresentOptionsEditor />
+            return <PresentNotPresentOptionsEditor handleAddField={props.handleAddField} />
         case 'normal_abnormal':
-            return <NormalAbnormalOptionsEditor />
+            return <NormalAbnormalOptionsEditor handleAddField={props.handleAddField} />
         default:
-            return <NoOptionsForField />
+            return <NoOptionsForField handleAddField={props.handleAddField} />
     }
 }
 
 /*
+    const {register} = useFormContext();
+    const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
             return <TextField name={`new_field_options`}  fullWidth inputRef={props.register} variant={`filled`} disabled helperText={`No options available for this type of field`} value={false} />;
 
 <TextField name={`new_field_options`} inputRef={props.register}  multiline helperText={`Enter field options seperated by semicolon(;) aka option1;option2;option3;... `} />

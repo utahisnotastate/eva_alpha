@@ -65,18 +65,19 @@ export default function EditorInput(props) {
                             </select>
                         </Grid>
                         <Grid item className={classes.addfielditem}>
-                            {watchfieldtype && <FieldOptionsEditor fieldtype={watchfieldtype} /> }
+                            {watchfieldtype && <FieldOptionsEditor fieldtype={watchfieldtype} handleAddField={props.handleAddField} append={props.append} /> }
                         </Grid>
                 </Grid>
             </CardBody>
-            <CardFooter>
-                <Button onClick={() => {props.handleAddField(props.methods)}}>Add Field</Button>
-            </CardFooter>
+
         </Card>
     );
 }
 
 /*
+<CardFooter>
+                <Button onClick={() => {props.handleAddField(props.methods)}}>Add Field</Button>
+            </CardFooter>
 <Grid item className={classes.addfielditem}>
                             <Grid container direction="column">
                                 <Grid item>

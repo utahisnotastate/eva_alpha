@@ -5,13 +5,14 @@ import { useForm, Controller, useFieldArray, useFormContext } from 'react-hook-f
 import {TextField,Checkbox, Typography,FormControl, FormControlLabel,FormLabel,FormGroup, InputLabel,RadioGroup,Radio, Input} from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
-import Card from '../../../../basestyledcomponents/Card/Card'
+import Button from "../../../../basestyledcomponents/Button";
+import Card from '../../../../basestyledcomponents/Card/Card';
 import CardBody from '../../../../basestyledcomponents/Card/CardBody';
 import CardHeader from '../../../../basestyledcomponents/Card/CardHeader';
 import FormFieldLabel from "./FormFieldLabel";
 import FormFieldActions from "./FormFieldActions/FormFieldActions";
 import FormFieldOptions from "./FormFieldOptions";
-import InputPreview from '../FieldPreview/InputPreview/InputPreview'
+import InputPreview from '../FieldPreview/InputPreview/InputPreview';
 import {makeStyles} from "@material-ui/core/styles";
 import {useParams} from "react-router-dom";
 
@@ -43,6 +44,9 @@ export default function FormFields(props) {
     const { control, register, watch } = useFormContext();
     const classes = useStyles();
     const customfields = props.customfields;
+
+
+
     return (
 
         <Grid container direction="column">
@@ -59,6 +63,9 @@ export default function FormFields(props) {
                     <Grid item>
                     <Card className={classes.fieldcontainer}>
                         <Grid container direction="column">
+                            <Grid item>
+                                <Button color="danger" onClick={() => props.handleDeleteFIeld(index)}>X</Button>
+                            </Grid>
                             <Grid item>
                                 <FormControlLabel
                                     control={<TextField
@@ -78,7 +85,7 @@ export default function FormFields(props) {
                                     label: watch(`customformfields[${index}].label`),
                                     fieldindex: index,
                                     type: field.type,
-                                    choices: field.choices
+                                    choices: customfields[index]['choices']
                                 }}/>
                             </Grid>
                         </Grid>

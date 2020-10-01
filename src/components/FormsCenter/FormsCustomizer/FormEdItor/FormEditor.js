@@ -49,29 +49,32 @@ function NoOptionsField(props) {
 
 export default function FormEditor(props) {
     const dispatch = useDispatch();
+    const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
+    const formtype = useSelector(state => state.formsmanager.newform.newformtype);
     const customfields = useSelector(state => state.formsmanager.newform.newformfields);
     const defaultValues = {
-        form_title: 'Testing',
-        form_type: 'physical_exam',
+        form_title: formtitle,
+        form_type: formtype,
         customformfields: customfields,
-        new_checkbox_field: ''
-
+        new_checkbox_field: '',
+        new_field: {
+            type: '',
+            label: '',
+        },
     }
+
     const methods = useForm({
         defaultValues
     });
+    const watchformfields = methods.watch('customformfields');
 
     let { path, url } = useRouteMatch();
-    // let { formId } = useParams();
+    let { formId } = useParams();
     const classes = useStyles();
-    // const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
-    // const formtype = useSelector(state => state.formsmanager.newform.newformtype);
-    //const [newfieldtype, setNewFieldType] = useState('');
-    // const textvalueoptions = useSelector(state => state.formsmanager.newform.newtextvalueoptions);
 
 
     const handleFormSave = (formData) => {
-        console.log({...formData, ...{id: props.formId}});
+        console.log(formData);
         /*updateForm(props.formId, formData).then(response => {
             console.log('form response is: ' + JSON.stringify(response) );
             dispatch({type: 'update_form_title', newtitle: response.title})
@@ -91,47 +94,53 @@ export default function FormEditor(props) {
         // keyName: "id", default to "id", you can change the key name
     });
 
-    const handleAddField = (methods) => {
+    const resetNewFieldInput = () => {
+        methods.setValue("new_field.type", '');
+        methods.setValue("new_field.label", '');
+    }
+
+    const handleAddField = (fieldinput) => {
+        //get the values of the label
         const values = methods.getValues();
 
+        //setup object to store the values of the fields into
         let fieldToBeAdded = {
-            label: values.new_field.label,
-            type: values.new_field.type,
+            label: fieldinput.label,
+            type: fieldinput.type,
         }
-        console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
+        console.log(fieldinput.choices);
 
+        //check to see if the field allows any custom choices
+        let choices = fieldinput.choices;
 
-        let choices = values.choices;
         if (choices) {
             let fieldchoices = [];
+            // the form editor depends on the choice being an object with a label property. Create an object with the label propery for each choice
             choices.forEach(choice => {
-                let choicekey = Object.keys(choice)
-                let choicelabel = {label: choicekey[0]};
+                //let choicekey = Object.keys(choice)
+                let choicelabel = {label: choice.label};
+                console.log(choicelabel);
                 fieldchoices.push(choicelabel);
 
             });
-
             fieldToBeAdded.choices = fieldchoices;
-            // let randomNum = Math.floor(Math.random() * 10000) + 1000;
-            // let fieldname = `custom${randomNum}`
-            // let fieldobj = {[fieldname]: fieldToBeAdded}
-            // console.log(fieldobj)
-            dispatch({type: 'add_field', newfield: fieldToBeAdded});
+            console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
+            // dispatch({type: 'add_field', newfield: fieldToBeAdded});
+            append(fieldToBeAdded);
+            resetNewFieldInput();
+        } else {
+            //console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
+            append(fieldToBeAdded);
+            // dispatch({type: 'add_field', newfield: fieldToBeAdded});
+            resetNewFieldInput();
         }
-
-
-        // console.log('New FOrm Field options is ' + values.new_field_options);
-        /*const randomNumber = Math.floor((Math.random() * 10000) + 1);
-        let fieldpropname = `customfield${randomNumber}`;
-        let formField = {};
-        formField[fieldpropname] = {
-            label: values.new_field_label,
-            type: values.new_field_type
-        }
-        console.log(formField);
-        dispatch({type: 'add_field', newfield: formField});*/
 
     }
+    const handleDeleteFIeld = (index) => {
+        remove(index);
+    }
+
+
     /*useEffect(() => {
         console.log('Calling fetch form now!');
 
@@ -158,6 +167,11 @@ export default function FormEditor(props) {
                 <Grid container direction={`column`}>
                     <Grid item>
                         <Card>
+                            <CardHeader>
+                                <NavLink to={`/formscenter/${formId}/preview`}>
+                                    <Button color={`primary`}>Preview Form</Button>
+                                </NavLink>
+                            </CardHeader>
                             <CardBody>
                                 <Grid container direction="column">
                                     <Grid item>
@@ -176,16 +190,15 @@ export default function FormEditor(props) {
                                         </select>
                                     </Grid>
                                 </Grid>
-
                             </CardBody>
                         </Card>
 
                     </Grid>
                     <Grid item>
-                        <FormFields customfields={fields} />
+                        <FormFields customfields={fields} handleDeleteFIeld={handleDeleteFIeld} />
                     </Grid>
                     <Grid item>
-                        <EditorInput methods={methods} handleAddField={handleAddField}/>
+                        <EditorInput methods={methods} handleAddField={handleAddField} append={append}/>
                     </Grid>
                     <Grid item>
                         <Grid container direction={`row`} justify={`space-between`}>
@@ -193,7 +206,7 @@ export default function FormEditor(props) {
                                 <input type="submit"/>
                             </Grid>
                             <Grid item>
-                                <Button color={`danger`}>Delete</Button>
+                                <Button color={`danger`}>Delete Form</Button>
                             </Grid>
                         </Grid>
 

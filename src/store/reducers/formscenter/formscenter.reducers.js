@@ -68,7 +68,7 @@ export function newformtype(state = '', action) {
 
     }
 }
-
+// I dont think we use this anymore
 export function newformproperties(state={title: '', form_type: ''}, action) {
     switch (action.type) {
         case 'set_title':
@@ -83,7 +83,7 @@ const testcustomformfields = [
     {type:"radio", label: "test radio", choices: [{label: 'First test choice'}, {label: 'Second test choice'}]}, {type: 'TextInput', label: "Test Text Input"},{type: 'checkbox_group', label: "Test Checkbox group",
         choices: [{label: "Test Check 1"},{label: "Test Check 2"},{label: "Test Check 3"}]}
 ];
-export function newformfields (state = testcustomformfields, action) {
+export function newformfields (state = [], action) {
     switch (action.type) {
         case 'add_field':
             return state.concat(action.newfield);

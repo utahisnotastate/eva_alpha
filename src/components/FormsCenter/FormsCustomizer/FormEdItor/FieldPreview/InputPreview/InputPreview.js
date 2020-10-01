@@ -6,6 +6,12 @@ import { useForm, Controller, useFieldArray, useFormContext } from 'react-hook-f
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../../../basestyledcomponents/Button";
 import CheckboxGroupPreview from './CheckboxGroupPreview';
+import CheckboxPreview from "./CheckboxPreview";
+import TextFieldPreview from "./TextFieldPreview";
+import NumberFieldPreview from "./NumberFieldPreview";
+import TextAreaFieldPreview from "./TextAreaFieldPreview";
+import DateFieldPreview from "./DateFieldPreview";
+import RadioFieldPreview from "./RadioFieldPreview";
 
 const useStyles = makeStyles({
     fullsize: {
@@ -16,76 +22,28 @@ const useStyles = makeStyles({
 export default function InputPreview(props) {
     const classes = useStyles();
     const {register, control} = useFormContext();
-    const {fields, append, remove} = useFieldArray({
-        control,
-        name: `customformfields[${props.input.fieldindex}].choices`,
-
-    })
     switch(props.input.type) {
         case "checkbox":
-            return (<FormControlLabel
-                control={<Checkbox   />}
-                label={props.input.label}
-                labelPlacement="top"
-            />)
+            return (<CheckboxPreview input={{name: `customformfields[${props.input.fieldindex}].label`} } />)
         case "checkbox_group":
-            return(<CheckboxGroupPreview input={{fieldindex: props.input.fieldindex, label: props.input.label, type: props.input.type, choices: {fields: fields, append: append, remove: remove}  } }  />)
+            return(
+                <CheckboxGroupPreview
+                    input={
+                        {
+                            fieldindex: props.input.fieldindex,
+                            label: props.input.label,
+                            type: props.input.type,
+                            choices: props.input.choices,
+                        }
+                         }  />)
         case "radio":
-            return (
-                <Grid container direction="column">
-                    <Grid item>
-                        <FormControl component="fieldset">
-                        <FormLabel component="legend">{props.input.label}</FormLabel>
-                        <RadioGroup>
-                            {fields.length > 0 ? fields.map((field, index) => (
-                                <div key={index}>
-                                    <FormControlLabel
-                                        control={<Radio checked={false}
-                                                        inputRef={register()}
-                                                        name={`customformfields[${props.input.fieldindex}].choices[${index}].label`}/>}
-                                        label={field.label}
-                                    />
-                                    <Button color="danger" onClick={() => remove(index)}>X</Button>
-                                </div>
-                            )) : <Typography></Typography>}
-
-                        </RadioGroup>
-                    </FormControl>
-                    </Grid>
-                    <Grid item>
-
-                    </Grid>
-                </Grid>
-            )
+            return (<RadioFieldPreview input={{fieldindex: props.input.fieldindex, label: props.input.label, choices: props.input.choices}} />)
         case "number":
-            return (
-                <FormControlLabel
-                    control={<TextField fullWidth type="number"  />}
-                    label={props.input.label}
-                    labelPlacement="start"
-                    className={classes.fullsize}
-
-
-                />
-            )
+            return (<NumberFieldPreview input={{name: `customformfields[${props.input.fieldindex}].label`} } />)
         case "textarea":
-            return (
-                <FormControlLabel
-                    control={<TextField fullWidth multiline rows={7} />}
-                    label={props.input.label}
-                    labelPlacement="start"
-                    className={classes.fullsize}
-
-                />
-            )
+            return (<TextAreaFieldPreview input={{name: `customformfields[${props.input.fieldindex}].label`} } />)
         case "TextInput":
-            return (<FormControlLabel
-                control={<TextField fullWidth />}
-                label={props.input.label}
-                labelPlacement="start"
-                className={classes.fullsize}
-
-            />)
+            return (<TextFieldPreview input={{name: `customformfields[${props.input.fieldindex}].label`} } />)
         case "present_not_present":
             return (
                 <FormControl component="fieldset">
@@ -96,6 +54,8 @@ export default function InputPreview(props) {
                     </RadioGroup>
                 </FormControl>
             )
+        case 'date':
+            return (<DateFieldPreview input={{name: `customformfields[${props.input.fieldindex}].label`} } />)
         case "normal_abnormal":
             return (
                 <FormControl component="fieldset">
@@ -111,7 +71,34 @@ export default function InputPreview(props) {
     }
 }
 /*
+    const {fields, append, remove} = useFieldArray({
+        control,
+        name: `customformfields[${props.input.fieldindex}].choices`,
 
+    })
+<Grid container direction="column">
+                    <Grid item>
+                        <FormControl component="fieldset">
+                        <FormLabel component="legend">{props.input.label}</FormLabel>
+                        <RadioGroup>
+                            {fields.length > 0 ? fields.map((field, index) => (
+                                <div key={field.id}>
+                                    <FormControlLabel
+                                        control={
+                                            <Radio checked={false}
+                                                   />}
+                                        label={field.label}
+                                    />
+                                    <Button color="danger" onClick={() => remove(index)}>X</Button>
+                                </div>
+                            )) : <Typography>No choices have been entered. Please add one above.</Typography>}
+
+                        </RadioGroup>
+                    </FormControl>
+                    </Grid>
+                </Grid>
+inputRef={register()}
+                                                   name={`customformfields[${props.input.fieldindex}].choices[${index}][${field.label}]`}
 <FormControl fullWidth>
                     <InputLabel htmlFor="previewtextinput">{props.input.label}</InputLabel>
                     <Input id="previewtextinput" multiline rows={7}  />

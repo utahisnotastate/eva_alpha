@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useSelector, useDispatch} from "react-redux";
 
 import {useFormContext, useFieldArray, Controller} from "react-hook-form";
-import {TextField, Typography, Divider, Radio, FormControl, FormControlLabel,FormLabel,FormGroup} from "@material-ui/core";
+import {TextField, Typography, Divider, Checkbox, Radio, FormControl, FormControlLabel,FormLabel,FormGroup} from "@material-ui/core";
 import Button from '../../../../../../basestyledcomponents/Button';
 import Grid from "@material-ui/core/Grid";
 
@@ -35,19 +35,23 @@ export default function RadioOptionsEditor(props){
     const classes = useStyles();
     const {register, watch, getValues,control, setValue} = useFormContext();
     const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-        name: "choices", // unique name for your Field Array
+        name: 'new_field.choices', // unique name for your Field Array
         control,
-        defaultValue: [],
+        // defaultValue: [],
         // keyName: "id", default to "id", you can change the key name
     });
     const watchlabel = watch("new_field.label");
     const watchnewchoice = watch("new_choice");
-    const SelectionType = props.selectiontype;
+    // const SelectionType = props.selectiontype;
 
-    const addNewChoice = () => {
-        const choice = getValues("new_choice");
-        append({label: choice});
-        setValue("new_choice", "");
+    const resetNewFieldInput = () => {
+        setValue("new_field.type", '');
+        setValue("new_field.label", '');
+    }
+    const addFieldToForm = () => {
+        const fieldsvalue = getValues();
+        props.handleAddField({label: fieldsvalue.new_field.label, type: 'radio'});
+        resetNewFieldInput()
     }
     return (
         <Grid container direction="column">
@@ -56,8 +60,24 @@ export default function RadioOptionsEditor(props){
                            inputRef={register} name="new_field.label"/>
             </Grid>
             <Grid item>
+                <Typography variant={`subtitle2`}>To edit choices of this field, please enter in a label then add it to the form via the button below.</Typography>
+            </Grid>
+            <Grid item>
                 <Grid container direction="column">
                     <Grid item>
+                        <Button type={`button`} color="primary" onClick={() => addFieldToForm()}>Add to form</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+
+        </Grid>
+    );
+}
+
+/*
+<Grid item>
                         <Grid container direction="row">
                             <Grid item>
                                 <TextField fullWidth placeholder={`Enter Choice`}
@@ -68,19 +88,21 @@ export default function RadioOptionsEditor(props){
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item className={classes.fieldPreviewContainer}>
+<Grid item className={classes.fieldPreviewContainer}>
                         <Typography variant="subtitle2">Field Preview:</Typography>
                         <FormControl component={`fieldset`}>
                             {watchlabel && <FormLabel component="legend">{watchlabel}</FormLabel> }
-                            {fields &&
                             <FormGroup className={classes.radiorow}>
-                                {fields.map((field, index) => (
+                                {fields.length > 0 ? fields.map((field, index) => (
                                     <div key={field.id}>
                                         <Grid container direction={`row`}>
                                             <Grid item>
+                                                <Radio />
+                                            </Grid>
+                                            <Grid item>
                                                 <FormControlLabel
-                                                    control={<Radio name={`choices[${index}][${field.label}]`} inputRef={register()}  />}
-                                                    label={field.label}
+                                                    control={<TextField name={`new_field.choices[${index}].label`} defaultValue={field.label} inputRef={register()}  />}
+
                                                 />
                                             </Grid>
                                             <Grid item>
@@ -90,16 +112,11 @@ export default function RadioOptionsEditor(props){
 
                                     </div>
 
-                                ))}
+                                )): <Typography></Typography>}
                             </FormGroup>
-                            }
+
                         </FormControl>
                     </Grid>
-                </Grid>
-            </Grid>
-
-
-
-        </Grid>
-    );
-}
+<Radio name={`choices[${index}][${field.label}]`} inputRef={register()}  />
+<Radio name={`choices[${index}][${field.label}]`} inputRef={register()}  />
+ */

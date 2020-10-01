@@ -29,55 +29,78 @@ const useStyles = makeStyles({
 
 export default function CheckboxGroupEditor(props){
     const classes = useStyles();
-    const {register, watch, getValues,control, setValue} = useFormContext();
-    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-        name: "choices", // unique name for your Field Array
-        control,
-        defaultValue: [],
-        // keyName: "id", default to "id", you can change the key name
-    });
+    const {register, watch, setValue} = useFormContext();
     const watchlabel = watch("new_field.label");
-    const watchnewchoice = watch("new_choice");
-    const SelectionType = props.selectiontype;
 
-    const addNewChoice = () => {
-        const choice = getValues("new_choice");
-        append({label: choice});
-        setValue("new_choice", "");
+    const addCheckboxGroupFieldToForm = (label) => {
+        props.append({label: label, type: "checkbox_group"});
+        setValue("new_field.label", "");
+        setValue("new_field.type", "");
     }
     return (
         <Grid container direction="column">
             <Grid item>
                 <TextField fullWidth placeholder={`Enter Field Label`}
-                           inputRef={register} name="new_field.label"/>
+                           inputRef={register}
+                           label={`Field Label`}
+                           name="new_field.label"
+                />
             </Grid>
             <Grid item>
                 <Grid container direction="column">
                     <Grid item>
-                        <Grid container direction="row">
-                            <Grid item>
-                                <TextField fullWidth placeholder={`Enter Choice`}
-                                           inputRef={register} name="new_choice"/>
-                            </Grid>
-                            <Grid item>
-                                <Button type={`button`} color="primary" onClick={() => addNewChoice()}>Add choice</Button>
-                            </Grid>
-                        </Grid>
+                        <Typography variant={`subtitle2`}>To edit choices of this field, please enter in a label then add it to the form via the button below.</Typography>
                     </Grid>
-                    <Grid item className={classes.fieldPreviewContainer}>
-                        <Typography variant="subtitle2">Field Preview:</Typography>
-                        <FormControl component={`fieldset`}>
+                </Grid>
+            </Grid>
+            <Grid item>
+                <Button color="primary" onClick={() => addCheckboxGroupFieldToForm(watchlabel) }>Add to form</Button>
+            </Grid>
+
+        </Grid>
+    );
+}
+
+/*
+const addNewChoice = (watchedchoice) => {
+        //const choice = getValues("new_choice");
+        console.log({label: watchedchoice});
+
+        append({label: watchedchoice});
+        const bocgroupvalues = getValues();
+        console.log(bocgroupvalues)
+        //setValue("new_choice", "");
+    }
+const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+        // name: "choices", // unique name for your Field Array
+        name: 'new_field.choices',
+        control,
+        // keyName: "id", default to "id", you can change the key name
+    });
+<Grid item>
+                <TextField fullWidth placeholder={`Enter Field Label`}
+                           inputRef={register}
+                           label={`Field Label`}
+                           name="new_field.label"
+                />
+            </Grid>
+ <Grid item>
+                                <TextField fullWidth placeholder={`Enter Choice`}
+                                           inputRef={register()} name="new_choice"/>
+                            </Grid>
+                            <Grid item>
+                                <Button type={`button`} color="primary" onClick={() => addNewChoice(watchnewchoice)}>Add choice</Button>
+                            </Grid>
+<FormControl component={`fieldset`}>
                             {watchlabel && <FormLabel component="legend">{watchlabel}</FormLabel> }
-                            {fields &&
                             <FormGroup>
-                                {fields.map((field, index) => (
+                                {fields.length > 0 ? fields.map((field, index) => (
                                     <div key={field.id}>
                                         <Grid container direction={`row`}>
                                             <Grid item>
-                                                <FormControlLabel
-                                                    control={<Checkbox name={`choices[${index}][${field.label}]`} inputRef={register()}  />}
-                                                    label={field.label}
-                                                />
+                                                <Checkbox />
+                                                <TextField fullWidth
+                                                           inputRef={register()}  defaultValue={field.label} name={`new_field.choices[${index}].label`}/>
                                             </Grid>
                                             <Grid item>
                                                 <Button type={`button`} color="danger" onClick={() => remove(index)}>X</Button>
@@ -86,16 +109,15 @@ export default function CheckboxGroupEditor(props){
 
                                     </div>
 
-                                ))}
+                                )): <Typography></Typography>}
                             </FormGroup>
-                            }
+
                         </FormControl>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-
-
-        </Grid>
-    );
-}
+<Button color="primary" onClick={() => props.handleAddField({label: watchlabel, type: 'checkbox_group', choices: watchchoices }) }>Add to form</Button>
+<FormControlLabel
+                                                    control={<Checkbox name={`new_field.choices[${index}].value`} defaultValue={`new_field.choices[${index}].value`} inputRef={register()} />}
+                                                    label={field.label}
+                                                    labelPlacement="top"
+                                                />
+control={<Checkbox name={`${props.input.name}[${index}][${field.label}]`} inputRef={register()}  />}
+ */
