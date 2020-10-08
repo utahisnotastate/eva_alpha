@@ -59,6 +59,7 @@ export default function RadioFieldPreview(props){
         //append({label: newfield, value: null});
         console.log(newfield);
         append({label: newfield});
+        setValue(`customformfields[${props.input.fieldindex}].new_choice`, "")
         //console.log(newfield);
         // setValue(`customformfields[${props.input.fieldindex}].choices[${}]`, "");
     }
@@ -72,17 +73,20 @@ export default function RadioFieldPreview(props){
                 <Grid container direction="column">
                     <Grid item>
                         <Grid container direction="row">
-                            <Grid item>
+                            <Grid item xs={8}>
                                 <TextField fullWidth placeholder={`Enter Choice`}
                                            inputRef={register()} name={`customformfields[${props.input.fieldindex}].new_choice`}/>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={4}>
                                 <Button type={`button`} color="primary" onClick={() => addNewChoice()}>Add choice</Button>
                             </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item className={classes.margTop}>
+                        <Typography variant="subtitle2">Field Preview:</Typography>
+                    </Grid>
                     <Grid item>
-                        <Grid container>
+                        <Grid container className={classes.fieldPreviewContainer}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">{props.input.label}</FormLabel>
 

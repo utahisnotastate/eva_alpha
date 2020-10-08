@@ -79,14 +79,11 @@ export function newformproperties(state={title: '', form_type: ''}, action) {
             return state;
     }
 }
-const testcustomformfields = [
-    {type:"radio", label: "test radio", choices: [{label: 'First test choice'}, {label: 'Second test choice'}]}, {type: 'TextInput', label: "Test Text Input"},{type: 'checkbox_group', label: "Test Checkbox group",
-        choices: [{label: "Test Check 1"},{label: "Test Check 2"},{label: "Test Check 3"}]}
-];
+const testcustomformfields = [{"label":"fsdfsdfdsf"},{"label":"fdfsdfsdf","choices":[{"label":"sdfsdfsdf"},{"label":"jkghjgjgh"}],"new_choice":""},{"label":"fdsfsdfsdf","choices":[{"label":"fdfsdfsf"},{"label":"gdfgdfgd"}],"new_choice":""},{"label":"dfsdfsdfsfs"}]
 export function newformfields (state = [], action) {
     switch (action.type) {
         case 'add_field':
-            return state.concat(action.newfield);
+            return [...state, {label: action.newfield.label, type: action.newfield.type}];
         case 'load_form_fields':
             return action.newformfields;
         default:
@@ -106,7 +103,7 @@ export function newformfields (state = [], action) {
     }
 }
  */
-
+// I dont think we use this anymore
 export function previewtitle(state = '', action) {
     switch (action.type) {
         case 'update_preview_title':
@@ -116,7 +113,7 @@ export function previewtitle(state = '', action) {
 
     }
 }
-
+// I dont think we use this anymore
 export function previewfields(state = [], action) {
     switch (action.type) {
         case 'load_fields':

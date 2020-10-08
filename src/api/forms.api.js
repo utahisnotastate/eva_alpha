@@ -25,10 +25,13 @@ export const fetchForm = async  (formId) => {
 };
 
 export const updateForm = async (formId, formData) => {
+    const customform = {
+        customformfields: formData.customformfields
+    }
    const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
        form_type: formData.form_type,
        title: formData.form_title,
-       form: formData.formfields
+       form: customform,
    });
    return result.data;
 }

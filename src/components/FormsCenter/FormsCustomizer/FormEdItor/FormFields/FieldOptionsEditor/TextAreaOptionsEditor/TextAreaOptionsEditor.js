@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useFormContext } from "react-hook-form";
 import {TextField, Typography, FormControlLabel,FormLabel} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Button from "../../../../../../basestyledcomponents/Button";
 
 const useStyles = makeStyles({
     fullsize: {
@@ -41,7 +42,7 @@ export default function TextAreaOptionsEditor(props) {
                 </Grid>
                 <Grid item className={classes.fieldPreviewContainer}>
                     <FormControlLabel
-                        control={<TextField type={`number`} fullWidth/>}
+                        control={<TextField fullWidth multiline rows={7}/>}
                         label={watchlabel}
                         labelPlacement="start"
                         className={classes.fullsize}
@@ -50,7 +51,9 @@ export default function TextAreaOptionsEditor(props) {
                 </Grid>
             </Grid>
             }
-
+            <Grid item>
+                <Button color={`primary`} onClick={() => props.handleAddField({label: watchlabel, type: 'textarea'})}>Add Field</Button>
+            </Grid>
 
         </Grid>
     );

@@ -9,7 +9,6 @@ import './formscenter.css';
 import {useRouteMatch, Switch, Route,} from "react-router-dom";
 import FormsCenterHome from "./FormsCenterHome";
 import FormsCustomizer from "./FormsCustomizer/formscustomizer";
-import FormEditor from "./FormsCustomizer/FormEdItor/FormEditor";
 import FormPreview from "./FormPreview/formpreview";
 
 
@@ -29,3 +28,6 @@ export default function FormsCenter(props) {
         </div>
     )
 }
+/*
+<Route path={`${path}/:formId/edit`} component={FormsCustomizer}/>
+ */

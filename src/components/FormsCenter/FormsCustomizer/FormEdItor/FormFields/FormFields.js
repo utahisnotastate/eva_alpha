@@ -1,108 +1,163 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import { useForm, Controller, useFieldArray, useFormContext } from 'react-hook-form';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  useForm,
+  Controller,
+  useFieldArray,
+  useFormContext,
+} from "react-hook-form";
 // import {fetchFormFields} from "../../../../../api/forms.api";
-import {TextField,Checkbox, Typography,FormControl, FormControlLabel,FormLabel,FormGroup, InputLabel,RadioGroup,Radio, Input} from "@material-ui/core";
+import {
+  TextField,
+  Checkbox,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+  InputLabel,
+  RadioGroup,
+  Radio,
+  Input,
+} from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../../basestyledcomponents/Button";
-import Card from '../../../../basestyledcomponents/Card/Card';
-import CardBody from '../../../../basestyledcomponents/Card/CardBody';
-import CardHeader from '../../../../basestyledcomponents/Card/CardHeader';
+import Card from "../../../../basestyledcomponents/Card/Card";
+import CardBody from "../../../../basestyledcomponents/Card/CardBody";
+import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
 import FormFieldLabel from "./FormFieldLabel";
 import FormFieldActions from "./FormFieldActions/FormFieldActions";
 import FormFieldOptions from "./FormFieldOptions";
-import InputPreview from '../FieldPreview/InputPreview/InputPreview';
-import {makeStyles} from "@material-ui/core/styles";
-import {useParams} from "react-router-dom";
+import InputPreview from "../FieldPreview/InputPreview/InputPreview";
+import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router-dom";
+import AppointmentField from "../../../../Forms/components/AppointmentField/appointmentfield";
 
 const useStyles = makeStyles({
-    formrowcontainer: {
-        margin: '5px',
-    },
-    fieldcontainer: {
-        padding: '15px',
-    },
-    fullsize: {
-        width: '100%',
-    },
-    fieldlabelcontainer: {
-        padding: '10px',
-        margin: '10px',
-    }
-})
+  formrowcontainer: {
+    margin: "5px",
+  },
+  fieldcontainer: {
+    padding: "15px",
+  },
+  fullsize: {
+    width: "100%",
+  },
+  deleteFieldButtoncontainer: {
+    display: "flex",
+    flexDirection: "row-reverse",
+  },
+  fieldlabelcontainer: {
+    padding: "10px",
+    margin: "10px",
+  },
+});
 
 function NoFieldsToDisplay() {
-    return (
-        <Typography>This form currently has no fields. Try creating a custom field in the box below to get started.</Typography>
-    )
+  return (
+    <Typography>
+      This form currently has no fields. Try creating a custom field in the box
+      below to get started.
+    </Typography>
+  );
 }
 
 export default function FormFields(props) {
-    const dispatch = useDispatch();
-    let { formId } = useParams();
-    const { control, register, watch } = useFormContext();
-    const classes = useStyles();
-    const customfields = props.customfields;
+  const dispatch = useDispatch();
+  const { control, register, watch } = useFormContext();
+  const classes = useStyles();
+  const customfields = props.customfields;
 
-
-
-    return (
-
-        <Grid container direction="column">
+  return (
+    <Grid container direction="column">
+      <Grid item>
+        <Card>
+          <CardHeader>
+            <Typography variant="h6">Form fields</Typography>
+          </CardHeader>
+        </Card>
+      </Grid>
+      {customfields.length > 0 ? (
+        customfields.map((field, index) => (
+          <div key={field.label}>
             <Grid item>
-                <Card>
-                    <CardHeader>
-                        <Typography variant="h6">Form fields</Typography>
-                    </CardHeader>
-                </Card>
+              <Card className={classes.fieldcontainer}>
+                <Grid container direction="column">
+                  <Grid item className={classes.deleteFieldButtoncontainer}>
+                    <Button
+                      color="danger"
+                      onClick={() => props.handleDeleteFIeld(index)}
+                    >
+                      X
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <TextField
+                          fullWidth
+                          inputRef={register()}
+                          name={`customformfields[${index}].label`}
+                          defaultValue={field.label}
+                        />
+                      }
+                      className={classes.fullsize}
+                      label={`Field Label`}
+                      labelPlacement={`start`}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <TextField
+                          fullWidth
+                          disabled
+                          inputRef={register()}
+                          name={`customformfields[${index}].type`}
+                          defaultValue={field.type}
+                        />
+                      }
+                      className={classes.fullsize}
+                      label={`Field Type`}
+                      labelPlacement={`start`}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <fieldset>
+                      <legend>Form Preview</legend>
+                      <AppointmentField
+                        label={watch(`customformfields[${index}].label`)}
+                        type={field.type}
+                        fieldindex={index}
+                        value={null}
+                        fieldchecked={false}
+                        choices={field.choices}
+                        fieldname={`formpreview`}
+                        additionalInformation={null}
+                      />
+                    </fieldset>
+                  </Grid>
+                </Grid>
+              </Card>
             </Grid>
-            {customfields.length > 0 ? customfields.map((field, index) => (
-
-                <div key={field.id}>
-                    <Grid item>
-                    <Card className={classes.fieldcontainer}>
-                        <Grid container direction="column">
-                            <Grid item>
-                                <Button color="danger" onClick={() => props.handleDeleteFIeld(index)}>X</Button>
-                            </Grid>
-                            <Grid item>
-                                <FormControlLabel
-                                    control={<TextField
-                                        fullWidth
-                                        inputRef={register()}
-                                        name={`customformfields[${index}].label`}
-                                        defaultValue={field.label}
-                                    />}
-                                    className={classes.fullsize}
-                                    label={`Field Label`}
-                                    labelPlacement={`start`}
-
-                                />
-                            </Grid>
-                            <Grid item>
-                                <InputPreview input={{
+          </div>
+        ))
+      ) : (
+        <Typography>No form fields yet</Typography>
+      )}
+    </Grid>
+  );
+}
+/*
+<InputPreview input={{
                                     label: watch(`customformfields[${index}].label`),
                                     fieldindex: index,
                                     type: field.type,
-                                    choices: customfields[index]['choices']
+                                    choices: field.choices
                                 }}/>
-                            </Grid>
-                        </Grid>
-
-                    </Card>
-
-                </Grid></div>
-
-            )):(<Typography>No form fields yet</Typography>)}
 
 
-
-        </Grid>
-
-    )
-}
-/*
 { formfields ? (<NoFieldsToDisplay />) : formfields.map(field => {
                         console.log('field label is ' + field.label);
                         console.log('field type is ' + field.type);

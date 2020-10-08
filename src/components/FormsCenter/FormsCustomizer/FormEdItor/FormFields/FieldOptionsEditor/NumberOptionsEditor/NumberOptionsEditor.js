@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useFormContext } from "react-hook-form";
 import {TextField, Typography, FormControlLabel,FormLabel} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Button from "../../../../../../basestyledcomponents/Button";
 
 const useStyles = makeStyles({
     fullsize: {
@@ -50,7 +51,9 @@ export default function NumberOptionsEditor(props) {
                 </Grid>
             </Grid>
             }
-
+            <Grid item>
+                <Button color={`primary`} onClick={() => props.handleAddField({label: watchlabel, type: 'number'})}>Add Field</Button>
+            </Grid>
 
         </Grid>
     );

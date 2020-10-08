@@ -1,224 +1,278 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
-import {useArray} from "react-hanger";
-import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller, FormContext, FormProvider, useFieldArray } from 'react-hook-form';
-import {TextField, Typography} from "@material-ui/core";
+import { useArray } from "react-hanger";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  useForm,
+  Controller,
+  FormContext,
+  FormProvider,
+  useFieldArray,
+} from "react-hook-form";
+import { TextField, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../basestyledcomponents/Button";
-import Card from '../../../basestyledcomponents/Card/Card';
-import CardHeader from '../../../basestyledcomponents/Card/CardHeader';
-import CardBody from '../../../basestyledcomponents/Card/CardBody';
-import FormFields from './FormFields/FormFields';
-import {useParams, useRouteMatch, NavLink} from "react-router-dom";
-import {updateForm, fetchForm} from "../../../../api/forms.api";
+import Card from "../../../basestyledcomponents/Card/Card";
+import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
+import CardBody from "../../../basestyledcomponents/Card/CardBody";
+import FormFields from "./FormFields/FormFields";
+import { useParams, useRouteMatch, NavLink } from "react-router-dom";
+import { updateForm, fetchForm } from "../../../../api/forms.api";
 import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
-import EditorHeader from './EditorHeader/EditorHeader';
-import EditorInput from './EditorInput/EditorInput';
+import EditorHeader from "./EditorHeader/EditorHeader";
+import EditorInput from "./EditorInput/EditorInput";
+import FormPreview from "../../FormPreview/formpreview";
 
 const API_URL = "http://127.0.0.1:8000/api";
 
 const useStyles = makeStyles({
-    builderroot: {
-        border: 1,
-        borderColor: 'black',
-       padding: '10px',
-       // backgroundColor: 'lightgrey'
-    },
-    addfieldcontainer: {
-            backgroundColor: 'white',
-        padding: '10px'
-    },
-    addfielditem: {
-        padding: '10px',
-        flexGrow: 2,
-    },
-    formTitle: {
-        padding: '15px'
-    },
-    formTypeSelectContainer: {
-        marginTop: '5px'
-    }
+  builderroot: {
+    border: 1,
+    borderColor: "black",
+    padding: "10px",
+    // backgroundColor: 'lightgrey'
+  },
+  addfieldcontainer: {
+    backgroundColor: "white",
+    padding: "10px",
+  },
+  addfielditem: {
+    padding: "10px",
+    flexGrow: 2,
+  },
+  formTitle: {
+    padding: "15px",
+  },
+  formTypeSelectContainer: {
+    marginTop: "5px",
+  },
 });
 
-function NoOptionsField(props) {
-
-}
+function NoOptionsField(props) {}
 
 export default function FormEditor(props) {
-    const dispatch = useDispatch();
-    const formtitle = useSelector(state => state.formsmanager.newform.newformtitle);
-    const formtype = useSelector(state => state.formsmanager.newform.newformtype);
-    const customfields = useSelector(state => state.formsmanager.newform.newformfields);
-    const defaultValues = {
-        form_title: formtitle,
-        form_type: formtype,
-        customformfields: customfields,
-        new_checkbox_field: '',
-        new_field: {
-            type: '',
-            label: '',
-        },
-    }
+  const dispatch = useDispatch();
+  const formtitle = useSelector(
+    (state) => state.formsmanager.newform.newformtitle
+  );
+  const formtype = useSelector(
+    (state) => state.formsmanager.newform.newformtype
+  );
+  const customfields = useSelector(
+    (state) => state.formsmanager.newform.newformfields
+  );
+  const defaultValues = {
+    form_title: formtitle,
+    form_type: formtype,
+    customformfields: [],
+    new_checkbox_field: "",
+    new_field: {
+      type: "",
+      label: "",
+    },
+  };
 
-    const methods = useForm({
-        defaultValues
+  const methods = useForm({
+    defaultValues,
+  });
+
+  let { path, url } = useRouteMatch();
+  let { formId } = useParams();
+  const classes = useStyles();
+
+  const handleFormSave = (formData) => {
+    console.log(props);
+    const formValues = methods.getValues();
+    console.log(formData);
+
+    updateForm(props.formId, formData).then((response) => {
+      console.log("form response is: " + JSON.stringify(response));
+      dispatch({ type: "update_form_title", newtitle: response.title });
+      dispatch({ type: "update_form_type", newtype: response.form_type });
+      if (response.form) {
+        console.log(response.form.customformfields);
+        dispatch({
+          type: "load_form_fields",
+          newformfields: response.form.customformfields,
+        });
+      } else {
+        dispatch({ type: "load_form_fields", newformfields: [] });
+      }
+      // dispatch({type: 'load_form_fields', newformfields: response.form })
     });
-    const watchformfields = methods.watch('customformfields');
+  };
 
-    let { path, url } = useRouteMatch();
-    let { formId } = useParams();
-    const classes = useStyles();
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      control: methods.control, // control props comes from useForm (optional: if you are using FormContext)
+      name: "customformfields", // unique name for your Field Array
+      // keyName: "id", default to "id", you can change the key name
+    }
+  );
 
+  // const watchformfields = methods.watch('customformfields', fields);
 
-    const handleFormSave = (formData) => {
-        console.log(formData);
-        /*updateForm(props.formId, formData).then(response => {
-            console.log('form response is: ' + JSON.stringify(response) );
-            dispatch({type: 'update_form_title', newtitle: response.title})
-            dispatch({type: 'update_form_type', newtype: response.form_type })
-            if (response.form) {
-                dispatch({type: 'load_form_fields', newformfields: response.form })
-            } else {
-                dispatch({type: 'load_form_fields', newformfields: {} })
-            }
-            // dispatch({type: 'load_form_fields', newformfields: response.form })
-        })*/
+  const resetNewFieldInput = () => {
+    methods.setValue("new_field.type", "");
+    methods.setValue("new_field.label", "");
+  };
+
+  const handleAddField = (fieldinput) => {
+    //get the values of the label
+
+    //setup object to store the values of the fields into
+    let fieldToBeAdded = {
+      label: fieldinput.label,
+      type: fieldinput.type,
+      checked: false,
+      value: null,
+      additionalnotes: null,
     };
 
-    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-        control: methods.control, // control props comes from useForm (optional: if you are using FormContext)
-        name: 'customformfields', // unique name for your Field Array
-        // keyName: "id", default to "id", you can change the key name
+    //check to see if the field allows any custom choices
+    let choices = fieldinput.choices;
+
+    if (choices) {
+      let fieldchoices = [];
+      // the form editor depends on the choice being an object with a label property. Create an object with the label propery for each choice
+      choices.forEach((choice) => {
+        //let choicekey = Object.keys(choice)
+        let choicelabel = { label: choice.label };
+        console.log(choicelabel);
+        fieldchoices.push(choicelabel);
+      });
+      fieldToBeAdded.choices = fieldchoices;
+      console.log(
+        "New Form Field Values are: " + JSON.stringify(fieldToBeAdded)
+      );
+      // dispatch({type: 'add_field', newfield: fieldToBeAdded});
+      append(fieldToBeAdded);
+      resetNewFieldInput();
+    } else {
+      //console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
+      console.log(fieldToBeAdded);
+      append(fieldToBeAdded);
+      //dispatch({type: 'add_field', newfield: fieldToBeAdded});
+      resetNewFieldInput();
+    }
+  };
+  const handleDeleteFIeld = (index) => {
+    remove(index);
+  };
+
+  const resetForm = () => {
+    methods.reset();
+  };
+  useEffect(() => {
+    console.log("Calling fetch form now!");
+    fetchForm(formId).then((response) => {
+      console.log("Form editor API call is: " + JSON.stringify(response));
+      dispatch({ type: "update_form_title", newtitle: response.title });
+      methods.setValue("form_title", response.title);
+      dispatch({ type: "update_form_type", newtype: response.form_type });
+      methods.setValue("form_type", response.form_type);
+      if (response.form.customformfields) {
+        console.log("response form is: " + JSON.stringify(response.form));
+        dispatch({
+          type: "load_form_fields",
+          newformfields: response.form.customformfields,
+        });
+        append(response.form.customformfields);
+        //methods.setValue("customformfields", response.form.customformfields)
+      } else {
+        dispatch({ type: "load_form_fields", newformfields: [] });
+        //methods.setValue("customformfields", [])
+      }
     });
+  }, [formId]);
 
-    const resetNewFieldInput = () => {
-        methods.setValue("new_field.type", '');
-        methods.setValue("new_field.label", '');
-    }
-
-    const handleAddField = (fieldinput) => {
-        //get the values of the label
-        const values = methods.getValues();
-
-        //setup object to store the values of the fields into
-        let fieldToBeAdded = {
-            label: fieldinput.label,
-            type: fieldinput.type,
-        }
-        console.log(fieldinput.choices);
-
-        //check to see if the field allows any custom choices
-        let choices = fieldinput.choices;
-
-        if (choices) {
-            let fieldchoices = [];
-            // the form editor depends on the choice being an object with a label property. Create an object with the label propery for each choice
-            choices.forEach(choice => {
-                //let choicekey = Object.keys(choice)
-                let choicelabel = {label: choice.label};
-                console.log(choicelabel);
-                fieldchoices.push(choicelabel);
-
-            });
-            fieldToBeAdded.choices = fieldchoices;
-            console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
-            // dispatch({type: 'add_field', newfield: fieldToBeAdded});
-            append(fieldToBeAdded);
-            resetNewFieldInput();
-        } else {
-            //console.log('New Form Field Values are: ' + JSON.stringify(fieldToBeAdded));
-            append(fieldToBeAdded);
-            // dispatch({type: 'add_field', newfield: fieldToBeAdded});
-            resetNewFieldInput();
-        }
-
-    }
-    const handleDeleteFIeld = (index) => {
-        remove(index);
-    }
-
-
-    /*useEffect(() => {
-        console.log('Calling fetch form now!');
-
-        fetchForm(props.formId).then(response => {
-            console.log('Form editor API call is: ' + JSON.stringify(response));
-            dispatch({type: 'update_form_title', newtitle: response.title})
-            methods.setValue("form_title", response.title);
-            dispatch({type: 'update_form_type', newtype: response.form_type })
-            methods.setValue("form_type", response.form_type)
-            if(response.form) {
-                dispatch({type: 'load_form_fields', newformfields: response.form })
-                methods.setValue("form", response.form_type)
-            } else {
-                dispatch({type: 'load_form_fields', newformfields: {} })
-                methods.setValue("form", {})
-            }
-        })
-    }, [props.formId, dispatch])*/
-    return (
-
-        <div>
-            <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(handleFormSave)}>
-                <Grid container direction={`column`}>
+  return (
+    <div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(handleFormSave)}>
+          <Grid container direction={`column`}>
+            <Grid item>
+              <Card>
+                <CardHeader>
+                  <Grid container justify={`flex-end`}>
                     <Grid item>
-                        <Card>
-                            <CardHeader>
-                                <NavLink to={`/formscenter/${formId}/preview`}>
-                                    <Button color={`primary`}>Preview Form</Button>
-                                </NavLink>
-                            </CardHeader>
-                            <CardBody>
-                                <Grid container direction="column">
-                                    <Grid item>
-                                        <TextField className={classes.formTitle} label={`Form Title`} fullWidth
-                                                   inputRef={methods.register} name={`form_title`}
-                                                   variant={`standard`}/>
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography>Form type</Typography>
-                                        <select className={classes.formTypeSelectContainer} name="form_type"
-                                                ref={methods.register}>
-                                            <option value="">Select Form Type</option>
-                                            <option value="physical_exam">Physical Exam</option>
-                                            <option value="review_of_systems">Review Of Systems</option>
-                                            <option value="medical_history">Medical History</option>
-                                        </select>
-                                    </Grid>
-                                </Grid>
-                            </CardBody>
-                        </Card>
+                      <Button
+                        color={`primary`}
+                        onClick={methods.handleSubmit(handleFormSave)}
+                      >
+                        Save Form
+                      </Button>
+                    </Grid>
 
+                    <Grid item>
+                      <NavLink to={`/formscenter/${formId}/preview/`}>
+                        <Button color={`primary`}>Preview Form</Button>
+                      </NavLink>
+                    </Grid>
+                  </Grid>
+                </CardHeader>
+                <CardBody>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <TextField
+                        className={classes.formTitle}
+                        label={`Form Title`}
+                        fullWidth
+                        inputRef={methods.register}
+                        name={`form_title`}
+                        variant={`standard`}
+                      />
                     </Grid>
                     <Grid item>
-                        <FormFields customfields={fields} handleDeleteFIeld={handleDeleteFIeld} />
+                      <Typography>Form type</Typography>
+                      <select
+                        className={classes.formTypeSelectContainer}
+                        name="form_type"
+                        ref={methods.register}
+                      >
+                        <option value="">Select Form Type</option>
+                        <option value="physical_exam">Physical Exam</option>
+                        <option value="review_of_systems">
+                          Review Of Systems
+                        </option>
+                        <option value="medical_history">Medical History</option>
+                      </select>
                     </Grid>
-                    <Grid item>
-                        <EditorInput methods={methods} handleAddField={handleAddField} append={append}/>
-                    </Grid>
-                    <Grid item>
-                        <Grid container direction={`row`} justify={`space-between`}>
-                            <Grid item>
-                                <input type="submit"/>
-                            </Grid>
-                            <Grid item>
-                                <Button color={`danger`}>Delete Form</Button>
-                            </Grid>
-                        </Grid>
-
-
-                    </Grid>
+                  </Grid>
+                </CardBody>
+              </Card>
+            </Grid>
+            <Grid item>
+              <FormFields
+                customfields={fields}
+                handleDeleteFIeld={handleDeleteFIeld}
+              />
+            </Grid>
+            <Grid item>
+              <EditorInput
+                methods={methods}
+                handleAddField={handleAddField}
+                append={append}
+              />
+            </Grid>
+            <Grid item>
+              <Grid container direction={`row`} justify={`space-between`}>
+                <Grid item>
+                  <input type="submit" />
                 </Grid>
-            </form>
-        </FormProvider>
-            <DevTool control={methods.control} />
-        </div>
-
-    );
+                <Grid item>
+                  <Button color={`danger`}>Delete Form</Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </form>
+      </FormProvider>
+      <DevTool control={methods.control} />
+    </div>
+  );
 }
 
 /*

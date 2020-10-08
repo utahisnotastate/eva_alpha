@@ -25,6 +25,13 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row'
     },
+    fieldPreviewContainer: {
+        borderStyle: 'solid',
+        borderColor: '#000',
+        borderWidth: '3',
+        padding: '10px',
+        marginTop: '15px',
+    },
     boxcontainer: {
         padding: '15px'
     }
@@ -34,7 +41,7 @@ const useStyles = makeStyles({
 export default function CheckBoxGroupPreview(props) {
     const {register, control, watch, getValues, setValue} = useFormContext();
     const classes = useStyles();
-    const watchnewcheckbox = watch(`new_checkbox_field`)
+    const watchnewcheckbox = watch(`customformfields[${props.input.fieldindex}].new_choice`)
 
     const {fields, append, prepend, remove, swap, move, insert} = useFieldArray({
         // name: "choices", // unique name for your Field Array
@@ -48,18 +55,18 @@ export default function CheckBoxGroupPreview(props) {
 
     }
     const handleAddField = (field) => {
+
         append({label: field});
-        setValue("new_checkbox_field", "");
+        setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
     }
     return (
         <Grid container direction="column">
 
             <Grid item>
-                <Box className={classes.boxcontainer} border={1}>
                     <Grid container spacing={3} direction="row">
                         <Grid item>
                             <FormControlLabel
-                                control={<TextField fullWidth inputRef={register()} name={`new_checkbox_field`}/>}
+                                control={<TextField fullWidth inputRef={register()} name={`customformfields[${props.input.fieldindex}].new_choice`}/>}
                                 label={`Enter new checkbox field`}
                                 labelPlacement="start"
                                 className={classes.fullsize}
@@ -71,17 +78,12 @@ export default function CheckBoxGroupPreview(props) {
                                 field</Button>
                         </Grid>
                     </Grid>
-
-                </Box>
-
             </Grid>
-
+            <Grid item className={classes.margTop}>
+                <Typography variant="subtitle2">Field Preview:</Typography>
+            </Grid>
             <Grid item>
-                <Box border={1}>
-                <Grid container direction="column">
-                    <Grid item>
-                        <Typography>Field Preview</Typography>
-                    </Grid>
+                <Grid container className={classes.fieldPreviewContainer} direction="column">
                     <Grid item>
 
                         <Typography>{props.input.label}</Typography>
@@ -104,7 +106,7 @@ export default function CheckBoxGroupPreview(props) {
                     </Grid>
 
                 </Grid>
-                </Box>
+
             </Grid>
 
         </Grid>

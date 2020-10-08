@@ -1,68 +1,60 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import {Typography} from "@material-ui/core";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import { Typography } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import SingleField from "./singlefield";
-
+import AppointmentField from "../../Forms/components/AppointmentField/appointmentfield";
+import {
+  useForm,
+  Controller,
+  FormContext,
+  FormProvider,
+  useFieldArray,
+} from "react-hook-form";
+const handleFormSave = (formData) => {
+  console.log(formData);
+};
 export default function FormGenerator(props) {
-    return (
+  const methods = useForm();
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(handleFormSave)}>
         <Grid container direction={`column`}>
-            {Object.keys(props.formfields).map(field => {
+          <Grid item>
+            {props.fields.length > 0 ? (
+              props.fields.map((field, index) => (
+                <div key={field.id}>
+                  <AppointmentField
+                    label={field.label}
+                    type={field.type}
+                    fieldindex={index}
+                    value={null}
+                    fieldchecked={false}
+                    additionalInformation={field.additionalInformation}
+                  />
+                </div>
+              ))
+            ) : (
+              <Typography>Add fields to show a preview!</Typography>
+            )}
+          </Grid>
+          <Grid item>
+            <input type="submit" />
+          </Grid>
+        </Grid>
+      </form>
+    </FormProvider>
+  );
+}
+
+/*
+<SingleField field={field} fieldindex={index} />
+{Object.keys(props.formfields).map(field => {
                 return (
                     <SingleField label={props.formfields[field].label} type={props.formfields[field].type} checked={false} />
                 );
             })}
-        </Grid>
-    );
-}
-
-/*
-
-props.formfields.map(formfield => (
-                <SingleField label={formfield.label} type={formfield.type} checked={false} name={formfield.name}/>
-            ))
-<Grid container direction={`row`}>
-            <Grid item xs={4}>
-                <Grid container direction={`column`}>
-                    <Grid item>
-                        <Typography>Field Label</Typography>
-                    </Grid>
-                    <Grid item>
-                        <FormControlLabel
-                            control={<Switch checked={false} onChange={console.log('Switched')} name="checkedA" />}
-                            label="Checked"
-                        />
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item xs={8}>
-                <Grid container direction={`column`}>
-                    <Typography>Test</Typography>
-
-                </Grid>
-
-            </Grid>
-        </Grid>
-
-
-<Grid item>
-                <Grid container direction={`row`}>
-                    <Grid item>
-                        <Typography>Field Label</Typography>
-                    </Grid>
-
-                </Grid>
-            </Grid>
- */
-
-/*
-<Grid item>
-                <FormControlLabel
-                    control={<Switch checked={false} onChange={console.log('Switched')} name="checkedA" />}
-                    label="Checked"
-                />
-            </Grid>
  */

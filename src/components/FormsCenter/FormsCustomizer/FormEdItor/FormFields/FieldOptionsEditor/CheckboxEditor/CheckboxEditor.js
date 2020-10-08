@@ -20,6 +20,8 @@ const useStyles = makeStyles({
     }
 });
 
+
+
 export default function CheckboxEditor(props) {
     const {register, watch} = useFormContext();
     const classes = useStyles();
