@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useArray } from "react-hanger";
 import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import {
   TextField,
@@ -46,54 +46,38 @@ const useStyles = makeStyles({
 export default function RadioFieldPreview(props) {
   const classes = useStyles();
   const { register, watch, getValues, control, setValue } = useFormContext();
+  const [choices, setChoices] = useState(props.input.choices);
   const watchlabel = watch("new_field.label");
   const watchnewchoice = watch(
     `customformfields[${props.input.fieldindex}].new_choice`
   );
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      //control, // control props comes from useForm (optional: if you are using FormContext)
-      name: props.input.name, // unique name for your Field Array
-      // keyName: "id", default to "id", you can change the key name
-    }
-  );
 
-  const handleRemove = (pos = 0) => {
-    remove(pos);
+  const handleRemove = (label) => {
+    console.log(label);
+    setChoices(choices.filter((choice) => choice.label !== label));
   };
   //console.log(fields, props);
   const addNewChoice = (watchnewchoice) => {
     console.log(watchnewchoice);
-    append({ label: watchnewchoice });
-    //append({ label: watchnewchoice });
-    //const valuechoices = getValues();
-    //console.log(
-    //newchoices.customformfields[`${props.input.fieldindex}`].choices
-    //);
-    //const arrchoices = props.input.choices;
-    //const pushchoices = arrchoices.push({ label: watchnewchoice });
-    //const arrcopy =
-    //valuechoices.customformfields[`${props.input.fieldindex}`].choices;
-    //const newchoice = arrcopy.push({ label: watchnewchoice });
-    //const newchoices = [...valuechoices.customformfields[`${props.input.fieldindex}`].choices, ...{label: "test"}]
-    //append({ label: "TEst" });
-    //let newfield =
-    //radiochoices.customformfields[props.input.fieldindex]["new_choice"];
-    //append({label: newfield, value: null});
-    //append({ label: newfield, value: null })
-    //console.log(newfield);
-    //append({ label: newfield });
-    //setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
-    //setValue(props.input.name, pushchoices);
-    //console.log(fields);
-    //console.log(radiochoices);
-    //console.log(valuechoices);
-    // setValue(`customformfields[${props.input.fieldindex}].choices[${}]`, "");
+    // append({ label: watchnewchoice });
+    let newchoices = [...choices, { label: watchnewchoice }];
+    console.log(newchoices);
+    setChoices(newchoices);
+    setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
   };
 
   const randomNumber = () => {
     return Math.floor(Math.random() * 100) + 1;
   };
+
+  useEffect(() => {
+    console.log(props.input.name);
+    console.log(props.input.choices);
+    //choices.push(props.input.choices);
+    setChoices(props.input.choices);
+    // props.input.choices.forEach((choice) => prepend(choice));
+  }, [props.input.choices]);
+
   return (
     <Grid container direction="column">
       <Grid item>
@@ -122,8 +106,8 @@ export default function RadioFieldPreview(props) {
           </Grid>
           <Grid item>
             <Grid container direction="column">
-              {fields.length > 0 ? (
-                fields.map((field, index) => (
+              {choices.length > 0 ? (
+                choices.map((field, index) => (
                   <div key={index}>
                     <Grid item>
                       <Grid container direction="row">
@@ -142,7 +126,7 @@ export default function RadioFieldPreview(props) {
                         <Grid item>
                           <Button
                             color={`danger`}
-                            onClick={() => handleRemove(index)}
+                            onClick={() => handleRemove(field.label)}
                           >
                             X
                           </Button>
@@ -163,8 +147,37 @@ export default function RadioFieldPreview(props) {
     </Grid>
   );
 }
-
+//append({ label: watchnewchoice });
+//const valuechoices = getValues();
+//console.log(
+//newchoices.customformfields[`${props.input.fieldindex}`].choices
+//);
+//const arrchoices = props.input.choices;
+//const pushchoices = arrchoices.push({ label: watchnewchoice });
+//const arrcopy =
+//valuechoices.customformfields[`${props.input.fieldindex}`].choices;
+//const newchoice = arrcopy.push({ label: watchnewchoice });
+//const newchoices = [...valuechoices.customformfields[`${props.input.fieldindex}`].choices, ...{label: "test"}]
+//append({ label: "TEst" });
+//let newfield =
+//radiochoices.customformfields[props.input.fieldindex]["new_choice"];
+//append({label: newfield, value: null});
+//append({ label: newfield, value: null })
+//console.log(newfield);
+//append({ label: newfield });
+//setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
+//setValue(props.input.name, pushchoices);
+//console.log(fields);
+//console.log(radiochoices);
+//console.log(valuechoices);
+// setValue(`customformfields[${props.input.fieldindex}].choices[${}]`, "");
 /*
+
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      name: props.input.name, // unique name for your Field Array
+    }
+  );
 <input
                               key={field.id}
                               name={`customformfields[${props.input.fieldindex}].choices[${index}].label`}
