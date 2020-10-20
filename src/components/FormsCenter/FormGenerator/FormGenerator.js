@@ -32,6 +32,7 @@ export default function FormGenerator(props) {
                     type={field.type}
                     fieldindex={index}
                     value={null}
+                    choices={field.choices}
                     fieldchecked={false}
                     additionalInformation={field.additionalInformation}
                   />
@@ -42,7 +43,7 @@ export default function FormGenerator(props) {
             )}
           </Grid>
           <Grid item>
-            <input type="submit" />
+            <input type="submit 2" />
           </Grid>
         </Grid>
       </form>

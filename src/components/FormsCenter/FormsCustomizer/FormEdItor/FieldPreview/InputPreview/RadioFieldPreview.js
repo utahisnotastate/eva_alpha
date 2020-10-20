@@ -1,88 +1,177 @@
-import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {useSelector, useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 
-import {useFormContext, useFieldArray, Controller} from "react-hook-form";
+import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import {
-    TextField,
-    Typography,
-    Divider,
-    Radio,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    FormGroup,
-    RadioGroup
+  TextField,
+  Typography,
+  Divider,
+  Radio,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+  RadioGroup,
 } from "@material-ui/core";
-import Button from '../../../../../basestyledcomponents/Button';
+import Button from "../../../../../basestyledcomponents/Button";
 import Grid from "@material-ui/core/Grid";
 
 function NoCheckboxFieldsDisplay() {
-    return <Typography>No checkboxs have been added. Add some below. </Typography>
+  return (
+    <Typography>No checkboxs have been added. Add some below. </Typography>
+  );
 }
 
 const useStyles = makeStyles({
-    fullsize: {
-        width: '100%',
-    },
-    radiorow: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    fieldPreviewContainer: {
-        borderStyle: 'solid',
-        borderColor: '#000',
-        borderWidth: '3',
-        padding: '10px',
-        marginTop: '15px',
-    },
-    margTop: {
-        marginTop: '15px',
-    }
+  fullsize: {
+    width: "100%",
+  },
+  radiorow: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  fieldPreviewContainer: {
+    borderStyle: "solid",
+    borderColor: "#000",
+    borderWidth: "3",
+    padding: "10px",
+    marginTop: "15px",
+  },
+  margTop: {
+    marginTop: "15px",
+  },
 });
 
-export default function RadioFieldPreview(props){
-    const classes = useStyles();
-    const {register, watch, getValues,control, setValue} = useFormContext();
-    const watchlabel = watch("new_field.label");
-    const watchnewchoice = watch("new_choice");
-
-    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-        //control, // control props comes from useForm (optional: if you are using FormContext)
-        name: `customformfields[${props.input.fieldindex}].choices`, // unique name for your Field Array
-        // keyName: "id", default to "id", you can change the key name
-    });
-
-    const addNewChoice = () => {
-        const radiochoices = getValues();
-        let newfield = radiochoices.customformfields[props.input.fieldindex]['new_choice'];
-        //append({label: newfield, value: null});
-        console.log(newfield);
-        append({label: newfield});
-        setValue(`customformfields[${props.input.fieldindex}].new_choice`, "")
-        //console.log(newfield);
-        // setValue(`customformfields[${props.input.fieldindex}].choices[${}]`, "");
+export default function RadioFieldPreview(props) {
+  const classes = useStyles();
+  const { register, watch, getValues, control, setValue } = useFormContext();
+  const watchlabel = watch("new_field.label");
+  const watchnewchoice = watch(
+    `customformfields[${props.input.fieldindex}].new_choice`
+  );
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      //control, // control props comes from useForm (optional: if you are using FormContext)
+      name: props.input.name, // unique name for your Field Array
+      // keyName: "id", default to "id", you can change the key name
     }
+  );
 
-    const randomNumber = () => {
-        return Math.floor(Math.random() * 100) + 1;
-    }
-    return (
+  const handleRemove = (pos = 0) => {
+    remove(pos);
+  };
+  //console.log(fields, props);
+  const addNewChoice = (watchnewchoice) => {
+    console.log(watchnewchoice);
+    append({ label: watchnewchoice });
+    //append({ label: watchnewchoice });
+    //const valuechoices = getValues();
+    //console.log(
+    //newchoices.customformfields[`${props.input.fieldindex}`].choices
+    //);
+    //const arrchoices = props.input.choices;
+    //const pushchoices = arrchoices.push({ label: watchnewchoice });
+    //const arrcopy =
+    //valuechoices.customformfields[`${props.input.fieldindex}`].choices;
+    //const newchoice = arrcopy.push({ label: watchnewchoice });
+    //const newchoices = [...valuechoices.customformfields[`${props.input.fieldindex}`].choices, ...{label: "test"}]
+    //append({ label: "TEst" });
+    //let newfield =
+    //radiochoices.customformfields[props.input.fieldindex]["new_choice"];
+    //append({label: newfield, value: null});
+    //append({ label: newfield, value: null })
+    //console.log(newfield);
+    //append({ label: newfield });
+    //setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
+    //setValue(props.input.name, pushchoices);
+    //console.log(fields);
+    //console.log(radiochoices);
+    //console.log(valuechoices);
+    // setValue(`customformfields[${props.input.fieldindex}].choices[${}]`, "");
+  };
+
+  const randomNumber = () => {
+    return Math.floor(Math.random() * 100) + 1;
+  };
+  return (
+    <Grid container direction="column">
+      <Grid item>
         <Grid container direction="column">
-            <Grid item>
-                <Grid container direction="column">
+          <Grid item>
+            <Grid container direction="row">
+              <Grid item xs={8}>
+                <TextField
+                  fullWidth
+                  placeholder={`Enter Choice`}
+                  inputRef={register()}
+                  defaultValue={``}
+                  name={`customformfields[${props.input.fieldindex}].new_choice`}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  type={`button`}
+                  color="primary"
+                  onClick={() => addNewChoice(watchnewchoice)}
+                >
+                  Add choice
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container direction="column">
+              {fields.length > 0 ? (
+                fields.map((field, index) => (
+                  <div key={index}>
                     <Grid item>
-                        <Grid container direction="row">
-                            <Grid item xs={8}>
-                                <TextField fullWidth placeholder={`Enter Choice`}
-                                           inputRef={register()} name={`customformfields[${props.input.fieldindex}].new_choice`}/>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Button type={`button`} color="primary" onClick={() => addNewChoice()}>Add choice</Button>
-                            </Grid>
+                      <Grid container direction="row">
+                        <Grid item>
+                          <Radio />
                         </Grid>
+                        <Grid item>
+                          <TextField
+                            fullWidth
+                            placeholder={`Enter Choice`}
+                            inputRef={register()}
+                            defaultValue={field.label}
+                            name={`${props.input.name}[${index}].label`}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            color={`danger`}
+                            onClick={() => handleRemove(index)}
+                          >
+                            X
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
-                    <Grid item className={classes.margTop}>
+                  </div>
+                ))
+              ) : (
+                <Typography>
+                  Add choices above to create choices for this field
+                </Typography>
+              )}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
+
+/*
+<input
+                              key={field.id}
+                              name={`customformfields[${props.input.fieldindex}].choices[${index}].label`}
+                              ref={register()}
+                              defaultValue={field.label}
+                            />
+<Grid item className={classes.margTop}>
                         <Typography variant="subtitle2">Field Preview:</Typography>
                     </Grid>
                     <Grid item>
@@ -104,17 +193,6 @@ export default function RadioFieldPreview(props){
                         </Grid>
 
                     </Grid>
-
-                </Grid>
-            </Grid>
-
-
-
-        </Grid>
-    );
-}
-
-/*
 <FormControlLabel name={`customformfields[${props.input.fieldindex}].choices[${index}].name`} defaultValue={false} control={<Radio inputRef={register()} />} label={field.label} />
 <Grid item>
                         {props.input.choices.length > 0 ? props.input.choices.map((field, index) => (

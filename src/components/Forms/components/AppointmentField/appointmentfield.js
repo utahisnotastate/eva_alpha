@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFormContext, Controller } from "react-hook-form";
+import { useFormContext, Controller, useFieldArray } from "react-hook-form";
 import {
   TextField,
   Typography,
@@ -48,7 +48,7 @@ export default function AppointmentField(props) {
               </Grid>
               <Grid item xs={4}>
                 <Controller
-                  name={`${fieldname}[${props.fieldindex}].checked]`}
+                  name={`${fieldname}[${props.fieldindex}].checked`}
                   defaultValue={props.fieldchecked}
                   render={({ onChange, onBlur, name, value }) => (
                     <Switch
@@ -76,6 +76,7 @@ export default function AppointmentField(props) {
               type={props.type}
               label={props.label}
               name={fieldname}
+              choices={props.choices}
             />
           </Grid>
           {props.type === "textarea" ? null : (
@@ -91,7 +92,7 @@ export default function AppointmentField(props) {
                     inputRef={register()}
                     multiline
                     defaultValue={props.additionalInformation}
-                    name={`${fieldname}[${props.fieldindex}].additionalInformation]`}
+                    name={`${fieldname}[${props.fieldindex}].additionalInformation`}
                     placeholder={`Enter in any additional notes about the above field. ONLY leave notes about findings for this specfic field.`}
                     rows={3}
                   />

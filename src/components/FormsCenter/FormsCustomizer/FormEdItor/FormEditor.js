@@ -83,7 +83,6 @@ export default function FormEditor(props) {
   const classes = useStyles();
 
   const handleFormSave = (formData) => {
-    console.log(props);
     const formValues = methods.getValues();
     console.log(formData);
 

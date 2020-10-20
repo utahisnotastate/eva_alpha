@@ -1,64 +1,84 @@
-import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {useSelector, useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 
-import {useFormContext, useFieldArray, Controller} from "react-hook-form";
-import {TextField, Typography, Divider, Checkbox, FormControl, FormControlLabel,FormLabel,FormGroup} from "@material-ui/core";
-import Button from '../../../../../../basestyledcomponents/Button';
+import { useFormContext, useFieldArray, Controller } from "react-hook-form";
+import {
+  TextField,
+  Typography,
+  Divider,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+} from "@material-ui/core";
+import Button from "../../../../../../basestyledcomponents/Button";
 import Grid from "@material-ui/core/Grid";
 
 function NoCheckboxFieldsDisplay() {
-    return <Typography>No checkboxs have been added. Add some below. </Typography>
+  return (
+    <Typography>No checkboxs have been added. Add some below. </Typography>
+  );
 }
 
 const useStyles = makeStyles({
-    fullsize: {
-        width: '100%',
-    },
-    fieldPreviewContainer: {
-        borderStyle: 'solid',
-        borderColor: '#000',
-        borderWidth: '3',
-        padding: '10px',
-        marginTop: '15px',
-    },
-    margTop: {
-        marginTop: '15px',
-    }
+  fullsize: {
+    width: "100%",
+  },
+  fieldPreviewContainer: {
+    borderStyle: "solid",
+    borderColor: "#000",
+    borderWidth: "3",
+    padding: "10px",
+    marginTop: "15px",
+  },
+  margTop: {
+    marginTop: "15px",
+  },
 });
 
-export default function CheckboxGroupEditor(props){
-    const classes = useStyles();
-    const {register, watch, setValue} = useFormContext();
-    const watchlabel = watch("new_field.label");
+export default function CheckboxGroupEditor(props) {
+  const classes = useStyles();
+  const { register, watch, setValue } = useFormContext();
+  const watchlabel = watch("new_field.label");
 
-    const addCheckboxGroupFieldToForm = (label) => {
-        props.append({label: label, type: "checkbox_group"});
-        setValue("new_field.label", "");
-        setValue("new_field.type", "");
-    }
-    return (
+  const addCheckboxGroupFieldToForm = (label) => {
+    props.append({ label: label, type: "checkbox_group", choices: [] });
+    setValue("new_field.label", "");
+    setValue("new_field.type", "");
+  };
+  return (
+    <Grid container direction="column">
+      <Grid item>
+        <TextField
+          fullWidth
+          placeholder={`Enter Field Label`}
+          inputRef={register}
+          label={`Field Label`}
+          name="new_field.label"
+        />
+      </Grid>
+      <Grid item>
         <Grid container direction="column">
-            <Grid item>
-                <TextField fullWidth placeholder={`Enter Field Label`}
-                           inputRef={register}
-                           label={`Field Label`}
-                           name="new_field.label"
-                />
-            </Grid>
-            <Grid item>
-                <Grid container direction="column">
-                    <Grid item>
-                        <Typography variant={`subtitle2`}>To edit choices of this field, please enter in a label then add it to the form via the button below.</Typography>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item>
-                <Button color="primary" onClick={() => addCheckboxGroupFieldToForm(watchlabel) }>Add to form</Button>
-            </Grid>
-
+          <Grid item>
+            <Typography variant={`subtitle2`}>
+              To edit choices of this field, please enter in a label then add it
+              to the form via the button below.
+            </Typography>
+          </Grid>
         </Grid>
-    );
+      </Grid>
+      <Grid item>
+        <Button
+          color="primary"
+          onClick={() => addCheckboxGroupFieldToForm(watchlabel)}
+        >
+          Add to form
+        </Button>
+      </Grid>
+    </Grid>
+  );
 }
 
 /*

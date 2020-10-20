@@ -26,12 +26,13 @@ import Button from "../../../../basestyledcomponents/Button";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardBody from "../../../../basestyledcomponents/Card/CardBody";
 import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
-import FormFieldLabel from "./FormFieldLabel";
-import FormFieldActions from "./FormFieldActions/FormFieldActions";
-import FormFieldOptions from "./FormFieldOptions";
-import InputPreview from "../FieldPreview/InputPreview/InputPreview";
+// import FormFieldLabel from "./FormFieldLabel";
+// import FormFieldActions from "./FormFieldActions/FormFieldActions";
+// import FormFieldOptions from "./FormFieldOptions";
+// import InputPreview from "../FieldPreview/InputPreview/InputPreview";
+import RadioFieldPreview from "../FieldPreview/InputPreview/RadioFieldPreview";
 import { makeStyles } from "@material-ui/core/styles";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import AppointmentField from "../../../../Forms/components/AppointmentField/appointmentfield";
 
 const useStyles = makeStyles({
@@ -80,7 +81,7 @@ export default function FormFields(props) {
       </Grid>
       {customfields.length > 0 ? (
         customfields.map((field, index) => (
-          <div key={field.label}>
+          <div key={index}>
             <Grid item>
               <Card className={classes.fieldcontainer}>
                 <Grid container direction="column">
@@ -124,19 +125,30 @@ export default function FormFields(props) {
                     />
                   </Grid>
                   <Grid item>
-                    <fieldset>
-                      <legend>Form Preview</legend>
-                      <AppointmentField
-                        label={watch(`customformfields[${index}].label`)}
-                        type={field.type}
-                        fieldindex={index}
-                        value={null}
-                        fieldchecked={false}
-                        choices={field.choices}
-                        fieldname={`formpreview`}
-                        additionalInformation={null}
+                    {field.type === "radio" ? (
+                      <RadioFieldPreview
+                        input={{
+                          fieldindex: index,
+                          label: field.label,
+                          name: `customformfields[${index}].choices`,
+                          choices: field.choices || [],
+                        }}
                       />
-                    </fieldset>
+                    ) : (
+                      <fieldset>
+                        <legend>Form Preview</legend>
+                        <AppointmentField
+                          label={watch(`customformfields[${index}].label`)}
+                          type={field.type}
+                          fieldindex={index}
+                          value={null}
+                          fieldchecked={false}
+                          choices={field.choices}
+                          fieldname={`customformfields`}
+                          additionalInformation={null}
+                        />
+                      </fieldset>
+                    )}
                   </Grid>
                 </Grid>
               </Card>
