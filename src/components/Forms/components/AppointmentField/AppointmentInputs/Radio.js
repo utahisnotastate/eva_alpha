@@ -34,7 +34,7 @@ function RadioFieldInput(props) {
   return (
     <Controller
       name={`${props.name}.value`}
-      defaultValue={`one`}
+      defaultValue={props.value}
       render={({ onChange, value, name }) => (
         <RadioGroup
           defaultValue={value}
@@ -76,11 +76,12 @@ export default function AppointmentRadioGroup(props) {
   return (
     <Controller
       name={`${props.name}`}
+      defaultValue={props.value}
       render={({ onChange, onBlur, value, name }) => (
         <RadioFieldInput
           value={value}
           name={`${props.name}`}
-          choices={props.choices || fields}
+          choices={props.choices}
           onChange={onChange}
           setValue={setValue}
           getValues={getValues}
