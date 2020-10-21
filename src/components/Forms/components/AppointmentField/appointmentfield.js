@@ -122,6 +122,7 @@ export default function AppointmentField(props) {
 }
 
 /*
+name={`${fieldname}[${props.fieldindex}]['checked']`}
 onChange={(e) => onChange(e.target.checked)}
 <Controller
                   name={`appointmentform[${props.fieldindex}].checked]`}

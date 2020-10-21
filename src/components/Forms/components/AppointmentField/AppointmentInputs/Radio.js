@@ -27,34 +27,37 @@ function RadioFieldInput(props) {
     if (e.target.value === "unchecked") {
       setValue(`${props.name}["checked"]`, false);
     } else {
-      console.log("other!!");
       setValue(`${props.name}["checked"]`, true);
-      setValue(`${props.name}.value`, e.target.value);
+      // setValue(`${props.name}["value"]`, e.target.value);
     }
   };
   return (
-    <FormControl component="fieldset">
-      <RadioGroup
-        defaultValue={`unchecked`}
-        name={`${props.name}.value`}
-        onChange={(e) => props.onChange(handleRadioFieldChange(e))}
-      >
-        {props.choices.map((choice, index) => (
-          <div key={index}>
-            <FormControlLabel
-              value={choice.label}
-              control={<Radio />}
-              label={choice.label}
-            />
-          </div>
-        ))}
-        <FormControlLabel
-          value="unchecked"
-          control={<Radio />}
-          label="Unchecked"
-        />
-      </RadioGroup>
-    </FormControl>
+    <Controller
+      name={`${props.name}.value`}
+      defaultValue={`one`}
+      render={({ onChange, value, name }) => (
+        <RadioGroup
+          defaultValue={value}
+          name={name}
+          onChange={(e) => props.onChange(handleRadioFieldChange(e))}
+        >
+          {props.choices.map((choice, index) => (
+            <div key={index}>
+              <FormControlLabel
+                value={choice.label}
+                control={<Radio />}
+                label={choice.label}
+              />
+            </div>
+          ))}
+          <FormControlLabel
+            value="unchecked"
+            control={<Radio />}
+            label="Unchecked"
+          />
+        </RadioGroup>
+      )}
+    />
   );
 }
 

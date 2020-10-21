@@ -26,15 +26,6 @@ export default function AppointmentInput(props) {
   const { register, control, setValue, getValues } = useFormContext();
   const classes = useStyles();
   const handleFormFieldChange = (e) => {
-    //console.log(e.target.value);
-    //console.log(`${props.name}[${props.fieldindex}]`);
-    //console.log(getValues());
-    //const formvalues = getValues();
-    //const formfields = formvalues.customformfields;
-    //const formfield = formvalues.customformfields[props.fieldindex];
-    //console.log(formfield);
-    //setValue(`${props.name}.value`, e.target.value);
-    // setValue(`${props.name}["checked"]`, true);
     if (e.target.value === "") {
       //setValue(`${props.name}[${props.fieldindex}].checked`, false);
       setValue(`${props.name}["checked"]`, false);
@@ -79,7 +70,7 @@ export default function AppointmentInput(props) {
     case "present_not_present":
       return (
         <AppointmentRadioGroup
-          name={`${props.name}`}
+          name={`${props.name}.value`}
           value={`unchecked`}
           choices={presentnotpresentchoices}
           fieldindex={props.fieldindex}

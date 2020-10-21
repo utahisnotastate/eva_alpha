@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
+import { DevTool } from "@hookform/devtools";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
@@ -20,34 +21,37 @@ const handleFormSave = (formData) => {
 export default function FormGenerator(props) {
   const methods = useForm();
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleFormSave)}>
-        <Grid container direction={`column`}>
-          <Grid item>
-            {props.fields.length > 0 ? (
-              props.fields.map((field, index) => (
-                <div key={field.id}>
-                  <AppointmentField
-                    label={field.label}
-                    type={field.type}
-                    fieldindex={index}
-                    value={null}
-                    choices={field.choices}
-                    fieldchecked={false}
-                    additionalInformation={field.additionalInformation}
-                  />
-                </div>
-              ))
-            ) : (
-              <Typography>Add fields to show a preview!</Typography>
-            )}
+    <div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(handleFormSave)}>
+          <Grid container direction={`column`}>
+            <Grid item>
+              {props.fields.length > 0 ? (
+                props.fields.map((field, index) => (
+                  <div key={field.id}>
+                    <AppointmentField
+                      label={field.label}
+                      type={field.type}
+                      fieldindex={index}
+                      value={null}
+                      choices={field.choices}
+                      fieldchecked={false}
+                      additionalInformation={field.additionalInformation}
+                    />
+                  </div>
+                ))
+              ) : (
+                <Typography>Add fields to show a preview!</Typography>
+              )}
+            </Grid>
+            <Grid item>
+              <input type="submit" />
+            </Grid>
           </Grid>
-          <Grid item>
-            <input type="submit" />
-          </Grid>
-        </Grid>
-      </form>
-    </FormProvider>
+        </form>
+      </FormProvider>
+      <DevTool control={methods.control} />
+    </div>
   );
 }
 
