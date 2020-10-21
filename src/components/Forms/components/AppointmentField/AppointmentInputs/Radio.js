@@ -25,11 +25,11 @@ function RadioFieldInput(props) {
   const { register, control, setValue, getValues } = useFormContext();
   const handleRadioFieldChange = (e) => {
     if (e.target.value === "unchecked") {
-      props.setValue(`${props.name}.checked]`, false);
+      setValue(`${props.name}["checked"]`, false);
     } else {
       console.log("other!!");
-      props.setValue(`${props.name}.checked]`, true);
-      props.setValue(`${props.name}.value]`, e.target.value);
+      setValue(`${props.name}["checked"]`, true);
+      setValue(`${props.name}.value`, e.target.value);
     }
   };
   return (

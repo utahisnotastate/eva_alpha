@@ -1,95 +1,110 @@
-import move from 'lodash-move'
+import move from "lodash-move";
 
 export function reviewofsystemsforms(state = [], action) {
-    switch (action.type) {
-        case 'add_form':
-            return [...state, action.newform];
+  switch (action.type) {
+    case "add_form":
+      return [...state, action.newform];
 
-        case 'load_forms':
-            return action.forms;
+    case "load_forms":
+      return action.forms;
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
 
 export function physicalexamforms(state = [], action) {
-    switch (action.type) {
-        case 'add_form':
-            return [...state, action.newform];
+  switch (action.type) {
+    case "add_form":
+      return [...state, action.newform];
 
-        case 'load_forms':
-            return action.forms;
+    case "load_forms":
+      return action.forms;
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
 
 export function medicalhistoryforms(state = [], action) {
-    switch (action.type) {
-        case 'add_form':
-            return [...state, action.newform];
+  switch (action.type) {
+    case "add_form":
+      return [...state, action.newform];
 
-        case 'load_forms':
-            return action.forms;
+    case "load_forms":
+      return action.forms;
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
 
 export function forms(state = [], action) {
-    switch (action.type) {
-        case 'load_forms':
-            return action.forms;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "load_forms":
+      return action.forms;
+    default:
+      return state;
+  }
 }
 // new form can either be a completely new/blank form that user is creating, or it can be used in edit form to edit form already saved to db.
-export function newformtitle(state = '', action) {
-    switch (action.type) {
-        case 'update_form_title':
-            return action.newtitle;
-        default:
-            return state;
-
-    }
+export function newformtitle(state = "", action) {
+  switch (action.type) {
+    case "update_form_title":
+      return action.newtitle;
+    default:
+      return state;
+  }
 }
 
-
-export function newformtype(state = '', action) {
-    switch (action.type) {
-        case 'update_form_type':
-            return action.newtype;
-        default:
-            return state;
-
-    }
+export function newformtype(state = "", action) {
+  switch (action.type) {
+    case "update_form_type":
+      return action.newtype;
+    default:
+      return state;
+  }
 }
 // I dont think we use this anymore
-export function newformproperties(state={title: '', form_type: ''}, action) {
-    switch (action.type) {
-        case 'set_title':
-            return {...state, title: action.title};
-        case 'set_form_type':
-            return {...state, form_type: action.form_type};
-        default:
-            return state;
-    }
+export function newformproperties(
+  state = { title: "", form_type: "" },
+  action
+) {
+  switch (action.type) {
+    case "set_title":
+      return { ...state, title: action.title };
+    case "set_form_type":
+      return { ...state, form_type: action.form_type };
+    default:
+      return state;
+  }
 }
-const testcustomformfields = [{"label":"fsdfsdfdsf"},{"label":"fdfsdfsdf","choices":[{"label":"sdfsdfsdf"},{"label":"jkghjgjgh"}],"new_choice":""},{"label":"fdsfsdfsdf","choices":[{"label":"fdfsdfsf"},{"label":"gdfgdfgd"}],"new_choice":""},{"label":"dfsdfsdfsfs"}]
-export function newformfields (state = [], action) {
-    switch (action.type) {
-        case 'add_field':
-            return [...state, {label: action.newfield.label, type: action.newfield.type}];
-        case 'load_form_fields':
-            return action.newformfields;
-        default:
-            return state;
-
-    }
+const testcustomformfields = [
+  { label: "fsdfsdfdsf" },
+  {
+    label: "fdfsdfsdf",
+    choices: [{ label: "sdfsdfsdf" }, { label: "jkghjgjgh" }],
+    new_choice: "",
+  },
+  {
+    label: "fdsfsdfsdf",
+    choices: [{ label: "fdfsdfsf" }, { label: "gdfgdfgd" }],
+    new_choice: "",
+  },
+  { label: "dfsdfsdfsfs" },
+];
+export function newformfields(state = [], action) {
+  switch (action.type) {
+    case "add_field":
+      return [
+        ...state,
+        { label: action.newfield.label, type: action.newfield.type },
+      ];
+    case "load_form_fields":
+      return action.newformfields;
+    default:
+      return state;
+  }
 }
 /*
 {
@@ -104,39 +119,34 @@ export function newformfields (state = [], action) {
 }
  */
 // I dont think we use this anymore
-export function previewtitle(state = '', action) {
-    switch (action.type) {
-        case 'update_preview_title':
-            return action.title;
-        default:
-            return state;
-
-    }
+export function previewtitle(state = "", action) {
+  switch (action.type) {
+    case "update_preview_title":
+      return action.title;
+    default:
+      return state;
+  }
 }
 // I dont think we use this anymore
 export function previewfields(state = [], action) {
-    switch (action.type) {
-        case 'load_fields':
-            return action.fields;
-        default:
-            return state;
-
-    }
-
+  switch (action.type) {
+    case "load_preview_fields":
+      return action.fields;
+    default:
+      return state;
+  }
 }
 
 export function newtextvalueoptions(state = [], action) {
-    switch (action.type) {
-        case 'add_new_text_option':
-            return [...state, action.newoption];
-        case 'reset_options_to_none':
-            return [];
-        default:
-            return state;
-
-    }
+  switch (action.type) {
+    case "add_new_text_option":
+      return [...state, action.newoption];
+    case "reset_options_to_none":
+      return [];
+    default:
+      return state;
+  }
 }
-
 
 /*
 import _ from 'lodash';

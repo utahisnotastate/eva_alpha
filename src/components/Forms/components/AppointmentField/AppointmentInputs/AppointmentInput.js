@@ -23,13 +23,24 @@ const useStyles = makeStyles({
 });
 
 export default function AppointmentInput(props) {
-  const { register, control, setValue } = useFormContext();
+  const { register, control, setValue, getValues } = useFormContext();
   const classes = useStyles();
   const handleFormFieldChange = (e) => {
-    if (e.target.value === "" || null || "unchecked") {
-      setValue(`${props.name}[${props.fieldindex}].checked]`, false);
+    //console.log(e.target.value);
+    //console.log(`${props.name}[${props.fieldindex}]`);
+    //console.log(getValues());
+    //const formvalues = getValues();
+    //const formfields = formvalues.customformfields;
+    //const formfield = formvalues.customformfields[props.fieldindex];
+    //console.log(formfield);
+    //setValue(`${props.name}.value`, e.target.value);
+    // setValue(`${props.name}["checked"]`, true);
+    if (e.target.value === "") {
+      //setValue(`${props.name}[${props.fieldindex}].checked`, false);
+      setValue(`${props.name}["checked"]`, false);
     } else {
-      setValue(`${props.name}[${props.fieldindex}].checked]`, true);
+      //console.log(e);
+      setValue(`${props.name}["checked"]`, true);
     }
   };
   const presentnotpresentchoices = [
@@ -48,7 +59,7 @@ export default function AppointmentInput(props) {
           variant={`outlined`}
           placeholder={`Please enter your findings for the '${props.label}' field here`}
           onChange={(e) => handleFormFieldChange(e)}
-          name={`${props.name}[${props.fieldindex}].value`}
+          name={`${props.name}.value`}
         />
       );
     case "checkbox":
@@ -68,7 +79,7 @@ export default function AppointmentInput(props) {
     case "present_not_present":
       return (
         <AppointmentRadioGroup
-          name={`${props.name}[${props.fieldindex}]`}
+          name={`${props.name}`}
           value={`unchecked`}
           choices={presentnotpresentchoices}
           fieldindex={props.fieldindex}
@@ -78,10 +89,11 @@ export default function AppointmentInput(props) {
     case "radio":
       return (
         <AppointmentRadioGroup
-          name={`${props.name}[${props.fieldindex}]`}
+          name={`${props.name}`}
           value={`unchecked`}
           fieldindex={props.fieldindex}
           radioChange={handleFormFieldChange}
+          choices={props.choices}
         />
       );
     case "textarea":
@@ -96,7 +108,7 @@ export default function AppointmentInput(props) {
           defaultValue={props.value}
           onChange={(e) => handleFormFieldChange(e)}
           rows={3}
-          name={`${props.name}[${props.fieldindex}].value`}
+          name={`${props.name}.value`}
         />
       );
     default:

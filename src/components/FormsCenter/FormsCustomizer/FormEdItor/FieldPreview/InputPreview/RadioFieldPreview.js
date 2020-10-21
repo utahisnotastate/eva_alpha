@@ -54,15 +54,12 @@ export default function RadioFieldPreview(props) {
   );
 
   const handleRemove = (label) => {
-    console.log(label);
     setChoices(choices.filter((choice) => choice.label !== label));
   };
   //console.log(fields, props);
   const addNewChoice = (watchnewchoice) => {
-    console.log(watchnewchoice);
     // append({ label: watchnewchoice });
     let newchoices = [...choices, { label: watchnewchoice }];
-    console.log(newchoices);
     setChoices(newchoices);
     setValue(`customformfields[${props.input.fieldindex}].new_choice`, "");
   };

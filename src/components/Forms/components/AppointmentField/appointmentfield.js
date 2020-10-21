@@ -30,9 +30,15 @@ export default function AppointmentField(props) {
   const classes = useStyles();
   const [fieldchecked, setFieldChecked] = useState("");
   const fieldname = props.fieldname || "customformfields";
+  console.log(fieldname);
 
   const setAdditionalInfoToNull = (name) => {
     setValue(name, null);
+  };
+  const handleChange = (checked) => {
+    //return setValue(`${fieldname}[${props.fieldindex}]['checked']`, checked);
+    return checked;
+    //console.log("hello!");
   };
   return (
     <Grid container direction="row" className={classes.basecontainer}>
@@ -48,14 +54,15 @@ export default function AppointmentField(props) {
               </Grid>
               <Grid item xs={4}>
                 <Controller
-                  name={`${fieldname}[${props.fieldindex}].checked`}
-                  defaultValue={props.fieldchecked}
+                  name={`${fieldname}[${props.fieldindex}]["checked"]`}
+                  defaultValue={false}
                   render={({ onChange, onBlur, name, value }) => (
                     <Switch
                       checked={value}
                       color="primary"
-                      onChange={(e) => onChange(e.target.checked)}
-                      name={name}
+                      inputRef={register()}
+                      onChange={(e) => onChange(handleChange(e.target.checked))}
+                      name={`${fieldname}[${props.fieldindex}]['checked']`}
                     />
                   )}
                 />
@@ -75,7 +82,7 @@ export default function AppointmentField(props) {
               fieldindex={props.fieldindex}
               type={props.type}
               label={props.label}
-              name={fieldname}
+              name={`${fieldname}[${props.fieldindex}]`}
               choices={props.choices}
             />
           </Grid>
@@ -102,11 +109,20 @@ export default function AppointmentField(props) {
           )}
         </Grid>
       </Grid>
+      <Grid item xs={9}>
+        <input
+          type={`hidden`}
+          ref={register()}
+          value={props.label}
+          name={`${fieldname}[${props.fieldindex}].label`}
+        />
+      </Grid>
     </Grid>
   );
 }
 
 /*
+onChange={(e) => onChange(e.target.checked)}
 <Controller
                   name={`appointmentform[${props.fieldindex}].checked]`}
                   defaultValue={props.fieldchecked}

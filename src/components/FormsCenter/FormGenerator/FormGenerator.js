@@ -43,7 +43,7 @@ export default function FormGenerator(props) {
             )}
           </Grid>
           <Grid item>
-            <input type="submit 2" />
+            <input type="submit" />
           </Grid>
         </Grid>
       </form>
