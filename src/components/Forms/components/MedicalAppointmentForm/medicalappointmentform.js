@@ -63,6 +63,7 @@ export default function MedicalAppointmentForm(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [formtitle, setFormTitle] = useState("");
+  const [formtype, setFormType] = useState("");
   const [initValues, setInitValues] = useState("");
   const fields = useSelector(
     (state) => state.formsmanager.formpreview.previewfields
@@ -119,6 +120,7 @@ export default function MedicalAppointmentForm(props) {
           fields: response.form.customformfields,
         });
         setFormTitle(response.title);
+        setFormType(response.form_type);
         setInitValues(response);
         //let currentfields = formfields;
         //console.log(formfields);
@@ -139,6 +141,7 @@ export default function MedicalAppointmentForm(props) {
         initialValues={{
           title: formtitle,
           formfields: fields,
+          form_type: formtype,
         }}
         enableReinitialize={true}
         onSubmit={async (values) => {
@@ -163,7 +166,26 @@ export default function MedicalAppointmentForm(props) {
                             <Grid item>
                               <Grid container direction="row">
                                 <Grid item xs={labelsize}>
-                                  <Typography>{field.label}</Typography>
+                                  <Grid container direction="column">
+                                    <Grid item>
+                                      <Typography>{field.label}</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                      <Grid container direction="row">
+                                        <Grid item>
+                                          <Typography>Unchecked</Typography>
+                                        </Grid>
+                                        <Grid item>
+                                          <SwitchField
+                                            name={`formfields.${index}.checked`}
+                                          />
+                                        </Grid>
+                                        <Grid item>
+                                          <Typography>Checked</Typography>
+                                        </Grid>
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
                                 </Grid>
                                 <Grid item xs={inputsize}>
                                   {field.type === "checkbox_group" ? (
@@ -258,21 +280,7 @@ export default function MedicalAppointmentForm(props) {
                             </Grid>
                             <Grid item>
                               <Grid container direction="row">
-                                <Grid item xs={labelsize}>
-                                  <Grid container direction="row">
-                                    <Grid item>
-                                      <Typography>Unchecked</Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <SwitchField
-                                        name={`formfields.${index}.checked`}
-                                      />
-                                    </Grid>
-                                    <Grid item>
-                                      <Typography>Checked</Typography>
-                                    </Grid>
-                                  </Grid>
-                                </Grid>
+                                <Grid item xs={labelsize}></Grid>
                                 <Grid item xs={inputsize}>
                                   {field.type === "textarea" ? null : (
                                     <Field
@@ -309,6 +317,19 @@ export default function MedicalAppointmentForm(props) {
 }
 
 /*
+<Grid container direction="row">
+                                    <Grid item>
+                                      <Typography>Unchecked</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                      <SwitchField
+                                        name={`formfields.${index}.checked`}
+                                      />
+                                    </Grid>
+                                    <Grid item>
+                                      <Typography>Checked</Typography>
+                                    </Grid>
+                                  </Grid>
 <Field
                                         component={Switch}
                                         type="checkbox"
