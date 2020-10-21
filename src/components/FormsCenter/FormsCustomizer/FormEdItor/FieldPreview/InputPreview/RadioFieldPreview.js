@@ -5,6 +5,7 @@ import { useArray } from "react-hanger";
 import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import {
   TextField,
+  Checkbox,
   Typography,
   Divider,
   Radio,
@@ -112,7 +113,11 @@ export default function RadioFieldPreview(props) {
                     <Grid item>
                       <Grid container direction="row">
                         <Grid item>
-                          <Radio />
+                          {props.input.fieldtype === "radio" ? (
+                            <Radio />
+                          ) : (
+                            <Checkbox />
+                          )}
                         </Grid>
                         <Grid item>
                           <TextField

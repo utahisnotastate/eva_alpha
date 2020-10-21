@@ -131,7 +131,18 @@ export default function FormFields(props) {
                           fieldindex: index,
                           label: field.label,
                           name: `customformfields[${index}].choices`,
-                          choices: field.choices,
+                          choices: field.choices || [],
+                          fieldtype: field.type,
+                        }}
+                      />
+                    ) : field.type === "checkbox_group" ? (
+                      <RadioFieldPreview
+                        input={{
+                          fieldindex: index,
+                          label: field.label,
+                          name: `customformfields[${index}].choices`,
+                          choices: field.choices || [],
+                          fieldtype: field.type,
                         }}
                       />
                     ) : (
