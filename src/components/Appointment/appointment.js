@@ -38,7 +38,10 @@ import {
   getAppointmentForms,
   getAllActiveForms,
   createAppointmentForm,
-} from "../../api/appointment.api.js";
+  getAppointmentBasicDetails,
+} from "../../api/appointment.api";
+import AppointmentAllergiesWarning from "./appointmentallergieswarning";
+import { getAllPatientAllergyInfo } from "../../api/patient.api";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,8 +72,6 @@ export default function Appointment() {
   let { id } = useParams();
   const dispatch = useDispatch();
   let { path, url } = useRouteMatch();
-  console.log("appointment path is " + path);
-  console.log("appointment url is " + url);
   const appointmentforms = useSelector(
     (state) => state.appointment.appointmentforms
   );
@@ -88,6 +89,9 @@ export default function Appointment() {
   const [rosopen, setROSOpen] = useState(false);
   const [examopen, setExamOpen] = useState(false);
   const [patientoptionsopen, setPatientOptionsOpen] = useState(false);
+  const [appointmentstatus, setAppointmentStatus] = useState();
+  const [patientname, setPatientName] = useState("");
+  const [provider, setAssignedProvider] = useState();
 
   const classes = useStyles();
   const activelinkstyle = {
@@ -223,7 +227,43 @@ export default function Appointment() {
     //save the converted forms to the db
     saveAppointmentFormsToDB(appointmentforms);
   };
-
+  useEffect(() => {
+    getAppointmentBasicDetails(id).then((response) => {
+      console.log(response);
+      setAppointmentStatus(response.status);
+      setPatientName(response.patient_display_name);
+      setAssignedProvider(response.provider_display_name);
+      getAllPatientAllergyInfo(response.patient).then((response) => {
+        console.log("all allergy is " + JSON.stringify(response));
+        const [
+          latexallergies,
+          pollenallergies,
+          petallergies,
+          drugallergies,
+          foodallergies,
+          insectallergies,
+        ] = response;
+        dispatch({ type: "load_latex_allergy", latexallergy: latexallergies });
+        dispatch({
+          type: "load_pollen_allergy",
+          pollenallergy: pollenallergies,
+        });
+        dispatch({
+          type: "load_all_drug_allergies",
+          drugallergies: drugallergies,
+        });
+        dispatch({
+          type: "load_all_food_allergies",
+          foodallergies: foodallergies,
+        });
+        dispatch({
+          type: "load_all_pet_allergies",
+          petallergies: petallergies,
+        });
+        console.log("latex allergies are " + latexallergies.length);
+      });
+    });
+  }, [id]);
   useEffect(() => {
     //check if appointment has any forms associated with it
     getAppointmentForms(id)
@@ -244,7 +284,7 @@ export default function Appointment() {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
   return (
     <Grid container spacing={2}>
       <Grid item xs={2}>
@@ -331,9 +371,11 @@ export default function Appointment() {
         </List>
       </Grid>
       <Grid item xs={10}>
-        <Card className={`w3-padding-large`}>
-          <Typography>Patient Name</Typography>
-          <Typography>Allergies</Typography>
+        <Card>
+          <Typography>Patient Name: {patientname}</Typography>
+          <Typography>Provider Name: {provider}</Typography>
+          <Typography>Appointment Status: {appointmentstatus}</Typography>
+          <AppointmentAllergiesWarning />
         </Card>
         <Switch>
           <Route path={`${path}/appointmentforms/:formId`}>
@@ -362,4 +404,9 @@ export default function Appointment() {
 }
 
 /*
+        setPollenStatus(pollenallergies);
+        setPetStatus(petallergies);
+        setDrugStatus(drugallergies);
+        setFoodStatus(foodallergies);
+        setInsectStatus(insectallergies);
  */

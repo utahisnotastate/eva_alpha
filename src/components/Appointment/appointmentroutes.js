@@ -1,9 +1,12 @@
 import React from "react";
 import SingleCheckboxwithLabel from "../Forms/components/CustomInputs/SingleCheckboxwithLabel";
-import {ROSConstitutionalSchema, ROSEndocrineSchema, ConditioalSchema} from "./Schemas/rosschemas";
+import {
+  ROSConstitutionalSchema,
+  ROSEndocrineSchema,
+  ConditioalSchema,
+} from "./Schemas/rosschemas";
 
-
-
+/*
 const schema = {
     "type": "object",
     "properties": {
@@ -99,7 +102,7 @@ const schema = {
 
 };
 
-/*
+/!*
 "dependencies": {
         "recent_fever": {
             properties: {
@@ -107,7 +110,7 @@ const schema = {
             }
         },
     }
- */
+ *!/
 
 const uiSchema = {
     recent_fever: {
@@ -152,7 +155,7 @@ const uiSchema = {
     }
 
 }
-/*
+/!*
 "ui:options": {
         label: false,
     }
@@ -184,7 +187,7 @@ const uiSchema = {
 "ui:options": {
         label: false
     }
- */
+ *!/
 const client = {
     schema,
     uiSchema,
@@ -640,4 +643,4 @@ export const ROSRoutes = [
             }]
     }
 
-];
+];*/
