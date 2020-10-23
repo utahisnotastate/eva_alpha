@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Card from "../../basestyledcomponents/Card/Card";
+import CardHeader from "../../basestyledcomponents/Card/CardHeader";
+import CardBody from "../../basestyledcomponents/Card/CardBody";
 import {
   Formik,
   Field,
@@ -31,7 +34,10 @@ import {
   Select,
   Switch,
 } from "formik-material-ui";
-import { fetchForm } from "../../../../api/forms.api";
+import {
+  getAppointmentForm,
+  updateAppointmentForm,
+} from "../../../api/appointment.api";
 
 const useStyles = makeStyles({
   fieldcontainer: {
@@ -43,13 +49,6 @@ const useStyles = makeStyles({
 const SwitchField = (props) => {
   const { values, setFieldValue } = useFormikContext();
   const [field, meta] = useField(props);
-
-  useEffect(() => {
-    // set the value of textC, based on textA and textB
-    if (values) {
-      setFieldValue(props.name, true);
-    }
-  }, [props.name]);
 
   return (
     <>
@@ -65,8 +64,13 @@ export default function ActiveAppointmentForm(props) {
   const [formtitle, setFormTitle] = useState("");
   const [formtype, setFormType] = useState("");
   const [initValues, setInitValues] = useState("");
+  const appointmentform = useSelector(
+    (state) =>
+      state.appointment.activeappointmentform.activeAppointmentFormDetails
+  );
   const fields = useSelector(
-    (state) => state.formsmanager.formpreview.previewfields
+    (state) =>
+      state.appointment.activeappointmentform.activeAppointmentFormFields
   );
   const labelsize = 3;
   const inputsize = 9;
@@ -82,10 +86,11 @@ export default function ActiveAppointmentForm(props) {
   };
 
   const handleRadioFieldChange = (event, fieldname, formProps) => {
+    console.log(formProps);
     //return event.target.value;
     if (event.target.value === "unchecked") {
       formProps.setFieldValue(`${fieldname}.checked`, false);
-      formProps.setFieldValue(`${fieldname}.value`, event.target.value);
+      //formProps.setFieldValue(`${fieldname}.value`, event.target.value);
     } else {
       //console.log(event.target.value);
       let newvalue = event.target.value;
@@ -93,6 +98,290 @@ export default function ActiveAppointmentForm(props) {
       formProps.setFieldValue(`${fieldname}.checked`, true);
     }
   };
+
+  const handleCheckboxGroupChange = (event, fieldname, formProps, index) => {
+    //return event.target.value;
+    console.log(event.target.value);
+    if (event.target.value === "unchecked") {
+      formProps.setFieldValue(`${fieldname}.checked`, false);
+      formProps.setFieldValue(`${fieldname}.value`, ["unchecked"]);
+      //formProps.setFieldValue(`${fieldname}.value`, event.target.value);
+    } else {
+      //console.log(event.target.value);
+      let newvalue = event.target.value;
+      console.log(formProps.values.formfields[index].value);
+      let filteredarray = formProps.values.formfields[index].value.filter(
+        (check) => {
+          return check !== "unchecked";
+        }
+      );
+      let newarray = [...filteredarray, newvalue];
+      console.log(newarray);
+      /*formProps.setFieldValue(`${fieldname}.value`, [
+        ...formProps.values[fieldname],
+        newvalue,
+      ]);*/
+      formProps.setFieldValue(`${fieldname}.checked`, true);
+      formProps.setFieldValue(`${fieldname}.value`, newarray);
+    }
+  };
+  useEffect(() => {
+    console.log(props.formId);
+    getAppointmentForm(props.appointmentId, props.formId).then((response) => {
+      console.log(
+        "Active appointment form response is " + JSON.stringify(response)
+      );
+      let modifledfields = [];
+
+      for (let field of response.form.customformfields) {
+        if (
+          field.hasOwnProperty("checked") === false ||
+          field.hasOwnProperty("value") === false
+        ) {
+          if (field.type === "radio") {
+            field.checked = false;
+            field.value = "unchecked";
+          } else if (field.type === "checkbox_group") {
+            field.checked = false;
+            field.value = ["unchecked"];
+          } else {
+            field.checked = false;
+            field.value = "";
+          }
+        }
+      }
+      console.log(response.form.customformfields);
+      dispatch({
+        type: "load_active_form_fields",
+        fields: response.form.customformfields,
+      });
+      dispatch({
+        type: "load_active_appointment_form_details",
+        details: {
+          title: response.title,
+          id: response.id,
+          form_type: response.form_type,
+        },
+      });
+    });
+  }, [props.formId, props.appointmentId]);
+  return (
+    <Card>
+      <CardHeader color={`primary`}>
+        <h4>
+          <Typography>{appointmentform.title}</Typography>
+        </h4>
+      </CardHeader>
+      <CardBody>
+        <Formik
+          initialValues={{
+            title: formtitle,
+            formfields: fields,
+            form_type: formtype,
+          }}
+          enableReinitialize={true}
+          onSubmit={async (values) => {
+            let mergedObject = { ...values, ...appointmentform };
+            console.log(mergedObject);
+            updateAppointmentForm(props.appointmentId, mergedObject).then(
+              (response) => {
+                console.log("update response is " + JSON.stringify(response));
+                dispatch({
+                  type: "load_active_form_fields",
+                  fields: response.form.customformfields,
+                });
+                dispatch({
+                  type: "load_active_appointment_form_details",
+                  details: {
+                    title: response.title,
+                    id: response.id,
+                    form_type: response.form_type,
+                  },
+                });
+              }
+            );
+          }}
+          render={(formProps) => {
+            return (
+              <Form>
+                <Typography>{initValues.title}</Typography>
+                <FieldArray
+                  name="formfields"
+                  render={() => (
+                    <Grid container direction={`column`}>
+                      {formProps.values.formfields.length > 0 ? (
+                        formProps.values.formfields.map((field, index) => (
+                          <Grid
+                            item
+                            key={index}
+                            className={classes.fieldcontainer}
+                          >
+                            <Grid container direction={`column`}>
+                              <Grid item>
+                                <Grid container direction="row">
+                                  <Grid item xs={labelsize}>
+                                    <Grid container direction="column">
+                                      <Grid item>
+                                        <Typography>{field.label}</Typography>
+                                      </Grid>
+                                      <Grid item>
+                                        {field.type ===
+                                        "checkbox_group" ? null : (
+                                          <Grid container direction="row">
+                                            <Grid item>
+                                              <Typography>Unchecked</Typography>
+                                            </Grid>
+                                            <Grid item>
+                                              <SwitchField
+                                                name={`formfields.${index}.checked`}
+                                              />
+                                            </Grid>
+                                            <Grid item>
+                                              <Typography>Checked</Typography>
+                                            </Grid>
+                                          </Grid>
+                                        )}
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
+                                  <Grid item xs={inputsize}>
+                                    {field.type === "checkbox_group" ? (
+                                      <div>
+                                        {field.choices.map(
+                                          (choice, choiceindex) => (
+                                            <div key={choice.label}>
+                                              <label>
+                                                <Field
+                                                  type={`checkbox`}
+                                                  name={`formfields.${index}.value`}
+                                                  value={choice.label}
+                                                />
+                                                {choice.label}
+                                              </label>
+                                            </div>
+                                          )
+                                        )}
+                                        <label>
+                                          <Field
+                                            type={`checkbox`}
+                                            name={`formfields.${index}.value`}
+                                            value={`unchecked`}
+                                          />
+                                          {`unchecked`}
+                                        </label>
+                                      </div>
+                                    ) : field.type === "textarea" ? (
+                                      <Field
+                                        component={TextField}
+                                        name={`formfields.${index}.value`}
+                                        variant={`outlined`}
+                                        onChange={(e) =>
+                                          handleTextFieldChange(
+                                            e,
+                                            `formfields.${index}`,
+                                            formProps
+                                          )
+                                        }
+                                        placeholder={`Enter findings for ${field.label} here`}
+                                        multiline={true}
+                                        fullWidth={true}
+                                        rows={5}
+                                      />
+                                    ) : field.type === "radio" ? (
+                                      <Field
+                                        component={RadioGroup}
+                                        name={`formfields.${index}.value`}
+                                        onChange={(e) =>
+                                          handleRadioFieldChange(
+                                            e,
+                                            `formfields.${index}`,
+                                            formProps
+                                          )
+                                        }
+                                      >
+                                        {field.choices.map(
+                                          (choice, choiceindex) => (
+                                            <div key={choice.label}>
+                                              <FormControlLabel
+                                                value={choice.label}
+                                                control={<Radio />}
+                                                label={choice.label}
+                                              />
+                                            </div>
+                                          )
+                                        )}
+                                        <FormControlLabel
+                                          value={`unchecked`}
+                                          control={<Radio />}
+                                          label={`Unchecked`}
+                                        />
+                                      </Field>
+                                    ) : (
+                                      <Field
+                                        component={TextField}
+                                        onChange={(e) =>
+                                          handleTextFieldChange(
+                                            e,
+                                            `formfields.${index}`,
+                                            formProps
+                                          )
+                                        }
+                                        name={`formfields.${index}.value`}
+                                        placeholder={`Enter findings for ${field.label} here`}
+                                        variant={`outlined`}
+                                        fullWidth={true}
+                                      />
+                                    )}
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                              <Grid item>
+                                <Grid container direction="row">
+                                  <Grid item xs={labelsize}></Grid>
+                                  <Grid item xs={inputsize}>
+                                    {field.type === "textarea" ? null : (
+                                      <Field
+                                        component={TextField}
+                                        name={`formfields.${index}.additionalInformation`}
+                                        variant={`outlined`}
+                                        placeholder={`Enter any additional information not reflected in the above findings for ${field.label} here`}
+                                        multiline={true}
+                                        fullWidth={true}
+                                        rows={5}
+                                      />
+                                    )}
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        ))
+                      ) : (
+                        <Typography>There aren't multiple fields!</Typography>
+                      )}
+                    </Grid>
+                  )}
+                />
+                <button type="submit">Submit</button>
+              </Form>
+            );
+          }}
+        />
+      </CardBody>
+    </Card>
+  );
+}
+
+/*
+  console.log(values);
+
+  useEffect(() => {
+    // set the value of textC, based on textA and textB
+    if (values) {
+      setFieldValue(props.name, true);
+    }
+  }, [props.name]);
+props.formId
   useEffect(() => {
     console.log(props.formId);
 
@@ -114,9 +403,12 @@ export default function ActiveAppointmentForm(props) {
             field.value = "";
           }
         });
-        console.log(response.form.customformfields);
+        console.log(
+          "modified active appointment form is " +
+            response.form.customformfields
+        );
         dispatch({
-          type: "load_preview_fields",
+          type: "load_active_form_fields",
           fields: response.form.customformfields,
         });
         setFormTitle(response.title);
@@ -135,183 +427,8 @@ export default function ActiveAppointmentForm(props) {
       }
     });
   }, [props.formId]);
-  return (
-    <div>
-      <Formik
-        initialValues={{
-          title: formtitle,
-          formfields: fields,
-          form_type: formtype,
-        }}
-        enableReinitialize={true}
-        onSubmit={async (values) => {
-          console.log(values);
-        }}
-        render={(formProps) => {
-          return (
-            <Form>
-              <Typography>{initValues.title}</Typography>
-              <FieldArray
-                name="formfields"
-                render={() => (
-                  <Grid container direction={`column`}>
-                    {formProps.values.formfields.length > 0 ? (
-                      formProps.values.formfields.map((field, index) => (
-                        <Grid
-                          item
-                          key={index}
-                          className={classes.fieldcontainer}
-                        >
-                          <Grid container direction={`column`}>
-                            <Grid item>
-                              <Grid container direction="row">
-                                <Grid item xs={labelsize}>
-                                  <Grid container direction="column">
-                                    <Grid item>
-                                      <Typography>{field.label}</Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <Grid container direction="row">
-                                        <Grid item>
-                                          <Typography>Unchecked</Typography>
-                                        </Grid>
-                                        <Grid item>
-                                          <SwitchField
-                                            name={`formfields.${index}.checked`}
-                                          />
-                                        </Grid>
-                                        <Grid item>
-                                          <Typography>Checked</Typography>
-                                        </Grid>
-                                      </Grid>
-                                    </Grid>
-                                  </Grid>
-                                </Grid>
-                                <Grid item xs={inputsize}>
-                                  {field.type === "checkbox_group" ? (
-                                    <div>
-                                      {field.choices.map(
-                                        (choice, choiceindex) => (
-                                          <div key={choice.label}>
-                                            <label>
-                                              <Field
-                                                type={`checkbox`}
-                                                name={`formfields.${index}.value`}
-                                                value={choice.label}
-                                              />
-                                              {choice.label}
-                                            </label>
-                                          </div>
-                                        )
-                                      )}
-                                      <label>
-                                        <Field
-                                          type={`checkbox`}
-                                          name={`formfields.${index}.value`}
-                                          value={`unchecked`}
-                                        />
-                                        {`Unchecked`}
-                                      </label>
-                                    </div>
-                                  ) : field.type === "textarea" ? (
-                                    <Field
-                                      component={TextField}
-                                      name={`formfields.${index}.value`}
-                                      variant={`outlined`}
-                                      onChange={(e) =>
-                                        handleTextFieldChange(
-                                          e,
-                                          `formfields.${index}`,
-                                          formProps
-                                        )
-                                      }
-                                      placeholder={`Enter findings for ${field.label} here`}
-                                      multiline={true}
-                                      fullWidth={true}
-                                      rows={5}
-                                    />
-                                  ) : field.type === "radio" ? (
-                                    <Field
-                                      component={RadioGroup}
-                                      name={`formfields.${index}.value`}
-                                      onChange={(e) =>
-                                        handleRadioFieldChange(
-                                          e,
-                                          `formfields.${index}`,
-                                          formProps
-                                        )
-                                      }
-                                    >
-                                      {field.choices.map(
-                                        (choice, choiceindex) => (
-                                          <div key={choice.label}>
-                                            <FormControlLabel
-                                              value={choice.label}
-                                              control={<Radio />}
-                                              label={choice.label}
-                                            />
-                                          </div>
-                                        )
-                                      )}
-                                      <FormControlLabel
-                                        value={`unchecked`}
-                                        control={<Radio />}
-                                        label={`Unchecked`}
-                                      />
-                                    </Field>
-                                  ) : (
-                                    <Field
-                                      component={TextField}
-                                      onChange={(e) =>
-                                        handleTextFieldChange(
-                                          e,
-                                          `formfields.${index}`,
-                                          formProps
-                                        )
-                                      }
-                                      name={`formfields.${index}.value`}
-                                      placeholder={`Enter findings for ${field.label} here`}
-                                      variant={`outlined`}
-                                      fullWidth={true}
-                                    />
-                                  )}
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                            <Grid item>
-                              <Grid container direction="row">
-                                <Grid item xs={labelsize}></Grid>
-                                <Grid item xs={inputsize}>
-                                  {field.type === "textarea" ? null : (
-                                    <Field
-                                      component={TextField}
-                                      name={`formfields.${index}.additionalInformation`}
-                                      variant={`outlined`}
-                                      placeholder={`Enter any additional information not reflected in the above findings for ${field.label} here`}
-                                      multiline={true}
-                                      fullWidth={true}
-                                      rows={5}
-                                    />
-                                  )}
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      ))
-                    ) : (
-                      <Typography>There aren't multiple fields!</Typography>
-                    )}
-                  </Grid>
-                )}
-              />
-              {props.showSubmitButton === true ? (
-                <button type="submit">Submit</button>
-              ) : null}
-            </Form>
-          );
-        }}
-      />
-    </div>
+
+const fields = useSelector(
+    (state) => state.formsmanager.formpreview.previewfields
   );
-}
+ */

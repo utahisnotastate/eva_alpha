@@ -1,115 +1,143 @@
-import {combineReducers} from "redux";
-import {patientdiagnoses, patientmedications, drugallergies, hasinsurance, foodallergies, latexallergy, petallergies, pollenallergy, surgicalhistory, addmedicationformicd10result, addMedicationFormMedication, primaryinsurance, secondaryinsurance} from "./patient/patient.reducers";
-import {medicalappointmentformtitle as title, medicalappointmentformtype as type, medicalappointmentformrequiredfields as required, medicalappointmentformvitals as vitals} from "./formscenter/MedicalAppointmentForm/medicalappointmentform.reducers";
+import { combineReducers } from "redux";
 import {
-    appointmentassessments,
-    assessmentinputfields,
-    appointmentcomplaints,
-    newcomplaintinputfields,
-    appointmentforms,
-    appointmentformfields,
-    activeAppointmentFormDetails,
-    activeAppointmentFormFields,
-    masteractiveappointmentformfields,
-    clinicalexamforms,
-    reviewofsystemforms
-} from './appointment/appointment.reducers'
+  patientdiagnoses,
+  patientmedications,
+  drugallergies,
+  hasinsurance,
+  foodallergies,
+  latexallergy,
+  petallergies,
+  pollenallergy,
+  surgicalhistory,
+  addmedicationformicd10result,
+  addMedicationFormMedication,
+  primaryinsurance,
+  secondaryinsurance,
+} from "./patient/patient.reducers";
+import {
+  medicalappointmentformtitle as title,
+  medicalappointmentformtype as type,
+  medicalappointmentformrequiredfields as required,
+  medicalappointmentformvitals as vitals,
+} from "./formscenter/MedicalAppointmentForm/medicalappointmentform.reducers";
+import {
+  appointmentassessments,
+  assessmentinputfields,
+  appointmentcomplaints,
+  newcomplaintinputfields,
+  appointmentforms,
+  appointmentformfields,
+  activeAppointmentFormDetails,
+  activeAppointmentFormFields,
+  masteractiveappointmentformfields,
+  clinicalexamforms,
+  reviewofsystemforms,
+} from "./appointment/appointment.reducers";
 
-import {reviewofsystemsforms, physicalexamforms, medicalhistoryforms, forms, newtextvalueoptions} from "./formscenter/formscenter.reducers";
+import {
+  reviewofsystemsforms,
+  physicalexamforms,
+  medicalhistoryforms,
+  forms,
+  newtextvalueoptions,
+} from "./formscenter/formscenter.reducers";
 
-import {newformproperties, newformfields, newformtitle, newformtype, previewtitle, previewfields} from "./formscenter/formscenter.reducers";
+import {
+  newformproperties,
+  newformfields,
+  newformtitle,
+  newformtype,
+  previewtitle,
+  previewfields,
+} from "./formscenter/formscenter.reducers";
 
-function patientAppointmentHistory(state=[], action) {
-    switch(action.type) {
-        case 'initial_load_patient_history':
-            return action.appointmenthistory;
-        default:
-            return state;
-
-    }
+function patientAppointmentHistory(state = [], action) {
+  switch (action.type) {
+    case "initial_load_patient_history":
+      return action.appointmenthistory;
+    default:
+      return state;
+  }
 }
 
 function requestupdates(state = [], action) {
-    switch(action.type) {
-        case 'set_request_updates':
-            return action.requestupdates;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "set_request_updates":
+      return action.requestupdates;
+    default:
+      return state;
+  }
 }
 
 function patientToSchedule(state = null, action) {
-    switch(action.type) {
-        case 'set_patient_to_schedule':
-            return action.patient;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "set_patient_to_schedule":
+      return action.patient;
+    default:
+      return state;
+  }
 }
 
 function patientRequests(state = [], action) {
-    switch(action.type) {
-        case 'load_patient_requests':
-            return action.patientrequests;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "load_patient_requests":
+      return action.patientrequests;
+    default:
+      return state;
+  }
 }
 
 function clinicalqueue(state = [], action) {
-    switch(action.type) {
-        case 'check_in_patient':
-            return action.newclinicalqueue;
-        case 'move_to_exam_room':
-            return action.newclinicalqueue;
-        case 'move_to_waiting_room':
-            return action.newclinicalqueue;
-        case 'appointment_in_progress':
-            return action.newclinicalqueue;
-        case 'initial_load':
-            return action.newclinicalqueue;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "check_in_patient":
+      return action.newclinicalqueue;
+    case "move_to_exam_room":
+      return action.newclinicalqueue;
+    case "move_to_waiting_room":
+      return action.newclinicalqueue;
+    case "appointment_in_progress":
+      return action.newclinicalqueue;
+    case "initial_load":
+      return action.newclinicalqueue;
+    default:
+      return state;
+  }
 }
 
 const formpreview = combineReducers({
-    previewtitle,
-    previewfields
-})
+  previewtitle,
+  previewfields,
+});
 
 const newform = combineReducers({
-    newformtitle,
-    newformtype,
-    newformfields,
-    newtextvalueoptions
+  newformtitle,
+  newformtype,
+  newformfields,
+  newtextvalueoptions,
 });
 
 const formsmanager = combineReducers({
-    forms,
-    newform,
-    formpreview
+  forms,
+  newform,
+  formpreview,
 });
 
 const patientallergies = combineReducers({
-    drugallergies,
-    foodallergies,
-    latexallergy,
-    petallergies,
-    pollenallergy,
-
+  drugallergies,
+  foodallergies,
+  latexallergy,
+  petallergies,
+  pollenallergy,
 });
 
-
-
 const complaints = combineReducers({
-    inputfields: newcomplaintinputfields,
-    complaints: appointmentcomplaints,
+  inputfields: newcomplaintinputfields,
+  complaints: appointmentcomplaints,
 });
 
 const assessments = combineReducers({
-    assessments: appointmentassessments,
-    inputfields: assessmentinputfields
+  assessments: appointmentassessments,
+  inputfields: assessmentinputfields,
 });
 
 /*const appointmentforms = combineReducers({
@@ -117,44 +145,41 @@ const assessments = combineReducers({
     reviewofsystemforms
 })*/
 const activeappointmentform = combineReducers({
-   activeAppointmentFormFields,
-   activeAppointmentFormDetails,
-    masteractiveappointmentformfields
-})
+  activeAppointmentFormFields,
+  activeAppointmentFormDetails,
+});
 const appointment = combineReducers({
-    complaints,
-    assessments,
-    appointmentforms,
-    appointmentformfields,
-    activeappointmentform
+  complaints,
+  assessments,
+  appointmentforms,
+  appointmentformfields,
+  activeappointmentform,
 });
 const patient = combineReducers({
-    patientdiagnoses,
-    patientmedications,
-    patientallergies,
-    surgicalhistory,
-    hasinsurance,
-    primaryinsurance,
-    secondaryinsurance,
-    addmedicationformicd10result,
-    addMedicationFormMedication,
+  patientdiagnoses,
+  patientmedications,
+  patientallergies,
+  surgicalhistory,
+  hasinsurance,
+  primaryinsurance,
+  secondaryinsurance,
+  addmedicationformicd10result,
+  addMedicationFormMedication,
 });
-
-
 
 export const allReducers = combineReducers({
-    clinicalqueue,
-    patientToSchedule,
-    formsmanager,
-    patientAppointmentHistory,
-    patientRequests,
-    requestupdates,
-    appointment,
-    patient,
+  clinicalqueue,
+  patientToSchedule,
+  formsmanager,
+  patientAppointmentHistory,
+  patientRequests,
+  requestupdates,
+  appointment,
+  patient,
 });
 
-
 /*
+    masteractiveappointmentformfields
 function vitalsformschema(state={
     type: "array",
     title: "Vital Fields",

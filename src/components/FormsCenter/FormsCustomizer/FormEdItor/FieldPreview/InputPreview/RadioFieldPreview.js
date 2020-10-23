@@ -69,8 +69,6 @@ export default function RadioFieldPreview(props) {
   };
 
   useEffect(() => {
-    console.log(props.input.name);
-    console.log(props.input.choices);
     //choices.push(props.input.choices);
     setChoices(props.input.choices);
     // props.input.choices.forEach((choice) => prepend(choice));

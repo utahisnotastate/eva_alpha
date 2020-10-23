@@ -38,7 +38,7 @@ export const updateAppointmentForm = async (appointmentId, form) => {
       id: form.id,
       title: form.title,
       form_type: form.form_type,
-      form: form.form,
+      form: { customformfields: form.formfields },
       appointment: appointmentId,
     }
   );

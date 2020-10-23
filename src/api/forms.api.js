@@ -2,43 +2,43 @@ import API_URL from "./api_url";
 import axios from "axios";
 
 export const fetchAllForms = async () => {
-    const result = await axios(`${API_URL}/forms/`);
-    return result.data;
+  const result = await axios(`${API_URL}/forms/`);
+  return result.data;
 };
 
 export const getAppointmentForms = async (appointmentId) => {
-    const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/`)
-    return result.data;
-}
+  const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/`);
+  return result.data;
+};
 
+export const checkIfAppointmentHasForms = async () => {
+  getAppointmentForms()
+    .then((response) => {
+      console.log("appointment forms = " + response);
+    })
+    .catch((error) => console.log(error));
+};
 
-
-export const checkIfAppointmentHasForms = async() => {
-    getAppointmentForms().then(response => {
-        console.log('appointment forms = ' + response)
-    }).catch(error => console.log(error))
-}
-
-export const fetchForm = async  (formId) => {
-    const result = await axios(`${API_URL}/forms/${formId}/`);
-    return result.data;
+export const fetchForm = async (formId) => {
+  const result = await axios(`${API_URL}/forms/${formId}/`);
+  return result.data;
 };
 
 export const updateForm = async (formId, formData) => {
-    const customform = {
-        customformfields: formData.customformfields
-    }
-   const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
-       form_type: formData.form_type,
-       title: formData.form_title,
-       form: customform,
-   });
-   return result.data;
-}
+  const customform = {
+    customformfields: formData.customformfields,
+  };
+  const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
+    form_type: formData.form_type,
+    title: formData.form_title,
+    form: customform,
+  });
+  return result.data;
+};
 
-export const fetchFormFields = async  (formId) => {
-    const result = await axios(`${API_URL}/forms/${formId}/formfields/`);
-    return result.data;
+export const fetchFormFields = async (formId) => {
+  const result = await axios(`${API_URL}/forms/${formId}/formfields/`);
+  return result.data;
 };
 
 /*export const addFormFieldOption = async (formId, formFieldId, option) => {
@@ -58,7 +58,6 @@ export const fetchFormFields = async  (formId) => {
     });
     return result.data;
 }*/
-
 
 /*export const addNewFormFieldWithOptions = async (formId, formField, options) => {
     createFormFieldWithOption(formId, formField).then(response => {
@@ -113,21 +112,19 @@ export const fetchFormFields = async  (formId) => {
 
 }*/
 
-
-export const updateFormProp = async  (formId, formChanges) => {
-    const result = await axios.patch(`${API_URL}/forms/${formId}/`, formChanges);
-    return result;
+export const updateFormProp = async (formId, formChanges) => {
+  const result = await axios.patch(`${API_URL}/forms/${formId}/`, formChanges);
+  return result;
 };
 
 export const createNewForm = async (formData) => {
-    const result = await axios.post('http://127.0.0.1:8000/api/forms/', {
-        form_type: formData.type,
-        title: formData.title,
-    });
-    return result;
-
-
-}
+  const result = await axios.post("http://127.0.0.1:8000/api/forms/", {
+    form_type: formData.type,
+    title: formData.title,
+    form: { customformfields: [] },
+  });
+  return result;
+};
 
 /*
 axios.post('http://127.0.0.1:8000/api/forms/', {

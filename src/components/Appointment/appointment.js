@@ -269,8 +269,6 @@ export default function Appointment() {
     getAppointmentForms(id)
       .then((response) => {
         if (response.length > 0) {
-          console.log("Forms were created already!");
-          console.log("already created forms are" + JSON.stringify(response));
           dispatch({ type: "load_all_appointment_forms", forms: response });
         } else {
           console.log("appointment forms need to be created!!Create them!");

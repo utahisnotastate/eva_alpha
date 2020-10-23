@@ -17,14 +17,11 @@ import CardBody from "../../basestyledcomponents/Card/CardBody";
 import FormTemplate from "./appointmentformtemplate.js";
 import MedicalAppointmentForm from "../../Forms/components/MedicalAppointmentForm/medicalappointmentform";
 import "./appointmentform.css";
+import ActiveAppointmentForm from "./activeappointmentform";
 
 export default function AppointmentForm(props) {
   let { formId } = useParams();
   const dispatch = useDispatch();
-  const appointmentform = useSelector(
-    (state) =>
-      state.appointment.activeappointmentform.activeAppointmentFormDetails
-  );
   // const formfields = useSelector(state => state.appointment.appointmentformfields);
   const getAppointmentForm = async (appointmentId, formId) => {
     const result = await axios(
@@ -32,6 +29,28 @@ export default function AppointmentForm(props) {
     );
     return result.data;
   };
+  return (
+    <ActiveAppointmentForm
+      appointmentId={props.appointmentId}
+      formId={formId}
+    />
+  );
+}
+
+/*
+<Card>
+      <CardHeader color={`primary`}>
+        <h4>{appointmentform.title}</h4>
+        <h4>{appointmentform.form_type}</h4>
+      </CardHeader>
+      <CardBody>
+        <ActiveAppointmentForm
+          appointmentId={props.appointmentId}
+          formId={formId}
+        />
+      </CardBody>
+    </Card>
+
 
   useEffect(() => {
     //check if appointment has any forms associated with it
@@ -48,21 +67,7 @@ export default function AppointmentForm(props) {
       dispatch({ type: "load_active_form_fields", fields: result.form });
     });
   }, [props.appointmentId, formId]);
-
-  return (
-    <Card>
-      <CardHeader color={`primary`}>
-        <h4>{appointmentform.title}</h4>
-        <h4>{appointmentform.form_type}</h4>
-      </CardHeader>
-      <CardBody>
-        <FormTemplate appointmentId={props.appointmentId} formId={formId} />
-      </CardBody>
-    </Card>
-  );
-}
-
-/*
+<FormTemplate appointmentId={props.appointmentId} formId={formId} />
 <FormTemplate appointmentId={props.appointmentId} formId={formId} />
 
 <Card>

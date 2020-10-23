@@ -30,7 +30,6 @@ export default function AppointmentField(props) {
   const classes = useStyles();
   const [fieldchecked, setFieldChecked] = useState("");
   const fieldname = props.fieldname || "customformfields";
-  console.log(fieldname);
 
   const setAdditionalInfoToNull = (name) => {
     setValue(name, null);
@@ -109,19 +108,18 @@ export default function AppointmentField(props) {
           )}
         </Grid>
       </Grid>
-      <Grid item xs={9}>
+    </Grid>
+  );
+}
+
+/*
+      <Grid item xs={9}></Grid>
         <input
           type={`hidden`}
           ref={register()}
           value={props.label}
           name={`${fieldname}[${props.fieldindex}].label`}
         />
-      </Grid>
-    </Grid>
-  );
-}
-
-/*
 name={`${fieldname}[${props.fieldindex}]['checked']`}
 onChange={(e) => onChange(e.target.checked)}
 <Controller
