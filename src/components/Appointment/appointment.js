@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  base: {
+    backgroundColor: "#fafafa",
+  },
   deepnested: {
     paddingLeft: theme.spacing(6),
   },
@@ -284,7 +287,7 @@ export default function Appointment() {
       .catch((err) => console.log(err));
   }, [id]);
   return (
-    <Grid container spacing={2}>
+    <Grid container className={classes.base} spacing={2}>
       <Grid item xs={2}>
         <List className={classes.list}>
           <ListItem

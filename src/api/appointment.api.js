@@ -31,6 +31,7 @@ export const getAllActiveForms = async () => {
   const result = await axios(`${API_URL}/activeforms`);
   return result.data;
 };
+
 export const updateAppointmentForm = async (appointmentId, form) => {
   const result = await axios.patch(
     `${API_URL}/appointments/${appointmentId}/forms/${form.id}/`,
@@ -44,6 +45,33 @@ export const updateAppointmentForm = async (appointmentId, form) => {
   );
   return result.data;
 };
+
+export const getAppointmentAssessments = async (appointmentId) => {
+  const result = await axios(
+    `${API_URL}/appointments/${appointmentId}/assessments/`
+  );
+  return result.data;
+};
+/*
+export const getAppointmentFindings = (appointmentId) => {
+  getAppointmentForms(appointmentId).then((response) => {
+    //console.log(response);
+    let appointmentfindings = [];
+    for (let appointmentform of response) {
+      //console.log(appointmentform.form.customformfields);
+      let checkedfields = appointmentform.form.customformfields.filter(
+        (field) => field.checked === true
+      );
+      checkedfields.forEach((checkedfield) =>
+        appointmentfindings.push(checkedfield)
+      );
+    }
+    console.log(appointmentfindings);
+    dispatch({type: "load_all_appointment_findings", findings: appointmentfindings})
+  });
+};
+*/
+
 export const checkIfAppointmentHasForms = async () => {
   getAppointmentForms()
     .then((response) => {

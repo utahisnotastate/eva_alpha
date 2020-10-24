@@ -110,7 +110,14 @@ export function clinicalexamforms(state = [], action) {
       return state;
   }
 }
-
+export function appointmentfindings(state = [], action) {
+  switch (action.type) {
+    case "load_all_appointment_findings":
+      return action.findings;
+    default:
+      return state;
+  }
+}
 export function reviewofsystemforms(state = [], action) {
   switch (action.type) {
     case "load_all_ROS_forms":
