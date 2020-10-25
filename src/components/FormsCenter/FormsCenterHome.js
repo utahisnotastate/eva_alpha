@@ -178,9 +178,7 @@ export default function FormsCenterHome(props) {
               </CardIcon>
             </CardHeader>
             <CardBody>
-              <Typography>
-                Create Custom Appointment Form from scratch
-              </Typography>
+              <Typography>Create Custom Complaint Form from scratch</Typography>
             </CardBody>
           </Card>
         </GridItem>

@@ -41,7 +41,7 @@ export default function AssessmentsList(props) {
       {props.assessments.map((assessment, index) => (
         <div key={index}>
           <Grid item className={classes.assessment}>
-            <Card>
+            <Card raised>
               <Grid container direction={`column`}>
                 <Grid item>
                   <Typography>

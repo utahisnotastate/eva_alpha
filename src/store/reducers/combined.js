@@ -131,10 +131,10 @@ const patientallergies = combineReducers({
   pollenallergy,
 });
 
-const complaints = combineReducers({
+/*const complaints = combineReducers({
   inputfields: newcomplaintinputfields,
   complaints: appointmentcomplaints,
-});
+});*/
 
 const assessments = combineReducers({
   assessments: appointmentassessments,
@@ -150,7 +150,7 @@ const activeappointmentform = combineReducers({
   activeAppointmentFormDetails,
 });
 const appointment = combineReducers({
-  complaints,
+  appointmentcomplaints,
   assessments,
   appointmentforms,
   appointmentformfields,

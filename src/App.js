@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { ModalProvider } from "react-modal-hook";
 import NavBar from "./components/NavBar/navbar";
 import Home from "./components/Home/home";
+import { ThemeProvider } from "@material-ui/core/styles";
 import ScheduleAppointment from "./components/Forms/Administrative/Scheduling/ScheduleAppointment/scheduleappointment";
 import Appointments from "./components/Appointments/appointments";
 import ClinicalQueue from "./components/ClinicalQueue/clinicalqueue";
@@ -27,6 +28,7 @@ import { StateProvider } from "./components/ClinicalQueue/context/ClinicalQueueC
 import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import FormsCenter from "./components/FormsCenter/FormsCenter";
+import theme from "./styles/theme";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -37,65 +39,72 @@ const store = createStore(
 
 function App() {
   return (
-    <Fragment>
-      <Provider store={store}>
-        <CssBaseline />
-        <ModalProvider>
-          <Router>
-            <div>
-              <NavBar />
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/appointments/:id">
-                  <Appointment />
-                </Route>
-                <Route path="/appointments">
-                  <Appointments />
-                </Route>
-                <Route path="/claims/:claimId" component={Claim} />
-                <Route path="/claims">
-                  <Claims />
-                </Route>
-                <Route path="/evaadmin">
-                  <EvaAdmin />
-                </Route>
-                <Route path="/faxes">
-                  <Faxes />
-                </Route>
-                <Route path="/clinicalqueue">
-                  <ClinicalQueue />
-                </Route>
-                <Route exact path="/patients">
-                  <Patients />
-                </Route>
-                <Route exact path="/patientrequests">
-                  <PatientRequests />
-                </Route>
-                <Route path="/formscenter" component={FormsCenter} />
-                <Route path="/waitlist" component={WaitList} />
-                <Route
-                  path="/referralstoschedule"
-                  component={ReferralsToScheduleList}
-                />
-                <Route path="/revenuecycle" component={RevenueCycle} />
-                <Route path="/patient/:id" component={Patient} />
-                <Route path="/scheduling/:id" component={Scheduling} />
-                <Route path="/scheduling" component={Scheduling} />
-                <Route path="/schedule/:id" component={ScheduleAppointment} />
-              </Switch>
-            </div>
-          </Router>
-        </ModalProvider>
-      </Provider>
-    </Fragment>
+    <Provider store={store}>
+      <ModalProvider>
+        <Router>
+          <div>
+            <NavBar />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/appointments/:id">
+                <Appointment />
+              </Route>
+              <Route path="/appointments">
+                <Appointments />
+              </Route>
+              <Route path="/claims/:claimId" component={Claim} />
+              <Route path="/claims">
+                <Claims />
+              </Route>
+              <Route path="/evaadmin">
+                <EvaAdmin />
+              </Route>
+              <Route path="/faxes">
+                <Faxes />
+              </Route>
+              <Route path="/clinicalqueue">
+                <ClinicalQueue />
+              </Route>
+              <Route exact path="/patients">
+                <Patients />
+              </Route>
+              <Route exact path="/patientrequests">
+                <PatientRequests />
+              </Route>
+              <Route path="/formscenter" component={FormsCenter} />
+              <Route path="/waitlist" component={WaitList} />
+              <Route
+                path="/referralstoschedule"
+                component={ReferralsToScheduleList}
+              />
+              <Route path="/revenuecycle" component={RevenueCycle} />
+              <Route path="/patient/:id" component={Patient} />
+              <Route path="/scheduling/:id" component={Scheduling} />
+              <Route path="/scheduling" component={Scheduling} />
+              <Route path="/schedule/:id" component={ScheduleAppointment} />
+            </Switch>
+          </div>
+        </Router>
+      </ModalProvider>
+    </Provider>
   );
 }
 
-export default App;
+function themedApp() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  );
+}
+
+export default themedApp;
 
 /*
+export default App;
 import CreateMedicalChartForm
     from "./components/FormsCenter/CreateFormCenter/CreateMedicalChartForm/CreateMedicalChartForm";
 import formscustomizer from "./components/FormsCenter/FormsCustomizer/formscustomizer";

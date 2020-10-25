@@ -29,6 +29,8 @@ import NewComplaint from "./Complaints/NewComplaint/NewComplaint.FunComp";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Card from "../basestyledcomponents/Card/Card";
+import CardHeader from "../basestyledcomponents/Card/CardHeader";
+import CardBody from "../basestyledcomponents/Card/CardBody";
 import Collapse from "@material-ui/core/Collapse";
 import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSComponent";
 import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
@@ -372,11 +374,15 @@ export default function Appointment() {
         </List>
       </Grid>
       <Grid item xs={10}>
-        <Card>
-          <Typography>Patient Name: {patientname}</Typography>
-          <Typography>Provider Name: {provider}</Typography>
-          <Typography>Appointment Status: {appointmentstatus}</Typography>
-          <AppointmentAllergiesWarning />
+        <Card raised>
+          <CardHeader color="primary">
+            <Typography>Patient Name: {patientname}</Typography>
+          </CardHeader>
+          <CardBody>
+            <Typography>Provider Name: {provider}</Typography>
+            <Typography>Appointment Status: {appointmentstatus}</Typography>
+            <AppointmentAllergiesWarning />
+          </CardBody>
         </Card>
         <Switch>
           <Route path={`${path}/appointmentforms/:formId`}>
