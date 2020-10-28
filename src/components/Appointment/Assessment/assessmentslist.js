@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { fetchAllForms } from "../../../api/forms.api";
+import { useParams } from "react-router-dom";
+import { getAppointmentComplaints } from "../../../api/appointment.api";
 
 const useStyles = makeStyles({
   fieldcontainer: {
@@ -28,13 +30,20 @@ const useStyles = makeStyles({
 });
 
 export default function AssessmentsList(props) {
+  let { id } = useParams();
   const classes = useStyles();
   const findings = useSelector(
     (state) => state.appointment.appointmentfindings
   );
+  const complaints = useSelector(
+    (state) => state.appointment.appointmentcomplaints
+  );
   const { register } = useFormContext();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(complaints);
+    getAppointmentComplaints(id).then((response) => {});
+  }, [id]);
   return (
     <Grid container direction={`column`}>
       <Typography>Assessments</Typography>
@@ -44,9 +53,27 @@ export default function AssessmentsList(props) {
             <Card raised>
               <Grid container direction={`column`}>
                 <Grid item>
-                  <Typography>
-                    {assessment.icd_code}: {assessment.icd_description}
-                  </Typography>
+                  <Grid container direction={`row`}>
+                    <Grid item>
+                      <TextField
+                        disabled
+                        inputRef={register()}
+                        defaultValue={assessment.icd_code}
+                        name={`appointmentassessments[${index}].icd_code`}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        disabled
+                        inputRef={register()}
+                        defaultValue={assessment.icd_description}
+                        name={`appointmentassessments[${index}].icd_description`}
+                      />
+                    </Grid>
+                    <Typography>
+                      {assessment.icd_code}: {assessment.icd_description}
+                    </Typography>
+                  </Grid>
                 </Grid>
                 <Grid item>
                   <Typography>Related to:</Typography>
@@ -61,25 +88,42 @@ export default function AssessmentsList(props) {
                       <Typography>
                         Which of the following patient complaints:
                       </Typography>
-                      {props.complaints
-                        ? props.complaints.map((complaint) => (
-                            <Grid container className={classes.fieldcontainer}>
-                              <Grid item></Grid>
-                              <Grid item>
-                                <Typography>
-                                  {complaint.complaint_name}
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          ))
-                        : null}
                     </Grid>
+                    <Grid item>
+                      <Grid container direction="row">
+                        {complaints
+                          ? complaints.map((complaint, complaintindex) => (
+                              <Grid item key={complaintindex}>
+                                <Grid
+                                  container
+                                  className={classes.fieldcontainer}
+                                >
+                                  <Grid item>
+                                    <TextField
+                                      disabled
+                                      inputRef={register()}
+                                      defaultValue={complaint.complaint_name}
+                                      name={`appointmentassessments[${index}].based_on.complaints[${complaintindex}].label`}
+                                    />
+                                  </Grid>
+                                  <Grid item>
+                                    <Checkbox
+                                      inputRef={register()}
+                                      name={`appointmentassessments[${index}].based_on.complaints[${complaintindex}].value`}
+                                    />
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            ))
+                          : null}
+                      </Grid>
+                    </Grid>
+
                     <Grid item>
                       <Grid container direction="column">
                         <Grid item>
                           <Typography>
-                            Which of the following {findings.length} physical
-                            exam findings:
+                            Which of the following physical exam findings:
                           </Typography>
                         </Grid>
                         <Grid item>
@@ -95,11 +139,11 @@ export default function AssessmentsList(props) {
                                   disabled
                                   inputRef={register()}
                                   defaultValue={finding.label}
-                                  name={`appointmentassessments[${index}].based_on[${findingindex}].label`}
+                                  name={`appointmentassessments[${index}].based_on.findings[${findingindex}].label`}
                                 />
                                 <Checkbox
                                   inputRef={register()}
-                                  name={`appointmentassessments[${index}].based_on[${findingindex}].value`}
+                                  name={`appointmentassessments[${index}].based_on.findings[${findingindex}].value`}
                                 />
                               </Grid>
                             ))}

@@ -14,6 +14,12 @@ import Typography from "@material-ui/core/Typography";
 import AppointmentComplaints from "./AppointmentComplaints/AppointmentComplaints";
 import { useParams } from "react-router-dom";
 // import PatientComplaint from './PatientComplaint/PatientComplaint';
+import {
+  getAppointmentComplaints,
+  saveAppointmentComplaints,
+  createAppointmentComplaints,
+} from "../../../api/appointment.api";
+import { fetchAllForms } from "../../../api/forms.api";
 
 const editorStyle = {
   minWidth: "100px",
@@ -50,10 +56,37 @@ export default function PatientComplaints(props) {
     }
   );
   // const { complaints, values } = props;
+  const reloadcomplaints = () => {
+    getAppointmentComplaints(id).then((response) => {
+      console.log("complaints response is " + JSON.stringify(response));
+      if (response.length === 0) {
+        console.log("There are no complaints yet!");
+        createAppointmentComplaints(id).then((response) => {
+          dispatch({ type: "load_complaints", complaints: [] });
+        });
+      } else {
+        //dispatch({ type: "load_complaints", complaints: response });
+        console.log(
+          "appointment has the following complaibts" + JSON.stringify(response)
+        );
+        dispatch({
+          type: "load_complaints",
+          complaints: response[0].appointment_complaints.complaints,
+        });
+      }
+    });
+  };
+
   const onSubmit = (data) => {
     const values = methods.getValues();
-    console.log(values);
+    console.log(values.complaints);
+    const complaints = { complaints: values.complaints };
+    saveAppointmentComplaints(id, complaints).then((response) => {
+      console.log(response);
+      reloadcomplaints();
+    });
   };
+
   const addComplaintToForm = (complaint) => {
     append(complaint);
     methods.setValue("complaint_name", "");
@@ -62,7 +95,22 @@ export default function PatientComplaints(props) {
   const handleRemove = (index) => {
     remove(index);
   };
-
+  useEffect(() => {
+    getAppointmentComplaints(id).then((response) => {
+      if (response.length === 0) {
+        console.log("There are no complaints yet!");
+        createAppointmentComplaints(id).then((response) => {
+          console.log("complaints created!" + response);
+          dispatch({ type: "load_complaints", complaints: [] });
+        });
+      } else {
+        //dispatch({ type: "load_complaints", complaints: response });
+        const newcomplaints = response[0].appointment_complaints.complaints;
+        dispatch({ type: "load_complaints", complaints: newcomplaints });
+        append(newcomplaints);
+      }
+    });
+  }, [id]);
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>

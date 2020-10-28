@@ -18,6 +18,8 @@ import Button from "@material-ui/core/Button";
 import {
   getAppointmentForms,
   getAppointmentAssessments,
+  getAppointmentComplaints,
+  createAppointmentComplaints,
 } from "../../../api/appointment.api";
 
 const API_URL = "http://127.0.0.1:8000/api";
@@ -30,7 +32,7 @@ export default function AppointmentAssessment(props) {
     (state) => state.appointment.assessments.assessments
   );
   const complaints = useSelector(
-    (state) => state.appointment.complaints.complaints
+    (state) => state.appointment.appointmentcomplaints
   );
   const onSubmit = (data) => {
     console.log(data);
@@ -103,7 +105,23 @@ export default function AppointmentAssessment(props) {
         getAppointmentFindings(id);
         dispatch({ type: "load_assessments", assessments: response });
       } else {
-        getAppointmentFindings(id);
+        //getAppointmentFindings(id);
+        dispatch({ type: "load_assessments", assessments: [] });
+      }
+    });
+    getAppointmentComplaints(id).then((response) => {
+      if (response.length === 0) {
+        console.log("There are no complaints yet!");
+        dispatch({ type: "load_complaints", complaints: [] });
+      } else {
+        //dispatch({ type: "load_complaints", complaints: response });
+        console.log(
+          "appointment has the following complaibts" + JSON.stringify(response)
+        );
+        dispatch({
+          type: "load_complaints",
+          complaints: response[0].appointment_complaints.complaints,
+        });
       }
     });
   }, [id]);

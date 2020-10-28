@@ -79,3 +79,39 @@ export const checkIfAppointmentHasForms = async () => {
     })
     .catch((error) => console.log(error));
 };
+export const getAppointmentComplaints = async (appointmentId) => {
+  const result = await axios(
+    `http://127.0.0.1:8000/api/appointments/${appointmentId}/complaints/`
+  );
+  console.log(result.data);
+  return result.data;
+};
+
+export const addNewAppointmentComplaint = async (appointmentId, complaint) => {
+  axios.post(`${API_URL}/appointments/${appointmentId}/complaints/`, {
+    appointment: appointmentId,
+    complaint_name: complaint.complaint_name,
+    complaint_description: complaint.complaint_description,
+    patient_belief_caused_by: complaint.patient_belief_caused_by,
+    patient_therapeutic_attempts: complaint.patient_therapeutic_attempts,
+    other_notes: complaint.other_notes,
+  });
+};
+
+export const createAppointmentComplaints = async (appointmentId) => {
+  axios.post(`${API_URL}/appointments/${appointmentId}/complaints/`, {
+    appointment: appointmentId,
+    appointment_complaints: { complaints: [] },
+  });
+};
+
+export const saveAppointmentComplaints = async (appointmentId, complaints) => {
+  const result = await axios.patch(
+    `${API_URL}/appointments/${appointmentId}/complaints/1/`,
+    {
+      appointment: appointmentId,
+      appointment_complaints: complaints,
+    }
+  );
+  return result.data;
+};

@@ -41,6 +41,38 @@ export const fetchFormFields = async (formId) => {
   return result.data;
 };
 
+export const updateFormProp = async (formId, formChanges) => {
+  const result = await axios.patch(`${API_URL}/forms/${formId}/`, formChanges);
+  return result;
+};
+
+export const createNewForm = async (formData) => {
+  const result = await axios.post("http://127.0.0.1:8000/api/forms/", {
+    form_type: formData.type,
+    title: formData.title,
+    form: { customformfields: [] },
+  });
+  return result;
+};
+
+/*
+axios.post('http://127.0.0.1:8000/api/forms/', {
+        form_type: formData.type,
+        title: formData.title,
+    }).then(response => {
+        if(response.statusText === "Created") {
+            const formId = response.data.id;
+            let newfields = formData.formfields.forEach((item) => item.form = formId)
+
+            axios.post(`http://127.0.0.1:8000/api/forms/${formId}/formfields/`, {
+                form_fields: newfields
+            })
+        }
+    }).catch(error => {
+        console.log(error);
+    });
+ */
+
 /*export const addFormFieldOption = async (formId, formFieldId, option) => {
     const result = await axios.post(`${API_URL}/forms/${formId}/formfields/${formFieldId}/options/`, {
         form_field: formFieldId,
@@ -111,35 +143,3 @@ export const fetchFormFields = async (formId) => {
     console.log(convertedoptions);
 
 }*/
-
-export const updateFormProp = async (formId, formChanges) => {
-  const result = await axios.patch(`${API_URL}/forms/${formId}/`, formChanges);
-  return result;
-};
-
-export const createNewForm = async (formData) => {
-  const result = await axios.post("http://127.0.0.1:8000/api/forms/", {
-    form_type: formData.type,
-    title: formData.title,
-    form: { customformfields: [] },
-  });
-  return result;
-};
-
-/*
-axios.post('http://127.0.0.1:8000/api/forms/', {
-        form_type: formData.type,
-        title: formData.title,
-    }).then(response => {
-        if(response.statusText === "Created") {
-            const formId = response.data.id;
-            let newfields = formData.formfields.forEach((item) => item.form = formId)
-
-            axios.post(`http://127.0.0.1:8000/api/forms/${formId}/formfields/`, {
-                form_fields: newfields
-            })
-        }
-    }).catch(error => {
-        console.log(error);
-    });
- */
