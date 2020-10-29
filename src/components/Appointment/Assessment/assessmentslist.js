@@ -58,8 +58,8 @@ export default function AssessmentsList(props) {
                       <TextField
                         disabled
                         inputRef={register()}
-                        defaultValue={assessment.icd_code}
-                        name={`appointmentassessments[${index}].icd_code`}
+                        defaultValue={assessment.icd10assessmentcode}
+                        name={`appointmentassessments[${index}].icd10assessmentcode`}
                       />
                     </Grid>
                     <Grid item>
@@ -70,9 +70,6 @@ export default function AssessmentsList(props) {
                         name={`appointmentassessments[${index}].icd_description`}
                       />
                     </Grid>
-                    <Typography>
-                      {assessment.icd_code}: {assessment.icd_description}
-                    </Typography>
                   </Grid>
                 </Grid>
                 <Grid item>

@@ -10,6 +10,7 @@ import {
 } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import NewAssessment from "./newassessment";
 import ICD10Search from "../../basestyledcomponents/ICD10Search/icd10search";
 import AssessmentsList from "./assessmentslist";
 import { Card } from "@material-ui/core";
@@ -20,7 +21,10 @@ import {
   getAppointmentAssessments,
   getAppointmentComplaints,
   createAppointmentComplaints,
+  getAppointmentBasicDetails,
 } from "../../../api/appointment.api";
+import NewComplaint from "../Complaints/NewComplaint/NewComplaint.FunComp";
+import { appointmentfindings } from "../../../store/reducers/appointment/appointment.reducers";
 
 const API_URL = "http://127.0.0.1:8000/api";
 
@@ -31,8 +35,14 @@ export default function AppointmentAssessment(props) {
   const assessments = useSelector(
     (state) => state.appointment.assessments.assessments
   );
+  const assessmentinputs = useSelector(
+    (state) => state.appointment.assessments.inputfields
+  );
   const complaints = useSelector(
     (state) => state.appointment.appointmentcomplaints
+  );
+  const findings = useSelector(
+    (state) => state.appointment.appointmentfindings
   );
   const onSubmit = (data) => {
     console.log(data);
@@ -43,6 +53,7 @@ export default function AppointmentAssessment(props) {
     handleSubmit,
     setValue,
     control,
+    watch,
     getValues,
   } = useForm({
     defaultValues: {
@@ -60,24 +71,12 @@ export default function AppointmentAssessment(props) {
   //const formProps = { register, errors, setValue, control, getValues };
 
   const handleAddAssessment = (assessment) => {
-    axios
-      .post(`${API_URL}/appointments/${id}/assessments/`, {
-        appointment: assessment.appointmentId,
-        icd_code: assessment.icd10assessmentcode,
-        icd_description: assessment.icd_description,
-      })
-      .then((response) => {
-        const fetchAssessments = async () => {
-          const result = await axios(
-            `${API_URL}/appointments/${id}/assessments/`
-          );
-          return result.data;
-        };
-        fetchAssessments().then((response) => {
-          console.log(response);
-          dispatch({ type: "load_assessments", assessments: response });
-        });
-      });
+    const newassessment = {
+      icd10assessmentcode: assessment[0],
+      icd_description: assessment[1],
+    };
+    console.log(newassessment);
+    append(newassessment);
   };
   const getAppointmentFindings = (id) => {
     getAppointmentForms(id).then((response) => {
@@ -100,13 +99,16 @@ export default function AppointmentAssessment(props) {
     });
   };
   useEffect(() => {
-    getAppointmentAssessments(id).then((response) => {
-      if (response.length > 0) {
+    getAppointmentBasicDetails(id).then((response) => {
+      if (response.appointment_assessment === null) {
         getAppointmentFindings(id);
-        dispatch({ type: "load_assessments", assessments: response });
-      } else {
-        //getAppointmentFindings(id);
         dispatch({ type: "load_assessments", assessments: [] });
+      } else {
+        getAppointmentFindings(id);
+        dispatch({
+          type: "load_assessments",
+          assessments: response.appointment_assessment.assessments,
+        });
       }
     });
     getAppointmentComplaints(id).then((response) => {
@@ -114,10 +116,6 @@ export default function AppointmentAssessment(props) {
         console.log("There are no complaints yet!");
         dispatch({ type: "load_complaints", complaints: [] });
       } else {
-        //dispatch({ type: "load_complaints", complaints: response });
-        console.log(
-          "appointment has the following complaibts" + JSON.stringify(response)
-        );
         dispatch({
           type: "load_complaints",
           complaints: response[0].appointment_complaints.complaints,
@@ -132,7 +130,7 @@ export default function AppointmentAssessment(props) {
         <Grid container>
           <Grid item xs={12}>
             <AssessmentsList
-              assessments={assessments}
+              assessments={fields}
               complaints={complaints}
               formProps={methods}
             />
@@ -140,13 +138,16 @@ export default function AppointmentAssessment(props) {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <ICD10Search
+                <NewAssessment
+                  control={methods.control}
                   register={methods.register}
-                  dispatch={dispatch}
-                  handleSelect={handleAddAssessment}
-                  id={id}
+                  setValue={methods.setValue}
+                  getValues={methods.getValues}
+                  addAssessment={handleAddAssessment}
+                  addComplaintToForm={() => console.log("add!")}
+                  complaints={complaints}
                 />
-                <Button>Add Assessment</Button>
+
                 <input type="submit" />
               </CardContent>
             </Card>
@@ -158,6 +159,49 @@ export default function AppointmentAssessment(props) {
 }
 
 /*
+<Button onClick={() => handleAddAssessment()}>ADD</Button>
+<ICD10Search
+                  register={methods.register}
+                  dispatch={dispatch}
+                  append={append}
+                  assessmentform={true}
+                  handleSelect={handleAddAssessment}
+                  id={id}
+                />
+  const handleAddAssessment = (assessment) => {
+    axios
+      .post(`${API_URL}/appointments/${id}/assessments/`, {
+        appointment: assessment.appointmentId,
+        icd_code: assessment.icd10assessmentcode,
+        icd_description: assessment.icd_description,
+      })
+      .then((response) => {
+        const fetchAssessments = async () => {
+          const result = await axios(
+            `${API_URL}/appointments/${id}/assessments/`
+          );
+          return result.data;
+        };
+        fetchAssessments().then((response) => {
+          console.log(response);
+          dispatch({ type: "load_assessments", assessments: response });
+        });
+      });
+  };
+
+getAppointmentAssessments(id).then((response) => {
+      if (response.appointment_assessment === null) {
+        //getAppointmentFindings(id);
+        dispatch({ type: "load_assessments", assessments: [] });
+        getAppointmentBasicDetails(id).then((response) => {
+          console.log("Assessments are " + JSON.stringify(response));
+        });
+      } else {
+        dispatch({ type: "load_assessments", assessments: response.appointment_assessment.assessments });
+        //getAppointmentFindings(id);
+        // dispatch({ type: "load_assessments", assessments: [] });
+      }
+    });
 <Card>
               <CardContent>
                 <AssessmentsList
