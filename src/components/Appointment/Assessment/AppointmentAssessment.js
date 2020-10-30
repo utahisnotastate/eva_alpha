@@ -22,6 +22,7 @@ import {
   getAppointmentComplaints,
   createAppointmentComplaints,
   getAppointmentBasicDetails,
+  saveAppointmentAssessments,
 } from "../../../api/appointment.api";
 import NewComplaint from "../Complaints/NewComplaint/NewComplaint.FunComp";
 import { appointmentfindings } from "../../../store/reducers/appointment/appointment.reducers";
@@ -45,7 +46,14 @@ export default function AppointmentAssessment(props) {
     (state) => state.appointment.appointmentfindings
   );
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.appointmentassessments);
+    saveAppointmentAssessments(id, data.appointmentassessments).then(
+      (response) => {
+        console.log(
+          "saved assessments resposne is " + JSON.stringify(response)
+        );
+      }
+    );
   };
   const {
     register,
@@ -74,9 +82,22 @@ export default function AppointmentAssessment(props) {
     const newassessment = {
       icd10assessmentcode: assessment[0],
       icd_description: assessment[1],
+      based_on: {
+        complaints: complaints,
+        findings: findings,
+      },
     };
     console.log(newassessment);
     append(newassessment);
+  };
+  const handleRemoveAssessment = (pos) => {
+    console.log(pos);
+    if (fields.length === 1) {
+      remove();
+    } else {
+      remove(pos);
+    }
+    //remove(pos);
   };
   const getAppointmentFindings = (id) => {
     getAppointmentForms(id).then((response) => {
@@ -91,7 +112,8 @@ export default function AppointmentAssessment(props) {
           appointmentfindings.push(checkedfield)
         );
       }
-      console.log("We got the findings!");
+      //console.log("We got the findings!");
+      //console.log(appointmentfindings);
       dispatch({
         type: "load_all_appointment_findings",
         findings: appointmentfindings,
@@ -104,11 +126,16 @@ export default function AppointmentAssessment(props) {
         getAppointmentFindings(id);
         dispatch({ type: "load_assessments", assessments: [] });
       } else {
+        console.log(
+          "assessments on server are " +
+            JSON.stringify(response.appointment_assessment.assessments)
+        );
         getAppointmentFindings(id);
         dispatch({
           type: "load_assessments",
           assessments: response.appointment_assessment.assessments,
         });
+        append(response.appointment_assessment.assessments);
       }
     });
     getAppointmentComplaints(id).then((response) => {
@@ -123,7 +150,8 @@ export default function AppointmentAssessment(props) {
       }
     });
   }, [id]);
-
+  console.log(complaints);
+  console.log(findings);
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -132,6 +160,7 @@ export default function AppointmentAssessment(props) {
             <AssessmentsList
               assessments={fields}
               complaints={complaints}
+              removeAssessment={handleRemoveAssessment}
               formProps={methods}
             />
           </Grid>

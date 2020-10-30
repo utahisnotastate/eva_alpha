@@ -126,3 +126,12 @@ export function reviewofsystemforms(state = [], action) {
       return state;
   }
 }
+
+export function appointmentplans(state = [], action) {
+  switch (action.type) {
+    case "load_plans":
+      return action.plan;
+    default:
+      return state;
+  }
+}

@@ -94,7 +94,6 @@ export default function NewAssessment(props) {
   const inputComplaintNameDescriptionProps = {
     placeholder: "Search Medical Conditions",
     value: complaint_name,
-    register: register,
     className: classes.searchinput,
     onChange: onComplaintNameChange,
   };

@@ -30,6 +30,7 @@ import {
   activeAppointmentFormDetails,
   activeAppointmentFormFields,
   appointmentfindings,
+  appointmentplans,
   masteractiveappointmentformfields,
   clinicalexamforms,
   reviewofsystemforms,
@@ -155,6 +156,7 @@ const appointment = combineReducers({
   appointmentforms,
   appointmentformfields,
   activeappointmentform,
+  appointmentplans,
   appointmentfindings,
 });
 const patient = combineReducers({

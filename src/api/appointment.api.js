@@ -45,10 +45,25 @@ export const updateAppointmentForm = async (appointmentId, form) => {
   );
   return result.data;
 };
-
-export const getAppointmentAssessments = async (appointmentId) => {
+// THIS GET APPOINTMENT ASSESSMENTS NO LONGER USED. USE GETAPPOINTMENTBASICDETAILS
+export const getAppointmentAssessments = async (appointmentId, assessments) => {
   const result = await axios(
     `${API_URL}/appointments/${appointmentId}/assessments/`
+  );
+  return result.data;
+};
+
+export const saveAppointmentAssessments = async (
+  appointmentId,
+  assessments
+) => {
+  const result = await axios.patch(
+    `${API_URL}/appointments/${appointmentId}/`,
+    {
+      appointment_assessment: {
+        assessments: assessments,
+      },
+    }
   );
   return result.data;
 };
