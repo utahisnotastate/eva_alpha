@@ -15,9 +15,21 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../../basestyledcomponents/Modal/modal";
 import AddNewMedicationForm from "../../../Forms/Clinical/Patient/addNewMedication";
 import NewMedication from "../../../basestyledcomponents/MedicationSearch/medicationsearch";
+import {
+  getPatientMedications,
+  addNewPatientMedication,
+  getPatientMedicationSummary,
+} from "../../../../api/patient.api";
+import MedicationSummary from "./medicationsummary";
+import MedicationPrescriptionHistory from "./medicationprescriptionhistory";
+import MedicationPrescriptionChanges from "./medicationchanges";
+import MedicationAuthorizations from "./medicationauthorizations";
+import MedicationDiagnoses from "./medicationdiagnoses";
 
 const useStyles = makeStyles(style);
 const API_URL = "http://127.0.0.1:8000/api";
+
+//https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?sf=RXCUIS&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS (+ "terms" parameter)
 
 function AddNewMedication(props) {
   return <Modal buttontext={`Add Medication`} form={AddNewMedicationForm} />;
@@ -27,7 +39,25 @@ export default function Medications(props) {
   const classes = useStyles();
   let { id } = useParams();
   const dispatch = useDispatch();
+
   const medications = useSelector((state) => state.patient.patientmedications);
+  const [activemedicationId, setActiveMedicationId] = useState("");
+  const [prescription, setPrescription] = useState("");
+  const [prescriptionlog, setPrescriptionLog] = useState([]);
+  const [authorizations, setAuthorizations] = useState([]);
+  const [prescriptionhistory, setPrescriptionHistory] = useState([]);
+  const [changes, setChanges] = useState([]);
+
+  const loadMedicationDetails = (medicationId) => {
+    console.log("load details for " + medicationId);
+    getPatientMedicationSummary(id, medicationId).then((response) => {
+      console.log("Summary response is " + JSON.stringify(response));
+      setPrescription(response);
+      setActiveMedicationId(medicationId);
+    });
+    //setActiveMedicationId(medicationId);
+  };
+
   const [options, setOptions] = useState({
     searchOpen: false,
     serverSide: false,
@@ -41,19 +71,11 @@ export default function Medications(props) {
     print: false,
     filter: false,
     download: false,
-    customToolbar: AddNewMedication,
+    //customToolbar: AddNewMedication,
     selectableRows: "none",
     viewColumns: false,
   });
   const columns = [
-    {
-      name: "prescribed_by",
-      label: "Prescribed by",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
     {
       name: "name",
       label: "Medication",
@@ -63,27 +85,59 @@ export default function Medications(props) {
       },
     },
     {
-      name: "dosage",
+      name: "strength",
       label: "Dosage",
     },
     {
       name: "frequency",
       label: "Frequency",
     },
+    {
+      name: "prescribed_by",
+      label: "Prescribed by",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: "id",
+      label: "View Details",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => loadMedicationDetails(value)}
+            >
+              View Details for {value}
+            </Button>
+          </div>
+        ),
+      },
+    },
   ];
+
   const addMedication = (medication) => {
     console.log(medication);
+    addNewPatientMedication(id, medication).then((response) => {
+      console.log(
+        "new medication creation response is " + JSON.stringify(response)
+      );
+      getPatientMedications(id).then((response) => {
+        dispatch({ type: "load_all_medications", medications: response });
+      });
+    });
   };
   useEffect(() => {
-    async function getPatientMedications() {
-      const result = await axios(`${API_URL}/patients/${id}/medications/`);
-      console.log(result.data);
-      return result.data;
-    }
-    getPatientMedications().then((response) => {
+    getPatientMedications(id).then((response) => {
+      console.log(
+        "patient medications response is " + JSON.stringify(response)
+      );
       dispatch({ type: "load_all_medications", medications: response });
     });
-  }, []);
+  }, [id]);
 
   return (
     <GridContainer justify="center">
@@ -97,6 +151,38 @@ export default function Medications(props) {
           columns={columns}
           options={options}
         />
+      </GridItem>
+      <GridItem xs={12} sm={10}>
+        {activemedicationId === "" ? null : (
+          <CustomTabs
+            headerColor={`primary`}
+            title={`${prescription.name}`}
+            tabs={[
+              {
+                tabName: "Summary",
+                tabContent: <MedicationSummary summary={prescription} />,
+              },
+              {
+                tabName: "Log",
+                tabContent: (
+                  <MedicationPrescriptionHistory prescription={prescription} />
+                ),
+              },
+              {
+                tabName: "Changes",
+                tabContent: <MedicationPrescriptionChanges />,
+              },
+              {
+                tabName: "Authorizations",
+                tabContent: <MedicationAuthorizations />,
+              },
+              {
+                tabName: "Diagnoses",
+                tabContent: <MedicationDiagnoses />,
+              },
+            ]}
+          />
+        )}
       </GridItem>
     </GridContainer>
   );

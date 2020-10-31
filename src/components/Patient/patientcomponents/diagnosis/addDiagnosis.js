@@ -80,6 +80,7 @@ export default function NewDiagnosis(props) {
         "After diagnosis creation response is " + JSON.stringify(response)
       );
       setComplaintName("");
+      props.loadDiagnoses();
     });
 
     /*props.append({

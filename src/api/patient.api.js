@@ -18,6 +18,11 @@ export const addNewPatientDiagnosis = async (patientId, diagnosis) => {
   return result.data;
 };
 
+export const getPatientMedications = async (patientId) => {
+  const result = await axios(`${API_URL}/patients/${patientId}/medications/`);
+  return result.data;
+};
+
 export const addNewPatientMedication = async (patientId, medication) => {
   const result = await axios.post(
     `${API_URL}/patients/${patientId}/medications/`,
@@ -25,10 +30,68 @@ export const addNewPatientMedication = async (patientId, medication) => {
       patient: patientId,
       name: medication.name,
       active: true,
+      medication_diagnoses: [],
       strength: medication.dosage,
       frequency: medication.frequency,
     }
   );
+  return result.data;
+};
+
+export const getMedicationPrescriptionHistory = async (
+  patientId,
+  medicationId
+) => {
+  const result = await axios(
+    `${API_URL}/patients/${patientId}/medications/${medicationId}/`
+  );
+  return result.data;
+};
+
+export const addNewMedicationPrescription = async (patientId, medication) => {
+  const result = await axios.post(
+    `${API_URL}/patients/${patientId}/medications/${medication.medicationId}/prescriptions/`,
+    {
+      strength: medication.strength,
+      frequency: medication.frequency,
+      name: medication.name,
+      medication: medication.medicationId,
+      type: "No Change",
+      refills: medication.refills,
+      provider: 1,
+    }
+  );
+  return result.data;
+};
+
+export const stopPrescribingMedication = async (
+  patientId,
+  medicationId,
+  medication
+) => {
+  const result = await axios.patch(
+    `${API_URL}/patients/${patientId}/basicmedications/${medicationId}/`,
+    {
+      name: medication.name,
+      active: false,
+      reason_stopped: medication.reason_stopped,
+    }
+  );
+  return result.data;
+};
+
+export const getMedicationClinicalDetails = async (name) => {
+  const result = await axios(
+    `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?sf=DISPLAY_NAME,STRENGTHS_AND_FORMS&df=DISPLAY_NAME,STRENGTHS_AND_FORMS&terms=${name}`
+  );
+  return result.data;
+};
+
+export const getPatientMedicationSummary = async (patientId, medicationId) => {
+  const result = await axios(
+    `${API_URL}/patients/${patientId}/medications/${medicationId}/`
+  );
+  return result.data;
 };
 export const getPatientLatexAllergies = async (patientId) => {
   const result = await axios(`${API_URL}/patients/${patientId}/latexallergy/`);

@@ -14,6 +14,7 @@ import { getPatientDiagnoses } from "../../../../api/patient.api";
 import { useSelector, useDispatch } from "react-redux";
 import { patientdiagnoses } from "../../../../store/reducers/patient/patient.reducers";
 import NewDiagnosis from "./addDiagnosis";
+import ResolvedDiagnoses from "./ResolvedDiagnoses";
 
 const useStyles = makeStyles(style);
 
@@ -52,17 +53,17 @@ export default function Diagnosis(props) {
     });
   }, [id]);
   return (
-    <GridContainer justify="center">
+    <GridContainer direction="column" justify="center">
       <GridItem xs={12} sm={10}>
-        <NewDiagnosis patientId={id} />
+        <NewDiagnosis patientId={id} loadDiagnoses={loadDiagnoses} />
       </GridItem>
 
       {diagnoses.length > 0 ? (
         diagnoses.map((diagnosis) => (
           <GridItem xs={12} sm={10}>
+            <Typography>{`${diagnosis.diagnosis_icd_code} ${diagnosis.diagnosis_description}`}</Typography>
             <CustomTabs
               headerColor="primary"
-              title={`${diagnosis.diagnosis_icd_code} ${diagnosis.diagnosis_description}`}
               tabs={[
                 {
                   tabName: "Summary",
@@ -70,7 +71,7 @@ export default function Diagnosis(props) {
                   tabContent: <DiagnosisSummary />,
                 },
                 {
-                  tabName: "Medication History",
+                  tabName: "Medications",
                   tabIcon: Person,
                   tabContent: (
                     <Table
@@ -270,6 +271,9 @@ export default function Diagnosis(props) {
           No diagnoses has been listed for the patient. Please enter any.
         </Typography>
       )}
+      <GridItem>
+        <ResolvedDiagnoses />
+      </GridItem>
     </GridContainer>
   );
 }

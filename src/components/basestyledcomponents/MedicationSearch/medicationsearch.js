@@ -146,7 +146,9 @@ export default function NewMedication(props) {
       spacing={2}
     >
       <Grid item>
-        <Typography>Search Medications</Typography>
+        <Typography>
+          {props.label ? props.label : "Add New Medication"}
+        </Typography>
       </Grid>
       <Grid item>
         <Autosuggest
@@ -174,19 +176,23 @@ export default function NewMedication(props) {
       </Grid>
       <Grid item>
         {dosage === "" || frequency === "" ? null : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() =>
-              addMedicationHandler({
-                name: complaint_name,
-                dosage: dosage,
-                frequency: frequency,
-              })
-            }
-          >
-            Add Medication
-          </Button>
+          <Grid container direction="row">
+            <Grid item>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() =>
+                  addMedicationHandler({
+                    name: complaint_name,
+                    dosage: dosage,
+                    frequency: frequency,
+                  })
+                }
+              >
+                Add Medication
+              </Button>
+            </Grid>
+          </Grid>
         )}
       </Grid>
     </Grid>
