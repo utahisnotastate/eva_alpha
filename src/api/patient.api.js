@@ -1,6 +1,35 @@
 import axios from "axios";
 import API_URL from "./api_url";
 
+export const getPatientDiagnoses = async (patientId) => {
+  const result = await axios(`${API_URL}/patients/${patientId}/diagnoses/`);
+  return result.data;
+};
+
+export const addNewPatientDiagnosis = async (patientId, diagnosis) => {
+  const result = await axios.post(
+    `${API_URL}/patients/${patientId}/diagnoses/`,
+    {
+      patient: patientId,
+      diagnosis_icd_code: diagnosis.icd_code,
+      diagnosis_description: diagnosis.icd_description,
+    }
+  );
+  return result.data;
+};
+
+export const addNewPatientMedication = async (patientId, medication) => {
+  const result = await axios.post(
+    `${API_URL}/patients/${patientId}/medications/`,
+    {
+      patient: patientId,
+      name: medication.name,
+      active: true,
+      strength: medication.dosage,
+      frequency: medication.frequency,
+    }
+  );
+};
 export const getPatientLatexAllergies = async (patientId) => {
   const result = await axios(`${API_URL}/patients/${patientId}/latexallergy/`);
   return result.data;
