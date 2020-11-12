@@ -3,10 +3,13 @@ import { Grid, Typography, Checkbox, TextField } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import Button from "../../../basestyledcomponents/Table/Button";
 
-export default function ResolvedDiagnoses(props) {
+export default function DiagnosisRadiology(props) {
   const columns = [
-    { label: "ICD Code", name: "diagnosis_icd_code" },
-    { label: "ICD Description", name: "diagnosis_description" },
+    { label: "Test Description", name: "diagnosis_icd_code" },
+    { label: "Date Ordered", name: "diagnosis_description" },
+    { label: "Completed", name: "strength" },
+    { label: "Results", name: "frequency" },
+    { label: "Reviewed By Provider?", name: "frequency" },
     {
       name: "id",
       label: "Reactivate Diagnoses",
@@ -32,13 +35,13 @@ export default function ResolvedDiagnoses(props) {
     ["Bob Herm", "Test Corp", "Tampa", "FL"],
     ["James Houston", "Test orp", "Dallas", "TX"],
   ];
-
+  useEffect(() => {}, [props.medications]);
   return (
     <Grid container direction="column">
       <Grid item>
         <MUIDataTable
           title={"Resolved Diagnoses"}
-          data={props.resolveddiagnoses}
+          data={data}
           columns={columns}
         />
       </Grid>

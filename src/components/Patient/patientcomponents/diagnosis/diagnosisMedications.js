@@ -1,3 +1,4 @@
+//IGNORE THIS FILE
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -9,7 +10,7 @@ export default function DiagnosisSummary(props) {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography>Diagnosis</Typography>
+        <Typography>Medications</Typography>
       </Grid>
       <Grid item xs={12}>
         <List component="div" disablePadding>
@@ -17,15 +18,7 @@ export default function DiagnosisSummary(props) {
           <ListItem>Medication Name</ListItem>
         </List>
       </Grid>
-      <Grid item xs={12}>
-        <Button
-          onClick={() =>
-            props.setDiagnosisStatus(props.diagnosisId, "resolved")
-          }
-        >
-          Mark Resolved
-        </Button>
-      </Grid>
+      <Grid item xs={12}></Grid>
     </Grid>
   );
 }

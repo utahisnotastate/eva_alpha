@@ -114,85 +114,12 @@ export default function Allergies(props) {
       .catch((error) => console.log(error));
   }, [id]);
   return (
-    <div style={{ margin: 20 }}>
-      <Grid container className={classes.root} alignItems="flex-start">
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Drug Allergies
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <MUIDataTable
-              data={drugallergies}
-              options={options}
-              columns={drugallergycolumns}
-            />
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Food Allergies
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square></Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Insect Allergies
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square></Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Latex Allergy
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <PresentUnpresentAllergy allergy={`Latex`} status={latexstatus} />
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Pet Allergies
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square></Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <AssignmentIcon />
-            <Typography className={classes.areatitletext} variant="subtitle2">
-              Pollen Allergy
-            </Typography>
-          </Paper>
-        </div>
-        <div>
-          <Paper className={classes.areaicon} square>
-            <PresentUnpresentAllergy allergy={`Pollen`} status={pollenstatus} />
-          </Paper>
-        </div>
-      </Grid>
+    <div style={{ margin: "20px" }}>
+      <MUIDataTable
+        title={`Allergies`}
+        data={[["1", "2", "3", "4", "5"]]}
+        columns={[{ label: "Allergy" }, { label: "Description" }]}
+      />
     </div>
   );
 }

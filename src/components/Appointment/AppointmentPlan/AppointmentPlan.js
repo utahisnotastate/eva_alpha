@@ -6,7 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Typography } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
-import { getAppointmentBasicDetails } from "../../../api/appointment.api";
+import {
+  getAppointmentBasicDetails,
+  saveAppointmentPlan,
+} from "../../../api/appointment.api";
+import DiagnosisPlan from "./diagnosisplan";
 import {
   useForm,
   FormProvider,
@@ -20,6 +24,12 @@ const useStyles = makeStyles({
     borderColor: "black",
     padding: "10px",
     // backgroundColor: 'lightgrey'
+  },
+  plancard: {
+    padding: "20px",
+  },
+  plancontentcontainer: {
+    margin: "20px",
   },
   addfieldcontainer: {
     backgroundColor: "white",
@@ -38,6 +48,7 @@ const useStyles = makeStyles({
 });
 
 export default function AppointmentPlan() {
+  const classes = useStyles();
   let { id } = useParams();
   const dispatch = useDispatch();
   const plans = useSelector((state) => state.appointment.appointmentplans);
@@ -55,9 +66,16 @@ export default function AppointmentPlan() {
     }
   );
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.plans);
+    saveAppointmentPlan(id, data.plans)
+      .then((response) => {
+        console.log("Plan saved!");
+        loadAppointmentPlan();
+      })
+      .catch((err) => console.log(err));
   };
-  useEffect(() => {
+
+  const loadAppointmentPlan = () => {
     getAppointmentBasicDetails(id).then((response) => {
       console.log("plan response is " + JSON.stringify(response));
       if (response.appointment_plan === null) {
@@ -69,10 +87,14 @@ export default function AppointmentPlan() {
         append(response.appointment_assessment.assessments);
       } else {
         console.log("There are plans!");
-        dispatch({ type: "load_plans", plan: response.appointment_plan.plans });
-        append(response.appointment_plan.plans);
+        dispatch({ type: "load_plans", plan: response.appointment_plan.plan });
+        append(response.appointment_plan.plan);
       }
     });
+  };
+
+  useEffect(() => {
+    loadAppointmentPlan();
   }, [id]);
   return (
     <FormProvider {...methods}>
@@ -90,10 +112,49 @@ export default function AppointmentPlan() {
           {fields.length > 0
             ? fields.map((field, index) => (
                 <Grid item key={field.id}>
-                  <Card raised>
-                    <Grid container direction={`column`}>
-                      <Grid item>
-                        <Grid container direction={`row`}>
+                  <DiagnosisPlan field={field} index={index} />
+                </Grid>
+              ))
+            : null}
+        </Grid>
+        <input type="submit" />
+      </form>
+    </FormProvider>
+  );
+}
+
+/*
+
+  useEffect(() => {
+    getAppointmentBasicDetails(id).then((response) => {
+      console.log("plan response is " + JSON.stringify(response));
+      if (response.appointment_plan === null) {
+        console.log("No plans!");
+        dispatch({
+          type: "load_plans",
+          plan: response.appointment_assessment.assessments,
+        });
+        append(response.appointment_assessment.assessments);
+      } else {
+        console.log("There are plans!");
+        dispatch({ type: "load_plans", plan: response.appointment_plan.plans });
+        append(response.appointment_plan.plans);
+      }
+    });
+  }, [id]);
+
+<Card raised>
+                    <Grid
+                      className={classes.plancard}
+                      container
+                      direction={`column`}
+                    >
+                      <Grid item className={classes.plancontentcontainer}>
+                        <Grid
+                          container
+                          direction={`row`}
+                          style={{ color: "#000" }}
+                        >
                           <Grid item>
                             <TextField
                               inputRef={methods.register()}
@@ -102,49 +163,36 @@ export default function AppointmentPlan() {
                               name={`plans[${index}].icd10assessmentcode`}
                             />
                           </Grid>
-                          <Grid item>
+                          <Grid item style={{ flexGrow: 1 }}>
                             <TextField
                               inputRef={methods.register()}
                               defaultValue={field.icd_description}
                               disabled
+                              fullWidth
                               name={`plans[${index}].icd_description`}
                             />
                           </Grid>
                         </Grid>
                       </Grid>
-                      <Grid item>
-                        <Grid container direction={`row`}>
-                          <Grid item>
-                            <Typography>
-                              Requires follow up appointment
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Typography>Follow up options</Typography>
-                          </Grid>
-                        </Grid>
+                      <Grid item className={classes.plancontentcontainer}>
+                        <TextField
+                          inputRef={methods.register()}
+                          defaultValue={field.plan}
+                          multiline
+                          fullWidth
+                          variant={`outlined`}
+                          rows={5}
+                          placeholder={`Enter treatment plan for ${field.icd10assessmentcode} - ${field.icd_description} here`}
+                          name={`plans[${index}].plan`}
+                        />
                       </Grid>
-                      <Grid item>
-                        <Typography>
-                          Requires medication prescription
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography>Requires specialist referral</Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography>Requires radiology</Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography>Requires labs</Typography>
+                      <Grid item className={classes.plancontentcontainer}>
+                        <Typography>Order Radiology</Typography>
+                        <Typography>Setup Referral</Typography>
+                        <Typography>Prescribe Medication</Typography>
+                        <Typography>Order Labs</Typography>
+                        <Typography>Schedule follow up appointment</Typography>
                       </Grid>
                     </Grid>
                   </Card>
-                </Grid>
-              ))
-            : null}
-        </Grid>
-      </form>
-    </FormProvider>
-  );
-}
+ */

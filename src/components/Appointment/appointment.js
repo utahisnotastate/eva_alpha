@@ -152,13 +152,6 @@ export default function Appointment() {
       component: AppointmentPlan,
     },
     {
-      path: "/followup",
-      label: "Follow Up",
-      nestedroutes: false,
-      subroutes: [],
-      component: AppointmentFollowUp,
-    },
-    {
       path: "/summary",
       label: "Summary",
       nestedroutes: false,
@@ -411,6 +404,13 @@ export default function Appointment() {
 }
 
 /*
+    {
+      path: "/followup",
+      label: "Follow Up",
+      nestedroutes: false,
+      subroutes: [],
+      component: AppointmentFollowUp,
+    },
         setPollenStatus(pollenallergies);
         setPetStatus(petallergies);
         setDrugStatus(drugallergies);

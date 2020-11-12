@@ -6,6 +6,37 @@ export const getPatientDiagnoses = async (patientId) => {
   return result.data;
 };
 
+export const getPatientInsurance = async (patientId) => {
+  const result = await axios.get(`${API_URL}/patients/${patientId}/insurance/`);
+  return result.data;
+};
+
+export const setPatientDiagnosisStatus = async (
+  patientId,
+  diagnosisId,
+  newstatus
+) => {
+  const result = await axios.patch(
+    `${API_URL}/patients/${patientId}/diagnoses/${diagnosisId}/`,
+    {
+      status: newstatus,
+      patient: patientId,
+    }
+  );
+  return result.data;
+};
+
+export const setPatientDiagnosisActive = async (patientId, diagnosisId) => {
+  const result = await axios.patch(
+    `${API_URL}/patients/${patientId}/diagnoses/${diagnosisId}/`,
+    {
+      status: "active",
+      patient: patientId,
+    }
+  );
+  return result.data;
+};
+
 export const addNewPatientDiagnosis = async (patientId, diagnosis) => {
   const result = await axios.post(
     `${API_URL}/patients/${patientId}/diagnoses/`,
@@ -34,6 +65,30 @@ export const addNewPatientMedication = async (patientId, medication) => {
       strength: medication.dosage,
       frequency: medication.frequency,
     }
+  );
+  return result.data;
+};
+
+export const changeMedicationStatus = async (
+  patientId,
+  medicationId,
+  status
+) => {
+  const result = await axios.patch(
+    `${API_URL}/patients/${patientId}/medications/${medicationId}/`,
+    { active: status }
+  );
+  return result.data;
+};
+
+export const addNewMedicationAuthorization = async (
+  patientId,
+  medicationId,
+  authorization
+) => {
+  const result = await axios.post(
+    `${API_URL}/patients/${patientId}/medications/${medicationId}/authorizations/`,
+    authorization
   );
   return result.data;
 };

@@ -31,15 +31,17 @@ function renderSuggestion(suggestion) {
 
 const useStyles = makeStyles((theme) => ({
   searchcontainer: {
-    backgroundColor: "#fff",
-    width: "100%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
     margin: "10px",
+  },
+  searchlabel: {
+    color: theme.palette.primary.main,
   },
   searchinput: {
     padding: "15px",
     width: "100%",
-    zIndex: "2",
+    zIndex: 900,
+    opacity: 0.99,
   },
 }));
 
@@ -141,12 +143,10 @@ export default function NewMedication(props) {
       container
       className={classes.searchcontainer}
       direction="row"
-      alignItems={`center`}
-      justify={`space-around`}
       spacing={2}
     >
       <Grid item>
-        <Typography>
+        <Typography variant={`h6`} color={`primary`}>
           {props.label ? props.label : "Add New Medication"}
         </Typography>
       </Grid>

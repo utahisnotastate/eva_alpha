@@ -1,5 +1,8 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-
+//#7d7d7d
+//default: "#fafafa",
+//  paper: "#fff",
+//
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -17,7 +20,7 @@ const theme = createMuiTheme({
     },
 
     background: {
-      default: "#fafafa",
+      default: "#ededed",
       paper: "#fff",
     },
     divider: "rgba(0, 0, 0, 0.12)",

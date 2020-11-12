@@ -130,3 +130,35 @@ export const saveAppointmentComplaints = async (appointmentId, complaints) => {
   );
   return result.data;
 };
+
+export const saveAppointmentPlan = async (appointmentId, plan) => {
+  const result = await axios.patch(
+    `${API_URL}/appointments/${appointmentId}/`,
+    {
+      appointment: appointmentId,
+      appointment_plan: { plan: plan },
+    }
+  );
+  return result.data;
+};
+
+export const getAppointmentFindings = (id) => {
+  getAppointmentForms(id).then((response) => {
+    //console.log(response);
+    let appointmentfindings = [];
+    for (let appointmentform of response) {
+      //console.log(appointmentform.form.customformfields);
+      let checkedfields = appointmentform.form.customformfields.filter(
+        (field) => field.checked === true
+      );
+      checkedfields.forEach((checkedfield) =>
+        appointmentfindings.push(checkedfield)
+      );
+    }
+    //console.log("We got the findings!");
+    //console.log(appointmentfindings);
+    return appointmentfindings;
+  });
+};
+
+export const getAppointmentSummary = async (appointmentId) => {};

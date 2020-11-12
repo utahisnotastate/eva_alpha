@@ -15,6 +15,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { patientdiagnoses } from "../../../../store/reducers/patient/patient.reducers";
 import NewDiagnosis from "./addDiagnosis";
 import ResolvedDiagnoses from "./ResolvedDiagnoses";
+import DiagnosisMedications from "./diagnosismedications";
+import DiagnosisRadiology from "./diagnosisRadiology";
+import DiagnosisLabs from "./diagnosisLabs";
+import DiagnosisReferrals from "./diagnosisReferrals";
+import {
+  setPatientDiagnosisActive,
+  setPatientDiagnosisStatus,
+} from "../../../../api/patient.api";
 
 const useStyles = makeStyles(style);
 
@@ -23,6 +31,13 @@ export default function Diagnosis(props) {
   let { id } = useParams();
   const dispatch = useDispatch();
   const diagnoses = useSelector((state) => state.patient.patientdiagnoses);
+  const activediagnoses = diagnoses.filter(
+    (diagnosis) => diagnosis.status !== "resolved"
+  );
+  const resolveddiagnoses = diagnoses.filter(
+    (diagnosis) =>
+      diagnosis.status === "inactive" || diagnosis.status === "resolved"
+  );
   //const [diagnoses, setDiagnoses] = useState(["Flu", "Asthma"]);
   const columnheaders = [
     "Type",
@@ -45,6 +60,23 @@ export default function Diagnosis(props) {
       dispatch({ type: "load_all_diagnoses", diagnoses: response });
     });
   };
+  const setDiagnosisActive = (diagnosisId) => {
+    setPatientDiagnosisActive(id, diagnosisId).then((response) => {
+      console.log(
+        "Response after diagnosis set active is " + JSON.stringify(response)
+      );
+      loadDiagnoses();
+    });
+  };
+
+  const setDiagnosisStatus = (diagnosisId, status) => {
+    setPatientDiagnosisStatus(id, diagnosisId, status).then((response) => {
+      console.log(
+        "response after diagnosis status changed " + JSON.stringify(response)
+      );
+      loadDiagnoses();
+    });
+  };
 
   useEffect(() => {
     getPatientDiagnoses(id).then((response) => {
@@ -58,8 +90,8 @@ export default function Diagnosis(props) {
         <NewDiagnosis patientId={id} loadDiagnoses={loadDiagnoses} />
       </GridItem>
 
-      {diagnoses.length > 0 ? (
-        diagnoses.map((diagnosis) => (
+      {activediagnoses.length > 0 ? (
+        activediagnoses.map((diagnosis) => (
           <GridItem xs={12} sm={10}>
             <Typography>{`${diagnosis.diagnosis_icd_code} ${diagnosis.diagnosis_description}`}</Typography>
             <CustomTabs
@@ -68,199 +100,32 @@ export default function Diagnosis(props) {
                 {
                   tabName: "Summary",
                   tabIcon: Person,
-                  tabContent: <DiagnosisSummary />,
+                  tabContent: (
+                    <DiagnosisSummary
+                      diagnosisId={diagnosis.id}
+                      setDiagnosisStatus={setDiagnosisStatus}
+                    />
+                  ),
                 },
                 {
                   tabName: "Medications",
                   tabIcon: Person,
-                  tabContent: (
-                    <Table
-                      tableHeaderColor="primary"
-                      tableHead={columnheaders}
-                      tableData={[
-                        [
-                          "1",
-                          "Andrew Mike",
-                          "Develop",
-                          "2013",
-                          "€ 99,225",
-                          fillButtons,
-                        ],
-                        [
-                          "2",
-                          "Utah Doe",
-                          "Design",
-                          "2012",
-                          "€ 89,241",
-                          fillButtons,
-                        ],
-                        [
-                          "3",
-                          "Alex Mike",
-                          "Design",
-                          "2010",
-                          "€ 92,144",
-                          fillButtons,
-                        ],
-                      ]}
-                      customCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customClassesForCells={[0, 4, 5]}
-                      customHeadCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customHeadClassesForCells={[0, 4, 5]}
-                    />
-                  ),
+                  tabContent: <DiagnosisMedications />,
                 },
                 {
                   tabName: "Radiology History",
                   tabIcon: Person,
-                  tabContent: (
-                    <Table
-                      tableHeaderColor="primary"
-                      tableHead={columnheaders}
-                      tableData={[
-                        [
-                          "1",
-                          "Andrew Mike",
-                          "Develop",
-                          "2013",
-                          "€ 99,225",
-                          fillButtons,
-                        ],
-                        [
-                          "2",
-                          "Utah Doe",
-                          "Design",
-                          "2012",
-                          "€ 89,241",
-                          fillButtons,
-                        ],
-                        [
-                          "3",
-                          "Alex Mike",
-                          "Design",
-                          "2010",
-                          "€ 92,144",
-                          fillButtons,
-                        ],
-                      ]}
-                      customCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customClassesForCells={[0, 4, 5]}
-                      customHeadCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customHeadClassesForCells={[0, 4, 5]}
-                    />
-                  ),
+                  tabContent: <DiagnosisRadiology />,
                 },
                 {
                   tabName: "Lab History",
                   tabIcon: Person,
-                  tabContent: (
-                    <Table
-                      tableHeaderColor="primary"
-                      tableHead={columnheaders}
-                      tableData={[
-                        [
-                          "1",
-                          "Andrew Mike",
-                          "Develop",
-                          "2013",
-                          "€ 99,225",
-                          fillButtons,
-                        ],
-                        [
-                          "2",
-                          "Utah Doe",
-                          "Design",
-                          "2012",
-                          "€ 89,241",
-                          fillButtons,
-                        ],
-                        [
-                          "3",
-                          "Alex Mike",
-                          "Design",
-                          "2010",
-                          "€ 92,144",
-                          fillButtons,
-                        ],
-                      ]}
-                      customCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customClassesForCells={[0, 4, 5]}
-                      customHeadCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customHeadClassesForCells={[0, 4, 5]}
-                    />
-                  ),
+                  tabContent: <DiagnosisLabs />,
                 },
                 {
                   tabName: "Referral History",
                   tabIcon: Person,
-                  tabContent: (
-                    <Table
-                      tableHeaderColor="primary"
-                      tableHead={columnheaders}
-                      tableData={[
-                        [
-                          "1",
-                          "Andrew Mike",
-                          "Develop",
-                          "2013",
-                          "€ 99,225",
-                          fillButtons,
-                        ],
-                        [
-                          "2",
-                          "Utah Doe",
-                          "Design",
-                          "2012",
-                          "€ 89,241",
-                          fillButtons,
-                        ],
-                        [
-                          "3",
-                          "Alex Mike",
-                          "Design",
-                          "2010",
-                          "€ 92,144",
-                          fillButtons,
-                        ],
-                      ]}
-                      customCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customClassesForCells={[0, 4, 5]}
-                      customHeadCellClasses={[
-                        classes.textCenter,
-                        classes.textRight,
-                        classes.textRight,
-                      ]}
-                      customHeadClassesForCells={[0, 4, 5]}
-                    />
-                  ),
+                  tabContent: <DiagnosisReferrals />,
                 },
               ]}
             />
@@ -271,8 +136,11 @@ export default function Diagnosis(props) {
           No diagnoses has been listed for the patient. Please enter any.
         </Typography>
       )}
-      <GridItem>
-        <ResolvedDiagnoses />
+      <GridItem xs={12} sm={10}>
+        <ResolvedDiagnoses
+          resolveddiagnoses={resolveddiagnoses}
+          setDiagnosisActive={setDiagnosisActive}
+        />
       </GridItem>
     </GridContainer>
   );

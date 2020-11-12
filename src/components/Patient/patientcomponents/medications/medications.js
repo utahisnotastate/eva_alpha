@@ -25,8 +25,12 @@ import MedicationPrescriptionHistory from "./medicationprescriptionhistory";
 import MedicationPrescriptionChanges from "./medicationchanges";
 import MedicationAuthorizations from "./medicationauthorizations";
 import MedicationDiagnoses from "./medicationdiagnoses";
+import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import CancelIcon from "@material-ui/icons/Cancel";
 
-const useStyles = makeStyles(style);
+const useStyles = makeStyles((theme) => ({
+  addmedicationcontainer: {},
+}));
 const API_URL = "http://127.0.0.1:8000/api";
 
 //https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?sf=RXCUIS&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS (+ "terms" parameter)
@@ -66,7 +70,7 @@ export default function Medications(props) {
         noMatch: "SORRY NO MATCHES FOUND",
       },
     },
-    elevation: 2,
+    elevation: 0,
     searchPlaceholder: "Search by medication name",
     print: false,
     filter: false,
@@ -76,6 +80,17 @@ export default function Medications(props) {
     viewColumns: false,
   });
   const columns = [
+    {
+      name: "active",
+      label: "Currently Taking",
+      options: {
+        filter: true,
+        sort: true,
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <div>{value ? <DoneOutlineIcon /> : <CancelIcon />}</div>
+        ),
+      },
+    },
     {
       name: "name",
       label: "Medication",
@@ -92,6 +107,7 @@ export default function Medications(props) {
       name: "frequency",
       label: "Frequency",
     },
+
     {
       name: "prescribed_by",
       label: "Prescribed by",
@@ -140,8 +156,8 @@ export default function Medications(props) {
   }, [id]);
 
   return (
-    <GridContainer justify="center">
-      <GridItem xs={12}>
+    <GridContainer direction={`column`} justify="center">
+      <GridItem xs={12} sm={10}>
         <NewMedication addMedication={addMedication} />
       </GridItem>
       <GridItem xs={12} sm={10}>
@@ -160,25 +176,27 @@ export default function Medications(props) {
             tabs={[
               {
                 tabName: "Summary",
-                tabContent: <MedicationSummary summary={prescription} />,
-              },
-              {
-                tabName: "Log",
                 tabContent: (
-                  <MedicationPrescriptionHistory prescription={prescription} />
+                  <MedicationSummary patient={id} summary={prescription} />
                 ),
               },
               {
-                tabName: "Changes",
-                tabContent: <MedicationPrescriptionChanges />,
+                tabName: "Prescription Log",
+                tabContent: (
+                  <MedicationPrescriptionHistory
+                    patient={id}
+                    prescription={prescription}
+                  />
+                ),
               },
               {
                 tabName: "Authorizations",
-                tabContent: <MedicationAuthorizations />,
-              },
-              {
-                tabName: "Diagnoses",
-                tabContent: <MedicationDiagnoses />,
+                tabContent: (
+                  <MedicationAuthorizations
+                    patient={id}
+                    prescription={prescription}
+                  />
+                ),
               },
             ]}
           />
@@ -187,3 +205,15 @@ export default function Medications(props) {
     </GridContainer>
   );
 }
+
+/*
+              {
+                tabName: "Changes",
+                tabContent: <MedicationPrescriptionChanges />,
+              },
+
+                            {
+                tabName: "Diagnoses",
+                tabContent: <MedicationDiagnoses />,
+              },
+ */
