@@ -105,6 +105,19 @@ export default function Appointment() {
     color: "white",
     width: "100%",
   };
+  /*{
+    //path: '/appointmentros/',
+    path: "/appointmentforms/",
+        label: "Review of Systems Forms",
+      nestedroutes: true,
+      menuopen: rosopen,
+      openNestedMenu() {
+    setROSOpen(!rosopen);
+  },
+    subroutes: reviewofsystemsforms,
+        component: AppointmentROS,
+  },*/
+
   const appointmentroutes = [
     {
       path: "",
@@ -115,14 +128,10 @@ export default function Appointment() {
     },
     {
       //path: '/appointmentros/',
-      path: "/appointmentforms/",
-      label: "Review of Systems Forms",
-      nestedroutes: true,
-      menuopen: rosopen,
-      openNestedMenu() {
-        setROSOpen(!rosopen);
-      },
-      subroutes: reviewofsystemsforms,
+      path: "/appointmentros/",
+      label: "Review of Systems",
+      nestedroutes: false,
+      subroutes: [],
       component: AppointmentROS,
     },
     {

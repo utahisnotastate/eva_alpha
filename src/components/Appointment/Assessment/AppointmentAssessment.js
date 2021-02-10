@@ -143,6 +143,7 @@ export default function AppointmentAssessment(props) {
         console.log("There are no complaints yet!");
         dispatch({ type: "load_complaints", complaints: [] });
       } else {
+        console.log(response);
         dispatch({
           type: "load_complaints",
           complaints: response[0].appointment_complaints.complaints,
