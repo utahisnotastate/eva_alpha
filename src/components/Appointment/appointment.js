@@ -31,6 +31,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Card from "../basestyledcomponents/Card/Card";
 import CardHeader from "../basestyledcomponents/Card/CardHeader";
 import CardBody from "../basestyledcomponents/Card/CardBody";
+import CardFooter from "../basestyledcomponents/Card/CardFooter";
 import Collapse from "@material-ui/core/Collapse";
 import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSComponent";
 import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
@@ -385,6 +386,11 @@ export default function Appointment() {
             <Typography>Appointment Status: {appointmentstatus}</Typography>
             <AppointmentAllergiesWarning />
           </CardBody>
+          <CardFooter>
+            <Typography>Begin Appointment</Typography>
+            <Typography>Appointment started at: </Typography>
+            <Typography>Appointment Completed on: </Typography>
+          </CardFooter>
         </Card>
         <Switch>
           <Route path={`${path}/appointmentforms/:formId`}>

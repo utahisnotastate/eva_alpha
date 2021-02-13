@@ -1,46 +1,82 @@
-import React, {useState, useEffect} from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import React, { useState, useEffect } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 import Typography from "@material-ui/core/Typography";
-import {useParams} from 'react-router-dom';
-import { RHFInput } from 'react-hook-form-input';
-import TextField from '@material-ui/core/TextField';
+import { useParams } from "react-router-dom";
+import { RHFInput } from "react-hook-form-input";
+import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import GridContainer from "../../../basestyledcomponents/Grid/GridContainer";
-import GridItem from '../../../basestyledcomponents/Grid/GridItem';
+import GridItem from "../../../basestyledcomponents/Grid/GridItem";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
-    root: {
-        display: 'flex',
-        flexDirection: 'row',
-        padding: 15,
-    },
-    labeltext: {
-        color: '#000000',
-    },
-    inputfield: {
-        padding: 20,
-    },
-    options: {
-        width: 200,
-        padding: 20,
-    }
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    padding: 15,
+  },
+  labeltext: {
+    color: "#000000",
+  },
+  inputfield: {
+    padding: 20,
+  },
+  options: {
+    width: 200,
+    padding: 20,
+  },
 });
 
 export default function AddressForm(props) {
-    const { register, handleSubmit, setValue, reset, control } = useForm();
-    let { id } = useParams();
-    const classes = useStyles();
-    const onSubmit = data => console.log(data);
-    const [formfields, setFormFields] = useState([
-        {label: 'Address One', name: 'address_one'},
-        {label: 'Address Two', name: 'address_two'},
-        {label: 'City', name: 'city'},
-        {label: 'State', name: 'state'},
-        {label: 'Zip Code', name: 'zip_code'},
-    ]);
+  const address = useSelector((state) => state.patient.patientaddress);
+  const { register, handleSubmit, setValue, reset, control } = useFormContext();
+  let { id } = useParams();
+  const classes = useStyles();
+  const onSubmit = (data) => console.log(data);
+  const [formfields, setFormFields] = useState([
+    { label: "Address One", name: "address.address_one" },
+    { label: "Address Two", name: "address.address_two" },
+    { label: "City", name: "address.city" },
+    { label: "State", name: "address.state" },
+    { label: "Zip Code", name: "address.zip_code" },
+  ]);
+  /*useEffect(() => {
+    async function setFormFields() {
+      const result = {
+        address,
+      };
+      reset(result);
+    }
+    console.log(address);
+    setFormFields();
+  }, [reset]);*/
 
-    useEffect(() => {
+  return (
+    <GridContainer className={classes.root}>
+      {formfields.map((formfield) => (
+        <GridItem key={formfield.label}>
+          <div>
+            <Controller
+              name={formfield.name}
+              as={
+                <TextField
+                  label={formfield.label}
+                  className={classes.inputfield}
+                />
+              }
+              control={control}
+            />
+          </div>
+        </GridItem>
+      ))}
+    </GridContainer>
+  );
+}
+
+/*
+
+useEffect(() => {
         const fetchData = async () => {
             const result = await axios(`http://127.0.0.1:8000/api/patients/${id}/address/`);
             console.log(result);
@@ -63,24 +99,6 @@ export default function AddressForm(props) {
             }
         }).catch(error => console.log(error));
     }, []);
-    return (
-        <GridContainer className={classes.root}>
-            {formfields.map((formfield => (
-                <GridItem key={formfield.label}>
-                    <div>
-                        <Controller name={formfield.name}
-                                    as={<TextField label={formfield.label} className={classes.inputfield}/>}
-                                    control={control}
-                        />
-                    </div>
-                </GridItem>
-            )))}
-
-        </GridContainer>
-    );
-}
-
-/*
 reset({
                 gender: result.data[0].gender,
                 race: result.data[0].race,

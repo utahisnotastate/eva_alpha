@@ -1,6 +1,11 @@
 import axios from "axios";
 import API_URL from "./api_url";
 
+export const getFullPatientInformation = async (patientId) => {
+  const result = await axios.get(`${API_URL}/patients/${patientId}/`);
+  return result.data;
+};
+
 export const getPatientDiagnoses = async (patientId) => {
   const result = await axios(`${API_URL}/patients/${patientId}/diagnoses/`);
   return result.data;
@@ -11,6 +16,10 @@ export const getPatientInsurance = async (patientId) => {
   return result.data;
 };
 
+export const getPatientAndDemographics = async (patientId) => {
+  const result = await axios.get(`${API_URL}/patients/${patientId}/`);
+  return result.data;
+};
 export const setPatientDiagnosisStatus = async (
   patientId,
   diagnosisId,

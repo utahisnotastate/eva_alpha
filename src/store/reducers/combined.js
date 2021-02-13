@@ -1,9 +1,12 @@
 import { combineReducers } from "redux";
 import {
+  patientnameanddetails,
   patientdiagnoses,
+  patient_contact_methods,
   patientmedications,
+  patientaddress,
+  patientdemographics,
   drugallergies,
-  hasinsurance,
   foodallergies,
   latexallergy,
   petallergies,
@@ -11,8 +14,7 @@ import {
   surgicalhistory,
   addmedicationformicd10result,
   addMedicationFormMedication,
-  primaryinsurance,
-  secondaryinsurance,
+  patientinsurances,
 } from "./patient/patient.reducers";
 import {
   medicalappointmentformtitle as title,
@@ -160,13 +162,14 @@ const appointment = combineReducers({
   appointmentfindings,
 });
 const patient = combineReducers({
+  patientnameanddetails,
   patientdiagnoses,
   patientmedications,
+  patient_contact_methods,
   patientallergies,
+  patientaddress,
+  patientdemographics,
   surgicalhistory,
-  hasinsurance,
-  primaryinsurance,
-  secondaryinsurance,
   addmedicationformicd10result,
   addMedicationFormMedication,
 });
