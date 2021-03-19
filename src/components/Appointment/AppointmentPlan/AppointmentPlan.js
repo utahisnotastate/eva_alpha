@@ -51,7 +51,7 @@ export default function AppointmentPlan() {
   const classes = useStyles();
   let { id } = useParams();
   const dispatch = useDispatch();
-  const plans = useSelector((state) => state.appointment.appointmentplans);
+  const plans = useSelector((state) => state.appointment.clinical_data.plans);
   const methods = useForm({
     defaultValues: {
       plans: plans,
@@ -94,28 +94,30 @@ export default function AppointmentPlan() {
   };
 
   useEffect(() => {
-    loadAppointmentPlan();
+    // loadAppointmentPlan();
   }, [id]);
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Grid container direction={`column`} spacing={3}>
           <Grid item>
-            <Card raised>
-              <Grid container direction={`column`}>
-                <Grid item>
-                  <Typography>Appointment Plans</Typography>
-                </Grid>
+            <Grid container direction={`column`}>
+              <Grid item>
+                <Typography>Appointment Plans</Typography>
               </Grid>
-            </Card>
+            </Grid>
           </Grid>
-          {fields.length > 0
-            ? fields.map((field, index) => (
-                <Grid item key={field.id}>
-                  <DiagnosisPlan field={field} index={index} />
-                </Grid>
-              ))
-            : null}
+          {fields.length > 0 ? (
+            fields.map((field, index) => (
+              <Grid item key={field.id}>
+                <DiagnosisPlan field={field} index={index} />
+              </Grid>
+            ))
+          ) : (
+            <Grid item>
+              <Typography>No Diagnosis listed</Typography>
+            </Grid>
+          )}
         </Grid>
         <input type="submit" />
       </form>

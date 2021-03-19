@@ -18,7 +18,10 @@ export default function FormsCenter(props) {
   return (
     <div>
       <Route exact path={`${path}`} component={FormsCenterHome} />
-      <Route path={`${path}/:formId/edit`} component={FormsCustomizer} />
+      <Route
+        path={`${path}/:formId/edit`}
+        component={() => <FormsCustomizer />}
+      />
       <Route path={`${path}/:formId/preview`} component={FormPreview} />
     </div>
   );

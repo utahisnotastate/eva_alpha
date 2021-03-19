@@ -197,6 +197,11 @@ export default function FormEditor(props) {
                 <CardHeader>
                   <Grid container justify={`flex-end`}>
                     <Grid item>
+                      <Typography variant="heading">
+                        MAKE SURE FORM IS SAVED BEFORE PREVIEWING
+                      </Typography>
+                    </Grid>
+                    <Grid item>
                       <Button
                         color={`primary`}
                         onClick={methods.handleSubmit(handleFormSave)}

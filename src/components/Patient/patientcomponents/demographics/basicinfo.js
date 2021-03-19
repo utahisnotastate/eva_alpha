@@ -61,11 +61,12 @@ export default function BasicInfoForm(props) {
               First Name:
             </Typography>
           </label>
-          <RHFInput
-            setValue={setValue}
-            register={register}
+          <TextField
+            inputRef={register}
             name="patientnameanddetails.first_name"
-            as={<TextField className={classes.inputfield} />}
+            defaultValue={``}
+            placeholder={`Enter first name`}
+            className={classes.inputfield}
           />
         </div>
         <div>
@@ -74,11 +75,12 @@ export default function BasicInfoForm(props) {
               Middle Name:
             </Typography>
           </label>
-          <RHFInput
-            setValue={setValue}
-            register={register}
+          <TextField
+            inputRef={register}
             name="patientnameanddetails.middle_name"
-            as={<TextField className={classes.inputfield} />}
+            defaultValue={``}
+            placeholder={`Enter middle name`}
+            className={classes.inputfield}
           />
         </div>
         <div>
@@ -87,11 +89,12 @@ export default function BasicInfoForm(props) {
               Last Name:
             </Typography>
           </label>
-          <RHFInput
-            setValue={setValue}
-            register={register}
+          <TextField
+            inputRef={register}
             name="patientnameanddetails.last_name"
-            as={<TextField className={classes.inputfield} />}
+            defaultValue={``}
+            placeholder={`Enter last name`}
+            className={classes.inputfield}
           />
         </div>
         <div>
@@ -100,17 +103,72 @@ export default function BasicInfoForm(props) {
               Preferred Name:
             </Typography>
           </label>
-          <RHFInput
-            setValue={setValue}
-            register={register}
+          <TextField
+            inputRef={register}
             name="patientnameanddetails.preferred_name"
-            as={<TextField className={classes.inputfield} />}
+            defaultValue={``}
+            placeholder={`Enter preferred name`}
+            className={classes.inputfield}
           />
         </div>
       </div>
       <div className={classes.root}>
         <div>
+          <TextField
+            type={`date`}
+            inputRef={register}
+            label={<Typography>Date Of Birth</Typography>}
+            name="patientnameanddetails.date_of_birth"
+            defaultValue={``}
+            placeholder={`mm/dd/yyyy`}
+            className={classes.inputfield}
+          />
+        </div>
+      </div>
+      <div>
+        <label>
+          <Typography className={classes.labeltext} variant="body1">
+            SSN:
+          </Typography>
+        </label>
+        <TextField
+          inputRef={register}
+          name="patientnameanddetails.ssn"
+          defaultValue={``}
+          placeholder={`Enter SSN`}
+          className={classes.inputfield}
+        />
+      </div>
+    </div>
+  );
+}
+
+/*
+<div>
           <Controller
+            name={`demographics.marital_status`}
+            as={<Select options={maritaloptions} className={classes.options} />}
+            control={control}
+            placeholder={`Please choose Marital status`}
+          />
+        </div>
+<div>
+          <Controller
+            name={`demographics.race`}
+            as={<Select options={raceoptions} className={classes.options} />}
+            control={control}
+            placeholder={`Please choose Race`}
+          />
+        </div>
+<div>
+          <Controller
+            name={`demographics.gender`}
+            as={<Select options={genderoptions} className={classes.options} />}
+            control={control}
+          />
+        </div>
+
+<Controller
             name={`patientnameanddetails.date_of_birth`}
             as={
               <TextField
@@ -122,42 +180,31 @@ export default function BasicInfoForm(props) {
             control={control}
             placeholder={`mm/dd/yyyy`}
           />
-        </div>
-        <div>
-          <Controller
-            name={`patientnameanddetails.gender`}
-            as={
-              <Select
-                value={`gender`}
-                options={genderoptions}
-                className={classes.options}
-              />
-            }
-            control={control}
+<RHFInput
+            setValue={setValue}
+            register={register}
+            name="patientnameanddetails.preferred_name"
+            as={<TextField className={classes.inputfield} />}
           />
-        </div>
-        <div>
-          <Controller
-            name={`patientnameanddetails.race`}
-            as={<Select options={raceoptions} className={classes.options} />}
-            control={control}
-            placeholder={`Please choose Race`}
+<RHFInput
+            setValue={setValue}
+            register={register}
+            name="patientnameanddetails.last_name"
+            as={<TextField className={classes.inputfield} />}
           />
-        </div>
-        <div>
-          <Controller
-            name={`patientnameanddetails.marital_status`}
-            as={<Select options={maritaloptions} className={classes.options} />}
-            control={control}
-            placeholder={`Please choose Marital status`}
+<RHFInput
+            setValue={setValue}
+            register={register}
+            name="patientnameanddetails.middle_name"
+            as={<TextField className={classes.inputfield} />}
           />
-        </div>
-      </div>
-    </div>
-  );
-}
 
-/*
+<RHFInput
+            setValue={setValue}
+            register={register}
+            name="patientnameanddetails.first_name"
+            as={<TextField className={classes.inputfield} />}
+          />
   useEffect(() => {
     async function setFormFields() {
       const result = {

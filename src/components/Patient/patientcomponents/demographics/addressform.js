@@ -30,7 +30,14 @@ const useStyles = makeStyles({
 
 export default function AddressForm(props) {
   const address = useSelector((state) => state.patient.patientaddress);
-  const { register, handleSubmit, setValue, reset, control } = useFormContext();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    reset,
+    control,
+  } = useFormContext();
   let { id } = useParams();
   const classes = useStyles();
   const onSubmit = (data) => console.log(data);
@@ -41,16 +48,6 @@ export default function AddressForm(props) {
     { label: "State", name: "address.state" },
     { label: "Zip Code", name: "address.zip_code" },
   ]);
-  /*useEffect(() => {
-    async function setFormFields() {
-      const result = {
-        address,
-      };
-      reset(result);
-    }
-    console.log(address);
-    setFormFields();
-  }, [reset]);*/
 
   return (
     <GridContainer className={classes.root}>
@@ -75,6 +72,18 @@ export default function AddressForm(props) {
 }
 
 /*
+  useEffect(() => {
+    async function setFormFields() {
+      const result = {
+        address,
+      };
+      const currentvalues = getValues();
+      console.log(currentvalues);
+      console.log(address);
+      //reset(address);
+    }
+    setFormFields();
+  }, [address]);
 
 useEffect(() => {
         const fetchData = async () => {

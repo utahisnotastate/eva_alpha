@@ -5,6 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import { Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import {
+  addNewInsuranceForPatient,
+  getPatientInsurance,
+} from "../../../api/patient.api";
 
 const API_URL = "http://127.0.0.1:8000/api";
 
@@ -12,42 +16,25 @@ export default function AddInsuranceForm(props) {
   const { register, control, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   let { id } = useParams();
-  //console.log(id);
-  const onSubmit = (data) => {
-    console.log(data);
-    axios
-      .post(`${API_URL}/patients/${id}/insurance/`, {
-        patient: id,
-        insurance_name: data.insurance_name,
-        member_id: data.member_id,
-        group_ID: data.group_ID,
-        bin_number: data.bin_number,
-        pcn: data.pcn,
-        date_effective: data.date_effective,
-        copay_amount: data.copay_amount,
-        type: data.type,
-      })
-      .then((response) => {
-        if (response.statusText === "Created") {
-          console.log(response);
 
-          if (data.type === "primary") {
-            props.setModal(false);
-            dispatch({ type: "patient_has_insurance" });
-            dispatch({
-              type: "set_primary_insurance",
-              primary_insurance: data,
-            });
-          } else {
-            props.setModal(false);
-            dispatch({ type: "patient_has_insurance" });
-            dispatch({
-              type: "set_secondary_insurance",
-              secondary_insurance: data,
-            });
-          }
-        }
-      });
+  const saveNewPatientInsuranceAndReloadPatientInsurances = async (
+    patientId,
+    new_insurance
+  ) => {
+    const apiToSaveNewInsurance = await addNewInsuranceForPatient(
+      patientId,
+      new_insurance
+    );
+    const allpatientinsurance = await getPatientInsurance(patientId);
+
+    dispatch({ type: "load_insurance", insurance: allpatientinsurance });
+
+    console.log(apiToSaveNewInsurance);
+    props.setModal(false);
+  };
+  //console.log(id);
+  const onSubmit = (insurance) => {
+    saveNewPatientInsuranceAndReloadPatientInsurances(id, insurance);
   };
   // console.log(errors);
   const style = {
@@ -64,7 +51,7 @@ export default function AddInsuranceForm(props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <div style={style.formrow}>
-          <Typography>Insurance Type:</Typography>
+          <Typography>Primary or Secondary Insurance</Typography>
           <div>
             <select name="type" ref={register}>
               <option value="primary">primary</option>
@@ -74,71 +61,47 @@ export default function AddInsuranceForm(props) {
         </div>
         <div style={style.formrow}>
           <Typography>Insurance Name:</Typography>
-          <Controller
-            style={style.textwidth}
-            label={`Enter Insurance Name`}
+          <TextField
+            inputRef={register}
             name="insurance_name"
-            as={<TextField />}
-            control={control}
+            defaultValue={``}
+            style={style.textwidth}
           />
         </div>
         <div style={style.formrow}>
           <Typography>Member Number:</Typography>
-          <Controller
-            style={style.textwidth}
-            label={`Enter Memmber ID number`}
+          <TextField
+            inputRef={register}
             name="member_id"
-            as={<TextField />}
-            control={control}
+            defaultValue={``}
+            style={style.textwidth}
           />
         </div>
         <div style={style.formrow}>
           <Typography>Group Number:</Typography>
-          <Controller
+          <TextField
+            inputRef={register}
+            name="group_id"
+            defaultValue={``}
             style={style.textwidth}
-            label={`Enter Group number`}
-            name="group_ID"
-            as={<TextField />}
-            control={control}
           />
         </div>
         <div style={style.formrow}>
           <Typography>Bin Number:</Typography>
-          <Controller
-            style={style.textwidth}
-            label={`Enter Bin number`}
+          <TextField
+            inputRef={register}
             name="bin_number"
-            as={<TextField />}
-            control={control}
+            defaultValue={``}
+            style={style.textwidth}
           />
         </div>
         <div style={style.formrow}>
           <Typography>PCN Number:</Typography>
-          <Controller
-            style={style.textwidth}
-            label={`Enter PCN number`}
+          <TextField
+            inputRef={register}
             name="pcn"
-            as={<TextField />}
-            control={control}
-          />
-        </div>
-        <div style={style.formrow}>
-          <Typography>Date coverage began:</Typography>
-          <Controller
+            defaultValue={``}
             style={style.textwidth}
-            name="date_effective"
-            as={<TextField type="date" />}
-            control={control}
-          />
-        </div>
-        <div style={style.formrow}>
-          <Typography>Copay Amount:</Typography>
-          <Controller
-            style={style.textwidth}
-            label={`Enter Copay Amount`}
-            name="copay_amount"
-            as={<TextField type="number" />}
-            control={control}
           />
         </div>
       </div>
@@ -148,3 +111,85 @@ export default function AddInsuranceForm(props) {
     </form>
   );
 }
+
+/*
+        <div style={style.formrow}>
+          <Typography>Copay Amount:</Typography>
+          <TextField
+            inputRef={register}
+            name="copay_amount"
+            defaultValue={``}
+            style={style.textwidth}
+          />
+        </div>
+<div style={style.formrow}>
+          <Typography>Date coverage began:</Typography>
+          <TextField
+            inputRef={register}
+            type={`date`}
+            name="date_effective"
+            defaultValue={``}
+            style={style.textwidth}
+          />
+        </div>
+
+          <Controller
+            style={style.textwidth}
+            label={`Enter Copay Amount`}
+            name="copay_amount"
+            as={<TextField type="number" />}
+            control={control}
+          />
+
+          <Controller
+            style={style.textwidth}
+            name="date_effective"
+            as={<TextField type="date" />}
+            control={control}
+          />
+
+          <Controller
+            style={style.textwidth}
+            label={`Enter PCN number`}
+            name="pcn"
+            as={<TextField />}
+            control={control}
+          />
+
+          <Controller
+            style={style.textwidth}
+            label={`Enter Bin number`}
+            name="bin_number"
+            as={<TextField />}
+            control={control}
+          />
+<Controller
+              style={style.textwidth}
+              label={`Enter Group number`}
+              name="group_ID"
+              as={<TextField />}
+              control={control}
+          />
+
+<Controller
+            style={style.textwidth}
+            label={`Enter Group number`}
+            name="group_ID"
+            as={<TextField />}
+            control={control}
+          />
+<Controller
+            style={style.textwidth}
+            label={`Enter Memmber ID number`}
+            name="member_id"
+            as={<TextField />}
+            control={control}
+          />
+<Controller
+            style={style.textwidth}
+            label={`Enter Insurance Name`}
+            name="insurance_name"
+            as={<TextField />}
+            control={control}
+          />
+ */

@@ -15,10 +15,14 @@ import {
 } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
 import routes from "./routes";
-import { getFullPatientInformation } from "../../api/patient.api";
+import {
+  getFullPatientInformation,
+  getBasicPatientInformation,
+} from "../../api/patient.api";
 import { apifetch } from "../../api/utility.api";
 import axios from "axios";
 import { useStateValue } from "../ClinicalQueue/context/ClinicalQueueContext";
+import { patient_contact_methods } from "../../store/reducers/patient/patient.reducers";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -45,7 +49,6 @@ export default function Patient() {
   const dispatch = useDispatch();
 
   function handleNameAndDetailsReduxLoad(patient) {
-    console.log(patient);
     dispatch({
       type: "load_name_and_details",
       nameanddetails: {
@@ -59,23 +62,59 @@ export default function Patient() {
     });
   }
 
-  function handleDemographicsAddressReduxLoad(patient) {
+  function handleDemographicsReduxLoad(demographics) {}
+
+  function handlePatientContactMethods(contact_methods) {
+    dispatch({
+      type: "load_patient_contact_methods",
+      patient_contact_methods: contact_methods,
+    });
+  }
+
+  function handleDemographicsAddressContactMethodsReduxLoad(patient) {
+    console.log(patient);
     //When you make an API call to get the patient address h, if the patient address hasnt been filled out yet it will give you a null value.
     //this function handles that and updates the store appropriately
+
+    // this populates the redux store with the nameanddetails value which has patient name and such
     handleNameAndDetailsReduxLoad(patient);
-    if (patient.address === null) {
-      console.log("address null");
-      //dispatch({ type: "address_is_null" });
-    } else {
-      dispatch({ type: "load_address", address: patient.address });
-    }
+    dispatch({ type: "load_address", address: patient.address });
+    dispatch({ type: "load_demographics", demographics: patient.demographics });
   }
 
   useEffect(() => {
-    apifetch(getFullPatientInformation, id).then((fullpatientinformation) => {
-      //dispatch({ type: "load_address", address: fullpatientinformation.address });
-      //handleNameAndDetailsReduxLoad(fullpatientinformation);
-      handleDemographicsAddressReduxLoad(fullpatientinformation);
+    /*
+    apifetch(getBasicPatientInformation, id).then((basicpatientinformation) => {
+      //handleDemographicsAddressContactMethodsReduxLoad(fullpatientinformation);
+      handleNameAndDetailsReduxLoad(basicpatientinformation);
+      console.log(basicpatientinformation);
+     */
+    apifetch(getFullPatientInformation, id).then((patientinformation) => {
+      //handleDemographicsAddressContactMethodsReduxLoad(fullpatientinformation);
+      dispatch({
+        type: "load_name_and_details",
+        nameanddetails: {
+          first_name: patientinformation.basic_information.first_name,
+          last_name: patientinformation.basic_information.last_name,
+          middle_name: patientinformation.basic_information.middle_name,
+          preferred_name: patientinformation.basic_information.preferred_name,
+          date_of_birth: patientinformation.basic_information.date_of_birth,
+          ssn: patientinformation.basic_information.ssn,
+        },
+      });
+      dispatch({
+        type: "load_address",
+        address: patientinformation.address[0],
+      });
+      dispatch({
+        type: "load_demographics",
+        demographics: patientinformation.demographics[0],
+      });
+      dispatch({
+        type: "load_patient_contact_methods",
+        patient_contact_methods: patientinformation.patient_contact_methods,
+      });
+      //handleNameAndDetailsReduxLoad(patientinformation.basic_information);
     });
   }, [id]);
   return (
@@ -119,6 +158,37 @@ export default function Patient() {
   );
 }
 /*
+  useEffect(() => {
+    apifetch(getFullPatientInformation, id).then((fullpatientinformation) => {
+      handleDemographicsAddressContactMethodsReduxLoad(fullpatientinformation);
+    });
+  }, [id]);
+if (patient.address === null || patient.demographics === null) {
+      // set address to its default blank values
+      dispatch({ type: "address_is_null" });
+      // set demographics to its default blank values
+      dispatch({ type: "demographics_is_null" });
+      // set patient contact methods to values in DB
+      // handlePatientContactMethods(patient.patient_contact_methods);
+
+      dispatch({
+        type: "load_patient_contact_methods",
+        patient_contact_methods: patient.patient_contact_methods,
+      });
+    } else {
+      // load the address into the redux store
+      dispatch({ type: "load_address", address: patient.address });
+      //load the demographics into the store
+      dispatch({ type: "load_demographics", address: patient.demographics });
+      // handlePatientContactMethods(patient.patient_contact_methods);
+
+      // set patient contact methods to values in DB
+      dispatch({
+        type: "load_patient_contact_methods",
+        patient_contact_methods: patient.patient_contact_methods,
+      });
+    }
+
 useEffect(() => {
   const fetchData = async () => {
     const result = await getFullPatientInformation(id);

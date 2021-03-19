@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { ModalProvider } from "react-modal-hook";
 import NavBar from "./components/NavBar/navbar";
 import Home from "./components/Home/home";
@@ -10,7 +10,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import ScheduleAppointment from "./components/Forms/Administrative/Scheduling/ScheduleAppointment/scheduleappointment";
 import Appointments from "./components/Appointments/appointments";
 import ClinicalQueue from "./components/ClinicalQueue/clinicalqueue";
-import Appointment from "./components/Appointment/appointment";
+import MedicalAppointment from "./components/Appointment/components/medicalappointment";
+//import Appointment from "./components/Appointment/appointment";
 import "./styles/w3.css";
 import Patient from "./components/Patient/patient";
 import PatientRequests from "./components/PatientRequests/patientrequests";
@@ -25,6 +26,7 @@ import Claim from "./components/Claims/Claim/claim";
 import WaitList from "./components/Scheduling/WaitList/waitlist";
 import ReferralsToScheduleList from "./components/Scheduling/ReferralsToSchedule/referralstoschedulelist";
 import { StateProvider } from "./components/ClinicalQueue/context/ClinicalQueueContext";
+import { fetchAllForms } from "./api/forms.api";
 import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import FormsCenter from "./components/FormsCenter/FormsCenter";
@@ -49,7 +51,7 @@ function App() {
                 <Home />
               </Route>
               <Route path="/appointments/:id">
-                <Appointment />
+                <MedicalAppointment />
               </Route>
               <Route path="/appointments">
                 <Appointments />

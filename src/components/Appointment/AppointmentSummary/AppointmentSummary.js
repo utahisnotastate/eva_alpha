@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { getAppointmentComplaints } from "../../../api/appointment.api";
 
-export default function AppointmentSummary() {
+export default function AppointmentSummary(props) {
   let { id } = useParams();
   const summaryvalues = {
     age: "33",

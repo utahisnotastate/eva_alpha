@@ -213,6 +213,22 @@ export default function MedicalAppointmentForm(props) {
                                         {`Unchecked`}
                                       </label>
                                     </div>
+                                  ) : field.type === "number" ? (
+                                    <Field
+                                      component={TextField}
+                                      name={`formfields.${index}.value`}
+                                      type={`number`}
+                                      variant={`outlined`}
+                                      onChange={(e) =>
+                                        handleTextFieldChange(
+                                          e,
+                                          `formfields.${index}`,
+                                          formProps
+                                        )
+                                      }
+                                      placeholder={`Enter findings for ${field.label} here`}
+                                      fullWidth={true}
+                                    />
                                   ) : field.type === "textarea" ? (
                                     <Field
                                       component={TextField}

@@ -38,6 +38,7 @@ import {
   getAppointmentForm,
   updateAppointmentForm,
 } from "../../../api/appointment.api";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   fieldcontainer: {
@@ -58,20 +59,21 @@ const SwitchField = (props) => {
 };
 
 export default function ActiveAppointmentForm(props) {
-  console.log(props);
+  let { formId } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [formtitle, setFormTitle] = useState("");
-  const [formtype, setFormType] = useState("");
-  const [initValues, setInitValues] = useState("");
-  const appointmentform = useSelector(
-    (state) =>
-      state.appointment.activeappointmentform.activeAppointmentFormDetails
-  );
-  const fields = useSelector(
+  const [form, setForm] = useState({
+    id: 420,
+    title: "",
+    form_type: "physical_exam",
+    form: { customformfields: [] },
+  });
+  const allforms = useSelector((state) => state.allpracticeforms);
+  //const fields = props.form.form.customformfields;
+  /*const fields = useSelector(a6
     (state) =>
       state.appointment.activeappointmentform.activeAppointmentFormFields
-  );
+  );*/
   const labelsize = 3;
   const inputsize = 9;
   const handleTextFieldChange = (event, fieldname, formProps) => {
@@ -86,7 +88,6 @@ export default function ActiveAppointmentForm(props) {
   };
 
   const handleRadioFieldChange = (event, fieldname, formProps) => {
-    console.log(formProps);
     //return event.target.value;
     if (event.target.value === "unchecked") {
       formProps.setFieldValue(`${fieldname}.checked`, false);
@@ -101,7 +102,6 @@ export default function ActiveAppointmentForm(props) {
 
   const handleCheckboxGroupChange = (event, fieldname, formProps, index) => {
     //return event.target.value;
-    console.log(event.target.value);
     if (event.target.value === "unchecked") {
       formProps.setFieldValue(`${fieldname}.checked`, false);
       formProps.setFieldValue(`${fieldname}.value`, ["unchecked"]);
@@ -116,7 +116,6 @@ export default function ActiveAppointmentForm(props) {
         }
       );
       let newarray = [...filteredarray, newvalue];
-      console.log(newarray);
       /*formProps.setFieldValue(`${fieldname}.value`, [
         ...formProps.values[fieldname],
         newvalue,
@@ -126,62 +125,28 @@ export default function ActiveAppointmentForm(props) {
     }
   };
   useEffect(() => {
-    console.log(props.formId);
-    getAppointmentForm(props.appointmentId, props.formId).then((response) => {
-      console.log(
-        "Active appointment form response is " + JSON.stringify(response)
-      );
-      let modifledfields = [];
-
-      for (let field of response.form.customformfields) {
-        if (
-          field.hasOwnProperty("checked") === false ||
-          field.hasOwnProperty("value") === false
-        ) {
-          if (field.type === "radio") {
-            field.checked = false;
-            field.value = "unchecked";
-          } else if (field.type === "checkbox_group") {
-            field.checked = false;
-            field.value = ["unchecked"];
-          } else {
-            field.checked = false;
-            field.value = "";
-          }
-        }
-      }
-      console.log(response.form.customformfields);
-      dispatch({
-        type: "load_active_form_fields",
-        fields: response.form.customformfields,
-      });
-      dispatch({
-        type: "load_active_appointment_form_details",
-        details: {
-          title: response.title,
-          id: response.id,
-          form_type: response.form_type,
-        },
-      });
-    });
-  }, [props.formId, props.appointmentId]);
+    let activeform = allforms.find((form) => form.id == formId);
+    setForm(activeform);
+    console.log(activeform);
+  }, [formId, form]);
   return (
     <Card>
       <CardHeader color={`primary`}>
         <h4>
-          <Typography>{appointmentform.title}</Typography>
+          <Typography>{form.title}</Typography>
         </h4>
       </CardHeader>
       <CardBody>
         <Formik
           initialValues={{
-            title: formtitle,
-            formfields: fields,
-            form_type: formtype,
+            title: form.title,
+            formfields: form.form.customformfields,
+            form_type: form.form_type,
           }}
-          enableReinitialize={true}
+          enableReinitialize={false}
           onSubmit={async (values) => {
-            let mergedObject = { ...values, ...appointmentform };
+            console.log(values);
+            /*let mergedObject = { ...values, ...appointmentform };
             console.log(mergedObject);
             updateAppointmentForm(props.appointmentId, mergedObject).then(
               (response) => {
@@ -199,12 +164,12 @@ export default function ActiveAppointmentForm(props) {
                   },
                 });
               }
-            );
+            );*/
           }}
           render={(formProps) => {
             return (
               <Form>
-                <Typography>{initValues.title}</Typography>
+                <Typography></Typography>
                 <FieldArray
                   name="formfields"
                   render={() => (
@@ -270,6 +235,22 @@ export default function ActiveAppointmentForm(props) {
                                           {`unchecked`}
                                         </label>
                                       </div>
+                                    ) : field.type === "number" ? (
+                                      <Field
+                                        component={TextField}
+                                        name={`formfields.${index}.value`}
+                                        variant={`outlined`}
+                                        type={`number`}
+                                        onChange={(e) =>
+                                          handleTextFieldChange(
+                                            e,
+                                            `formfields.${index}`,
+                                            formProps
+                                          )
+                                        }
+                                        placeholder={`Enter findings for ${field.label} here`}
+                                        fullWidth={true}
+                                      />
                                     ) : field.type === "textarea" ? (
                                       <Field
                                         component={TextField}
@@ -373,6 +354,57 @@ export default function ActiveAppointmentForm(props) {
 }
 
 /*
+  useEffect(() => {
+    console.log(allforms);
+    console.log(props.formId);
+    const checkforms = allforms.find((form) => {
+      if (form.id === props.formId) {
+        console.log(form);
+        return form;
+      }
+    });
+    console.log(checkforms);
+  }, [props.formId, props.appointmentId]);
+
+useEffect(() => {
+    getAppointmentForm(props.appointmentId, props.formId).then((response) => {
+      console.log(
+        "Active appointment form response is " + JSON.stringify(response)
+      );
+      let modifledfields = [];
+
+      for (let field of response.form.customformfields) {
+        if (
+          field.hasOwnProperty("checked") === false ||
+          field.hasOwnProperty("value") === false
+        ) {
+          if (field.type === "radio") {
+            field.checked = false;
+            field.value = "unchecked";
+          } else if (field.type === "checkbox_group") {
+            field.checked = false;
+            field.value = ["unchecked"];
+          } else {
+            field.checked = false;
+            field.value = "";
+          }
+        }
+      }
+      console.log(response.form.customformfields);
+      dispatch({
+        type: "load_active_form_fields",
+        fields: response.form.customformfields,
+      });
+      dispatch({
+        type: "load_active_appointment_form_details",
+        details: {
+          title: response.title,
+          id: response.id,
+          form_type: response.form_type,
+        },
+      });
+    });
+  }, [props.formId, props.appointmentId]);
   console.log(values);
 
   useEffect(() => {

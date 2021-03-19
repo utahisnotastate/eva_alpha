@@ -1,6 +1,11 @@
 import API_URL from "./api_url";
 import axios from "axios";
 
+export const getAppointment = async (appointmentId) => {
+  const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
+  return result.data;
+};
+
 export const getAppointmentForms = async (appointmentId) => {
   const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/`);
   return result.data;

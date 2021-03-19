@@ -7,7 +7,10 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import { getPatientAndDemographics } from "../../../../api/patient.api";
+import {
+  updatePatientDemographics,
+  saveDemographicsFormToDB,
+} from "../../../../api/patient.api";
 import axios from "axios";
 import BasicInfoForm from "./basicinfo";
 import AddressForm from "./addressform";
@@ -33,7 +36,8 @@ const useStyles = makeStyles({
 });
 
 export default function Demographics(props) {
-  const address = useSelector((state) => state.patient.patientaddress);
+  const dispatch = useDispatch();
+  let { id } = useParams();
   const patientnameanddetails = useSelector(
     (state) => state.patient.patientnameanddetails
   );
@@ -43,34 +47,115 @@ export default function Demographics(props) {
   const demographics = useSelector(
     (state) => state.patient.patientdemographics
   );
+  const address = useSelector((state) => state.patient.patientaddress);
 
   const methods = useForm({
     defaultValues: {
-      address: {},
+      address: {
+        address_one: "",
+        address_two: "",
+        city: "",
+        state: "",
+        zip_code: "",
+      },
       patientnameanddetails: {
         first_name: "Utah",
         middle_name: "Shanker",
+      },
+      demographics: {
+        race: "",
+        gender: "",
+        marital_status: "",
+        employment_status: "",
+        email: "",
       },
       patient_contact_methods: [],
     },
   });
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.patient_contact_methods);
+    const demographicsform = {
+      patient_address: data.address,
+      patient_contact_methods: data.patient_contact_methods,
+      patient_demographics: {
+        race: "unknown",
+        gender: "unknown",
+        marital_status: "unknown",
+        employment_status: "unknown",
+        email: "",
+      },
+      first_name: data.patientnameanddetails.first_name,
+      last_name: data.patientnameanddetails.last_name,
+      middle_name: data.patientnameanddetails.middle_name,
+      preferred_name: data.patientnameanddetails.preferred_name,
+      date_of_birth: data.patientnameanddetails.date_of_birth,
+      ssn: parseInt(data.patientnameanddetails.ssn),
+      //patient_contact_methods: data.patient_contact_methods,
+    };
+    // console.log(demographicsform);
+    saveDemographicsFormToDB(id, demographicsform).then((savedForm) => {
+      console.log(savedForm);
+    });
+
+    /*updatePatientDemographics(
+      id,
+      data.patientnameanddetails,
+      data.address,
+      data.patient_contact_methods,
+      data.demographics
+    )
+      .then((response) => {
+        console.log(response);
+
+        dispatch({
+          type: "load_name_and_details",
+          nameanddetails: {
+            first_name: response.first_name,
+            last_name: response.last_name,
+            middle_name: response.middle_name,
+            preferred_name: response.preferred_name,
+            date_of_birth: response.date_of_birth,
+            ssn: response.ssn,
+          },
+        });
+
+        dispatch({ type: "load_address", address: response.address });
+
+        dispatch({
+          type: "load_patient_contact_methods",
+          patient_contact_methods: response.patient_contact_methods,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });*/
   };
   const classes = useStyles();
-  let { id } = useParams();
+
   useEffect(() => {
+    //when the user clicks on the patient component, there is an API call which grabs all patient information and
+    //stores it in the redux store. setFormFields simply reads the value from redux and sets the values of the form accordingly
     async function setFormFields() {
-      console.log(patientnameanddetails);
-      methods.reset({
+      methods.setValue("patientnameanddetails", patientnameanddetails);
+      methods.setValue("address", address);
+      methods.setValue("patient_contact_methods", patient_contact_methods);
+      methods.setValue("demographics", demographics);
+      /* methods.reset({
         patientnameanddetails,
         address,
         patient_contact_methods,
-      });
+        demographics,
+      });*/
       //methods.reset(patientnameanddetails);
     }
     setFormFields();
-  }, [methods.reset, patientnameanddetails, address]);
+  }, [
+    id,
+    patientnameanddetails,
+    address,
+    patient_contact_methods,
+    demographics,
+  ]);
 
   /*  useEffect(() => {
     const fetchData = async () => {
@@ -131,6 +216,17 @@ export default function Demographics(props) {
 }
 
 /*
+const dbdemographicsobject = {
+      patientnamedetails: data.patientnameanddetails,
+      address: data.address,
+      patient_contact_methods: data.patient_contact_methods,
+      demographics: {
+        gender: data.demographics.gender.value,
+        marital_status: data.demographics.marital_status.value,
+        race: data.demographics.race.value,
+      },
+    };
+
 useEffect(() => {
         const fetchData = async () => {
             const result = await axios(`http://127.0.0.1:8000/api/patients/${id}/demographics/`);

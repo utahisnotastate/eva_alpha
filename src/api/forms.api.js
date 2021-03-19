@@ -1,8 +1,19 @@
 import API_URL from "./api_url";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export const fetchAllForms = async () => {
   const result = await axios(`${API_URL}/forms/`);
+  return result.data;
+};
+
+export const getAppointmentClinicalData = async (appointmentId) => {
+  const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
+  return result.data.clinical_data;
+};
+
+export const getAllAppointmentInformation = async (appointmentId) => {
+  const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
   return result.data;
 };
 
@@ -52,8 +63,17 @@ export const createNewForm = async (formData) => {
     title: formData.title,
     form: { customformfields: [] },
   });
-  return result;
+  return result.data;
 };
+
+/*export const createNewFormInDBAndLoadAllForms = async(newform) => {
+
+  const newformcreated = await createNewForm(newform)
+  const allforms = await fetchAllForms()
+
+  dispatch({ type: "load_forms", forms: allforms });
+
+}*/
 
 /*
 axios.post('http://127.0.0.1:8000/api/forms/', {

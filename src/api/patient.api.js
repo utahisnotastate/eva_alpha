@@ -2,8 +2,163 @@ import axios from "axios";
 import API_URL from "./api_url";
 
 export const getFullPatientInformation = async (patientId) => {
-  const result = await axios.get(`${API_URL}/patients/${patientId}/`);
+  const basic_information = await axios.get(
+    `${API_URL}/patients/${patientId}/`
+  );
+  const address = await axios.get(`${API_URL}/patients/${patientId}/address/`);
+  const demographics = await axios.get(
+    `${API_URL}/patients/${patientId}/demographics/`
+  );
+  const patient_contact_methods = await axios.get(
+    `${API_URL}/patients/${patientId}/contactinformation/`
+  );
+  const fullpatientinformation = {
+    basic_information: basic_information.data,
+    address: address.data,
+    demographics: demographics.data,
+    patient_contact_methods: patient_contact_methods.data,
+  };
+  return fullpatientinformation;
+};
+/*
+{
+      address_one: "unknown",
+      address_two: "unknown",
+      city: "unknown",
+      state: "unknown",
+      zip_code: "unknown",
+    },
+
+    [
+      {
+        type: "cell",
+        number: phone_prefix.concat("", "8042223333"),
+        special_instructions: "None",
+      },
+      {
+        type: "home",
+        number: phone_prefix.concat("", "8049993333"),
+        special_instructions: "Stuff",
+      },
+    ]
+
+
+ */
+const phone_prefix = "+1";
+export const saveDemographicsFormToDB = async (patientId, demographicsform) => {
+  console.log(demographicsform);
+  const stringedobject = JSON.stringify(demographicsform);
+  //console.log(JSON.stringify(demographicsform));
+  const exampleform = {
+    first_name: demographicsform.first_name,
+    patient_demographics: {
+      race: "unknown",
+      gender: "unknown",
+      marital_status: "unknown",
+      employment_status: "unknown",
+      email: "",
+    },
+    patient_address: demographicsform.patient_address,
+    //patient_contact_methods: demographicsform.patient_contact_methods,
+    last_name: demographicsform.last_name,
+    middle_name: demographicsform.middle_name,
+    preferred_name: demographicsform.preferred_name,
+    date_of_birth: demographicsform.date_of_birth,
+    ssn: demographicsform.ssn,
+  };
+  const result = await axios.put(`${API_URL}/patients/${patientId}/`, {
+    first_name: demographicsform.first_name,
+    patient_demographics: {
+      race: "unknown",
+      gender: "unknown",
+      marital_status: "unknown",
+      employment_status: "unknown",
+      email: "",
+    },
+    patient_address: demographicsform.patient_address,
+    patient_contact_methods: [],
+    last_name: demographicsform.last_name,
+    middle_name: demographicsform.middle_name,
+    preferred_name: demographicsform.preferred_name,
+    date_of_birth: demographicsform.date_of_birth,
+    ssn: demographicsform.ssn,
+  });
   return result.data;
+};
+
+export const getBasicPatientInformation = async (patientId) => {
+  const result = await axios.get(`${API_URL}/patients/${patientId}/`);
+  console.log(result.data);
+  return result.data;
+};
+
+export const getPatientAddress = async (patientId) => {
+  const result = await axios.get(`${API_URL}/patients/${patientId}/`);
+  console.log(result.data);
+  return result.data;
+};
+
+export const updatePatientBasicInfo = async (patientId, demographics) => {
+  const result = await axios.patch(`${API_URL}/patients/${patientId}/`, {
+    demographics: {
+      race: demographics.patientnamedetails(),
+    },
+    first_name: demographics.patientnamedetails.first_name,
+    last_name: demographics.patientnamedetails.last_name,
+    date_of_birth: demographics.patientnamedetails.date_of_birth,
+    middle_name: demographics.patientnamedetails.middle_name,
+    preferred_name: demographics.patientnamedetails.preferred_name,
+    address: demographics.address,
+    patient_contact_methods: demographics.patient_contact_methods,
+    ssn: demographics.patientnamedetails.ssn,
+  });
+  return result.data;
+};
+
+export const updatePatientAddressInfo = async (patientId, address) => {
+  const result = await axios.patch(
+    `${API_URL}/patients/${patientId}/address/`,
+    address
+  );
+  return result.data;
+};
+
+const default_demographics = {
+  race: "",
+  gender: "",
+  marital_status: "",
+  employment_status: "",
+  email: "",
+};
+export const updatePatientDemographics = async (
+  patientId,
+  patientnamedetails,
+  address,
+  patient_contact_methods = [],
+  demographics = default_demographics
+) => {
+  console.log(demographics);
+  /*
+      address,
+    patient_contact_methods,
+   */
+  const new_demographics = {
+    first_name: patientnamedetails.first_name,
+    middle_name: patientnamedetails.middle_name,
+    last_name: patientnamedetails.last_name,
+    preferred_name: patientnamedetails.preferred_name,
+    date_of_birth: patientnamedetails.date_of_birth,
+    ssn: patientnamedetails.ssn,
+  };
+  console.log(new_demographics);
+  //const result = await updatePatientBasicInfo(patientId, demographics);
+  const result = await axios.put(
+    `${API_URL}/patients/${patientId}/`,
+    new_demographics
+  );
+
+  console.log(result);
+  //return result;
 };
 
 export const getPatientDiagnoses = async (patientId) => {
@@ -12,7 +167,18 @@ export const getPatientDiagnoses = async (patientId) => {
 };
 
 export const getPatientInsurance = async (patientId) => {
-  const result = await axios.get(`${API_URL}/patients/${patientId}/insurance/`);
+  const result = await axios.get(
+    `${API_URL}/patients/${patientId}/patient_insurances/`
+  );
+  return result.data;
+};
+
+export const addNewInsuranceForPatient = async (patientId, insurance) => {
+  console.log({ ...insurance, patient: patientId });
+  const result = await axios.post(
+    `${API_URL}/patients/${patientId}/patient_insurances/`,
+    { ...insurance, patient: patientId }
+  );
   return result.data;
 };
 

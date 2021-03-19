@@ -15,15 +15,11 @@ export function patientnameanddetails(state = default_nameanddetails, action) {
       return state;
   }
 }
-const default_patient_contact_methods = [
-  { type: "home", special_instructions: "testing", number: "804-241-6659" },
-  { type: "work", special_instructions: "testing2", number: "804-420-6969" },
-];
-export function patient_contact_methods(
-  state = default_patient_contact_methods,
-  action
-) {
+const default_patient_contact_methods = [];
+export function patient_contact_methods(state = [], action) {
   switch (action.type) {
+    case "load_patient_contact_methods":
+      return action.patient_contact_methods;
     default:
       return state;
   }
@@ -37,6 +33,8 @@ export function patientdiagnoses(state = [], action) {
   }
 }
 // contains all patient insurances, filter which ones appropriately in components
+
+// collection of all insurances that the patient has used at practice
 export function patientinsurances(state = [], action) {
   switch (action.type) {
     case "load_insurance":
@@ -61,18 +59,32 @@ const default_address = {
 export function patientaddress(state = default_address, action) {
   switch (action.type) {
     case "load_address":
-      return action.address;
-    case "address_is_null":
-      return default_address;
+      if (action.address === null) {
+        return default_address;
+      } else {
+        return action.address;
+      }
     default:
       return state;
   }
 }
 
-export function patientdemographics(state = {}, action) {
+const default_demographics = {
+  race: "",
+  gender: "",
+  marital_status: "",
+  employment_status: "",
+  email: "",
+};
+
+export function patientdemographics(state = default_demographics, action) {
   switch (action.type) {
     case "load_demographics":
-      return action.demographics;
+      if (action.demographics === null) {
+        return default_demographics;
+      } else {
+        return action.demographics;
+      }
     default:
       return state;
   }

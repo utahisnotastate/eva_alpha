@@ -26,6 +26,8 @@ import {
   appointmentassessments,
   assessmentinputfields,
   appointmentcomplaints,
+  clinical_data,
+  allforms,
   newcomplaintinputfields,
   appointmentforms,
   appointmentformfields,
@@ -86,6 +88,17 @@ function patientRequests(state = [], action) {
   switch (action.type) {
     case "load_patient_requests":
       return action.patientrequests;
+    default:
+      return state;
+  }
+}
+
+//Shove every form in there, and then whenever you need one instead of pulling it up when the component loads
+//You just grab it from here and filter what you need.
+function allpracticeforms(state = [], action) {
+  switch (action.type) {
+    case "load_all_practice_forms":
+      return action.forms;
     default:
       return state;
   }
@@ -155,6 +168,7 @@ const activeappointmentform = combineReducers({
 const appointment = combineReducers({
   appointmentcomplaints,
   assessments,
+  clinical_data,
   appointmentforms,
   appointmentformfields,
   activeappointmentform,
@@ -166,6 +180,7 @@ const patient = combineReducers({
   patientdiagnoses,
   patientmedications,
   patient_contact_methods,
+  patientinsurances,
   patientallergies,
   patientaddress,
   patientdemographics,
@@ -175,6 +190,7 @@ const patient = combineReducers({
 });
 
 export const allReducers = combineReducers({
+  allpracticeforms,
   clinicalqueue,
   patientToSchedule,
   formsmanager,

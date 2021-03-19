@@ -93,7 +93,7 @@ export default function FormsCenterHome(props) {
                         <NavLink to={`${url}/${physicalexam.id}/edit`}>
                           <ListItemText
                             primary={
-                              <Typography>{physicalexam.title}</Typography>
+                              <Typography>{physicalexam.title} </Typography>
                             }
                           />
                         </NavLink>
@@ -118,6 +118,7 @@ export default function FormsCenterHome(props) {
                 buttontext={`Create New Clinical Exam Form`}
                 modaltitle={`Create New Clinical Exam Form`}
                 form={CreateNewForm}
+                formprops="physical_exam"
               />
             </CardBody>
           </Card>

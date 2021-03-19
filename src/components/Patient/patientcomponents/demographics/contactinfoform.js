@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   useForm,
   Controller,
@@ -48,31 +49,36 @@ export default function ContactForm(props) {
   } = useFormContext();
   let { id } = useParams();
   const classes = useStyles();
+  const patient_contact_methods = useSelector(
+    (state) => state.patient.patient_contact_methods
+  );
   const new_type = watch("new_type");
   const new_number = watch("new_number");
   const new_special_instructions = watch("new_special_instructions");
+
+  const resetNewContactFormInput = () => {
+    setValue("new_type", "");
+    setValue("new_number", "");
+    setValue("new_special_instructions", "");
+  };
+
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
       control,
       name: "patient_contact_methods",
     }
   );
-  const [formfields, setFormFields] = useState([
-    { label: "Type", name: "type" },
-    { label: "Number", name: "number" },
-    {
-      label: "Special Instructions",
-      name: "special_instructions",
-      component: "TextField",
-    },
-  ]);
-  //const values = getValues();
-  console.log([]);
+  useEffect(() => {
+    const updateContactMethods = async () => {
+      append(patient_contact_methods);
+    };
+    updateContactMethods();
+  }, [id, patient_contact_methods]);
   return (
     <GridContainer className={classes.root}>
       {fields.length > 0 ? (
         fields.map((field, index) => (
-          <div key={index}>
+          <div key={index} style={{ display: "flex" }}>
             <GridItem>
               <div>
                 <label>
@@ -94,7 +100,7 @@ export default function ContactForm(props) {
             <GridItem>
               <TextField
                 name={`patient_contact_methods[${index}].number`}
-                ref={register()}
+                inputRef={register()}
                 type="tel"
                 defaultValue={field.number}
               />
@@ -102,10 +108,22 @@ export default function ContactForm(props) {
             <GridItem>
               <TextField
                 name={`patient_contact_methods[${index}].special_instructions`}
-                ref={register()}
+                inputRef={register()}
                 type="textarea"
                 defaultValue={field.special_instructions}
               />
+            </GridItem>
+            <GridItem>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  console.log("delete!");
+                  remove(index);
+                }}
+              >
+                X
+              </Button>
             </GridItem>
           </div>
         ))
@@ -153,12 +171,14 @@ export default function ContactForm(props) {
               color="primary"
               onClick={() => {
                 const values = getValues();
-                console.log(values);
+                const phone_prefix = "+1";
+                console.log(phone_prefix.concat("", new_number));
                 append({
                   type: new_type,
-                  number: new_number,
+                  number: phone_prefix.concat("", new_number),
                   special_instructions: new_special_instructions,
                 });
+                resetNewContactFormInput();
               }}
             >
               Add
@@ -170,6 +190,17 @@ export default function ContactForm(props) {
   );
 }
 /*
+  const [formfields, setFormFields] = useState([
+    { label: "Type", name: "type" },
+    { label: "Number", name: "number" },
+    {
+      label: "Special Instructions",
+      name: "special_instructions",
+      component: "TextField",
+    },
+  ]);
+  //const values = getValues();
+  console.log([]);
 <TextField
           name={`new_special_instructions`}
           ref={register()}

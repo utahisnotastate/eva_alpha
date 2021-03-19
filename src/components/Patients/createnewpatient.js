@@ -35,6 +35,20 @@ export default function CreateNewPatient() {
         last_name: data.last_name,
         preferred_name: data.preferred_name,
         ssn: data.ssn,
+        patient_demographics: {
+          race: "unknown",
+          gender: "unknown",
+          marital_status: "unknown",
+          employment_status: "unknown",
+        },
+        patient_address: {
+          address_one: "unknown",
+          address_two: "unknown",
+          city: "unknown",
+          state: "unknown",
+          zip_code: "unknown",
+        },
+        patient_contact_methods: [],
       })
       .then((response) => {
         if (response.statusText === "Created") {

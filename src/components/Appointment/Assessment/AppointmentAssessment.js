@@ -34,17 +34,19 @@ export default function AppointmentAssessment(props) {
 
   const dispatch = useDispatch();
   const assessments = useSelector(
-    (state) => state.appointment.assessments.assessments
+    (state) => state.appointment.clinical_data.assessments
   );
   const assessmentinputs = useSelector(
     (state) => state.appointment.assessments.inputfields
   );
   const complaints = useSelector(
-    (state) => state.appointment.appointmentcomplaints
+    (state) => state.appointment.clinical_data.complaints
   );
-  const findings = useSelector(
+  /*const findings = useSelector(
     (state) => state.appointment.appointmentfindings
-  );
+  );*/
+
+  const findings = [];
   const onSubmit = (data) => {
     console.log(data.appointmentassessments);
     saveAppointmentAssessments(id, data.appointmentassessments).then(
@@ -120,37 +122,6 @@ export default function AppointmentAssessment(props) {
       });
     });
   };
-  useEffect(() => {
-    getAppointmentBasicDetails(id).then((response) => {
-      if (response.appointment_assessment === null) {
-        getAppointmentFindings(id);
-        dispatch({ type: "load_assessments", assessments: [] });
-      } else {
-        console.log(
-          "assessments on server are " +
-            JSON.stringify(response.appointment_assessment.assessments)
-        );
-        getAppointmentFindings(id);
-        dispatch({
-          type: "load_assessments",
-          assessments: response.appointment_assessment.assessments,
-        });
-        append(response.appointment_assessment.assessments);
-      }
-    });
-    getAppointmentComplaints(id).then((response) => {
-      if (response.length === 0) {
-        console.log("There are no complaints yet!");
-        dispatch({ type: "load_complaints", complaints: [] });
-      } else {
-        console.log(response);
-        dispatch({
-          type: "load_complaints",
-          complaints: response[0].appointment_complaints.complaints,
-        });
-      }
-    });
-  }, [id]);
   console.log(complaints);
   console.log(findings);
   return (
@@ -187,6 +158,40 @@ export default function AppointmentAssessment(props) {
     </FormProvider>
   );
 }
+
+/*
+  useEffect(() => {
+    getAppointmentBasicDetails(id).then((response) => {
+      if (response.appointment_assessment === null) {
+        getAppointmentFindings(id);
+        dispatch({ type: "load_assessments", assessments: [] });
+      } else {
+        console.log(
+          "assessments on server are " +
+            JSON.stringify(response.appointment_assessment.assessments)
+        );
+        getAppointmentFindings(id);
+        dispatch({
+          type: "load_assessments",
+          assessments: response.appointment_assessment.assessments,
+        });
+        append(response.appointment_assessment.assessments);
+      }
+    });
+    getAppointmentComplaints(id).then((response) => {
+      if (response.length === 0) {
+        console.log("There are no complaints yet!");
+        dispatch({ type: "load_complaints", complaints: [] });
+      } else {
+        console.log(response);
+        dispatch({
+          type: "load_complaints",
+          complaints: response[0].appointment_complaints.complaints,
+        });
+      }
+    });
+  }, [id]);
+ */
 
 /*
 <Button onClick={() => handleAddAssessment()}>ADD</Button>

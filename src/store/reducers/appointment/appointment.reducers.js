@@ -1,7 +1,38 @@
+export function appointmentassessments(state = [], action) {
+  switch (action.type) {
+    case "load_assessments":
+      return action.assessments;
+    case "update_assessments":
+      return action.assessments;
+    case "add_new_simple_assessment":
+      return [...state, action.assessment];
+    default:
+      return state;
+  }
+}
+
+export function clinical_data(state = {}, action) {
+  switch (action.type) {
+    case "load_clinical_data":
+      return action.clinical_data;
+
+    case "save_complaints":
+      console.log({ ...state, complaints: action.complaints });
+      return { ...state, complaints: action.complaints };
+
+    default:
+      return state;
+  }
+}
+
 export function appointmentcomplaints(state = [], action) {
   switch (action.type) {
     case "add_new_simple_complaint":
       return [...state, action.complaint];
+    case "save_compleints":
+      console.log({ ...state, complaints: action.complaints });
+      return { ...state, complaints: action.complaints };
+
     case "load_complaints":
       return action.complaints;
     default:
@@ -16,19 +47,6 @@ export function newcomplaintinputfields(
   switch (action.type) {
     case "update_complaint_input_fields":
       return action.newcomplaint;
-    default:
-      return state;
-  }
-}
-
-export function appointmentassessments(state = [], action) {
-  switch (action.type) {
-    case "load_assessments":
-      return action.assessments;
-    case "update_assessments":
-      return action.assessments;
-    case "add_new_simple_assessment":
-      return [...state, action.assessment];
     default:
       return state;
   }
@@ -59,6 +77,7 @@ export function appointmentforms(state = [], action) {
       return state;
   }
 }
+
 export function appointmentformfields(state = {}, action) {
   switch (action.type) {
     case "load_appointment_form_fields":

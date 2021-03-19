@@ -22,13 +22,11 @@ import ActiveAppointmentForm from "./activeappointmentform";
 export default function AppointmentForm(props) {
   let { formId } = useParams();
   const dispatch = useDispatch();
+  const allforms = useSelector((state) => state.allpracticeforms);
+  //const [activeform, setActiveForm] = useState();
   // const formfields = useSelector(state => state.appointment.appointmentformfields);
-  const getAppointmentForm = async (appointmentId, formId) => {
-    const result = await axios(
-      `${API_URL}/appointments/${appointmentId}/forms/${formId}/`
-    );
-    return result.data;
-  };
+  //allforms.find((form) => form.id == formId);
+
   return (
     <ActiveAppointmentForm
       appointmentId={props.appointmentId}
@@ -38,6 +36,13 @@ export default function AppointmentForm(props) {
 }
 
 /*
+  const getAppointmentForm = async (appointmentId, formId) => {
+    const result = await axios(
+      `${API_URL}/appointments/${appointmentId}/forms/${formId}/`
+    );
+    return result.data;
+  };
+
 <Card>
       <CardHeader color={`primary`}>
         <h4>{appointmentform.title}</h4>
