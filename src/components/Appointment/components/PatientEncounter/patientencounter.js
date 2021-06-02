@@ -1,17 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-/*import Card from "../../basestyledcomponents/Card/Card";
-import CardHeader from "../../basestyledcomponents/Card/CardHeader";
-import CardBody from "../../basestyledcomponents/Card/CardBody";*/
-import {
-  Formik,
-  Field,
-  Form,
-  ErrorMessage,
-  FieldArray,
-  useField,
-  useFormikContext,
-} from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Stepper,
@@ -30,29 +17,8 @@ import {
   InputLabel,
   Input,
 } from "@material-ui/core";
-import {
-  fieldToTextField,
-  TextField,
-  TextFieldProps,
-  RadioGroup,
-  Select,
-  Switch,
-} from "formik-material-ui";
-import { useParams } from "react-router-dom";
 //Follow Up Icon
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
-//Complaints Icon
-import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
-//Plan Icon
-import AssignmentIcon from "@material-ui/icons/Assignment";
-//Asessment ICon
-import EnhancedEncryptionIcon from "@material-ui/icons/EnhancedEncryption";
-//ROS Icon
-import SettingsIcon from "@material-ui/icons/Settings";
-//Physical Exam
-import BallotIcon from "@material-ui/icons/Ballot";
-//Summary Icon
-import ReceiptIcon from "@material-ui/icons/Receipt";
 import PatientComplaints from "../../Complaints/PatientComplaints";
 import AppointmentPlan from "../../AppointmentPlan/AppointmentPlan";
 import AppointmentAssessment from "../../Assessment/AppointmentAssessment";
@@ -78,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 function getSteps() {
   return [
-    "Complaints",
-    "Review of Systems",
-    "Physical Exam",
-    "Assessment",
-    "Plan",
-    "Follow Up",
-    "Summary",
+    { index: 0, label: "Complaints" },
+    { index: 1, label: "Review of Systems" },
+    { index: 2, label: "Physical Exam" },
+    { index: 3, label: "Assessment" },
+    { index: 4, label: "Plan" },
+    { index: 5, label: "Follow Up" },
+    { index: 6, label: "Summary" },
   ];
 }
 
@@ -98,7 +64,8 @@ function FakeCompoent(props) {
 
 export default function PatientEncounter(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState("Complaints");
+  const [activeStep, setActiveStep] = useState(0);
+  // i have no idea why i did the steps like this
   const steps = getSteps();
 
   const handleStep = (step) => () => {
@@ -106,20 +73,30 @@ export default function PatientEncounter(props) {
   };
   function getStepContent(step) {
     switch (step) {
-      case "Complaints":
+      //display patient complaints component
+      case 0:
         return <PatientComplaints />;
-      case "Review of Systems":
+      //display review of systems component
+      case 1:
         return <FakeCompoent label="Review of Systems" />;
-      case "Physical Exam":
+      //display physical exam component
+      // case "Physical Exam":
+      case 2:
         return <FakeCompoent label="Physical Exam" />;
-      case "Assessment":
+      //display assessment component
+      // case "Assessment":
+      case 3:
         return <AppointmentAssessment />;
-      case "Plan":
+      //display plan component
+      // case "Plan":
+      case 4:
         return <AppointmentPlan />;
-      case "Follow Up":
+      //display follow up component
+      // case "Follow Up":
+      case 5:
         return <FakeCompoent label="Follow Up" />;
-
-      case "Summary":
+      // case "Summary":
+      case 6:
         return <AppointmentSummary summary={props.summary} />;
 
       default:
@@ -133,22 +110,24 @@ export default function PatientEncounter(props) {
         <Grid container direction={`row`}>
           <Grid item xs={10}>
             <Stepper nonLinear activeStep={activeStep}>
-              {steps.map((label, index) => (
+              {steps.map((step, index) => (
                 <Step
-                  key={label}
-                  active={activeStep === label}
+                  key={step.label}
+                  active={activeStep === step.index}
                   className={classes.step}
                 >
                   <StepButton
                     icon={<InsertInvitationIcon />}
-                    onClick={handleStep(label)}
-                    className={activeStep === label ? classes.active : ""}
+                    onClick={handleStep(step.index)}
+                    className={activeStep === step.index ? classes.active : ""}
                   >
                     <StepLabel>
                       <Typography
-                        className={activeStep === label ? classes.active : ""}
+                        className={
+                          activeStep === step.index ? classes.active : ""
+                        }
                       >
-                        {label}
+                        {step.label}
                       </Typography>
                     </StepLabel>
                   </StepButton>

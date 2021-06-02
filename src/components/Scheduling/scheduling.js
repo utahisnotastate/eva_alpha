@@ -74,17 +74,7 @@ export default function Scheduling() {
   }
   // handles create new patient form
   const onSubmit = (data) => {
-    console.log("Resource Id " + slottoschedule.resourceId);
-    console.log(data);
-    console.log({
-      patient: parseInt(id),
-      provider: slottoschedule.resourceId,
-      clinical_data: JSON.stringify(blankclinicaldata),
-      type: data.type,
-      status: "scheduled",
-      start: moment(data.start).toISOString(),
-      end: moment(data.end).toISOString(),
-    });
+    // this schedules appointment. I dont know why I don't have this in the appointment API.
     axios
       .post("http://127.0.0.1:8000/api/appointments/", {
         patient: parseInt(id),

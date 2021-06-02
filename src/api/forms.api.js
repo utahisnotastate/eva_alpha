@@ -7,6 +7,12 @@ export const fetchAllForms = async () => {
   return result.data;
 };
 
+//not used
+export const getAllActivePEAndRosForms = async () => {
+  const result = await axios(`${API_URL}/activeforms/`);
+  return result.data;
+};
+
 export const getAppointmentClinicalData = async (appointmentId) => {
   const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
   return result.data.clinical_data;

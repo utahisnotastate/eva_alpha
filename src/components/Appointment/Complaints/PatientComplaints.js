@@ -3,7 +3,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm, FormProvider, useFieldArray } from "react-hook-form";
+import { FormProvider, useFieldArray, useFormContext } from "react-hook-form";
 import NewComplaint from "./NewComplaint/NewComplaint.FunComp";
 import { TextField } from "@material-ui/core";
 import Button from "../../basestyledcomponents/Button";
@@ -43,11 +43,12 @@ export default function PatientComplaints(props) {
   const complaints = useSelector(
     (state) => state.appointment.clinical_data.complaints
   );
-  const methods = useForm({
+  /*const methods = useForm({
     defaultValues: {
       complaints: complaints,
     },
-  });
+  });*/
+  const methods = useFormContext();
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
@@ -97,165 +98,157 @@ export default function PatientComplaints(props) {
     remove(index);
   };
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Grid
-          container
-          direction={`column`}
-          justify="space-evenly"
-          alignItems="stretch"
-          spacing={2}
-        >
-          <Grid item>
-            <Grid container direction="column">
-              {fields.length > 0
-                ? fields.map((field, index) => (
-                    <Grid item key={index}>
-                      <Card raised>
-                        <Grid container direction="column">
-                          <Grid item>
-                            <Grid container direction="row">
-                              <Grid item>
-                                <Button
-                                  color={`danger`}
-                                  onClick={() => handleRemove(index)}
-                                >
-                                  X
-                                </Button>
-                              </Grid>
+    <>
+      <Grid
+        container
+        direction={`column`}
+        justify="space-evenly"
+        alignItems="stretch"
+        spacing={2}
+      >
+        <Grid item>
+          <Grid container direction="column">
+            {fields.length > 0
+              ? fields.map((field, index) => (
+                  <Grid item key={index}>
+                    <Card raised>
+                      <Grid container direction="column">
+                        <Grid item>
+                          <Grid container direction="row">
+                            <Grid item>
+                              <Button
+                                color={`danger`}
+                                onClick={() => handleRemove(index)}
+                              >
+                                X
+                              </Button>
                             </Grid>
                           </Grid>
-                          <Grid item>
-                            <CardHeader>
-                              <Grid item>
-                                <Typography>Complaint</Typography>
-                              </Grid>
-                              <Grid item>
-                                <Grid container direction="column">
-                                  <Grid
-                                    item
-                                    className={classes.headercontainer}
-                                  >
-                                    <TextField
-                                      inputRef={methods.register()}
-                                      name={`complaints[${index}].complaint_name`}
-                                      fullWidth
-                                      defaultValue={field.complaint_name}
-                                      variant="outlined"
-                                    />
-                                  </Grid>
-                                  <Grid
-                                    item
-                                    className={classes.headercontainer}
-                                  >
-                                    <TextField
-                                      inputRef={methods.register()}
-                                      name={`complaints[${index}].complaint_description`}
-                                      fullWidth
-                                      variant="outlined"
-                                      defaultValue={field.complaint_description}
-                                    />
-                                  </Grid>
-                                </Grid>
-                              </Grid>
-                            </CardHeader>
-                          </Grid>
-                          <Grid item>
-                            <CardBody>
+                        </Grid>
+                        <Grid item>
+                          <CardHeader>
+                            <Grid item>
+                              <Typography>Complaint</Typography>
+                            </Grid>
+                            <Grid item>
                               <Grid container direction="column">
-                                <Grid item>
-                                  <Typography>Choose Complaint Form</Typography>
-                                </Grid>
-                                <Grid item className={classes.sectioncontainer}>
-                                  <Typography>Onset</Typography>
+                                <Grid item className={classes.headercontainer}>
                                   <TextField
                                     inputRef={methods.register()}
-                                    type={`date`}
-                                    name={`complaints[${index}].onset`}
-                                    defaultValue={field.onset}
+                                    name={`complaints[${index}].complaint_name`}
                                     fullWidth
+                                    defaultValue={field.complaint_name}
+                                    variant="outlined"
                                   />
                                 </Grid>
-                                <Grid item className={classes.sectioncontainer}>
-                                  <Grid container direction="column">
-                                    <Grid item>
-                                      <Typography>
-                                        Patient's Explanation
-                                      </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <Grid container direction="column">
-                                        <Grid
-                                          item
-                                          className={classes.sectioncontainer}
-                                        >
-                                          <TextField
-                                            inputRef={methods.register()}
-                                            name={`complaints[${index}].patient_therapeutic_attempts`}
-                                            fullWidth
-                                            placeholder={`Please document any treatment attempts the patient has done`}
-                                            defaultValue={
-                                              field.patient_therapeutic_attempts
-                                            }
-                                            variant="outlined"
-                                          />
-                                        </Grid>
-                                        <Grid
-                                          item
-                                          className={classes.sectioncontainer}
-                                        >
-                                          <TextField
-                                            inputRef={methods.register()}
-                                            name={`complaints[${index}].patient_belief_caused_by`}
-                                            placeholder={`Please document what patient beliefs the complaint is caused by`}
-                                            defaultValue={
-                                              field.patient_belief_caused_by
-                                            }
-                                            fullWidth
-                                            variant="outlined"
-                                          />
-                                        </Grid>
+                                <Grid item className={classes.headercontainer}>
+                                  <TextField
+                                    inputRef={methods.register()}
+                                    name={`complaints[${index}].complaint_description`}
+                                    fullWidth
+                                    variant="outlined"
+                                    defaultValue={field.complaint_description}
+                                  />
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </CardHeader>
+                        </Grid>
+                        <Grid item>
+                          <CardBody>
+                            <Grid container direction="column">
+                              <Grid item>
+                                <Typography>Choose Complaint Form</Typography>
+                              </Grid>
+                              <Grid item className={classes.sectioncontainer}>
+                                <Typography>Onset</Typography>
+                                <TextField
+                                  inputRef={methods.register()}
+                                  type={`date`}
+                                  name={`complaints[${index}].onset`}
+                                  defaultValue={field.onset}
+                                  fullWidth
+                                />
+                              </Grid>
+                              <Grid item className={classes.sectioncontainer}>
+                                <Grid container direction="column">
+                                  <Grid item>
+                                    <Typography>
+                                      Patient's Explanation
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Grid container direction="column">
+                                      <Grid
+                                        item
+                                        className={classes.sectioncontainer}
+                                      >
+                                        <TextField
+                                          inputRef={methods.register()}
+                                          name={`complaints[${index}].patient_therapeutic_attempts`}
+                                          fullWidth
+                                          placeholder={`Please document any treatment attempts the patient has done`}
+                                          defaultValue={
+                                            field.patient_therapeutic_attempts
+                                          }
+                                          variant="outlined"
+                                        />
+                                      </Grid>
+                                      <Grid
+                                        item
+                                        className={classes.sectioncontainer}
+                                      >
+                                        <TextField
+                                          inputRef={methods.register()}
+                                          name={`complaints[${index}].patient_belief_caused_by`}
+                                          placeholder={`Please document what patient beliefs the complaint is caused by`}
+                                          defaultValue={
+                                            field.patient_belief_caused_by
+                                          }
+                                          fullWidth
+                                          variant="outlined"
+                                        />
                                       </Grid>
                                     </Grid>
                                   </Grid>
                                 </Grid>
-                                <Grid item className={classes.sectioncontainer}>
-                                  <Typography>Provider's Notes</Typography>
-                                  <TextField
-                                    inputRef={methods.register()}
-                                    name={`complaints[${index}].other_notes`}
-                                    placeholder={`Provider notes only`}
-                                    defaultValue={field.other_notes}
-                                    fullWidth
-                                    variant="outlined"
-                                  />
-                                </Grid>
                               </Grid>
-                            </CardBody>
-                          </Grid>
+                              <Grid item className={classes.sectioncontainer}>
+                                <Typography>Provider's Notes</Typography>
+                                <TextField
+                                  inputRef={methods.register()}
+                                  name={`complaints[${index}].other_notes`}
+                                  placeholder={`Provider notes only`}
+                                  defaultValue={field.other_notes}
+                                  fullWidth
+                                  variant="outlined"
+                                />
+                              </Grid>
+                            </Grid>
+                          </CardBody>
                         </Grid>
-                      </Card>
-                    </Grid>
-                  ))
-                : null}
-            </Grid>
-          </Grid>
-          <Grid item>
-            <h3>Add Complaint</h3>
-            <NewComplaint
-              control={methods.control}
-              register={methods.register}
-              setValue={methods.setValue}
-              getValues={methods.getValues}
-              append={append}
-              addComplaintToForm={addComplaintToForm}
-            />
+                      </Grid>
+                    </Card>
+                  </Grid>
+                ))
+              : null}
           </Grid>
         </Grid>
         <Grid item>
-          <input type="submit" value={`Save`} />
+          <h3>Add Complaint</h3>
+          <NewComplaint
+            control={methods.control}
+            register={methods.register}
+            setValue={methods.setValue}
+            getValues={methods.getValues}
+            append={append}
+            addComplaintToForm={addComplaintToForm}
+          />
         </Grid>
-      </form>
-    </FormProvider>
+      </Grid>
+      <Grid item>
+        <input type="submit" value={`Save`} />
+      </Grid>
+    </>
   );
 }

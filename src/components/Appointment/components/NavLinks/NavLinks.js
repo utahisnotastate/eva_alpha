@@ -26,7 +26,7 @@ export default function NavLinks(props) {
         <Typography>Patient Details</Typography>
         {props.patientroutes && props.patientroutes.length > 0 ? (
           props.patientroutes.map((route) => (
-            <NavLink exact to={`${url}/test`}>
+            <NavLink exact to={`${url}${route.path}/1`}>
               <ListItemText primary={`${route.label}`} />
             </NavLink>
           ))

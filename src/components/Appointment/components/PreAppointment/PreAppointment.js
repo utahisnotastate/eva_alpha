@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../../../basestyledcomponents/Card/Card";
 import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 export default function PreAppointment(props) {
   const classes = useStyles();
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors } = useFormContext();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -58,17 +58,15 @@ export default function PreAppointment(props) {
         <Typography>Scheduling Note</Typography>
       </Grid>
       <Grid item>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            inputRef={register}
-            multiline
-            fullWidth
-            placeholder={`Enter any information that came up during the scheduling process`}
-            defaultValue={props.appointment.scheduling_note}
-            variant={`outlined`}
-          />
-          <input type="submit" />
-        </form>
+        <TextField
+          inputRef={register}
+          multiline
+          fullWidth
+          placeholder={`Enter any information that came up during the scheduling process`}
+          name={`scheduling_note`}
+          variant={`outlined`}
+        />
+        <input type="submit" />
       </Grid>
     </Grid>
   );
