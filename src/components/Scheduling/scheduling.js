@@ -20,13 +20,8 @@ import {
 } from "@material-ui/core";
 import GridContainer from "../basestyledcomponents/Grid/GridContainer";
 import GridItem from "../basestyledcomponents/Grid/GridItem";
-import TextField from "@material-ui/core/TextField";
 import { useModal } from "react-modal-hook";
-import CheckInForm from "../Forms/Administrative/Scheduling/CheckIn/checkin";
-import Modal from "../basestyledcomponents/Modal/modal";
 import Card from "../basestyledcomponents/Card/Card";
-import TimeSlot from "./Day/Appointment/components/TimeSlot/timeslot";
-// import SlotDialog from "../basestyledcomponents/Modal/Dialog";
 import CardBody from "../basestyledcomponents/Card/CardBody";
 import AppointmentScheduleEvent from "./Day/Appointment/appointmentscheduleevent";
 import WaitListCountCard from "./WaitList/waitlistcountcard";
@@ -94,6 +89,7 @@ export default function Scheduling() {
       .post("http://127.0.0.1:8000/api/appointments/", {
         patient: parseInt(id),
         provider: slottoschedule.resourceId,
+        clinical_data: blankclinicaldata,
         type: data.type,
         status: "scheduled",
         start: moment(data.start).toISOString(),

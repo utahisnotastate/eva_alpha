@@ -50,6 +50,7 @@ import {
   getAppointmentClinicalData,
   getAllAppointmentInformation,
 } from "../../api/forms.api";
+import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -86,6 +87,48 @@ function UpcomingAppointmentForm() {
   );
 }
 
+function AppointmentSidebar(props) {
+  return (
+    <List className={props.classes.list}>
+      <ListItem button onClick={props.onClick}>
+        <ListItemIcon>
+          <DraftsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Appointment Information" />
+        {props.appointmentinfoopen ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={props.appointmentinfoopen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {props.appointmentroutes.map(props.callbackfn)}
+        </List>
+      </Collapse>
+
+      <ListItem button onClick={props.onClick1}>
+        <ListItemIcon>
+          <DraftsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Patient Information" />
+        {props.patientoptionsopen ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={props.patientoptionsopen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {patientroutes.map(props.prop7)}
+        </List>
+      </Collapse>
+    </List>
+  );
+}
+
+AppointmentSidebar.propTypes = {
+  classes: PropTypes.any,
+  onClick: PropTypes.func,
+  appointmentinfoopen: PropTypes.bool,
+  appointmentroutes: PropTypes.any,
+  callbackfn: PropTypes.func,
+  onClick1: PropTypes.func,
+  patientoptionsopen: PropTypes.bool,
+  prop7: PropTypes.func,
+};
 export default function Appointment() {
   let { id } = useParams();
   const dispatch = useDispatch();
@@ -274,87 +317,60 @@ export default function Appointment() {
   return (
     <Grid container className={classes.base} spacing={2}>
       <Grid item xs={2}>
-        <List className={classes.list}>
-          <ListItem
-            button
-            onClick={() => setAppointmentInfoOpen(!appointmentinfoopen)}
-          >
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Appointment Information" />
-            {appointmentinfoopen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={appointmentinfoopen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {appointmentroutes.map((route) => {
-                if (route.nestedroutes) {
-                  return (
-                    <>
-                      <ListItem key={route.label}>
-                        <NavLink
-                          exact
-                          activeStyle={{ color: "white" }}
-                          to={`${url}${route.path}`}
-                        >
-                          <ListItemText primary={`${route.label}`} />
-                        </NavLink>
-                        {route.menuopen ? (
-                          <ExpandLess onClick={route.openNestedMenu} />
-                        ) : (
-                          <ExpandMore onClick={route.openNestedMenu} />
-                        )}
-                      </ListItem>
-                      <Collapse
-                        in={route.menuopen}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        <DeepNestedList
-                          subroutes={route.subroutes}
-                          path={route.path}
-                        />
-                      </Collapse>
-                    </>
-                  );
-                } else {
-                  return <SimpleRoute path={route.path} label={route.label} />;
-                }
-              })}
-            </List>
-          </Collapse>
-
-          <ListItem
-            key={`Patient_Information`}
-            button
-            onClick={() => setPatientOptionsOpen(!patientoptionsopen)}
-          >
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Patient Information" />
-            {patientoptionsopen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={patientoptionsopen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {patientroutes.map((route) => (
-                <ListItem className={classes.nested} key={route.label}>
-                  <NavLink
-                    exact
-                    activeStyle={{ color: "white" }}
-                    to={`${url}${route.path}`}
-                  >
-                    <ListItemText
-                      primary={
-                        <Typography variant="body1">{route.label}</Typography>
-                      }
+        <AppointmentSidebar
+          key={`Patient_Information`}
+          classes={classes}
+          onClick={() => setAppointmentInfoOpen(!appointmentinfoopen)}
+          appointmentinfoopen={appointmentinfoopen}
+          appointmentroutes={appointmentroutes}
+          callbackfn={(route) => {
+            if (route.nestedroutes) {
+              return (
+                <>
+                  <ListItem key={route.label}>
+                    <NavLink
+                      exact
+                      activeStyle={{ color: "white" }}
+                      to={`${url}${route.path}`}
+                    >
+                      <ListItemText primary={`${route.label}`} />
+                    </NavLink>
+                    {route.menuopen ? (
+                      <ExpandLess onClick={route.openNestedMenu} />
+                    ) : (
+                      <ExpandMore onClick={route.openNestedMenu} />
+                    )}
+                  </ListItem>
+                  <Collapse in={route.menuopen} timeout="auto" unmountOnExit>
+                    <DeepNestedList
+                      subroutes={route.subroutes}
+                      path={route.path}
                     />
-                  </NavLink>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </List>
+                  </Collapse>
+                </>
+              );
+            } else {
+              return <SimpleRoute path={route.path} label={route.label} />;
+            }
+          }}
+          onClick1={() => setPatientOptionsOpen(!patientoptionsopen)}
+          patientoptionsopen={patientoptionsopen}
+          prop7={(route) => (
+            <ListItem className={classes.nested} key={route.label}>
+              <NavLink
+                exact
+                activeStyle={{ color: "white" }}
+                to={`${url}${route.path}`}
+              >
+                <ListItemText
+                  primary={
+                    <Typography variant="body1">{route.label}</Typography>
+                  }
+                />
+              </NavLink>
+            </ListItem>
+          )}
+        />
       </Grid>
       <Grid item xs={10}>
         <Card raised>
