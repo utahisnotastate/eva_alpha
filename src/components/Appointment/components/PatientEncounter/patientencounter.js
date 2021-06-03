@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Formik, Field, Form, useField, FieldArray } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Stepper,
@@ -19,10 +20,15 @@ import {
 } from "@material-ui/core";
 //Follow Up Icon
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
-import PatientComplaints from "../../Complaints/PatientComplaints";
+//import PatientComplaints from "../../Complaints/PatientComplaints";
+import Complaints from "./Complaints/complaints";
 import AppointmentPlan from "../../AppointmentPlan/AppointmentPlan";
 import AppointmentAssessment from "../../Assessment/AppointmentAssessment";
 import AppointmentSummary from "../../AppointmentSummary/AppointmentSummary";
+import VerticalTabs from "../VerticalTabs/VerticalTabs";
+import Physicalexam from "../VerticalTabs/PhysicalExam/physicalexam";
+import ReviewOfSystems from "../VerticalTabs/ReviewOfSystems/reviewofsystems";
+import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +68,65 @@ function FakeCompoent(props) {
   );
 }
 
+function EncounterStepper(props) {
+  return (
+    <Grid item>
+      <Grid container direction={`row`}>
+        <Grid item xs={10}>
+          <Stepper nonLinear activeStep={props.activeStep}>
+            {props.steps.map(props.prop2)}
+          </Stepper>
+        </Grid>
+        <Grid item xs={2} className={props.classes.end_encounter}>
+          <Button variant={`contained`} color={`primary`}>
+            End Encounter
+          </Button>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
+
+EncounterStepper.propTypes = {
+  activeStep: PropTypes.number,
+  steps: PropTypes.any,
+  prop2: PropTypes.func,
+  classes: PropTypes.any,
+};
+
+function EncounterStep(props) {
+  return (
+    <Step
+      active={props.activeStep === props.step.index}
+      className={props.classes.step}
+    >
+      <StepButton
+        icon={<InsertInvitationIcon />}
+        onClick={props.onClick}
+        className={
+          props.activeStep === props.step.index ? props.classes.active : ""
+        }
+      >
+        <StepLabel>
+          <Typography
+            className={
+              props.activeStep === props.step.index ? props.classes.active : ""
+            }
+          >
+            {props.step.label}
+          </Typography>
+        </StepLabel>
+      </StepButton>
+    </Step>
+  );
+}
+
+EncounterStep.propTypes = {
+  activeStep: PropTypes.number,
+  step: PropTypes.any,
+  classes: PropTypes.any,
+  onClick: PropTypes.func,
+};
 export default function PatientEncounter(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
@@ -71,18 +136,97 @@ export default function PatientEncounter(props) {
   const handleStep = (step) => () => {
     setActiveStep(step);
   };
-  function getStepContent(step) {
+  function getStepContent(step, formvalues) {
     switch (step) {
       //display patient complaints component
       case 0:
-        return <PatientComplaints />;
+        return (
+          <Complaints
+            name={`clinical_data.complaints`}
+            complaints={formvalues.clinical_data.complaints}
+          />
+        );
       //display review of systems component
       case 1:
-        return <FakeCompoent label="Review of Systems" />;
+        return <Complaints />;
+      case 2:
+        return <Complaints />;
+      case 3:
+        return <Complaints />;
+      case 4:
+        return <Complaints />;
+      case 5:
+        return <Complaints />;
+      case 6:
+        return <Complaints />;
+
+      default:
+        return <FakeCompoent label="Unknown" />;
+    }
+  }
+
+  return (
+    <div>
+      <Formik
+        initialValues={{
+          clinical_data: {
+            complaints: [
+              {
+                id: "" + Math.random(),
+                complaint_name: "Test Complaint Name",
+                complaint_description: "This is complaint description",
+                fieldname: "complaint_name",
+              },
+            ],
+            assessments: [],
+            plan: [],
+            followup: [],
+            summary: "",
+          },
+        }}
+      >
+        {({ values }) => (
+          <Form>
+            <Grid container direction={`column`} className={classes.root}>
+              <EncounterStepper
+                activeStep={activeStep}
+                steps={steps}
+                prop2={(step, index) => (
+                  <EncounterStep
+                    key={step.label}
+                    activeStep={activeStep}
+                    step={step}
+                    classes={classes}
+                    onClick={handleStep(step.index)}
+                  />
+                )}
+                classes={classes}
+              />
+              <Grid item>
+                <div>{getStepContent(activeStep, values)}</div>
+              </Grid>
+            </Grid>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+}
+
+/*
+      case 1:
+        return (
+          <ReviewOfSystems
+            label="Review of Systems"
+            form_type={`review_of_systems`}
+          />
+        );
       //display physical exam component
       // case "Physical Exam":
       case 2:
-        return <FakeCompoent label="Physical Exam" />;
+        return (
+          <Physicalexam label="Physical Exam" form_type={`physical_exam`} />
+        );
       //display assessment component
       // case "Assessment":
       case 3:
@@ -99,57 +243,9 @@ export default function PatientEncounter(props) {
       case 6:
         return <AppointmentSummary summary={props.summary} />;
 
-      default:
-        return <FakeCompoent label="Unknown" />;
-    }
-  }
 
-  return (
-    <Grid container direction={`column`} className={classes.root}>
-      <Grid item>
-        <Grid container direction={`row`}>
-          <Grid item xs={10}>
-            <Stepper nonLinear activeStep={activeStep}>
-              {steps.map((step, index) => (
-                <Step
-                  key={step.label}
-                  active={activeStep === step.index}
-                  className={classes.step}
-                >
-                  <StepButton
-                    icon={<InsertInvitationIcon />}
-                    onClick={handleStep(step.index)}
-                    className={activeStep === step.index ? classes.active : ""}
-                  >
-                    <StepLabel>
-                      <Typography
-                        className={
-                          activeStep === step.index ? classes.active : ""
-                        }
-                      >
-                        {step.label}
-                      </Typography>
-                    </StepLabel>
-                  </StepButton>
-                </Step>
-              ))}
-            </Stepper>
-          </Grid>
-          <Grid item xs={2} className={classes.end_encounter}>
-            <Button variant={`contained`} color={`primary`}>
-              End Encounter
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item>
-        <div>{getStepContent(activeStep)}</div>
-      </Grid>
-    </Grid>
-  );
-}
 
-/*
+
                     <Typography
                       className={activeStep === label ? classes.active : ""}
                     >

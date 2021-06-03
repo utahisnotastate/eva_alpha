@@ -52,8 +52,7 @@ export default function PatientComplaints(props) {
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
-      control: methods.control,
-      name: "complaints",
+      name: "clinical_data.complaints",
     }
   );
   // const { complaints, values } = props;
@@ -81,7 +80,7 @@ export default function PatientComplaints(props) {
   const onSubmit = (data) => {
     const values = methods.getValues();
     console.log(values.complaints);
-    dispatch({ type: "save_complaints", complaints: values.complaints });
+    //dispatch({ type: "save_complaints", complaints: values.complaints });
     /*const complaints = { complaints: values.complaints };
         saveAppointmentComplaints(id, complaints).then((response) => {
           console.log(response);
@@ -97,6 +96,7 @@ export default function PatientComplaints(props) {
   const handleRemove = (index) => {
     remove(index);
   };
+  methods.watch("clinical_data.complaints");
   return (
     <>
       <Grid
@@ -135,7 +135,7 @@ export default function PatientComplaints(props) {
                                 <Grid item className={classes.headercontainer}>
                                   <TextField
                                     inputRef={methods.register()}
-                                    name={`complaints[${index}].complaint_name`}
+                                    name={`clinical_data.complaints[${index}].complaint_name`}
                                     fullWidth
                                     defaultValue={field.complaint_name}
                                     variant="outlined"
@@ -144,7 +144,7 @@ export default function PatientComplaints(props) {
                                 <Grid item className={classes.headercontainer}>
                                   <TextField
                                     inputRef={methods.register()}
-                                    name={`complaints[${index}].complaint_description`}
+                                    name={`clinical_data.complaints[${index}].complaint_description`}
                                     fullWidth
                                     variant="outlined"
                                     defaultValue={field.complaint_description}
@@ -165,7 +165,7 @@ export default function PatientComplaints(props) {
                                 <TextField
                                   inputRef={methods.register()}
                                   type={`date`}
-                                  name={`complaints[${index}].onset`}
+                                  name={`clinical_data.complaints[${index}].onset`}
                                   defaultValue={field.onset}
                                   fullWidth
                                 />
@@ -185,7 +185,7 @@ export default function PatientComplaints(props) {
                                       >
                                         <TextField
                                           inputRef={methods.register()}
-                                          name={`complaints[${index}].patient_therapeutic_attempts`}
+                                          name={`clinical_data.complaints[${index}].patient_therapeutic_attempts`}
                                           fullWidth
                                           placeholder={`Please document any treatment attempts the patient has done`}
                                           defaultValue={
@@ -200,7 +200,7 @@ export default function PatientComplaints(props) {
                                       >
                                         <TextField
                                           inputRef={methods.register()}
-                                          name={`complaints[${index}].patient_belief_caused_by`}
+                                          name={`clinical_data.complaints[${index}].patient_belief_caused_by`}
                                           placeholder={`Please document what patient beliefs the complaint is caused by`}
                                           defaultValue={
                                             field.patient_belief_caused_by
@@ -217,7 +217,7 @@ export default function PatientComplaints(props) {
                                 <Typography>Provider's Notes</Typography>
                                 <TextField
                                   inputRef={methods.register()}
-                                  name={`complaints[${index}].other_notes`}
+                                  name={`clinical_data.complaints[${index}].other_notes`}
                                   placeholder={`Provider notes only`}
                                   defaultValue={field.other_notes}
                                   fullWidth

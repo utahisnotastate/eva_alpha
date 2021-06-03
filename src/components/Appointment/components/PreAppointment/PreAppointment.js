@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 export default function PreAppointment(props) {
   const classes = useStyles();
-  const { register, handleSubmit, watch, errors } = useFormContext();
+  //const { register, handleSubmit, watch, errors } = useFormContext();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -59,7 +59,6 @@ export default function PreAppointment(props) {
       </Grid>
       <Grid item>
         <TextField
-          inputRef={register}
           multiline
           fullWidth
           placeholder={`Enter any information that came up during the scheduling process`}
