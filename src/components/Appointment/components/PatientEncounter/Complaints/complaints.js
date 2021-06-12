@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { makeStyles, Typography, Button, TextField } from "@material-ui/core";
-import { Formik, Field, Form, useField, FieldArray } from "formik";
+import { makeStyles, Typography, Button } from "@material-ui/core";
+import {
+  Formik,
+  Field,
+  Form,
+  useField,
+  FieldArray,
+  useFormikContext,
+} from "formik";
+import { TextField } from "formik-material-ui";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
 import CardBody from "../../../../basestyledcomponents/Card/CardBody";
@@ -35,24 +43,7 @@ Complaint.propTypes = {
   field: PropTypes.any,
 };
 
-function AddNewComplaint(props) {
-  const [complaintname, setComplaintName] = useState();
-  const [description, setDescription] = useState();
-  return (
-    <Card raised>
-      <CardHeader color={`primary`}>
-        <Typography>New Complaint</Typography>
-      </CardHeader>
-      <CardBody
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-      >
-        <TextField
-          label={`Complaint Name`}
-          name={`new_complaint_name`}
-          defaultValue={complaintname}
-          onChange={(event) => setComplaintName(event.target.value)}
-          variant={`outlined`}
-        />
+/*
         <TextField
           name={`new_complaint_description`}
           label={`Complaint Description`}
@@ -62,6 +53,44 @@ function AddNewComplaint(props) {
           multiline
           rows={5}
         />
+ */
+
+function AddNewComplaint(props) {
+  const [complaintname, setComplaintName] = useState("");
+  const [description, setDescription] = useState("");
+  const { setFieldValue } = useFormikContext();
+
+  function resetForm(name, description) {
+    setFieldValue("new_complaint_name", "");
+    setFieldValue("new_complaint_description", "");
+    //setComplaintName(name);
+    //setDescription(description);
+  }
+  return (
+    <Card raised>
+      <CardHeader color={`primary`}>
+        <Typography>New Complaint</Typography>
+      </CardHeader>
+      <CardBody
+        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+      >
+        <Field
+          component={TextField}
+          label={`Complaint Name`}
+          name={`new_complaint_name`}
+          variant={`outlined`}
+          onChange={(e) => setComplaintName(e.target.value)}
+        />
+        <Field
+          component={TextField}
+          multiline
+          rows={5}
+          label={`Complaint Name`}
+          name={`new_complaint_description`}
+          variant={`outlined`}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
         <Button
           color={`primary`}
           variant={`text`}
@@ -70,8 +99,7 @@ function AddNewComplaint(props) {
               complaint_name: complaintname,
               complaint_description: description,
             });
-            setComplaintName("");
-            setDescription("");
+            resetForm(complaintname, description);
           }}
         >
           Add Complaint
@@ -84,7 +112,6 @@ export default function PatientComplaints(props) {
   let { id } = useParams();
   let dispatch = useDispatch();
   const classes = useStyles();
-
   const onSubmit = (data) => {
     console.log(data);
   };

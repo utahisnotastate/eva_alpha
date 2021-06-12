@@ -3,9 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 
+// THIS IS NO LONGER USED
 export default function AppointmentDetails(props) {
   return (
     <Grid container direction="column">
+      <Grid item>
+        <pre>{JSON.stringify(props.appointment, null, 2)}</pre>
+      </Grid>
+    </Grid>
+  );
+}
+
+/*
+<Grid container direction="column">
       <Grid item>
         <Typography>Medical Appointment</Typography>
         <Typography>
@@ -25,5 +35,4 @@ export default function AppointmentDetails(props) {
         </Typography>
       </Grid>
     </Grid>
-  );
-}
+ */

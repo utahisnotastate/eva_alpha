@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Field, Form, useField, FieldArray } from "formik";
+import { useFormikContext } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Stepper,
@@ -27,7 +27,7 @@ import AppointmentAssessment from "../../Assessment/AppointmentAssessment";
 import AppointmentSummary from "../../AppointmentSummary/AppointmentSummary";
 import VerticalTabs from "../VerticalTabs/VerticalTabs";
 import Physicalexam from "../VerticalTabs/PhysicalExam/physicalexam";
-import ReviewOfSystems from "../VerticalTabs/ReviewOfSystems/reviewofsystems";
+import ReviewOfSystems from "./ReviewOfSystems/ReviewOfSystems";
 import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
@@ -130,6 +130,7 @@ EncounterStep.propTypes = {
 export default function PatientEncounter(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+  const { values } = useFormikContext();
   // i have no idea why i did the steps like this
   const steps = getSteps();
 
@@ -148,7 +149,14 @@ export default function PatientEncounter(props) {
         );
       //display review of systems component
       case 1:
-        return <Complaints />;
+        return (
+          <ReviewOfSystems
+            name={`clinical_data.review_of_systems`}
+            rosforms={props.appointmentforms.filter(
+              (form) => form.form_type === "review_of_systems"
+            )}
+          />
+        );
       case 2:
         return <Complaints />;
       case 3:
@@ -164,10 +172,33 @@ export default function PatientEncounter(props) {
         return <FakeCompoent label="Unknown" />;
     }
   }
-
   return (
-    <div>
-      <Formik
+    <Grid container direction={`column`} className={classes.root}>
+      <EncounterStepper
+        activeStep={activeStep}
+        steps={steps}
+        prop2={(step, index) => (
+          <EncounterStep
+            key={step.label}
+            activeStep={activeStep}
+            step={step}
+            classes={classes}
+            onClick={handleStep(step.index)}
+          />
+        )}
+        classes={classes}
+      />
+      <Grid item>
+        <div>{getStepContent(activeStep, values)}</div>
+      </Grid>
+    </Grid>
+  );
+}
+
+/*
+
+<Formik
+        enableReinitialize={true}
         initialValues={{
           clinical_data: {
             complaints: [
@@ -178,6 +209,8 @@ export default function PatientEncounter(props) {
                 fieldname: "complaint_name",
               },
             ],
+            review_of_systems: props.rosforms,
+            physical_exam: props.peforms,
             assessments: [],
             plan: [],
             followup: [],
@@ -209,11 +242,9 @@ export default function PatientEncounter(props) {
           </Form>
         )}
       </Formik>
-    </div>
-  );
-}
 
-/*
+
+
       case 1:
         return (
           <ReviewOfSystems

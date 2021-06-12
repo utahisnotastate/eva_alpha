@@ -8,3 +8,6 @@ export const apifetch = async (apifunc, api_param, log_result = false) => {
     return result;
   }
 };
+
+var text = "this is text";
+var replacedtext = text.replace(" ", "_").toLowerCase().trim();

@@ -87,32 +87,41 @@ function UpcomingAppointmentForm() {
   );
 }
 
-function AppointmentSidebar(props) {
+function AppointmentSidebar({
+  appointmentinfoopen,
+  appointmentroutes,
+  callbackfn,
+  classes,
+  onClick,
+  onClick1,
+  patientoptionsopen,
+  prop7,
+}) {
   return (
-    <List className={props.classes.list}>
-      <ListItem button onClick={props.onClick}>
+    <List className={classes.list}>
+      <ListItem button onClick={onClick}>
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="Appointment Information" />
-        {props.appointmentinfoopen ? <ExpandLess /> : <ExpandMore />}
+        {appointmentinfoopen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={props.appointmentinfoopen} timeout="auto" unmountOnExit>
+      <Collapse in={appointmentinfoopen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {props.appointmentroutes.map(props.callbackfn)}
+          {appointmentroutes.map(callbackfn)}
         </List>
       </Collapse>
 
-      <ListItem button onClick={props.onClick1}>
+      <ListItem button onClick={onClick1}>
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="Patient Information" />
-        {props.patientoptionsopen ? <ExpandLess /> : <ExpandMore />}
+        {patientoptionsopen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={props.patientoptionsopen} timeout="auto" unmountOnExit>
+      <Collapse in={patientoptionsopen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {patientroutes.map(props.prop7)}
+          {patientroutes.map(prop7)}
         </List>
       </Collapse>
     </List>
@@ -151,19 +160,6 @@ export default function Appointment() {
     color: "white",
     width: "100%",
   };
-  /*{
-    //path: '/appointmentros/',
-    path: "/appointmentforms/",
-        label: "Review of Systems Forms",
-      nestedroutes: true,
-      menuopen: rosopen,
-      openNestedMenu() {
-    setROSOpen(!rosopen);
-  },
-    subroutes: reviewofsystemsforms,
-        component: AppointmentROS,
-  },*/
-
   const appointmentroutes = [
     {
       path: "",
