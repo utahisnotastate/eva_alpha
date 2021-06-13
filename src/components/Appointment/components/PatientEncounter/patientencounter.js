@@ -22,12 +22,8 @@ import {
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
 //import PatientComplaints from "../../Complaints/PatientComplaints";
 import Complaints from "./Complaints/complaints";
-import AppointmentPlan from "../../AppointmentPlan/AppointmentPlan";
-import AppointmentAssessment from "../../Assessment/AppointmentAssessment";
-import AppointmentSummary from "../../AppointmentSummary/AppointmentSummary";
-import VerticalTabs from "../VerticalTabs/VerticalTabs";
-import Physicalexam from "../VerticalTabs/PhysicalExam/physicalexam";
 import ReviewOfSystems from "./ReviewOfSystems/ReviewOfSystems";
+import Assessment from "./Assessment/assessments";
 import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
@@ -160,7 +156,7 @@ export default function PatientEncounter(props) {
       case 2:
         return <Complaints />;
       case 3:
-        return <Complaints />;
+        return <Assessment />;
       case 4:
         return <Complaints />;
       case 5:

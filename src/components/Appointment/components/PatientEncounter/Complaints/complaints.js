@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles, Typography, Button } from "@material-ui/core";
-import {
-  Formik,
-  Field,
-  Form,
-  useField,
-  FieldArray,
-  useFormikContext,
-} from "formik";
+import { Field, FieldArray, useFormikContext } from "formik";
 import { TextField } from "formik-material-ui";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
@@ -63,8 +56,6 @@ function AddNewComplaint(props) {
   function resetForm(name, description) {
     setFieldValue("new_complaint_name", "");
     setFieldValue("new_complaint_description", "");
-    //setComplaintName(name);
-    //setDescription(description);
   }
   return (
     <Card raised>
@@ -78,6 +69,7 @@ function AddNewComplaint(props) {
           component={TextField}
           label={`Complaint Name`}
           name={`new_complaint_name`}
+          value={complaintname}
           variant={`outlined`}
           onChange={(e) => setComplaintName(e.target.value)}
         />
@@ -87,6 +79,7 @@ function AddNewComplaint(props) {
           rows={5}
           label={`Complaint Name`}
           name={`new_complaint_description`}
+          value={description}
           variant={`outlined`}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -108,35 +101,33 @@ function AddNewComplaint(props) {
     </Card>
   );
 }
-export default function PatientComplaints(props) {
-  let { id } = useParams();
-  let dispatch = useDispatch();
+export default function PatientComplaints({ complaints, name }) {
   const classes = useStyles();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
   return (
     <>
       <Grid container direction={`column`} justify="space-evenly" spacing={2}>
         <Grid item>
           <Grid container direction="column">
-            <FieldArray name={props.name}>
+            <FieldArray name={name}>
               {(arrayHelpers) => (
                 <>
-                  {props.complaints && props.complaints.length > 0 ? (
+                  {complaints && complaints.length > 0 ? (
                     <Grid container direction="column">
-                      {props.complaints.map((complaint, index) => (
+                      {complaints.map((complaint, index) => (
                         <Complaint
                           arrayHelpers={arrayHelpers}
                           key={index}
-                          name={props.name}
+                          name={name}
                           index={index}
                           classes={classes}
                         />
                       ))}
                     </Grid>
-                  ) : null}
+                  ) : (
+                    <Grid item>
+                      <p>No complaints yet. Add some below!</p>
+                    </Grid>
+                  )}
 
                   <Grid item>
                     <AddNewComplaint arrayHelpers={arrayHelpers} />

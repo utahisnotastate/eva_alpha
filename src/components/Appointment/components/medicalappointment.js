@@ -92,6 +92,7 @@ export default function MedicalAppointment() {
     const new_clinical_data = {
       physical_exam: activephysicalexamforms,
       review_of_systems: activeROSforms,
+      assessments: [],
     };
 
     const staticcomplaints = [
