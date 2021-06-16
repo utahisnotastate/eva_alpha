@@ -2,9 +2,14 @@ import React, { useEffect } from "react";
 import { useFormikContext, Field, FieldArray } from "formik";
 import Grid from "@material-ui/core/Grid";
 import AddAssessment from "./addassessment";
-
+import RelatedToAssessment from "./relatedToAssessments";
 export default function AppointmentAssessment(props) {
   const { values } = useFormikContext();
+  const complaints = values.clinical_data.complaints;
+
+  const handleAddNewItem = (helper, baseObject) => {
+    helper.push(baseObject);
+  };
 
   return (
     <Grid container direction={`column`}>
@@ -15,34 +20,28 @@ export default function AppointmentAssessment(props) {
             <Grid container direction={`column`}>
               {values.clinical_data.assessments &&
               values.clinical_data.assessments.length > 0 ? (
-                values.clinical_data.assessments.map((assessment, index) => (
-                  <Grid container direction={`column`} key={index}>
-                    <Grid item>
-                      <p>{assessment.complaint_name}</p>
-                      <p>{assessment.complaint_description}</p>
-                    </Grid>
-                    <Grid item>
-                      {values.clinical_data.complaints &&
-                      values.clinical_data.complaints.length > 0 ? (
+                values.clinical_data.assessments.map(
+                  (assessment, assessmentindex) => (
+                    <Grid container direction={`column`} key={assessmentindex}>
+                      <Grid item>
+                        <p>{assessment.code}</p>
+                        <p>{assessment.description}</p>
+                      </Grid>
+                      <Grid item>
+                        <p>Related To:</p>
+                      </Grid>
+                      <Grid item>
+                        <p>Complaints</p>
                         <Grid container>
-                          {values.clinical_data.complaints.map(
-                            (complaint, index) => {
-                              return (
-                                <pre key={index}>
-                                  {JSON.stringify(complaint, null, 2)}
-                                </pre>
-                              );
-                            }
-                          )}
+                          <RelatedToAssessment
+                            name={`clinical_data.assessments[${assessmentindex}].complaints`}
+                            items={complaints}
+                          />
                         </Grid>
-                      ) : (
-                        <Grid item>
-                          <p>No complaints have been recorded</p>
-                        </Grid>
-                      )}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                ))
+                  )
+                )
               ) : (
                 <Grid item>
                   <p>
@@ -52,7 +51,10 @@ export default function AppointmentAssessment(props) {
                 </Grid>
               )}
               <Grid item>
-                <AddAssessment arrayHelpers={arrayHelpers} />
+                <AddAssessment
+                  arrayHelpers={arrayHelpers}
+                  handleAddNewItem={() => handleAddNewItem(arrayHelpers)}
+                />
               </Grid>
             </Grid>
           )}
@@ -66,6 +68,66 @@ export default function AppointmentAssessment(props) {
 }
 
 /*
+<Grid item>
+                        {assessment.complaints &&
+                        assessment.complaints.length > 0 ? (
+                          <Grid container direction={`column`}>
+                            <Grid item>
+                              <p>Complaints:</p>
+                              <Grid container direction={`row`}>
+                                {assessment.complaints.map(
+                                  (complaint, assessmentcomplaintindex) => {
+                                    return (
+                                      <Grid item key={assessmentcomplaintindex}>
+                                        <RelatedToField
+                                          name={`clinical_data.assessments[${assessmentindex}].complaints`}
+                                          index={assessmentcomplaintindex}
+                                          label={complaint.complaint_name}
+                                        />
+                                        {JSON.stringify(complaint, null, 2)}
+                                      </Grid>
+                                    );
+                                  }
+                                )}
+                              </Grid>
+                            </Grid>
+                            <Grid item>
+                              <Grid container direction={`row`}></Grid>
+                            </Grid>
+                          </Grid>
+                        ) : (
+                          <Grid item>
+                            <p>No complaints have been recorded</p>
+                          </Grid>
+                        )}
+                      </Grid>
+
+{values.clinical_data.complaints &&
+                      values.clinical_data.complaints.length > 0 ? (
+                        <Grid container direction={`column`}>
+                          <Grid item>
+                            <p>Complaints:</p>
+                            <Grid container direction={`row`}>
+                              {values.clinical_data.complaints.map(
+                                (complaint, index) => {
+                                  return (
+                                      <Grid item>
+                                          {JSON.stringify(complaint, null, 2)}
+                                      </Grid>
+                                  );
+                                }
+                              )}
+                            </Grid>
+                          </Grid>
+                          <Grid item>
+                            <Grid container direction={`row`}></Grid>
+                          </Grid>
+                        </Grid>
+                      ) : (
+                        <Grid item>
+                          <p>No complaints have been recorded</p>
+                        </Grid>
+                      )}
         <AssessmentsList
           assessments={fields}
           complaints={complaints}

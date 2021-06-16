@@ -2,22 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import ICD10search from "../../../../ICD10Search/icd10search";
-
-// https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&df=code,name
-
-//old api https://clinicaltables.nlm.nih.gov/api/conditions/v3/search?sf=primary_name,consumer_name,icd10cm&terms=
-const API_URL =
-  "https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&df=code,name&terms=";
-
-const EVA_URL = "http://127.0.0.1:8000/api";
-
-function getComplaintNameSuggestionValue(suggestion) {
-  return `${suggestion[0]} ${suggestion[1]}`;
-}
-function renderSuggestion(suggestion) {
-  return <span>{suggestion}</span>;
-}
+//import ICD10search from "../../../../ICD10Search/icd10search";
+import AssessmentICD10search from "./assessmentICD10Search";
 
 const useStyles = makeStyles({
   newcomplaintcontainer: {
@@ -33,12 +19,43 @@ const useStyles = makeStyles({
 });
 
 export default function AddAssessment(props) {
+  return (
+    <Grid container direction="row">
+      <Grid item xs={1}>
+        <Typography>ICD Code</Typography>
+      </Grid>
+      <Grid item xs={11}>
+        <AssessmentICD10search
+          arrayHelpers={props.arrayHelpers}
+          extrafield={{ relatedTo: false }}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+
+/*
   const classes = useStyles();
   const [suggestions, setSuggestions] = useState([]);
   const [complaint_name, setComplaintName] = useState("");
   const onComplaintNameChange = (event, { newValue, method }) => {
     setComplaintName(newValue);
   };
+// https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&df=code,name
+
+//old api https://clinicaltables.nlm.nih.gov/api/conditions/v3/search?sf=primary_name,consumer_name,icd10cm&terms=
+const API_URL =
+  "https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&df=code,name&terms=";
+
+const EVA_URL = "http://127.0.0.1:8000/api";
+
+function getComplaintNameSuggestionValue(suggestion) {
+  return `${suggestion[0]} ${suggestion[1]}`;
+}
+function renderSuggestion(suggestion) {
+  return <span>{suggestion}</span>;
+}
+
 
   const onSuggestionsFetchRequested = ({ value }) => {
     fetch(`${API_URL}${value}`)
@@ -76,19 +93,7 @@ export default function AddAssessment(props) {
     className: classes.searchinput,
     onChange: onComplaintNameChange,
   };
-  return (
-    <Grid container direction="row">
-      <Grid item xs={1}>
-        <Typography>ICD Code</Typography>
-      </Grid>
-      <Grid item xs={11}>
-        <ICD10search arrayHelpers={props.arrayHelpers} />
-      </Grid>
-    </Grid>
-  );
-}
 
-/*
 
           <Grid item xs={12} className={classes.newcomplaintcontainer}>
             <Typography>Complaint Description</Typography>

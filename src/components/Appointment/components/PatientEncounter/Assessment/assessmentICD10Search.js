@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import "./icd10search.css";
+import "../../../../ICD10Search/icd10search.css";
 
 const API_URL =
   "https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&df=code,name&terms=";
@@ -22,13 +22,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ICD10search(props) {
+export default function AssessmentICD10search(props) {
   const [field] = useField(props);
   const [suggestions, setSuggestions] = useState([]);
   const [searchinput, setSearchInput] = useState("");
   const [icdcode, setICDCode] = useState("");
   const [icddescription, setICDDescription] = useState("");
   const classes = useStyles();
+  const { values } = useFormikContext();
+  const complaints = values.clinical_data.complaints.map((complaint) => ({
+    ...complaint,
+    relatedTo: false,
+  }));
 
   const onSuggestionsFetchRequested = ({ value }) => {
     fetch(`${API_URL}${value}`)
@@ -53,19 +58,10 @@ export default function ICD10search(props) {
     event,
     { suggestion, suggestionValue }
   ) => {
-    if (props.extrafield) {
-      const icdObject = {
-        code: suggestion[0],
-        description: suggestion[1],
-      };
-      const combinedNewObject = { ...icdObject, ...props.extrafield };
-      props.arrayHelpers.push(combinedNewObject);
-    } else {
-      props.arrayHelpers.push({
-        code: suggestion[0],
-        description: suggestion[1],
-      });
-    }
+    props.arrayHelpers.push({
+      code: suggestion[0],
+      description: suggestion[1],
+    });
 
     console.log(suggestion);
     console.log(suggestionValue);

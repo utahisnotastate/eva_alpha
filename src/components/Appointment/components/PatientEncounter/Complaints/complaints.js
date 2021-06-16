@@ -91,6 +91,7 @@ function AddNewComplaint(props) {
             props.arrayHelpers.push({
               complaint_name: complaintname,
               complaint_description: description,
+              relatedToAssessment: false,
             });
             resetForm(complaintname, description);
           }}
