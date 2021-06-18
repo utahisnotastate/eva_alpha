@@ -42,6 +42,7 @@ export default function MedicalAppointment() {
       summary: "",
       complaints: [],
       assessments: [],
+      clinical_forms: [],
       physical_exam: [],
       review_of_systems: [],
     },
@@ -89,38 +90,13 @@ export default function MedicalAppointment() {
     const activeROSforms = activeforms.filter(
       (form) => form.form_type === "review_of_systems"
     );
+
     const new_clinical_data = {
-      physical_exam: activephysicalexamforms,
-      review_of_systems: activeROSforms,
+      clinical_forms: activeforms,
+      complaints: [],
       assessments: [],
     };
 
-    const staticcomplaints = [
-      {
-        complaint_name: "test name",
-        complaint_description: "complaint description",
-        onset: "",
-        patient_therapeutic_attempts: "test therapeutic attempts",
-        patient_belief_caused_by: "test patient belief caused by ",
-        other_notes: "test other notes",
-      },
-    ];
-    //set clinical data physical exam form values
-
-    //set clinical data review of systems form values
-    /*setStatus("in_progress");
-    setActiveForms(activeforms);
-    setActivePEForms(activephysicalexamforms);
-    setActiveROSForms(activeROSForms);
-    console.log(activephysicalexamforms);
-    console.log(activeROSforms);*/
-    /*const encounter_start = {
-      status: "in_progress",
-      actual_start: moment().toISOString(),
-    };
-    const in_progress_appointment = { ...appointment, ...encounter_start };
-    setAppointment(in_progress_appointment);*/
-    //setStatus("in_progress");
     setAppointment({
       ...appointment,
       status: "in_progress",

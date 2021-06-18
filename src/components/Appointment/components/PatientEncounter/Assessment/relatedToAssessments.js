@@ -5,15 +5,13 @@ import { CheckboxWithLabel } from "formik-material-ui";
 import Grid from "@material-ui/core/Grid";
 
 export default function RelatedToAssessment(props) {
-  const { values } = useFormikContext();
-
   return (
     <Grid item>
       <FieldArray
         name={props.name}
         render={(arrayHelpers) => (
           <Grid container>
-            {props.items.length ? (
+            {props.items && props.items.length > 0 ? (
               props.items.map((complaint, index) => (
                 <Grid item key={index}>
                   <Field
@@ -22,7 +20,6 @@ export default function RelatedToAssessment(props) {
                     name={`${props.name}[${index}].relatedTo`}
                     Label={{ label: complaint.complaint_name }}
                   />
-                  ;
                 </Grid>
               ))
             ) : (

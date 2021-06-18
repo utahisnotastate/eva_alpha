@@ -32,10 +32,7 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    height: 224,
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -48,7 +45,6 @@ export default function ReviewOfSystems(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(props.rosforms);
   return (
     <div className={classes.root}>
       <Tabs
@@ -59,7 +55,35 @@ export default function ReviewOfSystems(props) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <FieldArray name={props.name}>
+        {props.rosforms && props.rosforms.length > 0 ? (
+          <div>
+            {props.rosforms.map((rosform, index) => (
+              <Tab key={index} label={rosform.title} {...a11yProps(index)} />
+            ))}
+          </div>
+        ) : (
+          <p>No Active ROS FOrms</p>
+        )}
+      </Tabs>
+      <>
+        {props.rosforms && props.rosforms.length > 0 ? (
+          <div>
+            {props.rosforms.map((rosform, index) => (
+              <TabPanel key={index} value={value} index={index}>
+                <pre>{JSON.stringify(rosform.customformfields, null, 2)}</pre>
+              </TabPanel>
+            ))}
+          </div>
+        ) : (
+          <p>No Active ROS FOrms</p>
+        )}
+      </>
+    </div>
+  );
+}
+
+/*
+<FieldArray name={props.name}>
           {(arrayHelpers) => (
             <>
               {props.rosforms && props.rosforms.length > 0 ? (
@@ -78,13 +102,6 @@ export default function ReviewOfSystems(props) {
             </>
           )}
         </FieldArray>
-      </Tabs>
-      <div></div>
-    </div>
-  );
-}
-
-/*
 {props.rosforms.map((rosform, index) => (
         <TabPanel key={"" + Math.random()} value={value} index={0}>
           {rosform.title}

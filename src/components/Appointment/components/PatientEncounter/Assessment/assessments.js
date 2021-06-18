@@ -3,6 +3,7 @@ import { useFormikContext, Field, FieldArray } from "formik";
 import Grid from "@material-ui/core/Grid";
 import AddAssessment from "./addassessment";
 import RelatedToAssessment from "./relatedToAssessments";
+
 export default function AppointmentAssessment(props) {
   const { values } = useFormikContext();
   const complaints = values.clinical_data.complaints;
@@ -51,10 +52,7 @@ export default function AppointmentAssessment(props) {
                 </Grid>
               )}
               <Grid item>
-                <AddAssessment
-                  arrayHelpers={arrayHelpers}
-                  handleAddNewItem={() => handleAddNewItem(arrayHelpers)}
-                />
+                <AddAssessment arrayHelpers={arrayHelpers} />
               </Grid>
             </Grid>
           )}

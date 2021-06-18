@@ -21,8 +21,9 @@ import {
 //Follow Up Icon
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
 //import PatientComplaints from "../../Complaints/PatientComplaints";
-import Complaints from "./Complaints/complaints";
+import PatientComplaints from "./Complaints/complaints";
 import ReviewOfSystems from "./ReviewOfSystems/ReviewOfSystems";
+import AppointmentROS from "../../AppointmentROS/AppointmentROS";
 import Assessment from "./Assessment/assessments";
 import * as PropTypes from "prop-types";
 
@@ -138,31 +139,24 @@ export default function PatientEncounter(props) {
       //display patient complaints component
       case 0:
         return (
-          <Complaints
+          <PatientComplaints
             name={`clinical_data.complaints`}
             complaints={formvalues.clinical_data.complaints}
           />
         );
       //display review of systems component
       case 1:
-        return (
-          <ReviewOfSystems
-            name={`clinical_data.review_of_systems`}
-            rosforms={props.appointmentforms.filter(
-              (form) => form.form_type === "review_of_systems"
-            )}
-          />
-        );
+        return <AppointmentROS name={`clinical_data.clinical_forms`} />;
       case 2:
-        return <Complaints />;
+        return <PatientComplaints />;
       case 3:
         return <Assessment />;
       case 4:
-        return <Complaints />;
+        return <PatientComplaints />;
       case 5:
-        return <Complaints />;
+        return <PatientComplaints />;
       case 6:
-        return <Complaints />;
+        return <PatientComplaints />;
 
       default:
         return <FakeCompoent label="Unknown" />;
@@ -193,6 +187,12 @@ export default function PatientEncounter(props) {
 
 /*
 
+<ReviewOfSystems
+            name={`clinical_data.review_of_systems`}
+            rosforms={props.appointmentforms.filter(
+              (form) => form.form_type === "review_of_systems"
+            )}
+          />
 <Formik
         enableReinitialize={true}
         initialValues={{

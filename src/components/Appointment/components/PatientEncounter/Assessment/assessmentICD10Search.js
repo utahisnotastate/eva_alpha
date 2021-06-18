@@ -30,10 +30,6 @@ export default function AssessmentICD10search(props) {
   const [icddescription, setICDDescription] = useState("");
   const classes = useStyles();
   const { values } = useFormikContext();
-  const complaints = values.clinical_data.complaints.map((complaint) => ({
-    ...complaint,
-    relatedTo: false,
-  }));
 
   const onSuggestionsFetchRequested = ({ value }) => {
     fetch(`${API_URL}${value}`)
@@ -73,30 +69,6 @@ export default function AssessmentICD10search(props) {
 
   const onComplaintNameChange = (event, { newValue }) => {
     setSearchInput(newValue);
-  };
-
-  const renderSuggestionsContainer = ({ containerProps, children, query }) => {
-    return (
-      <div {...containerProps}>
-        <Grid container direction={`column`}>
-          <Grid item>
-            <Grid container direction={`row`}>
-              <Grid item xs={1}>
-                <p>ICD 10 code</p>
-              </Grid>
-              <Grid item xs={11}>
-                <p>ICD 10 Description</p>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container direction={`column`}>
-              {children}
-            </Grid>
-          </Grid>
-        </Grid>
-      </div>
-    );
   };
 
   const inputComplaintNameDescriptionProps = {
