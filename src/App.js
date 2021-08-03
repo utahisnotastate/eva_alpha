@@ -44,7 +44,7 @@ function App() {
     <Provider store={store}>
       <ModalProvider>
         <Router>
-          <div>
+          <>
             <NavBar />
             <Switch>
               <Route exact path="/">
@@ -87,7 +87,7 @@ function App() {
               <Route path="/scheduling" component={Scheduling} />
               <Route path="/schedule/:id" component={ScheduleAppointment} />
             </Switch>
-          </div>
+          </>
         </Router>
       </ModalProvider>
     </Provider>

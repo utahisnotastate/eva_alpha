@@ -17,6 +17,7 @@
     "electron-is-dev": "^1.2.0",
     "formik": "^2.1.4",
     "formik-material-ui": "^3.0.0",
+    "install-peers": "^1.0.3",
     "lodash": "^4.17.15",
     "lodash-move": "^1.1.1",
     "moment": "^2.25.3",
@@ -52,9 +53,6 @@
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -68,10 +66,21 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.9",
+    "@babel/preset-react": "^7.14.5",
     "@hookform/devtools": "^2.0.1",
     "concurrently": "^5.2.0",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-hardcore": "19.19.4",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-react-hooks": "4.2.0",
     "wait-on": "^5.0.0"
   }
 }
