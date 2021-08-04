@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector, useDispatch } from "react-redux";
-import { useFormContext, Controller, useFieldArray } from "react-hook-form";
-import { TextField, Typography, Divider } from "@material-ui/core";
-import FieldPreview from "../FieldPreview/FieldPreview";
-import FieldOptionsEditor from "../FormFields/FieldOptionsEditor/FieldOptionsEditor";
+import { useFormContext } from "react-hook-form";
+import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import FieldOptionsEditor from "../FormFields/FieldOptionsEditor/FieldOptionsEditor";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardBody from "../../../../basestyledcomponents/Card/CardBody";
 import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
-import CardFooter from "../../../../basestyledcomponents/Card/CardFooter";
-import Button from "../../../../basestyledcomponents/Button";
-import InputPreview from "../FieldPreview/InputPreview/InputPreview";
 import "../../../../../styles/w3.css";
 
 const useStyles = makeStyles({
@@ -37,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EditorInput(props) {
+export default function EditorInput({ append, handleAddField }) {
   const { register, watch } = useFormContext();
   const classes = useStyles();
   const watchfieldtype = watch("new_field.type");
@@ -71,8 +66,8 @@ export default function EditorInput(props) {
             {watchfieldtype && (
               <FieldOptionsEditor
                 fieldtype={watchfieldtype}
-                handleAddField={props.handleAddField}
-                append={props.append}
+                handleAddField={handleAddField}
+                append={append}
               />
             )}
           </Grid>

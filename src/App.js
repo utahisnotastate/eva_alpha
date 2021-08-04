@@ -76,7 +76,7 @@ function App() {
                 <PatientRequests />
               </Route>
               <Route path="/formscenter" component={FormsCenter} />
-              <Route path="/waitlist" component={WaitList} />
+              <Route component={WaitList} path="/waitlist" />
               <Route
                 path="/referralstoschedule"
                 component={ReferralsToScheduleList}

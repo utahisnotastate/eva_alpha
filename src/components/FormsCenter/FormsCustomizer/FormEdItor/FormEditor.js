@@ -67,68 +67,66 @@ export default function FormEditor(props) {
   };
 
   return (
-    <>
-      <Formik
-        initialValues={defaultValues}
-        onSubmit={(values) => handleSubmit(values)}
-      >
-        {({ props }) => (
-          <Form>
-            <Grid container direction={`column`}>
-              <Grid item>
-                <Card>
-                  <CardHeader>
-                    <Grid container justify={`flex-end`}>
-                      <Grid item>
-                        <Typography variant="h2">
-                          MAKE SURE FORM IS SAVED BEFORE PREVIEWING
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Button color={`primary`} onClick={props.handleSubmit}>
-                          Save Form
-                        </Button>
-                      </Grid>
-                      <Grid item>
-                        <NavLink to={`/formscenter/${formId}/preview/`}>
-                          <Button color={`primary`}>Preview Form</Button>
-                        </NavLink>
-                      </Grid>
+    <Formik
+      initialValues={defaultValues}
+      onSubmit={(values) => handleSubmit(values)}
+    >
+      {({ props }) => (
+        <Form>
+          <Grid container direction={`column`}>
+            <Grid item>
+              <Card>
+                <CardHeader>
+                  <Grid container justify={`flex-end`}>
+                    <Grid item>
+                      <Typography variant="h2">
+                        MAKE SURE FORM IS SAVED BEFORE PREVIEWING
+                      </Typography>
                     </Grid>
-                  </CardHeader>
-                  <CardBody>
-                    <Grid container direction="column">
-                      <Grid item>
-                        <Field
-                          component={TextField}
-                          name={`form_title`}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Typography>{formtype}</Typography>
-                      </Grid>
+                    <Grid item>
+                      <Button color={`primary`} onClick={props.handleSubmit}>
+                        Save Form
+                      </Button>
                     </Grid>
-                  </CardBody>
-                </Card>
-              </Grid>
-              <Grid item>
-                <FormFields
-                  customfields={props.fields}
-                  handleDeleteFIeld={props.handleDeleteFIeld}
-                />
-              </Grid>
-              <Grid item>
-                <EditorInput
-                  methods={props.methods}
-                  handleAddField={props.handleAddField}
-                  append={props.append}
-                />
-              </Grid>
+                    <Grid item>
+                      <NavLink to={`/formscenter/${formId}/preview/`}>
+                        <Button color={`primary`}>Preview Form</Button>
+                      </NavLink>
+                    </Grid>
+                  </Grid>
+                </CardHeader>
+                <CardBody>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <Field
+                        component={TextField}
+                        fullWidth
+                        name={`form_title`}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography>{formtype}</Typography>
+                    </Grid>
+                  </Grid>
+                </CardBody>
+              </Card>
             </Grid>
-          </Form>
-        )}
-      </Formik>
-    </>
+            <Grid item>
+              <FormFields
+                customfields={props.fields}
+                handleDeleteFIeld={props.handleDeleteFIeld}
+              />
+            </Grid>
+            <Grid item>
+              <EditorInput
+                methods={props.methods}
+                handleAddField={props.handleAddField}
+                append={props.append}
+              />
+            </Grid>
+          </Grid>
+        </Form>
+      )}
+    </Formik>
   );
 }
