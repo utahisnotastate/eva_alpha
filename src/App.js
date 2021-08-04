@@ -1,32 +1,30 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { ModalProvider } from "react-modal-hook";
+import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core/styles";
 import NavBar from "./components/NavBar/navbar";
 import Home from "./components/Home/home";
-import { ThemeProvider } from "@material-ui/core/styles";
 import ScheduleAppointment from "./components/Forms/Administrative/Scheduling/ScheduleAppointment/scheduleappointment";
 import Appointments from "./components/Appointments/appointments";
 import ClinicalQueue from "./components/ClinicalQueue/clinicalqueue";
 import MedicalAppointment from "./components/Appointment/components/medicalappointment";
-//import Appointment from "./components/Appointment/appointment";
+// import Appointment from "./components/Appointment/appointment";
 import "./styles/w3.css";
 import Patient from "./components/Patient/patient";
 import PatientRequests from "./components/PatientRequests/patientrequests";
 import Claims from "./components/Claims/claims";
 import EvaAdmin from "./components/EvaAdmin/evaadmin";
 import Faxes from "./components/Faxes/faxes";
-import { CssBaseline } from "@material-ui/core";
 import Patients from "./components/Patients/patients";
 import RevenueCycle from "./components/RevenueCycle/revenuecycle";
 import Scheduling from "./components/Scheduling/scheduling";
 import Claim from "./components/Claims/Claim/claim";
 import WaitList from "./components/Scheduling/WaitList/waitlist";
 import ReferralsToScheduleList from "./components/Scheduling/ReferralsToSchedule/referralstoschedulelist";
-import { StateProvider } from "./components/ClinicalQueue/context/ClinicalQueueContext";
-import { fetchAllForms } from "./api/forms.api";
 import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import FormsCenter from "./components/FormsCenter/FormsCenter";
@@ -56,7 +54,7 @@ function App() {
               <Route path="/appointments">
                 <Appointments />
               </Route>
-              <Route path="/claims/:claimId" component={Claim} />
+              <Route component={Claim} path="/claims/:claimId" />
               <Route path="/claims">
                 <Claims />
               </Route>
@@ -75,17 +73,17 @@ function App() {
               <Route exact path="/patientrequests">
                 <PatientRequests />
               </Route>
-              <Route path="/formscenter" component={FormsCenter} />
+              <Route component={FormsCenter} path="/formscenter" />
               <Route component={WaitList} path="/waitlist" />
               <Route
-                path="/referralstoschedule"
                 component={ReferralsToScheduleList}
+                path="/referralstoschedule"
               />
-              <Route path="/revenuecycle" component={RevenueCycle} />
-              <Route path="/patient/:id" component={Patient} />
-              <Route path="/scheduling/:id" component={Scheduling} />
-              <Route path="/scheduling" component={Scheduling} />
-              <Route path="/schedule/:id" component={ScheduleAppointment} />
+              <Route component={RevenueCycle} path="/revenuecycle" />
+              <Route component={Patient} path="/patient/:id" />
+              <Route component={Scheduling} path="/scheduling/:id" />
+              <Route component={Scheduling} path="/scheduling" />
+              <Route component={ScheduleAppointment} path="/schedule/:id" />
             </Switch>
           </>
         </Router>

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import "./formscenter.css";
-import { useRouteMatch, Switch, Route } from "react-router-dom";
+import { useRouteMatch, Route } from "react-router-dom";
 import FormsCenterHome from "./FormsCenterHome";
 import FormsCustomizer from "./FormsCustomizer/formscustomizer";
 import FormPreview from "./FormPreview/formpreview";
 
-const log = (type) => console.log.bind(console, type);
-
-export default function FormsCenter(props) {
-  let { path, url } = useRouteMatch();
+export default function FormsCenter() {
+  const { path } = useRouteMatch();
   return (
-    <div>
-      <Route exact path={`${path}`} component={FormsCenterHome} />
-      <Route
-        path={`${path}/:formId/edit`}
-        component={() => <FormsCustomizer />}
-      />
-      <Route path={`${path}/:formId/preview`} component={FormPreview} />
-    </div>
+    <>
+      <Route component={FormsCenterHome} exact path={`${path}`} />
+      <Route component={FormsCustomizer} path={`${path}/:formId/edit`} />
+      <Route component={FormPreview} path={`${path}/:formId/preview`} />
+    </>
   );
 }
 /*
+
+<Route
+        component={() => <FormsCustomizer />}
+        path={`${path}/:formId/edit`}
+      />
 
 <div style={{ padding: 15 }}>
       <GridContainer>

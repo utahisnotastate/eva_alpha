@@ -1,63 +1,39 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { fetchAllForms, updateFormProp } from "../../api/forms.api";
-import Modal from "../basestyledcomponents/Modal/modal";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import GridContainer from "../basestyledcomponents/Grid/GridContainer";
-import GridItem from "../basestyledcomponents/Grid/GridItem";
-import Card from "../basestyledcomponents/Card/Card";
-import CardHeader from "../basestyledcomponents/Card/CardHeader";
-import CardBody from "../basestyledcomponents/Card/CardBody";
-import CardIcon from "../basestyledcomponents/Card/CardIcon";
 import LanguageIcon from "@material-ui/icons/Language";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
-import Button from "../basestyledcomponents/Button";
 import { Typography } from "@material-ui/core";
 import "./formscenter.css";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import CardIcon from "../basestyledcomponents/Card/CardIcon";
+import CardBody from "../basestyledcomponents/Card/CardBody";
+import Card from "../basestyledcomponents/Card/Card";
+import GridItem from "../basestyledcomponents/Grid/GridItem";
+import GridContainer from "../basestyledcomponents/Grid/GridContainer";
+import Modal from "../basestyledcomponents/Modal/modal";
+import { fetchAllForms, updateFormProp } from "../../api/forms.api";
+import CardHeader from "../basestyledcomponents/Card/CardHeader";
 import CreateNewForm from "./newcustomform";
+import CustomFormsCard from "./FCHomeComponents/CustomFormsList/CustomFormsCard";
 
-const styles = {
-  cardTitle: {
-    marginTop: "0",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
+const useStyles = makeStyles({
   root: {
-    margin: 15,
+    padding: 15,
   },
-};
-const useStyles = makeStyles(styles);
-const API_URL = "http://127.0.0.1:8000/api";
+});
 
-export default function FormsCenterHome(props) {
+export default function FormsCenterHome() {
+  const { path, url } = useRouteMatch();
   const classes = useStyles();
-  let { path, url } = useRouteMatch();
-  console.log("path is: " + path);
-  console.log("url is " + url);
+  console.log(`path is: ${path}`);
+  console.log(`url is ${url}`);
   const dispatch = useDispatch();
-  // const physicalexamforms = useSelector(state => state.formsmanager.physicalexamforms);
-  // const reviewofsystemsforms = useSelector(state => state.formsmanager.reviewofsystemsforms);
-  // const medicalhistoryforms = useSelector(state => state.formsmanager.medicalhistoryforms);
   const forms = useSelector((state) => state.formsmanager.forms);
-
-  const handleActiveSwitchChange = (activestatus, formId) => {
-    updateFormProp(formId, { active: !activestatus }).then((response) => {
-      fetchAllForms().then((response) => {
-        dispatch({ type: "load_forms", forms: response });
-      });
-    });
-  };
 
   useEffect(() => {
     fetchAllForms().then((response) => {
@@ -66,10 +42,52 @@ export default function FormsCenterHome(props) {
     });
   }, []);
 
+  /*
+              <Modal
+                buttontext="Create New Clinical Exam Form"
+                color="primary"
+                form={CreateNewForm}
+                formprops="physical_exam"
+                modaltitle="Create New Clinical Exam Form"
+              />
+ */
+
+  /*
+    <CustomFormsCard
+            listlabel={`Physical Exam`}
+            forms={forms}
+            typeOfFormToShow={"physical_exam"}
+            url={url}
+          />
+
+          <CustomFormsCard
+            listlabel={`Review Of Systems`}
+            forms={forms}
+            typeOfFormToShow={"review_of_systems"}
+            url={url}
+          />
+     */
+
   return (
-    <div style={{ padding: 15 }}>
+    <div className={classes.root}>
       <GridContainer>
-        <GridItem xs={10} md={4}>
+        <GridItem md={4} xs={10}>
+          <CustomFormsCard
+            listlabel={`Physical Exam`}
+            forms={forms}
+            typeOfFormToShow={"physical_exam"}
+            url={url}
+          />
+        </GridItem>
+        <GridItem md={4} xs={10}>
+          <CustomFormsCard
+            listlabel={`Review Of Systems`}
+            forms={forms}
+            typeOfFormToShow={"review_of_systems"}
+            url={url}
+          />
+        </GridItem>
+        <GridItem md={4} xs={10}>
           <Card>
             <CardHeader icon>
               <CardIcon color="primary">
@@ -77,54 +95,17 @@ export default function FormsCenterHome(props) {
               </CardIcon>
             </CardHeader>
             <CardBody>
-              <Typography>Physical Exam Forms</Typography>
-              <List>
-                {forms.length === 0 ? (
-                  <div>
-                    <Typography>
-                      There are no physical exam forms. Create one!{" "}
-                    </Typography>
-                  </div>
-                ) : (
-                  forms
-                    .filter((form) => form.form_type === "physical_exam")
-                    .map((physicalexam, index) => (
-                      <ListItem key={index}>
-                        <NavLink to={`${url}/${physicalexam.id}/edit`}>
-                          <ListItemText
-                            primary={
-                              <Typography>{physicalexam.title} </Typography>
-                            }
-                          />
-                        </NavLink>
-                        <ListItemSecondaryAction>
-                          <Switch
-                            edge={`end`}
-                            onChange={() =>
-                              handleActiveSwitchChange(
-                                physicalexam.active,
-                                physicalexam.id
-                              )
-                            }
-                            checked={physicalexam.active}
-                          />
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                    ))
-                )}
-              </List>
-              <Modal
-                color={`primary`}
-                buttontext={`Create New Clinical Exam Form`}
-                modaltitle={`Create New Clinical Exam Form`}
-                form={CreateNewForm}
-                formprops="physical_exam"
-              />
+              <Typography>Create Custom Complaint Form from scratch</Typography>
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem xs={10} md={4}>
-          <Card>
+      </GridContainer>
+    </div>
+  );
+}
+
+/*
+<Card>
             <CardHeader icon>
               <CardIcon color="primary">
                 <LanguageIcon />
@@ -151,11 +132,11 @@ export default function FormsCenterHome(props) {
                         </NavLink>
                         <ListItemSecondaryAction>
                           <Switch
-                            edge={`end`}
+                            checked={ros.active}
+                            edge="end"
                             onChange={() =>
                               handleActiveSwitchChange(ros.active, ros.id)
                             }
-                            checked={ros.active}
                           />
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -163,30 +144,12 @@ export default function FormsCenterHome(props) {
                 )}
               </List>
               <Modal
-                color={`primary`}
-                buttontext={`Create New Review of Systems Form`}
-                modaltitle={`Create New Review of Systems Form`}
+                buttontext="Create New Review of Systems Form"
+                color="primary"
                 form={CreateNewForm}
-                formprops={`review_of_systems`}
+                formprops="review_of_systems"
+                modaltitle="Create New Review of Systems Form"
               />
             </CardBody>
           </Card>
-        </GridItem>
-        <GridItem xs={10} md={4}>
-          <Card>
-            <CardHeader icon>
-              <CardIcon color="primary">
-                <LanguageIcon />
-              </CardIcon>
-            </CardHeader>
-            <CardBody>
-              <Typography>Create Custom Complaint Form from scratch</Typography>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-    </div>
-  );
-}
-
-/* */
+ */

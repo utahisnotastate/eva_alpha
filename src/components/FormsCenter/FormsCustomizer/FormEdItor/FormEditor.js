@@ -36,6 +36,9 @@ const useStyles = makeStyles({
     marginTop: "5px",
   },
 });
+/*
+
+ */
 
 export default function FormEditor(props) {
   const dispatch = useDispatch();
@@ -62,15 +65,12 @@ export default function FormEditor(props) {
     },
   };
 
-  const handleSubmit = async (values) => {
+  async function handleSubmit(values) {
     console.log(values);
-  };
+  }
 
   return (
-    <Formik
-      initialValues={defaultValues}
-      onSubmit={(values) => handleSubmit(values)}
-    >
+    <Formik initialValues={defaultValues} onSubmit={handleSubmit}>
       {({ props }) => (
         <Form>
           <Grid container direction={`column`}>
