@@ -1,18 +1,23 @@
-import React, {useEffect, useState} from "react";
-import {useSelector, useDispatch} from "react-redux";
+/*
+DO NOT USE THIS COMPONENT IT HAS BEEN REPLACED BY FORM EDITOR
+
+ */
+
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import GridContainer from "../../basestyledcomponents/Grid/GridContainer";
 import GridItem from "../../basestyledcomponents/Grid/GridItem";
 import Card from "../../basestyledcomponents/Card/Card";
 import CardHeader from "../../basestyledcomponents/Card/CardHeader";
 import CardBody from "../../basestyledcomponents/Card/CardBody";
 import Modal from "../../basestyledcomponents/Modal/modal";
-import {fetchForm} from "../../../api/forms.api";
-import {Button, Typography} from "@material-ui/core";
+import { fetchForm } from "../../../api/forms.api";
+import { Button, Typography } from "@material-ui/core";
 import Form from "react-jsonschema-form";
 import CreateCustomField from "../../Forms/FormsCenter/createCustomField";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FormEditor from "./FormEdItor/FormEditor";
-import './formscustomizer.css'
+import "./formscustomizer.css";
 import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000/api";
@@ -20,17 +25,14 @@ const API_URL = "http://127.0.0.1:8000/api";
 const log = (type) => console.log.bind(console, type);
 
 export default function FormsCustomizer(props) {
-    const dispatch = useDispatch();
-    let { formId } = useParams();
+  const dispatch = useDispatch();
+  let { formId } = useParams();
 
-
-
-
-    return (
-        <div style={{padding: 15}}>
-            <FormEditor formId={formId}/>
-        </div>
-    )
+  return (
+    <div style={{ padding: 15 }}>
+      <FormEditor formId={formId} />
+    </div>
+  );
 }
 
 /*

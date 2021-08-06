@@ -2,7 +2,8 @@ import React from "react";
 import "./formscenter.css";
 import { useRouteMatch, Route } from "react-router-dom";
 import FormsCenterHome from "./FormsCenterHome";
-import FormsCustomizer from "./FormsCustomizer/formscustomizer";
+// import FormsCustomizer from "./FormsCustomizer/formscustomizer";
+import FormEditor from "./FormsCustomizer/FormEdItor/FormEditor";
 import FormPreview from "./FormPreview/formpreview";
 
 export default function FormsCenter() {
@@ -10,13 +11,13 @@ export default function FormsCenter() {
   return (
     <>
       <Route component={FormsCenterHome} exact path={`${path}`} />
-      <Route component={FormsCustomizer} path={`${path}/:formId/edit`} />
+      <Route component={FormEditor} path={`${path}/:formId/edit`} />
       <Route component={FormPreview} path={`${path}/:formId/preview`} />
     </>
   );
 }
 /*
-
+<Route component={FormsCustomizer} path={`${path}/:formId/edit`} />
 <Route
         component={() => <FormsCustomizer />}
         path={`${path}/:formId/edit`}

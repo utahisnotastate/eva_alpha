@@ -1,33 +1,26 @@
-import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Typography } from "@material-ui/core";
+import LanguageIcon from "@material-ui/icons/Language";
 import Card from "../../../basestyledcomponents/Card/Card";
 import CardIcon from "../../../basestyledcomponents/Card/CardIcon";
-import LanguageIcon from "@material-ui/icons/Language";
 import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Switch from "@material-ui/core/Switch";
-import { Typography } from "@material-ui/core";
 import CardBody from "../../../basestyledcomponents/Card/CardBody";
 import CustomFormsList from "./CustomFormsList";
 
 /*
 forms give all forms
+
 <CustomFormsList
  forms={forms}
  listtitle={"Physical Exam"}
  typeOfFormToShow={"physical_exam"}
  url={props.url}
  />
+
+{listlabel, forms, typeOfFormToShow, url}
  */
 
-export default function CustomFormsCard(props) {
-  async function handleFormStatusUpdate(status, id) {
-    console.log("clicked");
-  }
-
+function CustomFormsCard(props) {
   return (
     <Card>
       <CardHeader icon>
@@ -40,19 +33,19 @@ export default function CustomFormsCard(props) {
         {props.forms && props.forms.length > 0 ? (
           <CustomFormsList
             forms={props.forms}
-            url={props.url}
             typeOfFormToShow={props.typeOfFormToShow}
+            url={props.url}
           />
         ) : (
           <Typography>
-            There have been no {props.listtitle} forms created. Create One!
+            There have been no {props.listlabel} forms created. Create One!
           </Typography>
         )}
       </CardBody>
     </Card>
   );
 }
-
+export default React.memo(CustomFormsCard);
 /*
 <List>
           {props.forms && props.forms.length === 0 ? (

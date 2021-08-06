@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Switch from "@material-ui/core/Switch";
 import { Typography } from "@material-ui/core";
-import { fetchAllForms, updateFormProp } from "../../../../api/forms.api";
 
 export default function CustomFormsListItem(props) {
   async function handleFormStatusUpdate() {
