@@ -10,6 +10,7 @@ import Button from "../../../basestyledcomponents/Button";
 import Card from "../../../basestyledcomponents/Card/Card";
 import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
 import CardBody from "../../../basestyledcomponents/Card/CardBody";
+import EditorHeader from "./EditorHeader/EditorHeader";
 import FormFields from "./FormFields/FormFields";
 import { updateForm, fetchForm } from "../../../../api/forms.api";
 import EditorInput from "./EditorInput/EditorInput";
@@ -67,8 +68,8 @@ export default function FormEditor(props) {
 
   const defaultValues = {
     id: formId,
-    title: "Test Form TItle",
-    type: "review_of_systems",
+    form_title: "Test Form TItle",
+    form_type: "review_of_systems",
     fields: [],
     new_checkbox_field: "",
     new_field: {
@@ -109,23 +110,7 @@ export default function FormEditor(props) {
             <Grid item>
               <Card>
                 <CardHeader>
-                  <Grid container>
-                    <Grid item>
-                      <Typography>
-                        MAKE SURE FORM IS SAVED BEFORE PREVIEWING
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Button color="primary" onClick={handleSubmit}>
-                        Save Form
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <NavLink to={`/formscenter/${formId}/preview/`}>
-                        <Button color="primary">Preview Form</Button>
-                      </NavLink>
-                    </Grid>
-                  </Grid>
+                  <EditorHeader formId={formId} />
                 </CardHeader>
                 <CardBody>
                   <Grid container direction="column">
@@ -157,6 +142,24 @@ export default function FormEditor(props) {
 }
 
 /*
+
+<Grid container>
+                    <Grid item>
+                      <Typography>
+                        MAKE SURE FORM IS SAVED BEFORE PREVIEWING
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Button color="primary" onClick={handleSubmit}>
+                        Save Form
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <NavLink to={`/formscenter/${formId}/preview/`}>
+                        <Button color="primary">Preview Form</Button>
+                      </NavLink>
+                    </Grid>
+                  </Grid>
 <FormFields
                 customfields={props.fields}
                 handleDeleteFIeld={props.handleDeleteFIeld}
