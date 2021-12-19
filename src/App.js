@@ -12,7 +12,6 @@ import ScheduleAppointment from "./components/Forms/Administrative/Scheduling/Sc
 import Appointments from "./components/Appointments/appointments";
 import ClinicalQueue from "./components/ClinicalQueue/clinicalqueue";
 import MedicalAppointment from "./components/Appointment/components/medicalappointment";
-// import Appointment from "./components/Appointment/appointment";
 import "./styles/w3.css";
 import Patient from "./components/Patient/patient";
 import PatientRequests from "./components/PatientRequests/patientrequests";
@@ -29,6 +28,7 @@ import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import FormsCenter from "./components/FormsCenter/FormsCenter";
 import theme from "./styles/theme";
+import FormsBuilder from "./redone/FormsBuilder/FormsBuilder";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -73,7 +73,7 @@ function App() {
               <Route exact path="/patientrequests">
                 <PatientRequests />
               </Route>
-              <Route component={FormsCenter} path="/formscenter" />
+              <Route component={FormsBuilder} path="/formscenter" />
               <Route component={WaitList} path="/waitlist" />
               <Route
                 component={ReferralsToScheduleList}

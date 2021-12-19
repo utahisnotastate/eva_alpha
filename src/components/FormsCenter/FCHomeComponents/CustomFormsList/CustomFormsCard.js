@@ -7,19 +7,6 @@ import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
 import CardBody from "../../../basestyledcomponents/Card/CardBody";
 import CustomFormsList from "./CustomFormsList";
 
-/*
-forms give all forms
-
-<CustomFormsList
- forms={forms}
- listtitle={"Physical Exam"}
- typeOfFormToShow={"physical_exam"}
- url={props.url}
- />
-
-{listlabel, forms, typeOfFormToShow, url}
- */
-
 function CustomFormsCard(props) {
   return (
     <Card>

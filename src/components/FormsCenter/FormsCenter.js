@@ -2,7 +2,6 @@ import React from "react";
 import "./formscenter.css";
 import { useRouteMatch, Route } from "react-router-dom";
 import FormsCenterHome from "./FormsCenterHome";
-// import FormsCustomizer from "./FormsCustomizer/formscustomizer";
 import FormEditor from "./FormsCustomizer/FormEdItor/FormEditor";
 import FormPreview from "./FormPreview/formpreview";
 

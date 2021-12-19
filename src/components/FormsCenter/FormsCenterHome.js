@@ -27,26 +27,6 @@ export default function FormsCenterHome() {
     });
   }, []);
 
-  /*
-    const customformtypes = [
-    { listlabel: "Physical Exam", typeOfFormToShow: "physical_exam" },
-    { listlabel: "Review Of Systems", typeOfFormToShow: "review_of_systems" },
-  ];
-
-<GridItem md={4} xs={10}>
-          <Card>
-            <CardHeader icon>
-              <CardIcon color="primary">
-                <LanguageIcon />
-              </CardIcon>
-            </CardHeader>
-            <CardBody>
-              <Typography>Create Custom Complaint Form from scratch</Typography>
-            </CardBody>
-          </Card>
-        </GridItem>
-     */
-
   return (
     <div className={classes.root}>
       <GridContainer>

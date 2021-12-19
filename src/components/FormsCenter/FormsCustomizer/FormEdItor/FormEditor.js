@@ -56,16 +56,6 @@ export default function FormEditor(props) {
   const customfields = useSelector(
     (state) => state.formsmanager.newform.newformfields
   );
-  /* const defaultValues = {
-    form_title: formtitle,
-    form_type: formtype,
-    customformfields: [],
-    new_checkbox_field: "",
-    new_field: {
-      type: "",
-      label: "",
-    },
-  }; */
 
   const defaultValues = {
     id: formId,

@@ -43,7 +43,10 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rhfa-material-ui": "^1.1.0",
-    "rjsf-material-ui": "^0.3.9"
+    "rjsf-material-ui": "^0.3.9",
+    "@mui/material": "^5.2.4",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
   },
   "main": "public/electron.js",
   "scripts": {
