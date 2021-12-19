@@ -6,20 +6,9 @@ import {
   useFieldArray,
   useFormContext,
 } from "react-hook-form";
+import { FieldArray, useFormikContext } from "formik";
 // import {fetchFormFields} from "../../../../../api/forms.api";
-import {
-  TextField,
-  Checkbox,
-  Typography,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  FormGroup,
-  InputLabel,
-  RadioGroup,
-  Radio,
-  Input,
-} from "@material-ui/core";
+import { TextField, Typography, FormControlLabel } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "../../../../basestyledcomponents/Button";
@@ -66,6 +55,7 @@ function NoFieldsToDisplay() {
 
 export default function FormFields(props) {
   const dispatch = useDispatch();
+  const { values } = useFormikContext();
   const { control, register, watch } = useFormContext();
   const classes = useStyles();
   const customfields = props.customfields;
@@ -73,96 +63,104 @@ export default function FormFields(props) {
   return (
     <Grid container direction="column">
       <Grid item>
-        <Card>
-          <CardHeader>
-            <Typography variant="h6">Form fields</Typography>
-          </CardHeader>
-        </Card>
+        <Typography variant="h6">Form fields</Typography>
+      </Grid>
+      <Grid item>
+        <FieldArray
+          name={`customformfields`}
+          render={(arrayHelpers) => (
+            <Grid column>
+              {values.customformfields && values.customformfields.length > 0 ? (
+                <NoFieldsToDisplay />
+              ) : (
+                <NoFieldsToDisplay />
+              )}
+            </Grid>
+          )}
+        />
       </Grid>
       {customfields.length > 0 ? (
         customfields.map((field, index) => (
           <div key={index}>
             <Grid item>
-              <Card className={classes.fieldcontainer}>
-                <Grid container direction="column">
-                  <Grid item className={classes.deleteFieldButtoncontainer}>
-                    <Button
-                      color="danger"
-                      onClick={() => props.handleDeleteFIeld(index)}
-                    >
-                      X
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <FormControlLabel
-                      control={
-                        <TextField
-                          fullWidth
-                          inputRef={register()}
-                          name={`customformfields[${index}].label`}
-                          defaultValue={field.label}
-                        />
-                      }
-                      className={classes.fullsize}
-                      label={`Field Label`}
-                      labelPlacement={`start`}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <FormControlLabel
-                      control={
-                        <TextField
-                          fullWidth
-                          disabled
-                          inputRef={register()}
-                          name={`customformfields[${index}].type`}
-                          defaultValue={field.type}
-                        />
-                      }
-                      className={classes.fullsize}
-                      label={`Field Type`}
-                      labelPlacement={`start`}
-                    />
-                  </Grid>
-                  <Grid item>
-                    {field.type === "radio" ? (
-                      <RadioFieldPreview
-                        input={{
-                          fieldindex: index,
-                          label: field.label,
-                          name: `customformfields[${index}].choices`,
-                          choices: field.choices || [],
-                          fieldtype: field.type,
-                        }}
-                      />
-                    ) : field.type === "checkbox_group" ? (
-                      <RadioFieldPreview
-                        input={{
-                          fieldindex: index,
-                          label: field.label,
-                          name: `customformfields[${index}].choices`,
-                          choices: field.choices || [],
-                          fieldtype: field.type,
-                        }}
-                      />
-                    ) : (
-                      <fieldset>
-                        <legend>Form Preview</legend>
-                        <AppointmentField
-                          label={watch(`customformfields[${index}].label`)}
-                          type={field.type}
-                          fieldindex={index}
-                          value={null}
-                          fieldchecked={false}
-                          choices={field.choices}
-                          fieldname={`customformfields`}
-                          additionalInformation={null}
-                        />
-                      </fieldset>
-                    )}
-                  </Grid>
+              <Grid container direction="column">
+                <Grid item className={classes.deleteFieldButtoncontainer}>
+                  <Button
+                    color="danger"
+                    onClick={() => props.handleDeleteFIeld(index)}
+                  >
+                    X
+                  </Button>
                 </Grid>
-              </Card>
+                <Grid item>
+                  <FormControlLabel
+                    control={
+                      <TextField
+                        fullWidth
+                        inputRef={register()}
+                        name={`customformfields[${index}].label`}
+                        defaultValue={field.label}
+                      />
+                    }
+                    className={classes.fullsize}
+                    label={`Field Label`}
+                    labelPlacement={`start`}
+                  />
+                </Grid>
+                <Grid item>
+                  <FormControlLabel
+                    control={
+                      <TextField
+                        fullWidth
+                        disabled
+                        inputRef={register()}
+                        name={`customformfields[${index}].type`}
+                        defaultValue={field.type}
+                      />
+                    }
+                    className={classes.fullsize}
+                    label={`Field Type`}
+                    labelPlacement={`start`}
+                  />
+                </Grid>
+                <Grid item>
+                  {field.type === "radio" ? (
+                    <RadioFieldPreview
+                      input={{
+                        fieldindex: index,
+                        label: field.label,
+                        name: `customformfields[${index}].choices`,
+                        choices: field.choices || [],
+                        fieldtype: field.type,
+                      }}
+                    />
+                  ) : field.type === "checkbox_group" ? (
+                    <RadioFieldPreview
+                      input={{
+                        fieldindex: index,
+                        label: field.label,
+                        name: `customformfields[${index}].choices`,
+                        choices: field.choices || [],
+                        fieldtype: field.type,
+                      }}
+                    />
+                  ) : (
+                    <fieldset>
+                      <legend>Form Preview</legend>
+                      <AppointmentField
+                        label={watch(`customformfields[${index}].label`)}
+                        type={field.type}
+                        fieldindex={index}
+                        value={null}
+                        fieldchecked={false}
+                        choices={field.choices}
+                        fieldname={`customformfields`}
+                        additionalInformation={null}
+                      />
+                    </fieldset>
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
           </div>
         ))

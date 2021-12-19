@@ -19,7 +19,7 @@ import { useParams, useRouteMatch, NavLink } from "react-router-dom";
 import { updateForm, fetchForm } from "../../../../api/forms.api";
 import FieldOptionsEditor from "./FormFields/FieldOptionsEditor/FieldOptionsEditor";
 import EditorHeader from "./EditorHeader/EditorHeader";
-import EditorInput from "./EditorInput/EditorInput";
+import AddNewCustomField from "./EditorInput/AddNewCustomField";
 import FormPreview from "../../FormPreview/formpreview";
 
 const API_URL = "http://127.0.0.1:8000/api";
@@ -252,7 +252,7 @@ export default function FormEditor(props) {
               />
             </Grid>
             <Grid item>
-              <EditorInput
+              <AddNewCustomField
                 methods={methods}
                 handleAddField={handleAddField}
                 append={append}

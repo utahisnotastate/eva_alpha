@@ -9,7 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardBody from "../../../../basestyledcomponents/Card/CardBody";
 import Button from "../../../../basestyledcomponents/Button";
-import FormikMUISelectField from "../../../FormikFields/FormikSelect";
+import FormikMUISelectField from "../../../FormikFields/FormikMUISelect";
+import FormikMUITextField from "../../../FormikFields/FormikMUITextField";
 
 const useStyles = makeStyles({
   horizontal: {
@@ -48,7 +49,7 @@ export default function EditorHeader(props) {
         <Grid container direction="row" justify="space-between">
           <Grid item className={classes.horizontal}>
             <Typography>Form Title: {values.title} </Typography>
-            <Field component={TextField} label="" name={`form_title`} />
+            <FormikMUITextField name={`form_title`} />
           </Grid>
         </Grid>
       </Grid>
@@ -58,6 +59,7 @@ export default function EditorHeader(props) {
           label={``}
           name={`form_type`}
           options={form_type_options}
+          selecttext={`Choose form type from below`}
         />
       </Grid>
     </Grid>
@@ -65,6 +67,8 @@ export default function EditorHeader(props) {
 }
 
 /*
+<Field component={TextField} label="" name={`form_title`} />
+
            <select name="form_type" ref={register}>
               <option value="">Select Form Type</option>
               <option value="physical_exam">Physical Exam</option>

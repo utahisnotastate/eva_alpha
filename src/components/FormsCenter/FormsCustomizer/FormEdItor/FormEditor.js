@@ -13,7 +13,8 @@ import CardBody from "../../../basestyledcomponents/Card/CardBody";
 import EditorHeader from "./EditorHeader/EditorHeader";
 import FormFields from "./FormFields/FormFields";
 import { updateForm, fetchForm } from "../../../../api/forms.api";
-import EditorInput from "./EditorInput/EditorInput";
+import AddNewCustomField from "./EditorInput/AddNewCustomField";
+import CardFooter from "../../../basestyledcomponents/Card/CardFooter";
 
 const useStyles = makeStyles({
   builderroot: {
@@ -115,24 +116,17 @@ export default function FormEditor(props) {
                 <CardBody>
                   <Grid container direction="column">
                     <Grid item>
-                      <Field
-                        component={TextField}
-                        fullWidth
-                        name="form_title"
-                      />
+                      <Typography>Placeholder for Form Fields</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography>review_of_systems</Typography>
+                      <Typography>Placeholder for Form Editor Input</Typography>
                     </Grid>
                   </Grid>
                 </CardBody>
+                <CardFooter>
+                  <Typography>Test</Typography>
+                </CardFooter>
               </Card>
-            </Grid>
-            <Grid item>
-              <Typography>Placeholder for Form Fields</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>Placeholder for Form Editor Input</Typography>
             </Grid>
           </Grid>
         </Form>
@@ -142,6 +136,13 @@ export default function FormEditor(props) {
 }
 
 /*
+<Grid item>
+                      <Field
+                        component={TextField}
+                        fullWidth
+                        name="form_title"
+                      />
+                    </Grid>
 
 <Grid container>
                     <Grid item>

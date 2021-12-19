@@ -1,13 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormContext } from "react-hook-form";
-import { Typography } from "@material-ui/core";
+import { useFormikContext } from "formik";
+import { Typography, Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import FieldOptionsEditor from "../FormFields/FieldOptionsEditor/FieldOptionsEditor";
 import Card from "../../../../basestyledcomponents/Card/Card";
 import CardBody from "../../../../basestyledcomponents/Card/CardBody";
 import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
 import "../../../../../styles/w3.css";
+import FormikMUISelectField from "../../../FormikFields/FormikMUISelect";
 
 const useStyles = makeStyles({
   builderroot: {
@@ -32,17 +34,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EditorInput({ append, handleAddField }) {
+export default function AddNewCustomField({ append, handleAddField }) {
+  const { values } = useFormikContext();
   const { register, watch } = useFormContext();
   const classes = useStyles();
   const watchfieldtype = watch("new_field.type");
 
   return (
-    <Card>
-      <CardHeader>
+    <Grid direction={`column`}>
+      <Grid item>
+        <Divider />
         <Typography variant="h6">Create New Field</Typography>
-      </CardHeader>
-      <CardBody>
+      </Grid>
+      <Grid item>
         <Grid container direction="column" justify="space-between">
           <Grid item className={classes.addfielditem}>
             <Typography variant="subtitle2">Field Type</Typography>
@@ -72,8 +76,8 @@ export default function EditorInput({ append, handleAddField }) {
             )}
           </Grid>
         </Grid>
-      </CardBody>
-    </Card>
+      </Grid>
+    </Grid>
   );
 }
 
