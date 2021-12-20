@@ -2,14 +2,17 @@ import React from "react";
 import { Field } from "formik";
 import { TextField } from "formik-mui";
 
-export default function DynamicTextField({ label, multiline }) {
+export default function DynamicTextField({ label }) {
   return (
     <Field
-      component={TextField}
+      name="text"
       label={label}
-      name="outlined"
-      variant="standard"
-      InputProps={{ notched: true }}
+      component={TextField}
+      variant="outlined"
+      fullWidth
     />
   );
 }
+/*
+InputProps={{ notched: true }}
+ */

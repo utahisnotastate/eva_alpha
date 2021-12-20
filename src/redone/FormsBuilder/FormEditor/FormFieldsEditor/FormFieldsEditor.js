@@ -43,7 +43,12 @@ export default function FormFieldsEditor() {
               values.form.customformfields.length > 0
                 ? values.form.customformfields.map((field, index) => (
                     <div key={index}>
-                      <EditField label={field.label} />
+                      <EditField
+                        label={field.label}
+                        type={field.type}
+                        options={field.choices}
+                        index={index}
+                      />
                     </div>
                   ))
                 : null}

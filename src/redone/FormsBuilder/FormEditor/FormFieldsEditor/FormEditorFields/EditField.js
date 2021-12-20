@@ -3,8 +3,8 @@ import Card from "@mui/material/Card";
 import { Field } from "formik";
 import { CardActions, CardContent, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
-import DynamicTextField from "../../../../DynamicField/Fields/DynamicTextField";
 import DynamicField from "../../../../DynamicField/DynamicField";
+import EditFieldPreview from "./EditFieldPreview/EditFieldPreview";
 
 const useStyles = makeStyles((theme) => ({
   row: {
@@ -15,22 +15,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditField({ type, label, choices, index }) {
+export default function EditField({ type, label, options, index }) {
   const classes = useStyles();
 
   return (
     <Card variant={`outlined`}>
       <CardContent className={classes.row}>
         <Typography>Label</Typography>
-        <DynamicTextField label={label} />
+        <DynamicField type={type} label={label} options={options} />
       </CardContent>
       <CardActions>
-        <Typography>Preview</Typography>
+        <EditFieldPreview type={type} label={label} options={options} />
       </CardActions>
     </Card>
   );
 }
 /*
+<EditFieldPreview
+          type={type}
+          label={label}
+          options={options}
+          index={index}
+        />
+
+<DynamicTextField label={label} />
 <DynamicField
           type={type}
           options={choices ? choices : []}

@@ -3,15 +3,15 @@ import { FormControlLabel, Radio, LinearProgress } from "@mui/material";
 import { Field } from "formik";
 import { RadioGroup } from "formik-mui";
 
-export default function DynamicRadioGroup(props) {
+export default function DynamicRadioGroup({ options, label, name }) {
   return (
-    <Field component={RadioGroup} name={props.name}>
-      {props.options && props.options.length > 0
-        ? props.options.map((option, index) => (
+    <Field component={RadioGroup} label={label}>
+      {options && options.length > 0
+        ? options.map((option, index) => (
             <FormControlLabel
               key={index}
-              value={option.value}
               control={<Radio />}
+              value={option.label}
               label={option.label}
             />
           ))
@@ -19,3 +19,15 @@ export default function DynamicRadioGroup(props) {
     </Field>
   );
 }
+
+/*{
+  options && options.length > 0
+    ? options.map((option, index) => (
+        <FormControlLabel
+          key={index}
+          control={<Radio />}
+          label={option.label}
+        />
+      ))
+    : null;
+}*/
