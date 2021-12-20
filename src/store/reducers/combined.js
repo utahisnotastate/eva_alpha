@@ -41,20 +41,14 @@ import {
 } from "./appointment/appointment.reducers";
 
 import {
-  reviewofsystemsforms,
-  physicalexamforms,
-  medicalhistoryforms,
   forms,
   newtextvalueoptions,
-} from "./formscenter/formscenter.reducers";
-
-import {
-  newformproperties,
   newformfields,
   newformtitle,
   newformtype,
   previewtitle,
   previewfields,
+  activeformscenterform,
 } from "./formscenter/formscenter.reducers";
 
 function patientAppointmentHistory(state = [], action) {
@@ -135,6 +129,7 @@ const newform = combineReducers({
 
 const formsmanager = combineReducers({
   forms,
+  activeformscenterform,
   newform,
   formpreview,
 });

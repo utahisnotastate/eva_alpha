@@ -1,15 +1,7 @@
 import React from "react";
-import _ from "lodash";
 import { useRouteMatch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector, useDispatch } from "react-redux";
 import FormsList from "../FormsList/FormsList";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Switch from "@mui/material/Switch";
-import { Divider } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +25,7 @@ export default function FormsBuilderHome() {
       {formslistobjects.map((form, index) => (
         <FormsList
           key={index}
+          form={form}
           form_type={form.form_type}
           label={form.label}
           url={url}

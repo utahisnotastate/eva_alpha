@@ -148,6 +148,15 @@ export function newtextvalueoptions(state = [], action) {
   }
 }
 
+export function activeformscenterform(state = {}, action) {
+  switch (action.type) {
+    case "set_active_form":
+      return action.form;
+    default:
+      return state;
+  }
+}
+
 /*
 import _ from 'lodash';
 export function createmedicalchartformschema(state= {

@@ -30,8 +30,12 @@ function FormsBuilder() {
       <Route exact path={`${path}`}>
         <FormsBuilderHome />
       </Route>
-      <Route component={FormEditor} path={`${path}/:formId/edit`} />
-      <Route component={FormPreview} path={`${path}/:formId/preview`} />
+      <Route path={`${path}/:id/edit`}>
+        <FormEditor />
+      </Route>
+      <Route path={`${path}/:formId/preview`}>
+        <FormPreview />
+      </Route>
     </div>
   );
 }
@@ -40,4 +44,17 @@ export default React.memo(FormsBuilder);
 <Route component={FormsBuilderHome} exact path={`${path}`} />
       <Route component={FormEditor} path={`${path}/:formId/edit`} />
       <Route component={FormPreview} path={`${path}/:formId/preview`} />
+
+
+      <div className={classes.root}>
+      <Route exact path={`${path}`}>
+        <FormsBuilderHome />
+      </Route>
+      <Route path={`${path}/:formId/edit`}>
+        <FormEditor />
+      </Route>
+      <Route path={`${path}/:formId/preview`}>
+        <FormPreview />
+      </Route>
+    </div>
  */
