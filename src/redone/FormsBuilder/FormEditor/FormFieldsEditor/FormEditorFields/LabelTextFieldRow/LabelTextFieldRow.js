@@ -2,15 +2,14 @@ import React from "react";
 import { Field } from "formik";
 import { TextField } from "formik-mui";
 
-export default function DynamicNumberField({ label }) {
+export default function LabelTextFieldRow({ label, name, index }) {
   return (
     <Field
-      name="number_field"
-      label={label}
       component={TextField}
-      type={"number"}
-      variant="standard"
       fullWidth
+      label={label}
+      name={`${name}.${index}.label`}
+      variant="standard"
     />
   );
 }

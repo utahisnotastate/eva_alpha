@@ -2,13 +2,14 @@ import React from "react";
 import { Field } from "formik";
 import { TextField } from "formik-mui";
 
-export default function DynamicTextField({ label }) {
+export default function DynamicTextField({ label, name, index, test }) {
+  console.log(name);
   return (
     <Field
-      name="text"
+      name={name}
       label={label}
       component={TextField}
-      variant="outlined"
+      variant="standard"
       fullWidth
     />
   );

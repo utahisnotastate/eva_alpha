@@ -44,6 +44,7 @@ export default function FormFieldsEditor() {
                 ? values.form.customformfields.map((field, index) => (
                     <div key={index}>
                       <EditField
+                        name={`form.customformfields`}
                         label={field.label}
                         type={field.type}
                         options={field.choices}
