@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "white",
+    backgroundColor: "lightgray",
   },
 }));
 

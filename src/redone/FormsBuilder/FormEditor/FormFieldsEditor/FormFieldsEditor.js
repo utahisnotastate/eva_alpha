@@ -1,7 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormikContext, FieldArray } from "formik";
-import { Typography } from "@mui/material";
+import {
+  Typography,
+  Card,
+  CardHeader,
+  CardActions,
+  CardContent,
+  Button,
+} from "@mui/material";
 import AddField from "./AddField/AddField";
 import Stack from "@mui/material/Stack";
 import DynamicTextField from "../../../DynamicField/Fields/DynamicTextField";
@@ -12,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
     padding: "1rem",
     border: "1px solid #ccc",
+  },
+  card: {
+    padding: theme.spacing(1),
   },
   form: {
     display: "flex",
@@ -43,13 +53,24 @@ export default function FormFieldsEditor() {
               values.form.customformfields.length > 0
                 ? values.form.customformfields.map((field, index) => (
                     <div key={index}>
-                      <EditField
-                        name={`form.customformfields`}
-                        label={field.label}
-                        type={field.type}
-                        options={field.choices}
-                        index={index}
-                      />
+                      <Card
+                        variant={`outlined`}
+                        raised
+                        className={classes.card}
+                      >
+                        <CardHeader
+                          component={() => <Button>Delete Field</Button>}
+                        />
+                        <CardContent>
+                          <EditField
+                            name={`form.customformfields`}
+                            label={field.label}
+                            type={field.type}
+                            options={field.choices}
+                            index={index}
+                          />
+                        </CardContent>
+                      </Card>
                     </div>
                   ))
                 : null}
