@@ -47,7 +47,7 @@ export default function FormEditor() {
         <Formik
           initialValues={initialvalues}
           enableReinitialize
-          onSubmit={() => console.log("submit!!")}
+          onSubmit={(values) => console.log(values)}
         >
           <Form className={classes.form}>
             <FormHeader />

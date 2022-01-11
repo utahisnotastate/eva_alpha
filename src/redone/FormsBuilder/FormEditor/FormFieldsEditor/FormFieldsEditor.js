@@ -61,32 +61,3 @@ export default function FormFieldsEditor() {
     />
   );
 }
-
-/*
-<EditField key={index} index={index} field={field} />
-<Stack spacing={2}>
-            {values.form.customformfields &&
-            values.form.customformfields.length > 0
-              ? values.form.customformfields.map((field, index) => (
-                  <EditField key={index} index={index} field={field} />
-                ))
-              : null}
-          </Stack>
-
-<item key={index}>
-                  <Typography>{field.label}</Typography>
-                  <button
-                    type="button"
-                    onClick={() => arrayHelpers.remove(index)}
-                  >
-                    Remove
-                  </button>
-                </item>
-
-<button
-            type="button"
-            onClick={() => arrayHelpers.push({ label: "Test label" })}
-          >
-            Add
-          </button>
- */

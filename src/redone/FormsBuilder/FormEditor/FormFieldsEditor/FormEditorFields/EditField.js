@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditField({ type, label, options, index, name }) {
+function EditField({ type, label, options, index, name }) {
   const classes = useStyles();
 
   return (
@@ -60,3 +60,5 @@ export default function EditField({ type, label, options, index, name }) {
           index={index}
         />
  */
+
+export default React.memo(EditField);

@@ -15,22 +15,31 @@ export default function DynamicField({ type, index, options, label, name }) {
       return <DynamicTextField key={index} multiline label={label} />;
 
     case "radio":
-      return <DynamicRadioGroup key={index} label={label} options={options} />;
+      return (
+        <DynamicRadioGroup
+          key={index}
+          label={label}
+          options={options}
+          name={name}
+        />
+      );
     case "date":
-      return <DynamicTextField key={index} label={label} />;
+      return <DynamicTextField key={index} label={label} name={name} />;
 
     case "number":
-      return <DynamicNumberField key={index} label={label} />;
+      return <DynamicNumberField key={index} label={label} name={name} />;
 
     case "normal_abnormal":
-      return <DynamicNormalAbnormal key={index} label={label} />;
+      return <DynamicNormalAbnormal key={index} label={label} name={name} />;
 
     case "present_not_present":
-      return <DynamicPresentNotPresentField key={index} label={label} />;
+      return (
+        <DynamicPresentNotPresentField key={index} label={label} name={name} />
+      );
     case "select":
-      return <DynamicTextField key={index} label={label} />;
+      return <DynamicTextField key={index} label={label} name={name} />;
 
     default:
-      return <DynamicTextField key={index} label={`default`} />;
+      return <DynamicTextField key={index} label={`default`} name={name} />;
   }
 }
