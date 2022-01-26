@@ -8,6 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Switch from "@mui/material/Switch";
 import { Divider, Typography } from "@mui/material";
+import NewFormButton from "./newformbutton";
 
 const useStyles = makeStyles({
   root: {
@@ -30,30 +31,35 @@ export default function FormsList({ label, form_type, url }) {
   };
 
   return (
-    <List
-      className={classes.root}
-      subheader={<ListSubheader>{`${label}`}</ListSubheader>}
-    >
-      <>
-        {redirect ? <Redirect push to={`${url}/${redirectTo}/edit`} /> : null}{" "}
-        :}
-      </>
-      <Divider />
-      {forms && forms.length > 0
-        ? forms
-            .filter((form) => form.form_type === form_type)
-            .map((form, index) => (
-              <ListItem key={index} onClick={() => handleFormSelect(form)}>
-                <Switch
-                  edge={`start`}
-                  onChange={handleSwitch}
-                  checked={form.active}
-                />
-                <ListItemText primary={form.title} />
-              </ListItem>
-            ))
-        : null}
-    </List>
+    <>
+      <List
+        className={classes.root}
+        subheader={<ListSubheader>{`${label}`}</ListSubheader>}
+      >
+        <>
+          {redirect ? <Redirect push to={`${url}/${redirectTo}/edit`} /> : null}{" "}
+          :}
+        </>
+        <Divider />
+        {forms && forms.length > 0
+          ? forms
+              .filter((form) => form.form_type === form_type)
+              .map((form, index) => (
+                <ListItem key={index} onClick={() => handleFormSelect(form)}>
+                  <Switch
+                    edge={`start`}
+                    onChange={handleSwitch}
+                    checked={form.active}
+                  />
+                  <ListItemText primary={form.title} />
+                </ListItem>
+              ))
+          : null}
+        <ListItem>
+          <NewFormButton displaytext={`Add`} />
+        </ListItem>
+      </List>
+    </>
   );
 }
 /*
