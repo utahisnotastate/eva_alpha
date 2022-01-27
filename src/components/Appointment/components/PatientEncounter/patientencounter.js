@@ -10,22 +10,14 @@ import {
   StepLabel,
   Typography,
   Button,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  FormLabel,
-  FormGroup,
-  InputLabel,
-  Input,
 } from "@material-ui/core";
 //Follow Up Icon
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
-//import PatientComplaints from "../../Complaints/PatientComplaints";
 import PatientComplaints from "./Complaints/complaints";
-import ReviewOfSystems from "./ReviewOfSystems/ReviewOfSystems";
 import AppointmentROS from "../../AppointmentROS/AppointmentROS";
 import Assessment from "./Assessment/assessments";
 import * as PropTypes from "prop-types";
+import ReviewOfSystems from "./ReviewOfSystems/reviewofsystems";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -146,9 +138,9 @@ export default function PatientEncounter(props) {
         );
       //display review of systems component
       case 1:
-        return <AppointmentROS name={`clinical_data.clinical_forms`} />;
+        return <ReviewOfSystems />;
       case 2:
-        return <PatientComplaints />;
+        return <ReviewOfSystems />;
       case 3:
         return <Assessment />;
       case 4:

@@ -154,3 +154,10 @@ export function appointmentplans(state = [], action) {
       return state;
   }
 }
+
+/*
+ *
+ *
+ * Potentially new reducers
+ *
+ * */
