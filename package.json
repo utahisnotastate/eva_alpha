@@ -79,14 +79,20 @@
     "concurrently": "^5.2.0",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
+    "eslint": "^8.9.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-config-hardcore": "19.19.4",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-unicorn": "^41.0.0",
+    "eslint-plugin-react-redux": "^4.0.0",
+    "prettier": "2.5.1",
     "wait-on": "^5.0.0"
   }
 }

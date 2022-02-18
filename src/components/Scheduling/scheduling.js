@@ -21,6 +21,7 @@ import {
 import GridContainer from "../basestyledcomponents/Grid/GridContainer";
 import GridItem from "../basestyledcomponents/Grid/GridItem";
 import { useModal } from "react-modal-hook";
+import API_URL from "../../api/api_url";
 import Card from "../basestyledcomponents/Card/Card";
 import CardBody from "../basestyledcomponents/Card/CardBody";
 import AppointmentScheduleEvent from "./Day/Appointment/appointmentscheduleevent";
@@ -35,7 +36,6 @@ var toDate = require("@fav/type.to-date");
 const localizer = momentLocalizer(moment);
 
 const useStyles = makeStyles(styles);
-const API_URL = "http://127.0.0.1:8000/api";
 
 const blankclinicaldata = {
   complaints: [],

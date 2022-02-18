@@ -4,22 +4,22 @@ import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm, FormProvider, useFieldArray } from "react-hook-form";
-import NewComplaint from "./NewComplaint/NewComplaint.FunComp";
+import NewComplaint from "../components/Appointment/Complaints/NewComplaint/NewComplaint.FunComp";
 import { TextField } from "@material-ui/core";
-import Button from "../../basestyledcomponents/Button";
-import Card from "../../basestyledcomponents/Card/Card";
-import CardHeader from "../../basestyledcomponents/Card/CardHeader";
-import CardBody from "../../basestyledcomponents/Card/CardBody";
+import Button from "../components/basestyledcomponents/Button";
+import Card from "../components/basestyledcomponents/Card/Card";
+import CardHeader from "../components/basestyledcomponents/Card/CardHeader";
+import CardBody from "../components/basestyledcomponents/Card/CardBody";
 import Typography from "@material-ui/core/Typography";
-import AppointmentComplaints from "./AppointmentComplaints/AppointmentComplaints";
+import AppointmentComplaints from "../components/Appointment/Complaints/AppointmentComplaints/AppointmentComplaints";
 import { useParams } from "react-router-dom";
 // import PatientComplaint from './PatientComplaint/PatientComplaint';
 import {
   getAppointmentComplaints,
   saveAppointmentComplaints,
   createAppointmentComplaints,
-} from "../../../api/appointment.api";
-import { fetchAllForms } from "../../../api/forms.api";
+} from "../api/appointment.api";
+import { fetchAllForms } from "../api/forms.api";
 
 const editorStyle = {
   minWidth: "100px",

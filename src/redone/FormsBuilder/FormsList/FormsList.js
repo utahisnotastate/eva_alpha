@@ -23,7 +23,7 @@ export default function FormsList({ label, form_type, url }) {
   const [redirect, setRedirect] = useState(false);
   const [redirectTo, setRedirectTo] = useState("");
 
-  const handleSwitch = console.log("clicked~");
+  const handleSwitch = () => console.log("clicked~");
   const handleFormSelect = (form) => {
     dispatch({ type: "set_active_form", form: form });
     setRedirectTo(form.id);
@@ -44,7 +44,7 @@ export default function FormsList({ label, form_type, url }) {
           ? forms
               .filter((form) => form.form_type === form_type)
               .map((form, index) => (
-                <ListItem key={index} onClick={() => handleFormSelect(form)}>
+                <ListItem key={index}>
                   <Switch
                     edge={`start`}
                     onChange={handleSwitch}

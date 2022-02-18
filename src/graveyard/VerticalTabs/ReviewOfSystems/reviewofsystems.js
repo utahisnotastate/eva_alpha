@@ -6,7 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import DynamicAppointmentForm from "../DynamicAppointmentForm/dynamicappointmentform";
+import DynamicAppointmentForm from "../../../components/Appointment/components/DynamicAppointmentForm/dynamicappointmentform";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,16 +49,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VerticalTabs(props) {
+export default function ReviewOfSystems(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [form_type, setFormType] = React.useState(props.form_type);
 
   const methods = useFormContext();
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
-      name: `clinical_data.physical_exam`, // unique name for your Field Array
+      name: `clinical_data.review_of_systems`, // unique name for your Field Array
       // keyName: "id", default to "id", you can change the key name
     }
   );

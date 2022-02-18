@@ -9,13 +9,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import NavBar from "./components/NavBar/navbar";
 import Home from "./components/Home/home";
 import ScheduleAppointment from "./components/Forms/Administrative/Scheduling/ScheduleAppointment/scheduleappointment";
-import Appointments from "./components/Appointments/appointments";
 import ClinicalQueue from "./components/ClinicalQueue/clinicalqueue";
 import MedicalAppointment from "./components/Appointment/components/medicalappointment";
 import "./styles/w3.css";
 import Patient from "./components/Patient/patient";
 import PatientRequests from "./components/PatientRequests/patientrequests";
-import Claims from "./components/Claims/claims";
+//import Claims from "./components/Claims/claims";
+import ClaimsTableContainer from "./components/Claims/ClaimsTableContainer/claimstablecontainer";
 import EvaAdmin from "./components/EvaAdmin/evaadmin";
 import Faxes from "./components/Faxes/faxes";
 import Patients from "./components/Patients/patients";
@@ -27,7 +27,6 @@ import ReferralsToScheduleList from "./components/Scheduling/ReferralsToSchedule
 import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 //import FormsCenter from "./components/FormsCenter/FormsCenter";
-import Appointment from "./components/Appointment/appointment";
 import theme from "./styles/theme";
 import FormsBuilder from "./redone/FormsBuilder/FormsBuilder";
 
@@ -37,6 +36,12 @@ const store = createStore(
   allReducers,
   composeEnhancers(applyMiddleware(thunk))
 );
+
+/*
+*               <Route path="/appointments">
+                <Appointments />
+              </Route>
+* */
 
 function App() {
   return (
@@ -52,12 +57,10 @@ function App() {
               <Route path="/appointments/:id">
                 <MedicalAppointment />
               </Route>
-              <Route path="/appointments">
-                <Appointments />
-              </Route>
+
               <Route component={Claim} path="/claims/:claimId" />
               <Route path="/claims">
-                <Claims />
+                <ClaimsTableContainer />
               </Route>
               <Route path="/evaadmin">
                 <EvaAdmin />

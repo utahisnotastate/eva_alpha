@@ -6,7 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import DynamicAppointmentForm from "../../DynamicAppointmentForm/dynamicappointmentform";
+import DynamicAppointmentForm from "../../components/Appointment/components/DynamicAppointmentForm/dynamicappointmentform";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,9 +49,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Physicalexam(props) {
+export default function VerticalTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [form_type, setFormType] = React.useState(props.form_type);
 
   const methods = useFormContext();
 

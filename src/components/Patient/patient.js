@@ -21,7 +21,7 @@ import {
 } from "../../api/patient.api";
 import { apifetch } from "../../api/utility.api";
 import axios from "axios";
-import { useStateValue } from "../ClinicalQueue/context/ClinicalQueueContext";
+import { useStateValue } from "../../graveyard/context/ClinicalQueueContext";
 import { patient_contact_methods } from "../../store/reducers/patient/patient.reducers";
 
 const useStyles = makeStyles((theme) => ({

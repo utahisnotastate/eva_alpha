@@ -1,20 +1,23 @@
 {
   "env": {
     "browser": true,
-    "node": true,
-    "es6": true
+    "es2021": true
   },
   "plugins": [
     "only-warn",
     "react-hooks",
-    "react"
+    "react",
+    "react-redux",
+    "promise",
+    "unicorn"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "airbnb-base",
-    "hardcore/react"
+    "plugin:react-redux/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:promise/recommended",
+    "prettier"
   ],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -24,6 +27,8 @@
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "requireConfigFile": false,
+    "ecmaVersion": 12,
+    "sourceType": "module",
     "babelOptions": {
       "presets": ["@babel/preset-react"]
     },
