@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Card from "../../basestyledcomponents/Card/Card";
-import CardHeader from "../../basestyledcomponents/Card/CardHeader";
-import CardBody from "../../basestyledcomponents/Card/CardBody";
+import Card from "../../../basestyledcomponents/Card/Card";
+import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
+import CardBody from "../../../basestyledcomponents/Card/CardBody";
 import {
   Formik,
   Field,
@@ -37,7 +37,7 @@ import {
 import {
   getAppointmentForm,
   updateAppointmentForm,
-} from "../../../api/appointment.api";
+} from "../../../../api/appointment.api";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({

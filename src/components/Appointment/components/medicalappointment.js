@@ -194,31 +194,27 @@ export default function MedicalAppointment() {
   }, [id]);
   console.log(path);
   return (
-    <>
-      <Grid container direction="row" spacing={1}>
-        <Grid item xs={12} style={{ margin: "20px" }}>
-          <Card>
-            <Grid container direction={`column`}>
-              <Grid item className={classes.header}>
-                <CardHeader color={`primary`}>
-                  <AppointmentHeader appointment={appointment} />
-                </CardHeader>
-              </Grid>
-              <Formik enableReinitialize={true} initialValues={appointment}>
-                {({ values }) => (
-                  <>
-                    <Grid item className={classes.content}>
-                      {determineAppointmentComponentToRender(values)}
-                      <pre>{JSON.stringify(values, null, 2)}</pre>
-                    </Grid>
-                  </>
-                )}
-              </Formik>
+    <Grid container direction="row" spacing={1}>
+      <Grid item xs={12} style={{ margin: "20px" }}>
+        <Card>
+          <Grid container direction={`column`}>
+            <Grid item className={classes.header}>
+              <CardHeader color={`primary`}>
+                <AppointmentHeader appointment={appointment} />
+              </CardHeader>
             </Grid>
-          </Card>
-        </Grid>
+            <Formik enableReinitialize={true} initialValues={appointment}>
+              {({ values }) => (
+                <Grid item className={classes.content}>
+                  {determineAppointmentComponentToRender(values)}
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                </Grid>
+              )}
+            </Formik>
+          </Grid>
+        </Card>
       </Grid>
-    </>
+    </Grid>
   );
 }
 

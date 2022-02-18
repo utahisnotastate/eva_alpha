@@ -26,7 +26,8 @@ import WaitList from "./components/Scheduling/WaitList/waitlist";
 import ReferralsToScheduleList from "./components/Scheduling/ReferralsToSchedule/referralstoschedulelist";
 import { allReducers } from "./store/reducers/combined";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import FormsCenter from "./components/FormsCenter/FormsCenter";
+//import FormsCenter from "./components/FormsCenter/FormsCenter";
+import Appointment from "./components/Appointment/appointment";
 import theme from "./styles/theme";
 import FormsBuilder from "./redone/FormsBuilder/FormsBuilder";
 

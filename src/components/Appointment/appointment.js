@@ -1,56 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  Typography,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from "@material-ui/core";
 import { fetchAllForms } from "../../api/forms.api";
-import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import ListItemText from "@material-ui/core/ListItemText";
 import PatientComplaints from "./Complaints/PatientComplaints";
-import AppointmentROS from "./AppointmentROS/AppointmentROS";
-// import AppointmentPhysicalExam from "./AppointmentPhysicalExam/AppointmentPhysicalExam";
+import AppointmentROS from "./old appointment code/AppointmentROS/AppointmentROS";
 import AppointmentAssessment from "./Assessment/AppointmentAssessment";
 import AppointmentPlan from "./AppointmentPlan/AppointmentPlan";
-import AppointmentFollowUp from "./AppointmentFollowUp/AppointmentFollowUp";
 import AppointmentSummary from "./AppointmentSummary/AppointmentSummary";
 import {
   useParams,
   useRouteMatch,
   Switch,
   Route,
-  Link,
   NavLink,
 } from "react-router-dom";
 import patientroutes from "../Patient/routes";
-import AppointmentComplaints from "./Complaints/AppointmentComplaints/AppointmentComplaints";
-import NewComplaint from "./Complaints/NewComplaint/NewComplaint.FunComp";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
 import Card from "../basestyledcomponents/Card/Card";
 import CardHeader from "../basestyledcomponents/Card/CardHeader";
 import CardBody from "../basestyledcomponents/Card/CardBody";
 import CardFooter from "../basestyledcomponents/Card/CardFooter";
-import Collapse from "@material-ui/core/Collapse";
-import BaseROSComponent from "./AppointmentROS/AppointmentROSComponents/BaseROSComponent";
-import BasePhysicalExamComponent from "./AppointmentPhysicalExam/BasePhysicalExamComponent";
-// import {ROSRoutes, PhysicalExamRoutes} from "./appointmentroutes";
-import AppointmentForm from "./AppointmentForm/appointmentform";
+import AppointmentForm from "./old appointment code/AppointmentForm/appointmentform";
 import {
   getAppointmentForms,
-  getAllActiveForms,
   createAppointmentForm,
-  getAppointmentBasicDetails,
 } from "../../api/appointment.api";
 import AppointmentAllergiesWarning from "./appointmentallergieswarning";
-import { getAllPatientAllergyInfo } from "../../api/patient.api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAppointmentClinicalData,
-  getAllAppointmentInformation,
-} from "../../api/forms.api";
+import { getAllAppointmentInformation } from "../../api/forms.api";
 import * as PropTypes from "prop-types";
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import DraftsIcon from "@material-ui/icons/Drafts";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -111,7 +98,6 @@ function AppointmentSidebar({
           {appointmentroutes.map(callbackfn)}
         </List>
       </Collapse>
-
       <ListItem button onClick={onClick1}>
         <ListItemIcon>
           <DraftsIcon />
@@ -138,6 +124,7 @@ AppointmentSidebar.propTypes = {
   patientoptionsopen: PropTypes.bool,
   prop7: PropTypes.func,
 };
+
 export default function Appointment() {
   let { id } = useParams();
   const dispatch = useDispatch();
@@ -237,19 +224,7 @@ export default function Appointment() {
       </ListItem>
     );
   };
-  const saveAppointmentFormsToDB = (forms) => {
-    console.log("save appointment forms is " + JSON.stringify(forms));
-    let promiseforms = [];
-    forms.forEach((form) => {
-      promiseforms.push(createAppointmentForm(id, form));
-    });
-    Promise.all(promiseforms).then((results) => {
-      console.log(results);
-      getAppointmentForms(id).then((response) => {
-        dispatch({ type: "load_all_appointment_forms", forms: response });
-      });
-    });
-  };
+
   const convertAppointmentForms = (forms) => {
     let activeforms = forms;
     let appointmentforms = [];
@@ -416,79 +391,20 @@ export default function Appointment() {
   );
 }
 
-/*
-useEffect(() => {
-    getAppointmentBasicDetails(id).then((response) => {
-      console.log(response);
-      setAppointmentStatus(response.status);
-      setPatientName(response.patient_display_name);
-      setAssignedProvider(response.provider_display_name);
-      getAllPatientAllergyInfo(response.patient).then((response) => {
-        console.log("all allergy is " + JSON.stringify(response));
-        const [
-          latexallergies,
-          pollenallergies,
-          petallergies,
-          drugallergies,
-          foodallergies,
-          insectallergies,
-        ] = response;
-        dispatch({ type: "load_latex_allergy", latexallergy: latexallergies });
-        dispatch({
-          type: "load_pollen_allergy",
-          pollenallergy: pollenallergies,
-        });
-        dispatch({
-          type: "load_all_drug_allergies",
-          drugallergies: drugallergies,
-        });
-        dispatch({
-          type: "load_all_food_allergies",
-          foodallergies: foodallergies,
-        });
-        dispatch({
-          type: "load_all_pet_allergies",
-          petallergies: petallergies,
-        });
-        console.log("latex allergies are " + latexallergies.length);
+/* 
+*   const saveAppointmentFormsToDB = (forms) => {
+    console.log("save appointment forms is " + JSON.stringify(forms));
+    let promiseforms = [];
+    forms.forEach((form) => {
+      promiseforms.push(createAppointmentForm(id, form));
+    });
+    Promise.all(promiseforms).then((results) => {
+      console.log(results);
+      getAppointmentForms(id).then((response) => {
+        dispatch({ type: "load_all_appointment_forms", forms: response });
       });
     });
-  }, [id]);
- */
-
-/*
-  useEffect(() => {
-    //check if appointment has any forms associated with it
-    getAppointmentForms(id)
-      .then((response) => {
-        if (response.length > 0) {
-          dispatch({ type: "load_all_appointment_forms", forms: response });
-        } else {
-          console.log("appointment forms need to be created!!Create them!");
-          getAllActiveForms().then((response) => {
-            convertAppointmentForms(response);
-            console.log(
-              "appointment forms are " + JSON.stringify(appointmentforms)
-            );
-            // saveAppointmentFormsToDB(appointmentforms)
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
- */
-
-/*
-    {
-      path: "/followup",
-      label: "Follow Up",
-      nestedroutes: false,
-      subroutes: [],
-      component: AppointmentFollowUp,
-    },
-        setPollenStatus(pollenallergies);
-        setPetStatus(petallergies);
-        setDrugStatus(drugallergies);
-        setFoodStatus(foodallergies);
-        setInsectStatus(insectallergies);
- */
+  };
+*
+*
+* */

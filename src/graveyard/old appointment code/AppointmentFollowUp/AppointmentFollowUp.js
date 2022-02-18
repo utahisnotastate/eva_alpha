@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom"
-
-export default function AppointmentFollowUp() {
+import {useParams} from "react-router-dom" function AppointmentFollowUp(){
     let { id } = useParams();
     return (
         <div>

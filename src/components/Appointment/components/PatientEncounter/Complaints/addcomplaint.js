@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
-import { FieldArray } from "formik";
+import { makeStyles, Typography, Button } from "@material-ui/core";
+import { Field, FieldArray, useFormikContext } from "formik";
+import { TextField } from "formik-material-ui";
+import Card from "../../../../basestyledcomponents/Card/Card";
+import CardHeader from "../../../../basestyledcomponents/Card/CardHeader";
+import CardBody from "../../../../basestyledcomponents/Card/CardBody";
 import Grid from "@material-ui/core/Grid";
 import { Complaint } from "./Complaint/complaint";
-import AddNewComplaint from "./addcomplaint";
 
 const editorStyle = {
   minWidth: "100px",
@@ -19,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px",
   },
 }));
+
 /*
         <TextField
           name={`new_complaint_description`}
@@ -31,15 +35,23 @@ const useStyles = makeStyles((theme) => ({
         />
  */
 
-/*function AddNewComplaint(props) {
+export default function AddNewComplaint(props) {
   const [complaintname, setComplaintName] = useState("");
   const [description, setDescription] = useState("");
   const { setFieldValue } = useFormikContext();
 
-  function resetForm(name, description) {
-    setFieldValue("new_complaint_name", "");
-    setFieldValue("new_complaint_description", "");
+  function resetForm() {
+    setComplaintName("");
+    setDescription("");
   }
+  const handleComplaintNameChange = (event) => {
+    setComplaintName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
   return (
     <Card raised>
       <CardHeader color={`primary`}>
@@ -76,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
               complaint_description: description,
               relatedToAssessment: false,
             });
-            resetForm(complaintname, description);
+            resetForm();
           }}
         >
           Add Complaint
@@ -84,49 +96,29 @@ const useStyles = makeStyles((theme) => ({
       </CardBody>
     </Card>
   );
-}*/
-export default function PatientComplaints({ complaints, name }) {
-  const classes = useStyles();
-  return (
-    <>
-      <Grid container direction={`column`} justify="space-evenly" spacing={2}>
-        <Grid item>
-          <Grid container direction="column">
-            <FieldArray name={name}>
-              {(arrayHelpers) => (
-                <>
-                  {complaints && complaints.length > 0 ? (
-                    <Grid container direction="column">
-                      {complaints.map((complaint, index) => (
-                        <Complaint
-                          arrayHelpers={arrayHelpers}
-                          key={index}
-                          name={name}
-                          index={index}
-                          classes={classes}
-                        />
-                      ))}
-                    </Grid>
-                  ) : (
-                    <Grid item>
-                      <p>No complaints yet. Add some below!</p>
-                    </Grid>
-                  )}
-
-                  <Grid item>
-                    <AddNewComplaint arrayHelpers={arrayHelpers} />
-                  </Grid>
-                </>
-              )}
-            </FieldArray>
-          </Grid>
-        </Grid>
-      </Grid>
-    </>
-  );
 }
 
 /*
+ <Field
+          component={TextField}
+          label={`Complaint Name`}
+          name={`new_complaint_name`}
+          value={complaintname}
+          variant={`outlined`}
+          onChange={(e) => setComplaintName(e.target.value)}
+        />
+        <Field
+          component={TextField}
+          multiline
+          rows={5}
+          label={`Complaint Name`}
+          name={`new_complaint_description`}
+          value={description}
+          variant={`outlined`}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+
 <FieldArray name={props.name}>
               {(arrayHelpers) => (
                 <>

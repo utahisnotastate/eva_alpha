@@ -38,7 +38,6 @@ export default function FormsList({ label, form_type, url }) {
       >
         <>
           {redirect ? <Redirect push to={`${url}/${redirectTo}/edit`} /> : null}{" "}
-          :}
         </>
         <Divider />
         {forms && forms.length > 0
