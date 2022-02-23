@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouteMatch, Route } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,24 +17,26 @@ function FormsBuilder() {
 	const { path } = useRouteMatch()
 	const classes = useStyles()
 	const dispatch = useDispatch()
+	const [forms, setForms] = useState([])
 
 	useEffect(() => {
 		fetchAllForms().then((response) => {
 			console.log(response)
 			console.log('forms loggeed')
-			dispatch({ type: 'load_forms', forms: response })
+			setForms(response)
+			//dispatch({ type: 'load_forms', forms: response })
 		})
 	}, [])
 
 	return (
 		<div className={classes.root}>
 			<Route exact path={`${path}`}>
-				<FormsBuilderHome />
+				<FormsBuilderHome forms={forms} />
 			</Route>
 			<Route path={`${path}/:id/edit`}>
 				<FormEditor />
 			</Route>
-			<Route path={`${path}/:formId/preview`}>
+			<Route path={`${path}/:id/preview`}>
 				<FormPreview />
 			</Route>
 		</div>

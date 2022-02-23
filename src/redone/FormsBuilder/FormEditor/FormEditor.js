@@ -27,7 +27,7 @@ export default function FormEditor() {
 		id: '',
 		active: '',
 		title: '',
-		form: { customformfields: [] },
+		form: { fields: [] },
 	})
 	useEffect(() => {
 		const getFormDetails = async () => {

@@ -66,9 +66,7 @@ export default function FormFieldsEditor() {
 														type={field.type}
 														choices={field.choices}
 														label={field.label}
-														types={types}
-														index={index}
-														name={`form.customformfields.${index}`}
+														name={`form.customformfields.${index}.value`}
 														setFieldValue={
 															setFieldValue
 														}

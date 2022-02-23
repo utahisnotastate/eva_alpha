@@ -16,13 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function EditFieldPreview({
-	label,
-	type,
-	options,
-	index,
-	name,
-}) {
+export default function EditFieldPreview({ label, type, options, name }) {
 	const classes = useStyles()
 	return (
 		<div className={classes.root}>
@@ -33,8 +27,17 @@ export default function EditFieldPreview({
 				type={type}
 				options={options}
 				name={name}
-				index={index}
 			/>
 		</div>
 	)
 }
+/*
+* <DynamicField
+				label={label}
+				type={type}
+				options={options}
+				name={name}
+				index={index}
+			/>
+*
+* */

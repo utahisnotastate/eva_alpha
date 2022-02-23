@@ -9,21 +9,29 @@ import ListSubheader from '@mui/material/ListSubheader'
 import Switch from '@mui/material/Switch'
 import { Divider, Typography } from '@mui/material'
 import NewFormButton from './newformbutton'
+import CreateNewExam from './createnewexam'
 
 const useStyles = makeStyles({
 	root: {
 		backgroundColor: 'white',
+		display: 'flex',
+		flexDirection: 'column',
 	},
 })
 
-export default function FormsList({ label, form_type, url }) {
+export default function FormsList({
+	label,
+	forms,
+	form_type,
+	url,
+	create_button_text,
+}) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const forms = useSelector((state) => state.formsmanager.forms)
 	const [redirect, setRedirect] = useState(false)
 	const [redirectTo, setRedirectTo] = useState('')
 
-	const handleSwitch = () => console.log('clicked~')
+	const handleSwitch = () => console.log('clicked')
 	const handleFormSelect = (form) => {
 		dispatch({ type: 'set_active_form', form: form })
 		setRedirectTo(form.id)
@@ -31,38 +39,49 @@ export default function FormsList({ label, form_type, url }) {
 	}
 
 	return (
-		<>
+		<div className={classes.root}>
 			<List
 				className={classes.root}
 				subheader={<ListSubheader>{`${label}`}</ListSubheader>}>
-				<>
-					{redirect ? (
-						<Redirect push to={`${url}/${redirectTo}/edit`} />
-					) : null}{' '}
-				</>
+				{redirect ? (
+					<Redirect push to={`${url}/${redirectTo}/edit`} />
+				) : null}{' '}
 				<Divider />
-				{forms && forms.length > 0
-					? forms
-							.filter((form) => form.form_type === form_type)
-							.map((form, index) => (
-								<ListItem key={index}>
-									<Switch
-										edge={`start`}
-										onChange={handleSwitch}
-										checked={form.active}
-									/>
-									<ListItemText
-										primary={`${form.title} and id ${form.id}`}
-										onClick={() => handleFormSelect(form)}
-									/>
-								</ListItem>
-							))
-					: null}
-				<ListItem>
-					<NewFormButton displaytext={`Add`} />
-				</ListItem>
+				{forms && forms.length > 0 ? (
+					forms.map((form, index) => (
+						<ListItem key={index}>
+							<ListItemText
+								primary={form.title}
+								onClick={() => handleFormSelect(form)}
+							/>
+							<div className={classes.root}>
+								<Typography>Active</Typography>
+								<Switch
+									edge={`start`}
+									onChange={handleSwitch}
+									checked={form.active}
+								/>
+							</div>
+						</ListItem>
+					))
+				) : (
+					<ListItem>
+						<ListItemText>
+							{' '}
+							Sorry no forms are created. Create one below
+						</ListItemText>
+					</ListItem>
+				)}
 			</List>
-		</>
+			<Divider />
+			<CreateNewExam
+				redirect={redirect}
+				setRedirect={setRedirect}
+				redirectTo={redirectTo}
+				setRedirectTo={setRedirectTo}
+				create_button_text={create_button_text}
+			/>
+		</div>
 	)
 }
 /*

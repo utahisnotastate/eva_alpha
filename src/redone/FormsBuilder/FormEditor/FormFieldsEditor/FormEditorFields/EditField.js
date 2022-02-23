@@ -21,25 +21,33 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-function EditField({ type, label, options, index, name }) {
+/*
+LabelTextFieldRow is just the label for the field that shows up on the form. The user can edit this in case of typos etc.
+
+ */
+
+function EditField({ type, label, choices, index, name }) {
 	return (
 		<>
-			<LabelTextFieldRow
+			<LabelTextFieldRow label={label} name={name} />
+			<EditFieldPreview
+				type={type}
 				label={label}
-				name={`${name}.label`}
-				index={index}
+				options={choices}
+				name={name}
 			/>
-			{options ? (
-				<FieldOptionsEditor
-					name={`${name}.${index}.choices`}
-					options={options}
-					index={index}
-				/>
-			) : null}
 		</>
 	)
 }
 /*
+{choices ? (
+				<FieldOptionsEditor
+					name={`${name}.${index}.choices`}
+					options={choices}
+					index={index}
+				/>
+			) : null}
+
 			<EditFieldPreview
 				type={type}
 				label={label}

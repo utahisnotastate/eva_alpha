@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function LabelTextFieldRow({ label, name, index }) {
+/* This only changes the label for the field. This is not a normal text field.*/
+
+export default function LabelTextFieldRow({ label, name }) {
 	const classes = useStyles()
 	return (
 		<Field

@@ -11,26 +11,45 @@ const useStyles = makeStyles({
 	},
 })
 
-export default function FormsBuilderHome() {
+export default function FormsBuilderHome({ forms }) {
 	const { url } = useRouteMatch()
 	const classes = useStyles()
+	const physical_exam_forms = forms.filter(
+		(form) => form.type === 'physical_exam'
+	)
+	const review_of_systems_forms = forms.filter(
+		(form) => form.type === 'review_of_systems'
+	)
 
 	const typesofforms = [
-		{ label: 'Physical Exam', form_type: 'physical_exam' },
-		{ label: 'Review Of Systems', form_type: 'review_of_systems' },
+		{
+			label: 'Physical Exam',
+			form_type: 'physical_exam',
+			create_button_text: 'Create New Physical Exam Form',
+		},
+		{
+			label: 'Review Of Systems',
+			form_type: 'review_of_systems',
+			create_button_text: 'Add New System',
+		},
 	]
 
 	return (
 		<div className={classes.root}>
-			{typesofforms.map((form, index) => (
-				<FormsList
-					key={index}
-					form={form}
-					form_type={form.form_type}
-					label={form.label}
-					url={url}
-				/>
-			))}
+			<FormsList
+				forms={physical_exam_forms}
+				type={`physical_exam`}
+				create_button_text={`Create New Physical Exam Form`}
+				label={`Physical Exam Forms`}
+				url={url}
+			/>
+			<FormsList
+				forms={review_of_systems_forms}
+				type={`review_of_systems`}
+				create_button_text={`Create New Review Of Systems Form`}
+				label={`Review Of Systems Forms`}
+				url={url}
+			/>
 		</div>
 	)
 }
