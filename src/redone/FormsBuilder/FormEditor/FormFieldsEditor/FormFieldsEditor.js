@@ -43,47 +43,56 @@ export default function FormFieldsEditor() {
 		<FieldArray
 			name={`form.customformfields`}
 			render={(arrayHelpers) => (
-				<>
-					<div className={classes.root}>
-						<Typography variant="h6">Fields</Typography>
-						<Stack spacing={2}>
-							{values.form.customformfields &&
-							values.form.customformfields.length > 0
-								? values.form.customformfields.map(
-										(field, index) => (
-											<div key={index}>
-												<Card
-													variant={`outlined`}
-													raised
-													className={classes.card}>
-													<CardHeader
-														component={() => (
-															<Button>
-																Delete Field
-															</Button>
-														)}
+				<div className={classes.root}>
+					<Typography variant="h6">Fields</Typography>
+					<Stack spacing={2}>
+						{values.form.customformfields &&
+						values.form.customformfields.length > 0
+							? values.form.customformfields.map(
+									(field, index) => (
+										<div key={index}>
+											<Card
+												variant={`outlined`}
+												className={classes.card}>
+												<CardHeader
+													component={() => (
+														<Button>
+															Delete Field
+														</Button>
+													)}
+												/>
+												<CardContent>
+													<EditField
+														type={field.type}
+														choices={field.choices}
+														label={field.label}
+														types={types}
+														index={index}
+														name={`form.customformfields.${index}`}
+														setFieldValue={
+															setFieldValue
+														}
 													/>
-													<CardContent>
-														<EditField
-															name={`form.customformfields`}
-															label={field.label}
-															type={field.type}
-															options={
-																field.choices
-															}
-															index={index}
-														/>
-													</CardContent>
-												</Card>
-											</div>
-										)
-								  )
-								: null}
-						</Stack>
-					</div>
-					<AddField arrayHelpers={arrayHelpers} types={types} />
-				</>
+												</CardContent>
+											</Card>
+										</div>
+									)
+							  )
+							: null}
+						<AddField arrayHelpers={arrayHelpers} types={types} />
+					</Stack>
+				</div>
 			)}
 		/>
 	)
 }
+
+/*
+<EditField
+														name={`form.customformfields`}
+														label={field.label}
+														type={field.type}
+														options={field.choices}
+														index={index}
+													/>
+ */
