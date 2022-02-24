@@ -30,8 +30,7 @@ const normal_abnormal_options = [
 	},
 ]
 
-export default function DynamicField({ type, index, choices, label, name }) {
-	console.log('DynamicField', type, index, choices, label, name)
+function DynamicField({ type, index, choices, label, name }) {
 	switch (type) {
 		case 'text':
 			return <DynamicTextField type={`text`} label={label} name={name} />
@@ -66,13 +65,7 @@ export default function DynamicField({ type, index, choices, label, name }) {
 			)
 
 		case 'present_not_present':
-			return (
-				<DynamicSelectField
-					label={label}
-					name={name}
-					choices={present_not_present_options}
-				/>
-			)
+			return <DynamicPresentNotPresentField />
 		case 'select':
 			return (
 				<DynamicSelectField
@@ -88,3 +81,5 @@ export default function DynamicField({ type, index, choices, label, name }) {
 			)
 	}
 }
+
+export default React.memo(DynamicField)

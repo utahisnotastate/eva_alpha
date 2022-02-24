@@ -23,6 +23,7 @@
     "date-fns": "^2.22.1",
     "electron-is-dev": "^1.2.0",
     "formik": "^2.1.4",
+    "formik-devtools-extension": "^0.1.7",
     "formik-material-ui": "^3.0.0",
     "formik-mui": "^4.0.0-alpha.3",
     "formik-mui-lab": "^1.0.0-alpha.3",

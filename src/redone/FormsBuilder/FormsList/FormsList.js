@@ -37,8 +37,6 @@ export default function FormsList({
 		setRedirectTo(form.id)
 		setRedirect(true)
 	}
-	console.log(url)
-	console.log(forms)
 
 	return (
 		<div className={classes.root}>

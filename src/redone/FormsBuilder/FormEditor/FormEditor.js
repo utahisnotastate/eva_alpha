@@ -7,6 +7,7 @@ import FormHeader from './FormHeader/FormHeader'
 import FormFields from './FormFields/FormFieldsEditor'
 import Container from '@material-ui/core/Container'
 import { fetchForm, updateForm } from '../../../api/forms.api'
+import { withFormikDevtools } from 'formik-devtools-extension'
 
 const useStyles = makeStyles((theme) => ({
 	root: {

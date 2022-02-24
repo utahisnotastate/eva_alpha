@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	CardContent,
 	Button,
+	CardActions,
 } from '@mui/material'
 import AddField from './AddField/AddField'
 import Stack from '@mui/material/Stack'
@@ -60,16 +61,18 @@ export default function FormFields() {
 											<CardContent>
 												<EditField
 													type={field.type}
-													choices={field.choices}
 													label={field.label}
-													name={`details.fields[${index}]`}
+													name={`details.fields.${index}`}
+													index={index}
 												/>
 											</CardContent>
 										</Card>
 									</div>
 							  ))
 							: null}
-						<AddField arrayHelpers={arrayHelpers} />
+						<CardActions>
+							<AddField arrayHelpers={arrayHelpers} />
+						</CardActions>
 					</Stack>
 				</div>
 			)}

@@ -11,6 +11,7 @@ export default function DynamicNormalAbnormal({ label, name }) {
 				shrink: true,
 			}}
 			component={TextField}
+			disabled
 			fullWidth
 			label={label}
 			margin="normal"

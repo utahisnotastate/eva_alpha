@@ -1,29 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import { Typography, Button, TextField as MUITextField } from '@mui/material'
+import { Typography, Button, TextField } from '@mui/material'
 import { makeStyles } from '@material-ui/core/styles'
 import { Field, useFormikContext, FieldArray } from 'formik'
 import DynamicField from '../../../../../DynamicField/DynamicField'
-import { TextField } from 'formik-mui'
 import Stack from '@mui/material/Stack'
+import AddNewChoice from './addchoice'
 
-/*
-{
-    "type": "radio",
-    "label": "Extremity Issues",
-    "choices": [
-    {
-        "label": "Poor Rotation"
-    },
-    {
-        "label": "Pain on exertion"
-    },
-    {
-        "label": "Discolored Skin"
-    }
-],
-    "new_choice": ""
-}
-*/
 const useStyles = makeStyles((theme) => ({
 	newchoice: {
 		marginTop: theme.spacing(2),
@@ -38,10 +20,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function ChoicesEditor({ choices, label, name }) {
+export default function ChoicesEditor({ choices, label, name, index }) {
 	const classes = useStyles()
-	const [newChoice, setNewChoice] = useState('')
+	const [newChoice, setNewChoice] = useState('hhhhhhh')
 	const { values, setFieldValue } = useFormikContext()
+	console.log({ choices, label, name, index })
 
 	return (
 		<FieldArray
@@ -50,13 +33,15 @@ export default function ChoicesEditor({ choices, label, name }) {
 				<div>
 					<Typography>Edit Choices for {label}</Typography>
 					<Stack spacing={2}>
-						{choices && choices.length > 0
-							? choices.map((choice, index) => (
+						{values.details.fields[index].choices &&
+						values.details.fields[index].choices.length > 0 ? (
+							values.details.fields[index].choices.map(
+								(choice, index) => (
 									<div
 										key={index}
 										className={classes.optionrow}>
 										<DynamicField
-											name={`${name}[${index}][label]`}
+											name={`${name}.${index}`}
 											label={choice.label}
 											type={`text`}
 										/>
@@ -69,8 +54,36 @@ export default function ChoicesEditor({ choices, label, name }) {
 											X
 										</Button>
 									</div>
-							  ))
-							: null}
+								)
+							)
+						) : (
+							<Typography>No Choices</Typography>
+						)}
+						<div>
+							<TextField
+								label="New Choice"
+								onChange={(event) =>
+									setNewChoice(event.target.value)
+								}
+								type={`text`}
+								variant="outlined"
+								size="small"
+								style={{ width: '100%' }}
+							/>
+							<Button
+								onClick={() => {
+									const choice = {
+										label: newChoice,
+									}
+
+									arrayHelpers.push(choice)
+									setNewChoice('')
+								}}
+								variant="contained"
+								color="secondary">
+								Add
+							</Button>
+						</div>
 					</Stack>
 				</div>
 			)}

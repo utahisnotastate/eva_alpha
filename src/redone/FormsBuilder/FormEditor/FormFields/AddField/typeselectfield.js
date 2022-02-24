@@ -159,9 +159,9 @@ function CustomSelect(props) {
 const types = [
 	{ type: 'text', label: 'Text' },
 	{ type: 'textarea', label: 'Textarea' },
-	{ type: 'select', label: 'Select' },
+	{ type: 'select', label: 'Select', choices: [] },
 	{ type: 'checkbox', label: 'Checkbox' },
-	{ type: 'radio', label: 'Radio' },
+	{ type: 'radio', label: 'Radio', choices: [] },
 	{ type: 'date', label: 'Date' },
 	{
 		type: 'present_not_present',

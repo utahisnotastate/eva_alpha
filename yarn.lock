@@ -8454,6 +8454,11 @@ format-io@^2.0.0:
   dependencies:
     currify "^4.0.0"
 
+formik-devtools-extension@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/formik-devtools-extension/-/formik-devtools-extension-0.1.7.tgz#1ae9ce28c7e15ad3f2638337d31d5396720d808c"
+  integrity sha512-vHLgA8M/Norz+PuPtctmYcwpL4Xn2LSWpmrP5rPWg2Wlz2LGDJAzpled5/Q5Hz81Ij7z/DioODJ3FXVkHClSKw==
+
 formik-material-ui@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-3.0.1.tgz#189407885c411fb202514eb9993a4d9ea46ce82a"

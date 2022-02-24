@@ -28,19 +28,25 @@ LabelTextFieldRow is just the label for the field that shows up on the form. The
 
  */
 
-function EditField({ type, label, choices, index, name }) {
+function EditField({ type, label, name, index }) {
 	const classes = useStyles()
 	return (
 		<>
 			<div className={classes.header}>
-				<Typography>Field type: {`${type.label}`}</Typography>
+				<Typography>Field type: {`${type.type.label}`}</Typography>
 			</div>
 			<div className={classes.row}>
 				<Typography>Label</Typography>
 				<LabelTextFieldRow name={`${name}[label]`} />
 			</div>
-			{choices ? (
-				<ChoicesEditor name={`${name}[choices]`} choices={choices} />
+			{type.choices ? (
+				<ChoicesEditor
+					type={type.type}
+					name={`${name}.choices`}
+					index={index}
+					choices={type.choices}
+					label={type.label}
+				/>
 			) : null}
 		</>
 	)
