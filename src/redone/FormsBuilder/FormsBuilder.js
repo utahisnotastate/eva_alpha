@@ -17,6 +17,7 @@ export default function FormsBuilder() {
 	const { path } = useRouteMatch()
 	const classes = useStyles()
 	const [forms, setForms] = useState([])
+	const activeEditForm = useSelector((state) => state.activeEditForm)
 
 	useEffect(() => {
 		fetchAllForms().then((response) => {
@@ -31,10 +32,10 @@ export default function FormsBuilder() {
 				<FormsBuilderHome forms={forms} />
 			</Route>
 			<Route path={`${path}/:id/edit`}>
-				<FormEditor />
+				<FormEditor activeEditForm={activeEditForm} />
 			</Route>
 			<Route path={`${path}/:id/preview`}>
-				<FormPreview />
+				<FormPreview activeEditForm={activeEditForm} />
 			</Route>
 		</div>
 	)

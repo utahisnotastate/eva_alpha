@@ -7,10 +7,13 @@ import {
 	CardActions,
 	CardHeader,
 	Button,
+	FormControl,
+	InputLabel,
+	Select,
+	TextField,
 } from '@mui/material'
 import { useFormikContext, Field } from 'formik'
-import { TextField } from 'formik-mui'
-import { Select } from 'formik-mui'
+import Typeselectfield from './typeselectfield'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -30,46 +33,77 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+const types = [
+	{ type: 'text', label: 'Text' },
+	{ type: 'textarea', label: 'Textarea' },
+	{ type: 'select', label: 'Select' },
+	{ type: 'checkbox', label: 'Checkbox' },
+	{ type: 'radio', label: 'Radio' },
+	{ type: 'date', label: 'Date' },
+	{
+		type: 'present_not_present',
+		label: 'Present/Not Present',
+		choices: [
+			{ label: 'Present', value: 'present' },
+			{ label: 'Not Present', value: 'not_present' },
+		],
+	},
+	{
+		type: 'normal_abnormal',
+		label: 'Normal/Abnormal',
+		choices: [
+			{ label: 'normal', value: 'normal' },
+			{ label: 'abnormal', value: 'abnormal' },
+		],
+	},
+]
+
 export default function AddField({ arrayHelpers }) {
-	const { values, setFieldValue } = useFormikContext()
+	const [type, setType] = useState(types[0])
+	const [label, setLabel] = useState('')
 	const classes = useStyles()
 
-	const types = [
-		{ type: 'text', label: 'Text' },
-		{ type: 'textarea', label: 'Textarea' },
-		{ type: 'select', label: 'Select' },
-		{ type: 'checkbox', label: 'Checkbox' },
-		{ type: 'radio', label: 'Radio' },
-		{ type: 'date', label: 'Date' },
-		{
-			type: 'present_not_present',
-			label: 'Present/Not Present',
-			choices: [
-				{ label: 'Present', value: 'present' },
-				{ label: 'Not Present', value: 'not_present' },
-			],
-		},
-		{
-			type: 'normal_abnormal',
-			label: 'Normal/Abnormal',
-			choices: [
-				{ label: 'normal', value: 'normal' },
-				{ label: 'abnormal', value: 'abnormal' },
-			],
-		},
-	]
-
-	const handleAddField = (values) => {
-		console.log(values.addField)
-		arrayHelpers.push(values.addField)
-		setFieldValue('addField', { type: '', label: '', choices: null })
+	const handleAddField = (field) => {
+		console.log({ type, label })
+		arrayHelpers.push({ type: field.type, label: field.label })
+		setType('')
+		setLabel('')
 	}
 
 	return (
 		<Card>
 			<CardHeader title="Add Field" />
 			<CardContent className={classes.content}>
-				<Field
+				<Typeselectfield type={type} setType={setType} />
+				<TextField
+					className={classes.fieldinput}
+					label="Label"
+					value={label}
+					onChange={(event) => setLabel(event.target.value)}
+				/>
+			</CardContent>
+			<CardActions>
+				<Button
+					variant={`contained`}
+					color={`primary`}
+					onClick={() => handleAddField({ type, label })}>
+					Add Field
+				</Button>
+			</CardActions>
+		</Card>
+	)
+}
+
+/*
+<Field
+					className={classes.fieldinput}
+					component={TextField}
+					label="label"
+					name="addField.label"
+					variant="outlined"
+					InputProps={{ notched: true }}
+				/>
+<Field
 					className={classes.fieldinput}
 					component={Select}
 					name="addField.type"
@@ -81,28 +115,7 @@ export default function AddField({ arrayHelpers }) {
 						</MenuItem>
 					))}
 				</Field>
-				<Field
-					className={classes.fieldinput}
-					component={TextField}
-					label="label"
-					name="addField.label"
-					variant="outlined"
-					InputProps={{ notched: true }}
-				/>
-			</CardContent>
-			<CardActions>
-				<Button
-					variant={`contained`}
-					color={`primary`}
-					onClick={() => handleAddField(values)}>
-					Add Field
-				</Button>
-			</CardActions>
-		</Card>
-	)
-}
 
-/*
 					<MenuItem value={10}>Ten</MenuItem>
 					<MenuItem value={20}>Twenty</MenuItem>
 					<MenuItem value={30}>Thirty</MenuItem>

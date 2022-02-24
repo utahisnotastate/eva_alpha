@@ -63,9 +63,6 @@ export default function FormFields() {
 													choices={field.choices}
 													label={field.label}
 													name={`details.fields[${index}]`}
-													setFieldValue={
-														setFieldValue
-													}
 												/>
 											</CardContent>
 										</Card>

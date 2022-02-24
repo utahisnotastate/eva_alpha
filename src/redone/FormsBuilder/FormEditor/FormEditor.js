@@ -19,13 +19,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function FormEditor() {
+export default function FormEditor({ activeEditForm }) {
 	let { id } = useParams()
 	const dispatch = useDispatch()
 
 	const [loading, setLoading] = useState(true)
 	const classes = useStyles()
-	const activeEditForm = useSelector((state) => state.activeEditForm)
 
 	const handleSaveForm = async (values) => {
 		updateForm(values)
@@ -57,7 +56,7 @@ export default function FormEditor() {
 	return (
 		<Container>
 			{loading ? (
-				<div>Loading...</div>
+				<p>Loading...</p>
 			) : (
 				<Formik
 					initialValues={activeEditForm}
@@ -65,7 +64,7 @@ export default function FormEditor() {
 					onSubmit={(values) => handleSaveForm(values)}>
 					<Form className={classes.form}>
 						<FormHeader handlePreviewForm={handlePreviewForm} />
-						<FormFields fields={activeEditForm.details.fields} />
+						<FormFields />
 					</Form>
 				</Formik>
 			)}

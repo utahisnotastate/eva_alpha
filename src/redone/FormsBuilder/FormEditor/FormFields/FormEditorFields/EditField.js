@@ -33,7 +33,7 @@ function EditField({ type, label, choices, index, name }) {
 	return (
 		<>
 			<div className={classes.header}>
-				<Typography>Field type: {type}</Typography>
+				<Typography>Field type: {`${type.label}`}</Typography>
 			</div>
 			<div className={classes.row}>
 				<Typography>Label</Typography>
