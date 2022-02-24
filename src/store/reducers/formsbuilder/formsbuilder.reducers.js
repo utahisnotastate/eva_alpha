@@ -1,20 +1,38 @@
-const initialformvalues = {
+import { combineReducers } from 'redux'
+
+const defaultEditForm = {
 	id: '',
 	type: '',
 
 	active: '',
 	title: '',
 	details: { fields: [] },
+	addField: {
+		type: '',
+		label: '',
+		choices: null,
+	},
 }
 
-export function form(state = initialformvalues, action) {
+export default function activeEditForm(state = defaultEditForm, action) {
 	switch (action.type) {
-		case 'FORM_EDITOR_LOADED':
-			return {
-				...state,
-				...action.form,
-			}
+		case 'SET_ACTIVE_EDIT_FORM':
+			return action.form
 		default:
 			return state
 	}
 }
+
+/*
+const active_edit_form = combineReducers({
+	formid,
+	type,
+	active,
+	title,
+	details,
+})
+
+
+
+export default active_edit_form
+*/

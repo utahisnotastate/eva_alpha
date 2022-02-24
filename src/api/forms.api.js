@@ -1,63 +1,57 @@
-import API_URL from "./api_url";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+import API_URL from './api_url'
+import axios from 'axios'
 
 export const fetchAllForms = async () => {
-  const result = await axios(`${API_URL}/forms/`);
-  return result.data;
-};
+	const result = await axios(`${API_URL}/forms/`)
+	return result.data
+}
 
 //not used
-export const getAllActivePEAndRosForms = async () => {
-  const result = await axios(`${API_URL}/activeforms/`);
-  return result.data;
-};
-
-export const getAppointmentClinicalData = async (appointmentId) => {
-  const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
-  return result.data.clinical_data;
-};
-
-export const getAllAppointmentInformation = async (appointmentId) => {
-  const result = await axios(`${API_URL}/appointments/${appointmentId}/`);
-  return result.data;
-};
-
-export const getAppointmentForms = async (appointmentId) => {
-  const result = await axios(`${API_URL}/appointments/${appointmentId}/forms/`);
-  return result.data;
-};
-
-export const checkIfAppointmentHasForms = async () => {
-  getAppointmentForms()
-    .then((response) => {
-      console.log("appointment forms = " + response);
-    })
-    .catch((error) => console.log(error));
-};
 
 export const fetchForm = async (formId) => {
-  const result = await axios(`${API_URL}/forms/${formId}/`);
-  return result.data;
-};
+	const result = await axios(`${API_URL}/forms/${formId}/`)
+	return result.data
+}
 
-export const updateForm = async (formId, formData) => {
-  const customform = {
-    customformfields: formData.customformfields,
-  };
-  const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
-    form_type: formData.form_type,
-    title: formData.form_title,
-    form: customform,
-  });
-  return result.data;
-};
+export const updateForm = async (form) => {
+	const result = await axios.put(`${API_URL}/forms/${form.id}/`, form)
+	return result.data
+}
+
+/*
+export const checkIfAppointmentHasForms = async () => {
+	getAppointmentForms()
+		.then((response) => {
+			console.log('appointment forms = ' + response)
+		})
+		.catch((error) => console.log(error))
+}
 
 export const fetchFormFields = async (formId) => {
-  const result = await axios(`${API_URL}/forms/${formId}/formfields/`);
-  return result.data;
-};
+	const result = await axios(`${API_URL}/forms/${formId}/formfields/`)
+	return result.data
+}
+export const getAllActivePEAndRosForms = async () => {
+	const result = await axios(`${API_URL}/activeforms/`)
+	return result.data
+}
 
+export const getAppointmentClinicalData = async (appointmentId) => {
+	const result = await axios(`${API_URL}/appointments/${appointmentId}/`)
+	return result.data.clinical_data
+}
+
+export const getAllAppointmentInformation = async (appointmentId) => {
+	const result = await axios(`${API_URL}/appointments/${appointmentId}/`)
+	return result.data
+}
+
+export const getAppointmentForms = async (appointmentId) => {
+	const result = await axios(
+		`${API_URL}/appointments/${appointmentId}/forms/`
+	)
+	return result.data
+}
 export const updateFormProp = async (formId, formChanges) => {
   const result = await axios.patch(`${API_URL}/forms/${formId}/`, formChanges);
   return result;
@@ -71,8 +65,19 @@ export const createNewForm = async (formData) => {
   });
   return result.data;
 };
+export const updateForm = async (formId, formData) => {
+  const customform = {
+    customformfields: formData.customformfields,
+  };
+  const result = await axios.patch(`${API_URL}/forms/${formId}/`, {
+    form_type: formData.form_type,
+    title: formData.form_title,
+    form: customform,
+  });
+  return result.data;
+};
 
-/*export const createNewFormInDBAndLoadAllForms = async(newform) => {
+export const createNewFormInDBAndLoadAllForms = async(newform) => {
 
   const newformcreated = await createNewForm(newform)
   const allforms = await fetchAllForms()

@@ -1,5 +1,36 @@
 import { combineReducers } from 'redux'
-import {
+import activeEditForm from './formsbuilder/formsbuilder.reducers'
+
+function forms(state = {}, action) {
+	switch (action.type) {
+		case 'ADD_FORM':
+			return {
+				...state,
+				[action.form.id]: action.form,
+			}
+		case 'UPDATE_FORM':
+			return {
+				...state,
+				[action.form.id]: action.form,
+			}
+		case 'DELETE_FORM':
+			const newState = { ...state }
+			delete newState[action.formId]
+			return newState
+
+		case 'LOAD_FORMS':
+			return action.forms
+		default:
+			return state
+	}
+}
+
+export const allReducers = combineReducers({
+	activeEditForm,
+	forms,
+})
+
+/*import {
 	patientnameanddetails,
 	patientdiagnoses,
 	patient_contact_methods,
@@ -131,20 +162,20 @@ const patientallergies = combineReducers({
 	pollenallergy,
 })
 
-/*const complaints = combineReducers({
+/!*const complaints = combineReducers({
   inputfields: newcomplaintinputfields,
   complaints: appointmentcomplaints,
-});*/
+});*!/
 
 const assessments = combineReducers({
 	assessments: appointmentassessments,
 	inputfields: assessmentinputfields,
 })
 
-/*const appointmentforms = combineReducers({
+/!*const appointmentforms = combineReducers({
     clinicalexamforms,
     reviewofsystemforms
-})*/
+})*!/
 const activeappointmentform = combineReducers({
 	activeAppointmentFormFields,
 	activeAppointmentFormDetails,
@@ -183,7 +214,7 @@ export const allReducers = combineReducers({
 	requestupdates,
 	appointment,
 	patient,
-})
+})*/
 
 /*
     masteractiveappointmentformfields

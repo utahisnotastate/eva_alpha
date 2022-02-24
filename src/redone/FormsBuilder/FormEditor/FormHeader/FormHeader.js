@@ -23,15 +23,19 @@ const useStyles = makeStyles({
 		backgroundColor: 'white',
 	},
 })
-export default function FormHeader(props) {
+export default function FormHeader({ handlePreviewForm, handleSaveForm }) {
 	const classes = useStyles()
+	const { values, setFieldValue } = useFormikContext()
 	return (
 		<div className={classes.fieldrow}>
 			<div className={classes.actions}>
 				<Button variant="contained" color="primary" type="submit">
 					Save
 				</Button>
-				<Button variant="contained" color="primary" type="submit">
+				<Button
+					variant="contained"
+					color="primary"
+					onClick={() => handlePreviewForm(values)}>
 					Preview
 				</Button>
 			</div>

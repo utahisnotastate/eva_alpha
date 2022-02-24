@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import FormHeader from './FormHeader/FormHeader'
 import FormFields from './FormFields/FormFieldsEditor'
 import Container from '@material-ui/core/Container'
-import { fetchForm } from '../../../api/forms.api'
+import { fetchForm, updateForm } from '../../../api/forms.api'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -21,9 +21,62 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormEditor() {
 	let { id } = useParams()
+	const dispatch = useDispatch()
+
 	const [loading, setLoading] = useState(true)
 	const classes = useStyles()
-	const [initialvalues, setInitialValues] = React.useState({
+	const activeEditForm = useSelector((state) => state.activeEditForm)
+
+	const handleSaveForm = async (values) => {
+		updateForm(values)
+			.then((form) => {
+				dispatch({ type: 'SET_ACTIVE_EDIT_FORM', form })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+
+	const handlePreviewForm = async (form) => {
+		console.log(form)
+	}
+
+	useEffect(() => {
+		const getForm = async () => {
+			return fetchForm(id)
+		}
+		getForm().then((form) => {
+			dispatch({
+				type: 'SET_ACTIVE_EDIT_FORM',
+				form,
+			})
+			setLoading(false)
+		})
+	}, [id])
+
+	return (
+		<Container>
+			{loading ? (
+				<div>Loading...</div>
+			) : (
+				<Formik
+					initialValues={activeEditForm}
+					enableReinitialize
+					onSubmit={(values) => handleSaveForm(values)}>
+					<Form className={classes.form}>
+						<FormHeader handlePreviewForm={handlePreviewForm} />
+						<FormFields fields={activeEditForm.details.fields} />
+					</Form>
+				</Formik>
+			)}
+		</Container>
+	)
+}
+
+/*
+<FormFieldsEditor />
+
+const [initialvalues, setInitialValues] = useState({
 		id: '',
 		type: '',
 
@@ -36,38 +89,5 @@ export default function FormEditor() {
 			choices: null,
 		},
 	})
-	useEffect(() => {
-		const getFormDetails = async () => {
-			const form = await fetchForm(id)
-			setInitialValues({
-				...form,
-				...{ addField: { type: '', label: '' } },
-			})
-			console.log({ ...form, ...{ addField: { type: '', label: '' } } })
-			setLoading(false)
-		}
-		getFormDetails()
-	}, [id])
 
-	return (
-		<Container>
-			{loading ? (
-				<div>Loading...</div>
-			) : (
-				<Formik
-					initialValues={initialvalues}
-					enableReinitialize
-					onSubmit={(values) => console.log(values)}>
-					<Form className={classes.form}>
-						<FormHeader />
-						<FormFields />
-					</Form>
-				</Formik>
-			)}
-		</Container>
-	)
-}
-
-/*
-<FormFieldsEditor />
  */
