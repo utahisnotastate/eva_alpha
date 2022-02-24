@@ -13,16 +13,13 @@ const useStyles = makeStyles({
 	},
 })
 
-function FormsBuilder() {
+export default function FormsBuilder() {
 	const { path } = useRouteMatch()
 	const classes = useStyles()
-	const dispatch = useDispatch()
 	const [forms, setForms] = useState([])
 
 	useEffect(() => {
 		fetchAllForms().then((response) => {
-			console.log(response)
-			console.log('forms loggeed')
 			setForms(response)
 			//dispatch({ type: 'load_forms', forms: response })
 		})
@@ -42,22 +39,3 @@ function FormsBuilder() {
 		</div>
 	)
 }
-export default React.memo(FormsBuilder)
-/*
-<Route component={FormsBuilderHome} exact path={`${path}`} />
-      <Route component={FormEditor} path={`${path}/:formId/edit`} />
-      <Route component={FormPreview} path={`${path}/:formId/preview`} />
-
-
-      <div className={classes.root}>
-      <Route exact path={`${path}`}>
-        <FormsBuilderHome />
-      </Route>
-      <Route path={`${path}/:formId/edit`}>
-        <FormEditor />
-      </Route>
-      <Route path={`${path}/:formId/preview`}>
-        <FormPreview />
-      </Route>
-    </div>
- */

@@ -1,8 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import LabelTextFieldRow from './LabelTextFieldRow/LabelTextFieldRow'
-import FieldOptionsEditor from './FieldOptionsEditor/FieldOptionsEditor'
+import ChoicesEditor from './ChoicesEditor/ChoicesEditor'
 import EditFieldPreview from './EditFieldPreview/EditFieldPreview'
+import { Typography } from '@mui/material'
 
 const useStyles = makeStyles((theme) => ({
 	header: {
@@ -15,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	row: {
 		display: 'flex',
-		justifyContent: 'flex-start',
+		justifyContent: 'space-between',
 		alignItems: 'flex-end',
+		gap: theme.spacing(2),
 		padding: '1rem',
 	},
 }))
@@ -27,19 +29,30 @@ LabelTextFieldRow is just the label for the field that shows up on the form. The
  */
 
 function EditField({ type, label, choices, index, name }) {
+	const classes = useStyles()
 	return (
 		<>
-			<LabelTextFieldRow label={label} name={name} />
-			<EditFieldPreview
+			<div className={classes.header}>
+				<Typography>Field type: {type}</Typography>
+			</div>
+			<div className={classes.row}>
+				<Typography>Label</Typography>
+				<LabelTextFieldRow name={`${name}[label]`} />
+			</div>
+			{choices ? (
+				<ChoicesEditor name={`${name}[choices]`} choices={choices} />
+			) : null}
+		</>
+	)
+}
+/*
+<EditFieldPreview
 				type={type}
 				label={label}
 				options={choices}
 				name={name}
 			/>
-		</>
-	)
-}
-/*
+
 {choices ? (
 				<FieldOptionsEditor
 					name={`${name}.${index}.choices`}

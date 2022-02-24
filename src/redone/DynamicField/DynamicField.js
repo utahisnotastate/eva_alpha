@@ -1,6 +1,7 @@
 import React from 'react'
 import DynamicTextField from './Fields/DynamicTextField'
 import DynamicRadioGroup from './Fields/DynamicRadioGroup'
+import DynamicTextArea from './Fields/DynamicTextArea'
 import DynamicPresentNotPresentField from './Fields/DynamicPresentNotPresentField'
 import DynamicNormalAbnormal from './Fields/DynamicNormalAbnormal'
 import DynamicNumberField from './Fields/DynamicNumber'
@@ -29,36 +30,60 @@ const normal_abnormal_options = [
 	},
 ]
 
-export default function DynamicField({ type, index, options, label, name }) {
+export default function DynamicField({ type, index, choices, label, name }) {
 	switch (type) {
 		case 'text':
-			return <DynamicTextField label={label} name={name} />
+			return <DynamicTextField type={`text`} label={label} name={name} />
 		case 'textarea':
-			return <DynamicTextField label={label} name={name} />
+			return (
+				<DynamicTextField type={`textarea`} label={label} name={name} />
+			)
 
 		case 'radio':
 			return (
 				<DynamicRadioGroup
 					label={label}
-					options={options}
+					choices={choices}
 					name={name}
 				/>
 			)
 		case 'date':
-			return <DynamicTextField label={label} name={name} />
+			return <DynamicTextField type={`date`} label={label} name={name} />
 
 		case 'number':
-			return <DynamicTextField label={label} name={name} />
+			return (
+				<DynamicTextField type={`number`} label={label} name={name} />
+			)
 
 		case 'normal_abnormal':
-			return <DynamicTextField label={label} name={name} />
+			return (
+				<DynamicSelectField
+					label={label}
+					name={name}
+					choices={normal_abnormal_options}
+				/>
+			)
 
 		case 'present_not_present':
-			return <DynamicTextField label={label} name={name} />
+			return (
+				<DynamicSelectField
+					label={label}
+					name={name}
+					choices={present_not_present_options}
+				/>
+			)
 		case 'select':
-			return <DynamicTextField label={label} name={name} />
+			return (
+				<DynamicSelectField
+					label={label}
+					name={name}
+					choices={choices}
+				/>
+			)
 
 		default:
-			return <DynamicTextField label={`default`} name={name} />
+			return (
+				<DynamicTextField type={`text`} label={`default`} name={name} />
+			)
 	}
 }

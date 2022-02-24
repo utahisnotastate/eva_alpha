@@ -20,20 +20,6 @@ export default function FormsBuilderHome({ forms }) {
 	const review_of_systems_forms = forms.filter(
 		(form) => form.type === 'review_of_systems'
 	)
-
-	const typesofforms = [
-		{
-			label: 'Physical Exam',
-			form_type: 'physical_exam',
-			create_button_text: 'Create New Physical Exam Form',
-		},
-		{
-			label: 'Review Of Systems',
-			form_type: 'review_of_systems',
-			create_button_text: 'Add New System',
-		},
-	]
-
 	return (
 		<div className={classes.root}>
 			<FormsList

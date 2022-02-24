@@ -2,14 +2,12 @@ import React from 'react'
 import { Field } from 'formik'
 import { TextField } from 'formik-mui'
 
-export default function DynamicTextField({ label, name, type }) {
-	console.log({ label, name })
-
+export default function DynamicTextArea({ label, name }) {
 	return (
 		<Field
 			name={`${name}.value`}
 			label={label}
-			type={type}
+			type="textarea"
 			component={TextField}
 			variant="standard"
 			fullWidth

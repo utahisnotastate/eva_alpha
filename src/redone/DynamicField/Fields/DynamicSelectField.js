@@ -1,15 +1,14 @@
 import React from 'react'
 import { Field } from 'formik'
 
-export default function DynamicSelectField({ label, name, options }) {
-	console.log({ label, name, options })
+export default function DynamicSelectField({ label, name, choices }) {
 	return (
-		<Field as={`select`} name={name}>
-			{options && options.length > 0
-				? options.map((option, index) => {
+		<Field as={`select`} name={name} label={label}>
+			{choices && choices.length > 0
+				? choices.map((choice, index) => {
 						return (
-							<option key={index} value={option.value}>
-								{option.label}
+							<option key={index} value={choice.value}>
+								{choice.label}
 							</option>
 						)
 				  })
