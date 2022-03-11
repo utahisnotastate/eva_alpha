@@ -1,40 +1,58 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import { NavLink } from 'react-router-dom'
+import EvaLink from './evalink'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "#ffffff",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  navcontainer: {
-    backgroundColor: theme.palette.primary,
-  },
-  link: {
-    textDecoration: "none",
-  },
-  item: {
-    padding: theme.spacing(2),
-    color: theme.palette.primary.contrastText,
-  },
-}));
+	root: {
+		flexGrow: 1,
+		backgroundColor: '#ffffff',
+	},
+	menuButton: {
+		marginRight: theme.spacing(2),
+	},
+	title: {
+		flexGrow: 1,
+	},
+	navcontainer: {
+		backgroundColor: theme.palette.primary,
+	},
+	link: {
+		textDecoration: 'none',
+	},
+	item: {
+		padding: theme.spacing(2),
+		color: theme.palette.primary.contrastText,
+	},
+}))
 
-function NavBar() {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <AppBar color={`primary`} position="static">
-        <Toolbar>
-          <NavLink to="/">
+export default function NavBar({ routes }) {
+	const classes = useStyles()
+	return (
+		<div className={classes.root}>
+			<AppBar color={`primary`} position="static">
+				<Toolbar>
+					{routes && routes.length > 0
+						? routes.map((link, index) => (
+								<EvaLink
+									key={index}
+									path={link.path}
+									label={link.label}
+									displayInNav={link.displayInNav}
+								/>
+						  ))
+						: null}
+				</Toolbar>
+			</AppBar>
+		</div>
+	)
+}
+
+/*
+<NavLink to="/">
             <Typography variant="subtitle2" className={classes.item}>
               Home
             </Typography>
@@ -85,13 +103,4 @@ function NavBar() {
             </Typography>
           </NavLink>
         </Toolbar>
-      </AppBar>
-    </div>
-  );
-}
-
-export default NavBar;
-/*
-<A href="/">Home</A>
-            <A href="/appointments">Appointments</A>
  */

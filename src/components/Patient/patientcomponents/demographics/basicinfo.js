@@ -1,146 +1,153 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Select from "react-select";
-import { useForm, Controller, useFormContext } from "react-hook-form";
-import Typography from "@material-ui/core/Typography";
-import { useParams } from "react-router-dom";
-import { RHFInput } from "react-hook-form-input";
-import TextField from "@material-ui/core/TextField";
-import axios from "axios";
-import { makeStyles } from "@material-ui/core";
+import React, { useState, useEffect } from 'react'
+import { Field } from 'formik'
+import Typography from '@material-ui/core/Typography'
+import { useParams } from 'react-router-dom'
+import { RHFInput } from 'react-hook-form-input'
+import TextField from ''
+import axios from 'axios'
+import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "row",
-    padding: 15,
-  },
-  labeltext: {
-    color: "#000000",
-  },
-  inputfield: {
-    padding: 20,
-  },
-  options: {
-    width: 200,
-    padding: 20,
-  },
-});
+	root: {
+		display: 'flex',
+		flexDirection: 'row',
+		padding: 15,
+	},
+	labeltext: {
+		color: '#000000',
+	},
+	inputfield: {
+		padding: 20,
+	},
+	options: {
+		width: 200,
+		padding: 20,
+	},
+})
 
 const genderoptions = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-];
+	{ value: 'male', label: 'Male' },
+	{ value: 'female', label: 'Female' },
+]
 
 const raceoptions = [
-  { value: "black-non-hispanic", label: "Black - Non Hispanic" },
-  { value: "caucasian", label: "Caucasian" },
-  { value: "other", label: "Other" },
-];
+	{ value: 'black-non-hispanic', label: 'Black - Non Hispanic' },
+	{ value: 'caucasian', label: 'Caucasian' },
+	{ value: 'other', label: 'Other' },
+]
 const maritaloptions = [
-  { value: "single", label: "Single" },
-  { value: "married", label: "Married" },
-  { value: "divorced", label: "Divorced" },
-  { value: "widow", label: "Widow" },
-];
+	{ value: 'single', label: 'Single' },
+	{ value: 'married', label: 'Married' },
+	{ value: 'divorced', label: 'Divorced' },
+	{ value: 'widow', label: 'Widow' },
+]
 
-export default function BasicInfoForm(props) {
-  const classes = useStyles();
-  const { register, handleSubmit, setValue, reset, control } = useFormContext();
-  const patientnameanddetails = useSelector(
-    (state) => state.patient.patientnameanddetails
-  );
-  let { id } = useParams();
-  // console.log(errors);
-  return (
-    <div>
-      <div className={classes.root}>
-        <div>
-          <label>
-            <Typography className={classes.labeltext} variant="body1">
-              First Name:
-            </Typography>
-          </label>
-          <TextField
-            inputRef={register}
-            name="patientnameanddetails.first_name"
-            defaultValue={``}
-            placeholder={`Enter first name`}
-            className={classes.inputfield}
-          />
-        </div>
-        <div>
-          <label>
-            <Typography className={classes.labeltext} variant="body1">
-              Middle Name:
-            </Typography>
-          </label>
-          <TextField
-            inputRef={register}
-            name="patientnameanddetails.middle_name"
-            defaultValue={``}
-            placeholder={`Enter middle name`}
-            className={classes.inputfield}
-          />
-        </div>
-        <div>
-          <label>
-            <Typography className={classes.labeltext} variant="body1">
-              Last Name:
-            </Typography>
-          </label>
-          <TextField
-            inputRef={register}
-            name="patientnameanddetails.last_name"
-            defaultValue={``}
-            placeholder={`Enter last name`}
-            className={classes.inputfield}
-          />
-        </div>
-        <div>
-          <label>
-            <Typography className={classes.labeltext} variant="body1">
-              Preferred Name:
-            </Typography>
-          </label>
-          <TextField
-            inputRef={register}
-            name="patientnameanddetails.preferred_name"
-            defaultValue={``}
-            placeholder={`Enter preferred name`}
-            className={classes.inputfield}
-          />
-        </div>
-      </div>
-      <div className={classes.root}>
-        <div>
-          <TextField
-            type={`date`}
-            inputRef={register}
-            label={<Typography>Date Of Birth</Typography>}
-            name="patientnameanddetails.date_of_birth"
-            defaultValue={``}
-            placeholder={`mm/dd/yyyy`}
-            className={classes.inputfield}
-          />
-        </div>
-      </div>
-      <div>
-        <label>
-          <Typography className={classes.labeltext} variant="body1">
-            SSN:
-          </Typography>
-        </label>
-        <TextField
-          inputRef={register}
-          name="patientnameanddetails.ssn"
-          defaultValue={``}
-          placeholder={`Enter SSN`}
-          className={classes.inputfield}
-        />
-      </div>
-    </div>
-  );
+/*
+* 	<Field
+		component={TextField}
+		className={classes.header}
+		fullWidth
+		label={label}
+		name={name}
+		variant="standard"
+	/>
+*
+* */
+
+export default function BasicInfoForm() {
+	const classes = useStyles()
+	let { id } = useParams()
+	return (
+		<div>
+			<div className={classes.root}>
+				<div>
+					<label>
+						<Typography
+							className={classes.labeltext}
+							variant="body1">
+							First Name:
+						</Typography>
+					</label>
+					<Field name="first_name" placeholder={`Enter first name`} />
+				</div>
+				<div>
+					<label>
+						<Typography
+							className={classes.labeltext}
+							variant="body1">
+							Middle Name:
+						</Typography>
+					</label>
+					<TextField
+						inputRef={register}
+						name="patientnameanddetails.middle_name"
+						defaultValue={``}
+						placeholder={`Enter middle name`}
+						className={classes.inputfield}
+					/>
+				</div>
+				<div>
+					<label>
+						<Typography
+							className={classes.labeltext}
+							variant="body1">
+							Last Name:
+						</Typography>
+					</label>
+					<TextField
+						inputRef={register}
+						name="patientnameanddetails.last_name"
+						defaultValue={``}
+						placeholder={`Enter last name`}
+						className={classes.inputfield}
+					/>
+				</div>
+				<div>
+					<label>
+						<Typography
+							className={classes.labeltext}
+							variant="body1">
+							Preferred Name:
+						</Typography>
+					</label>
+					<TextField
+						inputRef={register}
+						name="patientnameanddetails.preferred_name"
+						defaultValue={``}
+						placeholder={`Enter preferred name`}
+						className={classes.inputfield}
+					/>
+				</div>
+			</div>
+			<div className={classes.root}>
+				<div>
+					<TextField
+						type={`date`}
+						inputRef={register}
+						label={<Typography>Date Of Birth</Typography>}
+						name="patientnameanddetails.date_of_birth"
+						defaultValue={``}
+						placeholder={`mm/dd/yyyy`}
+						className={classes.inputfield}
+					/>
+				</div>
+			</div>
+			<div>
+				<label>
+					<Typography className={classes.labeltext} variant="body1">
+						SSN:
+					</Typography>
+				</label>
+				<TextField
+					inputRef={register}
+					name="patientnameanddetails.ssn"
+					defaultValue={``}
+					placeholder={`Enter SSN`}
+					className={classes.inputfield}
+				/>
+			</div>
+		</div>
+	)
 }
 
 /*
