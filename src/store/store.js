@@ -1,6 +1,7 @@
 import { createStore } from 'redux'
-import { allReducers } from './reducers/combined'
+import allReducers from './reducers/redone/eva.reducers'
+import { composeWithDevTools } from '@redux-devtools/extension'
 
-export const store = createStore(allReducers)
+const store = createStore(allReducers, composeWithDevTools())
 
 export default store

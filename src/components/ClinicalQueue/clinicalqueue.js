@@ -3,61 +3,76 @@ import AirlineSeatLegroomExtraIcon from '@material-ui/icons/AirlineSeatLegroomEx
 import PersonIcon from '@material-ui/icons/Person'
 import PeopleIcon from '@material-ui/icons/People'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
-import axios from 'axios'
-import moment from 'moment'
 import { useSelector, useDispatch } from 'react-redux'
 import GridContainer from '../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../basestyledcomponents/Grid/GridItem'
 import ClinicalQueueTable from './ClinicalQueueTable/clinicalqueuetable'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
+import MUIDataTable from 'mui-datatables'
 import TodaysAppointmentsSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/todaysappointments.settings'
-import InWaitingRoomSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/inwaitingroom.settings'
-import InExamRoomSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/waitinginexamroom.settings'
-import AppointmentInProgressSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/appointmentinprogress.settings'
-import RecentlyCompletedAppointmentSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/recentlycompleted.settings'
-import API_URL from '../../api/api_url'
 
 export default function ClinicalQueue() {
 	return (
 		<GridContainer alignContent="center" direction="column">
 			<GridItem sm={9} xs={12}>
-				<CustomTabs
-					headerColor={`primary`}
-					tabs={[
-						{
-							tabName: 'Todays Upcoming Appointments',
-							tabIcon: AirlineSeatLegroomExtraIcon,
-							tabContent: (
-								<ClinicalQueueTable
-									clinicalqueuefilter="scheduled"
-									columnheaders={
-										TodaysAppointmentsSettings.columnheaders
-									}
-									// table_actions={TodaysAppointmentsSettings.actions}
-									data={[
-										{
-											id: 1,
-											patient: '123456789',
-											patient_display_name: 'Utah',
-											start: moment()
-												.add(1, 'days')
-												.format(
-													'MMMM Do YYYY, h:mm:ss a'
-												),
-											provider_display_name: 'Dr. John',
-										},
-									]}
-								/>
-							),
-						},
-					]}
-				/>
+				<CustomTabs headerColor={`primary`} tabs={[]} />
 			</GridItem>
 		</GridContainer>
 	)
 }
 
 /*
+
+
+[
+						{
+							tabName: 'Todays Appointments',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<ClinicalQueueTable
+									tableSettings={TodaysAppointmentsSettings}
+									tableData={[]}
+								/>
+							)
+						},
+						{
+							tabName: 'Waiting List',
+							tabIcon: PeopleIcon,
+							tabContent: (
+								<ClinicalQueueTable
+									tableSettings={TodaysAppointmentsSettings}
+									tableData={[]}
+								/>
+							)
+						},
+						{
+							tabName: 'Patients',
+							tabIcon: PersonIcon,
+							tabContent: (
+								<ClinicalQueueTable
+									tableSettings={TodaysAppointmentsSettings}
+									tableData={[]}
+								/>
+							)
+						},
+							{
+								tabName: 'New Patients',
+								tabIcon: HowToRegIcon,
+								tabContent: (
+									<ClinicalQueueTable
+										tableSettings={TodaysAppointmentsSettings}
+										tableData={[]}
+									/>
+								)
+							]}
+import InWaitingRoomSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/inwaitingroom.settings'
+import InExamRoomSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/waitinginexamroom.settings'
+import AppointmentInProgressSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/appointmentinprogress.settings'
+import RecentlyCompletedAppointmentSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/recentlycompleted.settings'
+import API_URL from '../../api/api_url'
+
+
+
 <CustomTabs
           headerColor="primary"
           tabs={[
