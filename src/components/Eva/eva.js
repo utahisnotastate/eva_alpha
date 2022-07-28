@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
 import Navbar from '../NavBar/navbar'
 
 export default function Eva({ routes }) {
 	return (
-		<div>
 			<Router>
 				<Navbar routes={routes} />
 				<Switch>
@@ -19,6 +17,5 @@ export default function Eva({ routes }) {
 					))}
 				</Switch>
 			</Router>
-		</div>
 	)
 }

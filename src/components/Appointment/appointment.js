@@ -109,16 +109,6 @@ function AppointmentSidebar({
 	)
 }
 
-AppointmentSidebar.propTypes = {
-	classes: PropTypes.any,
-	onClick: PropTypes.func,
-	appointmentinfoopen: PropTypes.bool,
-	appointmentroutes: PropTypes.any,
-	callbackfn: PropTypes.func,
-	onClick1: PropTypes.func,
-	patientoptionsopen: PropTypes.bool,
-	prop7: PropTypes.func,
-}
 
 export default function Appointment() {
 	let { id } = useParams()

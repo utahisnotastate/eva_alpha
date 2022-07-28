@@ -1,11 +1,36 @@
+import React from 'react'
 import Home from './components/Home/home'
 import MedicalAppointment from './components/Appointment/components/medicalappointment'
 import ClinicalQueue from './components/ClinicalQueue/clinicalqueue'
 import Patients from './components/Patients/patients'
 import PatientRequests from './components/PatientRequests/patientrequests'
-import FormsBuilder from './redone/FormsBuilder/FormsBuilder'
+//import FormsBuilder from './redone/FormsBuilder/FormsBuilder'
+import FormBuilder from './components/FormBuilder/formbuilder'
 import Patient from './components/Patient/patient'
 import Scheduling from './components/Scheduling/scheduling'
+
+const physicalexamfields = [
+	{ label: "Label 1", type: "text" },
+	{ label: "Label 2", type: "textarea" },
+	{
+		label: "Label 3",
+		type: "radiogroup",
+		options: [
+			{ label: "Option Label 1" },
+			{ label: "Option Label 2" },
+			{ label: "Option Label 3" }
+		]
+	},
+	{ label: "Label 5", type: "textarea" },
+]
+
+const physicalexaminputs = [
+	{ buttonlabel: "text", type: "text", label: "Test text push" },
+	{ buttonlabel: "textarea", type: "textarea", label: "22222" },
+	{ buttonlabel: "radio", type: "radio", label: "", options: [] },
+	{ buttonlabel: "range", type: "range", label: "", min: "", max: "" }
+]
+
 
 const routes = [
 	{
@@ -47,8 +72,30 @@ const routes = [
 		path: '/formscenter',
 		exact: false,
 		displayInNav: true,
-		component: FormsBuilder,
+		component: FormBuilder,
 		label: 'Forms Center',
+	},
+	{
+		path: '/physicalexameditor',
+		exact: true,
+		displayInNav: true,
+		component: () => <FormBuilder fields={physicalexamfields} inputs={physicalexaminputs} />,
+		label: 'Physical Exam Editor',
+	},
+	{
+		path: '/reviewofsystemseditor',
+		exact: true,
+		displayInNav: true,
+		component: FormBuilder,
+		label: 'Review of Systems Editor',
+	},
+	{
+		path: '/complainteditor',
+		exact: true,
+		displayInNav: true,
+		component: FormBuilder,
+		label: 'Complaint Editor',
+
 	},
 	{
 		path: '/patient/:id',

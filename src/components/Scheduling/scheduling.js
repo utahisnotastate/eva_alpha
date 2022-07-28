@@ -29,7 +29,6 @@ import WaitListCountCard from "./WaitList/waitlistcountcard";
 import ReferralsToSchedule from "./ReferralsToSchedule/referralstoschedule";
 import ScheduleAppointmentModal from "./ScheduleAppointmentModal/scheduleappointmentmodal";
 import styles from "../basestyledcomponents/buttonStyle";
-import "../basestyledcomponents/scss/material-dashboard-pro-react.scss";
 
 var toDate = require("@fav/type.to-date");
 

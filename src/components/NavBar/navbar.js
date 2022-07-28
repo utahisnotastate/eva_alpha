@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { NavLink } from 'react-router-dom'
+import FormBuilderMenu from './formbuildermenu'
 import EvaLink from './evalink'
 
 const useStyles = makeStyles((theme) => ({
