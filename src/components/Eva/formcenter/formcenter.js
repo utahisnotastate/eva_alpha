@@ -56,71 +56,84 @@ export default function FormEditor({ title, fields = [] }) {
 		},
 	]
 	return (
-		<Formik
-			initialValues={{ fields }}
-			enableReinitialize
-			onSubmit={(values) => {
-				console.log(values)
-			}}>
-			{(formikProps) => (
-				<Card sx={{ boxShadow: 3 }}>
-					<CardHeader
-						title={`${type}`}
-						sx={{
-							bgcolor: 'primary.main',
-							color: 'primary.contrastText',
-						}}
-						action={
-							<ButtonGroup>
-								<Button
-									variant="outlined"
-									sx={{ color: 'primary.contrastText' }}
-									onClick={() => setView('edit')}>
-									Edit
-								</Button>
-								<Button
-									sx={{ color: 'primary.contrastText' }}
-									variant="outlined"
-									onClick={() => setView('preview')}>
-									Preview
-								</Button>
-								<Button
-									sx={{ color: 'primary.contrastText' }}
-									variant="outlined"
-									onClick={() => setView('preview')}>
-									Save
-								</Button>
-							</ButtonGroup>
-						}
-					/>
-					<CardContent>
-						<Form>
-							{view === 'edit' ? (
-								<Fields
-									name={`fields`}
-									formikProps={formikProps}
-									view={view}
-								/>
-							) : (
-								<EVAFormFieldsPreview name={`fields`} />
-							)}
-						</Form>
-					</CardContent>
-					<CardActions sx={{ display: 'flex', flexDirection: 'row' }}>
-						{view === 'edit'
-							? inputs.map((input, index) => (
-									<AddFieldButton
-										key={index}
-										formikProps={formikProps}
-										blankitem={input.blankitem}
-										buttontext={input.buttontext}
-									/>
-							  ))
-							: null}
-						{view === 'edit' ? <input type="submit" /> : null}
-					</CardActions>
-				</Card>
-			)}
-		</Formik>
+		<div className={`w3-content`}>
+			<div>
+				<Formik
+					initialValues={{ fields }}
+					enableReinitialize
+					onSubmit={(values) => {
+						console.log(values)
+					}}>
+					{(formikProps) => (
+						<Card sx={{ boxShadow: 3 }}>
+							<CardHeader
+								title={`${type}`}
+								sx={{
+									bgcolor: 'primary.main',
+									color: 'primary.contrastText',
+								}}
+								action={
+									<ButtonGroup>
+										<Button
+											variant="outlined"
+											sx={{
+												color: 'primary.contrastText',
+											}}
+											onClick={() => setView('edit')}>
+											Edit
+										</Button>
+										<Button
+											sx={{
+												color: 'primary.contrastText',
+											}}
+											variant="outlined"
+											onClick={() => setView('preview')}>
+											Preview
+										</Button>
+										<Button
+											sx={{
+												color: 'primary.contrastText',
+											}}
+											variant="outlined"
+											onClick={() => setView('preview')}>
+											Save
+										</Button>
+									</ButtonGroup>
+								}
+							/>
+							<CardContent>
+								<Form>
+									{view === 'edit' ? (
+										<Fields
+											name={`fields`}
+											formikProps={formikProps}
+											view={view}
+										/>
+									) : (
+										<EVAFormFieldsPreview name={`fields`} />
+									)}
+								</Form>
+							</CardContent>
+							<CardActions
+								sx={{ display: 'flex', flexDirection: 'row' }}>
+								{view === 'edit'
+									? inputs.map((input, index) => (
+											<AddFieldButton
+												key={index}
+												formikProps={formikProps}
+												blankitem={input.blankitem}
+												buttontext={input.buttontext}
+											/>
+									  ))
+									: null}
+								{view === 'edit' ? (
+									<input type="submit" />
+								) : null}
+							</CardActions>
+						</Card>
+					)}
+				</Formik>
+			</div>
+		</div>
 	)
 }
