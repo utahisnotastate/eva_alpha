@@ -26,78 +26,81 @@ export default function Fields({ name, view }) {
 			{({ move, swap, remove, push, insert, unshift, pop, form }) => {
 				return (
 					<List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-						{form.values.fields && form.values.fields.length > 0
-							? form.values.fields.map((field, index) => (
-									<ListItem
-										divider
-										key={index}
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-										}}
-										secondaryAction={
-											view === 'edit' ? (
-												<IconButton
-													edge="end"
-													color={`error`}
-													aria-label="delete"
-													onClick={() =>
-														remove(index)
-													}>
-													<DeleteIcon />
-												</IconButton>
-											) : null
-										}>
-										<ListItemText
-											sx={{ width: '100%' }}
-											primary={
-												<Field
-													component={TextField}
-													name={`fields.${index}.label`}
-													label={`Label`}
-													margin={`normal`}
-													fullWidth
-												/>
-											}
-										/>
-										<ListItemText
-											sx={{ width: '100%' }}
-											primary={
-												<Field
-													label={`Placeholder`}
-													margin={`normal`}
-													component={TextField}
-													name={`fields.${index}.placeholder`}
-													fullWidth
-												/>
-											}
-										/>
-										<ListItemText
-											sx={{ width: '100%' }}
-											primary={
-												<Field
-													label={`Helper Text`}
-													margin={`normal`}
-													component={TextField}
-													name={`fields.${index}.helperText`}
-													fullWidth
-												/>
-											}
-										/>
-										{
-											<div>
-												{field.type === 'select' &&
-												view === 'edit' ? (
-													<EditOptions
-														field={field}
-														name={`fields.${index}.options`}
-													/>
-												) : null}
-											</div>
+						{form.values.fields && form.values.fields.length > 0 ? (
+							form.values.fields.map((field, index) => (
+								<ListItem
+									divider
+									key={index}
+									sx={{
+										display: 'flex',
+										flexDirection: 'column',
+									}}
+									secondaryAction={
+										view === 'edit' ? (
+											<IconButton
+												edge="end"
+												color={`error`}
+												aria-label="delete"
+												onClick={() => remove(index)}>
+												<DeleteIcon />
+											</IconButton>
+										) : null
+									}>
+									<ListItemText
+										sx={{ width: '100%' }}
+										primary={
+											<Field
+												component={TextField}
+												name={`fields.${index}.label`}
+												label={`Label`}
+												margin={`normal`}
+												fullWidth
+											/>
 										}
-									</ListItem>
-							  ))
-							: null}
+									/>
+									<ListItemText
+										sx={{ width: '100%' }}
+										primary={
+											<Field
+												label={`Placeholder`}
+												margin={`normal`}
+												component={TextField}
+												name={`fields.${index}.placeholder`}
+												fullWidth
+											/>
+										}
+									/>
+									<ListItemText
+										sx={{ width: '100%' }}
+										primary={
+											<Field
+												label={`Helper Text`}
+												margin={`normal`}
+												component={TextField}
+												name={`fields.${index}.helperText`}
+												fullWidth
+											/>
+										}
+									/>
+									{
+										<div>
+											{field.type === 'select' &&
+											view === 'edit' ? (
+												<EditOptions
+													field={field}
+													name={`fields.${index}.options`}
+												/>
+											) : null}
+										</div>
+									}
+								</ListItem>
+							))
+						) : (
+							<Typography>
+								No Fields have been created for this form.
+								Please add one below
+							</Typography>
+						)}
 					</List>
 				)
 			}}

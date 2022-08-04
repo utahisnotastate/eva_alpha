@@ -79,25 +79,6 @@ export const saveAppointmentAssessments = async (
 	)
 	return result.data
 }
-/*
-export const getAppointmentFindings = (appointmentId) => {
-  getAppointmentForms(appointmentId).then((response) => {
-    //console.log(response);
-    let appointmentfindings = [];
-    for (let appointmentform of response) {
-      //console.log(appointmentform.form.customformfields);
-      let checkedfields = appointmentform.form.customformfields.filter(
-        (field) => field.checked === true
-      );
-      checkedfields.forEach((checkedfield) =>
-        appointmentfindings.push(checkedfield)
-      );
-    }
-    console.log(appointmentfindings);
-    dispatch({type: "load_all_appointment_findings", findings: appointmentfindings})
-  });
-};
-*/
 
 export const checkIfAppointmentHasForms = async () => {
 	getAppointmentForms()

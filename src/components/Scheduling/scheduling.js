@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams, useRouteMatch, NavLink, Redirect } from 'react-router-dom'
+import { useParams, useRouteMatch } from 'react-router-dom'
 import {
 	Calendar as BigCalendar,
 	momentLocalizer,

@@ -77,7 +77,7 @@ const routes = [
 	{
 		path: '/formscenter',
 		exact: false,
-		displayInNav: false,
+		displayInNav: true,
 		component: FormCenter,
 		label: 'Forms Center',
 	},

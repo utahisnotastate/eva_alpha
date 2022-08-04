@@ -54,7 +54,7 @@ function requests(state = [], action) {
 	}
 }
 
-function settings(state = defaultsettings, action) {
+function settings(state = {}, action) {
 	switch (action.type) {
 		case 'LOAD_SETTINGS':
 			return action.settings

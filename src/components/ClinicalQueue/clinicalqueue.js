@@ -3,27 +3,73 @@ import AirlineSeatLegroomExtraIcon from '@material-ui/icons/AirlineSeatLegroomEx
 import PersonIcon from '@material-ui/icons/Person'
 import PeopleIcon from '@material-ui/icons/People'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
-import { useSelector, useDispatch } from 'react-redux'
-import GridContainer from '../basestyledcomponents/Grid/GridContainer'
-import GridItem from '../basestyledcomponents/Grid/GridItem'
-import ClinicalQueueTable from './ClinicalQueueTable/clinicalqueuetable'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
-import MUIDataTable from 'mui-datatables'
-import TodaysAppointmentsSettings from './ClinicalQueueTable/ClinicalQueueTableSettings/todaysappointments.settings'
-
 export default function ClinicalQueue() {
+	const [stages, setStates] = React.useState([
+		{ title: 'Todays Appointments' },
+		{ title: 'In Waiting Room' },
+		{ title: 'Waiting in Exam room' },
+		{ title: 'In Progress' },
+	])
 	return (
-		<GridContainer alignContent="center" direction="column">
-			<GridItem sm={9} xs={12}>
-				<CustomTabs headerColor={`primary`} tabs={[]} />
-			</GridItem>
-		</GridContainer>
+		<div
+			styles={{
+				display: 'flex',
+				flexDirection: 'row',
+				justifyContent: 'space-around',
+			}}>
+			<CustomTabs
+				headerColor={`primary`}
+				tabs={[
+					{
+						tabName: 'Todays Appointments',
+						tabIcon: AirlineSeatLegroomExtraIcon,
+						tabContent: (
+							<div>
+								<p>Today's appointments</p>
+							</div>
+						),
+					},
+					{
+						tabName: 'Waiting List',
+						tabIcon: PeopleIcon,
+						tabContent: (
+							<div>
+								<p>Today's appointments</p>
+							</div>
+						),
+					},
+					{
+						tabName: 'Patients',
+						tabIcon: PersonIcon,
+						tabContent: (
+							<div>
+								<p>Today's appointments</p>
+							</div>
+						),
+					},
+					{
+						tabName: 'New Patients',
+						tabIcon: HowToRegIcon,
+						tabContent: (
+							<div>
+								<p>Today's appointments</p>
+							</div>
+						),
+					},
+				]}
+			/>
+		</div>
 	)
 }
 
 /*
+<CustomTabs headerColor={`primary`} tabs={[]} />
+<GridContainer alignContent="center" direction="column">
+			<GridItem sm={9} xs={12}>
 
-
+			</GridItem>
+		</GridContainer>
 [
 						{
 							tabName: 'Todays Appointments',
