@@ -4,8 +4,9 @@ import { getAllPatients } from './patients.api'
 import getAllRequests from './requests.api'
 import API_URL from './api_url'
 
-const getSettings = async () => {
+export const getSettings = async () => {
 	const response = await axios.get(`${API_URL}/settings/1/`)
+
 	return response.data
 }
 
@@ -28,6 +29,3 @@ export const apifetch = async (apifunc, api_param, log_result = false) => {
 		return result
 	}
 }
-
-var text = 'this is text'
-var replacedtext = text.replace(' ', '_').toLowerCase().trim()

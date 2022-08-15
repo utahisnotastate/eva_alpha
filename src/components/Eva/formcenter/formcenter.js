@@ -6,23 +6,20 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form } from 'formik'
 import Fields from './fields/fields'
 import AddFieldButton from './fields/addfieldbutton'
 import EVAFormFieldsPreview from './fields/preview'
 import { useTheme } from '@mui/material/styles'
-import { useParams } from 'react-router-dom'
 import FormsList from './sidebar'
+import { getSettings } from '../../../api/utility.api'
 
 export default function FormEditor() {
 	const theme = useTheme()
 	const forms = useSelector((state) => state.forms)
-	const [fields, setFields] = React.useState([])
-	let { type } = useParams()
-	const activeform = React.useState(forms[0])
-	const [title, setTitle] = React.useState(forms[0].title)
-
+	const [title, setTitle] = React.useState()
+	const editform = useSelector((state) => state.editform)
 	const [view, setView] = React.useState('edit')
 	const inputs = [
 		{
@@ -63,9 +60,17 @@ export default function FormEditor() {
 			},
 		},
 	]
+
+	React.useEffect(() => {
+		dispatch({ type: 'UPDATE_EDITFORM', editform: forms })
+		getSettings().then((data) => {
+			setTitle(data.settings.details.title)
+		})
+	}, [input])
+
 	return (
 		<Formik
-			initialValues={{ fields: activeform.fields }}
+			initialValues={editform}
 			enableReinitialize
 			onSubmit={(values) => {
 				console.log(values)
@@ -73,7 +78,7 @@ export default function FormEditor() {
 			{(formikProps) => (
 				<Grid container spacing={3}>
 					<Grid item xs={2}>
-						<FormsList forms={forms} setFields={setFields} />
+						<FormsList forms={forms} formikProps={formikProps} />
 					</Grid>
 					<Grid item xs={10}>
 						{' '}
@@ -92,7 +97,7 @@ export default function FormEditor() {
 												color: 'primary.contrastText',
 											}}
 											onClick={() => setView('edit')}>
-											Edit
+											View
 										</Button>
 										<Button
 											sx={{

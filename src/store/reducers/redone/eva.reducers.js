@@ -65,12 +65,23 @@ function settings(state = {}, action) {
 	}
 }
 
+function editform(state = { id: '', title: '', fields: [] }, action) {
+	switch (action.type) {
+		case 'LOAD_EDITFORM':
+			return action.editform
+
+		default:
+			return state
+	}
+}
+
 const allReducers = combineReducers({
 	appointments,
 	forms,
 	patients,
 	requests,
 	settings,
+	editform,
 })
 
 export default allReducers
