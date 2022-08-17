@@ -2,10 +2,6 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import HoverMenu from './hovermenu'
-import Typography from '@material-ui/core/Typography'
-import { NavLink } from 'react-router-dom'
-import FormBuilderMenu from './formbuildermenu'
 import EvaLink from './evalink'
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +40,6 @@ export default function NavBar({ routes }) {
 								/>
 						  ))
 						: null}
-					<HoverMenu />
 				</Toolbar>
 			</AppBar>
 		</div>
@@ -52,6 +47,8 @@ export default function NavBar({ routes }) {
 }
 
 /*
+<HoverMenu />
+
 <NavLink to="/">
             <Typography variant="subtitle2" className={classes.item}>
               Home

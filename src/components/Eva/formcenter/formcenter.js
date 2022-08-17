@@ -17,6 +17,7 @@ import { getSettings } from '../../../api/utility.api'
 
 export default function FormEditor() {
 	const theme = useTheme()
+	const dispatch = useDispatch()
 	const forms = useSelector((state) => state.forms)
 	const [title, setTitle] = React.useState()
 	const editform = useSelector((state) => state.editform)
@@ -63,10 +64,14 @@ export default function FormEditor() {
 
 	React.useEffect(() => {
 		dispatch({ type: 'UPDATE_EDITFORM', editform: forms })
-		getSettings().then((data) => {
-			setTitle(data.settings.details.title)
-		})
-	}, [input])
+		getSettings()
+			.then((data) => {
+				setTitle(data.settings.details.title)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	})
 
 	return (
 		<Formik

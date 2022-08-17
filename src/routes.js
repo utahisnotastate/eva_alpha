@@ -68,13 +68,6 @@ const routes = [
 		displayInNav: false,
 	},
 	{
-		path: '/formscenter/:type',
-		exact: false,
-		displayInNav: false,
-		component: FormCenter,
-		label: 'Forms Center',
-	},
-	{
 		path: '/formscenter',
 		exact: false,
 		displayInNav: true,

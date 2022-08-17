@@ -16,9 +16,9 @@ export default function FormsList({ forms, setFields }) {
 
 				bgcolor: 'background.paper',
 			}}>
-			{forms.map((form) => (
+			{forms.map((form, index) => (
 				<ListItem
-					key={form.id}
+					key={index}
 					sx={{
 						display: 'flex',
 						flexDirection: 'row',
