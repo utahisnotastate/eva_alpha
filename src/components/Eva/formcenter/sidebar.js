@@ -7,8 +7,10 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
+import { useDispatch } from 'react-redux'
 
 export default function FormsList({ forms, setFields }) {
+	const dispatch = useDispatch()
 	return (
 		<List
 			sx={{
@@ -39,7 +41,12 @@ export default function FormsList({ forms, setFields }) {
 						secondary={
 							<Button
 								variant={`text`}
-								onClick={() => setFields(form.fields)}>
+								onClick={() => {
+									dispatch({
+										type: 'LOAD_EDITFORM',
+										editform: form,
+									})
+								}}>
 								Edit
 							</Button>
 						}

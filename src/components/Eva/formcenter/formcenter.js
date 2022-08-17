@@ -14,6 +14,7 @@ import EVAFormFieldsPreview from './fields/preview'
 import { useTheme } from '@mui/material/styles'
 import FormsList from './sidebar'
 import { getSettings } from '../../../api/utility.api'
+import inputs from './inputs'
 
 export default function FormEditor() {
 	const theme = useTheme()
@@ -22,56 +23,21 @@ export default function FormEditor() {
 	const [title, setTitle] = React.useState()
 	const editform = useSelector((state) => state.editform)
 	const [view, setView] = React.useState('edit')
-	const inputs = [
-		{
-			buttontext: 'Text',
-			blankitem: {
-				label: '',
-				type: 'text',
-				placeholder: '',
-				helperText: '',
-			},
-		},
-		{
-			buttontext: 'Number',
-			blankitem: {
-				label: '',
-				type: 'number',
-				placeholder: '',
-				helperText: '',
-			},
-		},
-		{
-			buttontext: 'Select',
-			blankitem: {
-				label: '',
-				type: 'select',
-				options: [{ label: '' }],
-				placeholder: '',
-				helperText: '',
-			},
-		},
-		{
-			buttontext: 'Range',
-			blankitem: {
-				label: '',
-				type: 'range',
-				placeholder: '',
-				helperText: '',
-			},
-		},
-	]
 
 	React.useEffect(() => {
-		dispatch({ type: 'UPDATE_EDITFORM', editform: forms })
 		getSettings()
 			.then((data) => {
-				setTitle(data.settings.details.title)
+				console.log(data)
+				setTitle(data.details.title)
+				dispatch({
+					type: 'LOAD_EDITFORM',
+					editform: data.details.forms[0],
+				})
 			})
 			.catch((err) => {
 				console.log(err)
 			})
-	})
+	}, [forms])
 
 	return (
 		<Formik
@@ -117,7 +83,9 @@ export default function FormEditor() {
 												color: 'primary.contrastText',
 											}}
 											variant="outlined"
-											onClick={() => setView('preview')}>
+											onClick={() =>
+												formikProps.handleSubmit()
+											}>
 											Save
 										</Button>
 									</ButtonGroup>
@@ -144,9 +112,6 @@ export default function FormEditor() {
 											/>
 									  ))
 									: null}
-								{view === 'edit' ? (
-									<input type="submit" />
-								) : null}
 							</CardActions>
 						</Card>
 					</Grid>
@@ -157,6 +122,10 @@ export default function FormEditor() {
 }
 
 /*
+*{view === 'edit' ? (
+									<input type="submit" />
+								) : null}
+*
 *
 *
 * <Grid
