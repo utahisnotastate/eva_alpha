@@ -15,6 +15,7 @@ import { useTheme } from '@mui/material/styles'
 import FormsList from './sidebar'
 import { getSettings } from '../../../api/utility.api'
 import inputs from './inputs'
+import _ from 'lodash'
 
 export default function FormEditor() {
 	const theme = useTheme()
@@ -27,8 +28,6 @@ export default function FormEditor() {
 	React.useEffect(() => {
 		getSettings()
 			.then((data) => {
-				console.log(data)
-				setTitle(data.details.title)
 				dispatch({
 					type: 'LOAD_EDITFORM',
 					editform: data.details.forms[0],
@@ -42,9 +41,11 @@ export default function FormEditor() {
 	return (
 		<Formik
 			initialValues={editform}
-			enableReinitialize
+			enableReinitializeß
 			onSubmit={(values) => {
-				console.log(values)
+				console.log(_.merge(values, forms))
+
+				
 			}}>
 			{(formikProps) => (
 				<Grid container spacing={3}>
