@@ -10,6 +10,14 @@ export const getSettings = async () => {
 	return response.data
 }
 
+//update the settings
+export const updateSettings = async (settings) => {
+	console.log(settings)
+	const response = await axios.put(`${API_URL}/settings/1/`, settings)
+
+	return response.data
+}
+
 export const getAllInitDataOnLoad = async () => {
 	const [appointments, patients, requests, settings] = await Promise.all([
 		getAllAppointments(),

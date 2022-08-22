@@ -7,9 +7,10 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-export default function FormsList({ forms, setFields }) {
+export default function FormsList({ setFields }) {
+	const forms = useSelector((state) => state.forms)
 	const dispatch = useDispatch()
 	return (
 		<List
@@ -18,41 +19,43 @@ export default function FormsList({ forms, setFields }) {
 
 				bgcolor: 'background.paper',
 			}}>
-			{forms.map((form, index) => (
-				<ListItem
-					key={index}
-					sx={{
-						display: 'flex',
-						flexDirection: 'row',
-						justifyContent: 'flex-start',
-						alignItems: 'center',
-					}}>
-					<ListItemText
-						primary={
-							<Typography
-								sx={{
-									fontSize: '1rem',
-									fontWeight: 'bold',
-									color: '#000',
-								}}>
-								{form.title}
-							</Typography>
-						}
-						secondary={
-							<Button
-								variant={`text`}
-								onClick={() => {
-									dispatch({
-										type: 'LOAD_EDITFORM',
-										editform: form,
-									})
-								}}>
-								Edit
-							</Button>
-						}
-					/>
-				</ListItem>
-			))}
+			{forms && forms.length > 0
+				? forms.map((form, index) => (
+						<ListItem
+							key={index}
+							sx={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'flex-start',
+								alignItems: 'center',
+							}}>
+							<ListItemText
+								primary={
+									<Typography
+										sx={{
+											fontSize: '1rem',
+											fontWeight: 'bold',
+											color: '#000',
+										}}>
+										{form.title}
+									</Typography>
+								}
+								secondary={
+									<Button
+										variant={`text`}
+										onClick={() => {
+											dispatch({
+												type: 'LOAD_EDITFORM',
+												editform: form,
+											})
+										}}>
+										Edit
+									</Button>
+								}
+							/>
+						</ListItem>
+				  ))
+				: null}
 		</List>
 	)
 }

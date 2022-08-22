@@ -67,9 +67,9 @@ export default function Patient() {
 										Content
 									</Typography>
 								</Route>
-								{routes.map((route) => (
+								{routes.map((route, index) => (
 									<Route
-										key={route.path}
+										key={index}
 										exact
 										path={`${path}${route.path}`}
 										component={route.component}
