@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-mui'
-import { addNewPatient } from '../../../api/patients.api'
+import { addNewPatient, getAllPatients } from '../../../api/patients.api'
 
 import Grid from '@material-ui/core/Grid'
 
@@ -12,8 +12,11 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
 import CardActions from '@mui/material/CardActions'
+import { useDispatch } from 'react-redux'
 
-export default function NewPatientForm() {
+export default function NewPatientForm(props) {
+	const dispatch = useDispatch()
+
 	// Note that we have to initialize ALL of fields with values. These
 	// could come from props, but since we don’t want to prefill this form,
 	// we just use an empty string. If we don’t do this, React will yell
@@ -54,6 +57,11 @@ export default function NewPatientForm() {
 					.then((data) => {
 						console.log(data)
 						actions.setSubmitting(false)
+						props.setModal(false)
+						getAllPatients().then((data) => {
+							console.log(data)
+							dispatch({ type: 'LOAD_PATIENTS', patients: data })
+						})
 					})
 					.catch((err) => {
 						console.log(err)
