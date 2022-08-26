@@ -12,7 +12,7 @@ import {
 	Route,
 	NavLink,
 } from 'react-router-dom'
-import { Typography } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core'
 import SimpleSideBar from './patientcomponents/simplesidebar/simplesidebar'
 import routes from './routes'
 import blankpatient from './patient.mock'
@@ -61,6 +61,11 @@ export default function Patient() {
 						enableReinitialize
 						onSubmit={(patient) => handleSave(patient)}>
 						<Form>
+							<Button
+								variant={`contained`}
+								onClick={() => handleSave(patient)}>
+								Save!
+							</Button>
 							<Switch>
 								<Route exact path={path}>
 									<Typography variant="body1">

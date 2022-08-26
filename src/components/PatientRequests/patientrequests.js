@@ -13,10 +13,89 @@ import Person from '@material-ui/icons/Person'
 import axios from 'axios'
 import { Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-
+import columns from './patientrequests.columns'
+import { getAllRequests } from '../../api/requests.api'
 const useStyles = makeStyles(style)
 
-function viewRequestColumn(tableMeta) {
+export default function PatientRequests() {
+	// const [activePatientRequests, setActivePatientRequests] = useState();
+	const requests = useSelector((state) => state.requests)
+	const dispatch = useDispatch()
+
+	const options = {
+		elevation: 0,
+	}
+
+	useEffect(() => {
+		getAllRequests()
+			.then((requests) => {
+				dispatch({ type: 'LOAD_REQUESTS', requests })
+			})
+			.catch((err) => console.log(err))
+	})
+
+	return (
+		<GridContainer justify="center">
+			<GridItem xs={12} sm={10}>
+				<CustomTabs
+					headerColor="primary"
+					tabs={[
+						{
+							tabName: 'Active',
+							tabIcon: Person,
+							tabContent: (
+								<MUIDataTable
+									title={`Active Requests`}
+									data={requests.filter(
+										(patientrequest) =>
+											patientrequest.status === 'active'
+									)}
+									columns={columns}
+									options={options}
+								/>
+							),
+						},
+						{
+							tabName: 'Recently Completed',
+							tabIcon: Person,
+							tabContent: (
+								<MUIDataTable
+									title={`Recently Completed`}
+									data={requests.filter(
+										(patientrequest) =>
+											patientrequest.status === 'active'
+									)}
+									columns={columns}
+									options={options}
+								/>
+							),
+						},
+					]}
+				/>
+			</GridItem>
+		</GridContainer>
+	)
+}
+
+/*
+* const fetchData = async () => {
+			const result = await axios(
+				`http://127.0.0.1:8000/api/clinicalrequests`
+			)
+			return result.data
+		}
+		fetchData().then((response) => {
+			console.log(response)
+			dispatch({
+				type: 'load_patient_requests',
+				patientrequests: response,
+			})
+		})
+*
+*
+* */
+
+/*function viewRequestColumn(tableMeta) {
 	return (
 		<RequestTimeLine
 			requestId={tableMeta.rowData[0]}
@@ -31,9 +110,9 @@ function NameColumn(tableMeta) {
 			{tableMeta.rowData[2].first_name} {tableMeta.rowData[2].last_name}
 		</Typography>
 	)
-}
+}*/
 
-const columns = [
+/*const columns = [
 	{
 		name: 'id',
 		label: 'Request ID',
@@ -94,72 +173,4 @@ const columns = [
 				viewRequestColumn(tableMeta),
 		},
 	},
-]
-
-export default function PatientRequests() {
-	// const [activePatientRequests, setActivePatientRequests] = useState();
-	const patientrequests = useSelector((state) => state.patientRequests)
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const result = await axios(
-				`http://127.0.0.1:8000/api/clinicalrequests`
-			)
-			return result.data
-		}
-		fetchData().then((response) => {
-			console.log(response)
-			dispatch({
-				type: 'load_patient_requests',
-				patientrequests: response,
-			})
-		})
-	}, [])
-
-	const options = {
-		elevation: 0,
-	}
-
-	return (
-		<GridContainer justify="center">
-			<GridItem xs={12} sm={10}>
-				<CustomTabs
-					headerColor="primary"
-					tabs={[
-						{
-							tabName: 'Active',
-							tabIcon: Person,
-							tabContent: (
-								<MUIDataTable
-									title={`Active Requests`}
-									data={patientrequests.filter(
-										(patientrequest) =>
-											patientrequest.status === 'active'
-									)}
-									columns={columns}
-									options={options}
-								/>
-							),
-						},
-						{
-							tabName: 'Recently Completed',
-							tabIcon: Person,
-							tabContent: (
-								<MUIDataTable
-									title={`Recently Completed`}
-									data={patientrequests.filter(
-										(patientrequest) =>
-											patientrequest.status === 'active'
-									)}
-									columns={columns}
-									options={options}
-								/>
-							),
-						},
-					]}
-				/>
-			</GridItem>
-		</GridContainer>
-	)
-}
+]*/

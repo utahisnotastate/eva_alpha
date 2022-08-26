@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getAllAppointments } from './appointment.api'
 import { getAllPatients } from './patients.api'
-import getAllRequests from './requests.api'
+import { getAllRequests } from './requests.api'
 import API_URL from './api_url'
 
 export const getSettings = async () => {
@@ -16,6 +16,19 @@ export const updateSettings = async (settings) => {
 	const response = await axios.put(`${API_URL}/settings/1/`, settings)
 
 	return response.data
+}
+
+export const getProviders = async () => {
+	const response = await axios(`${API_URL}/providers/`)
+	return response.data
+}
+
+export const getSchedulingComponentData = async () => {
+	const [appointments, providers] = await Promise.all([
+		getAllAppointments(),
+		getProviders(),
+	])
+	return { appointments, providers }
 }
 
 export const getAllInitDataOnLoad = async () => {

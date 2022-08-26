@@ -65,7 +65,7 @@ const routes = [
 		exact: true,
 		component: PatientRequests,
 		label: 'Patient Requests',
-		displayInNav: false,
+		displayInNav: true,
 	},
 	{
 		path: '/formscenter',
