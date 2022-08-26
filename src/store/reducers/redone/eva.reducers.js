@@ -75,6 +75,16 @@ function editform(state = { id: '', title: '', fields: [] }, action) {
 	}
 }
 
+function patient(state = { id: '', details: {}, ssn: '' }, action) {
+	switch (action.type) {
+		case 'LOAD_PATIENT':
+			return action.patient
+
+		default:
+			return state
+	}
+}
+
 const allReducers = combineReducers({
 	appointments,
 	forms,
@@ -82,6 +92,7 @@ const allReducers = combineReducers({
 	requests,
 	settings,
 	editform,
+	patient,
 })
 
 export default allReducers

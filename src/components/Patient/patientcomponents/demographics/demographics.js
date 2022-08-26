@@ -100,26 +100,19 @@ const basicfields = [
 export default function Demographics() {
 	const classes = useStyles()
 	return (
-		<Grid container className={classes.root} alignItems="flex-start">
+		<div>
 			{basicfields.map((field, index) => (
-				<Grid
-					item
-					xs={12}
-					sm={6}
-					md={4}
-					lg={3}
+				<Field
+					style={{ margin: '15px' }}
 					key={index}
-					className={classes.formcontainer}>
-					<Field
-						name={field.name}
-						label={field.label}
-						type={field.type}
-						component={TextField}
-						fullWidth
-					/>
-				</Grid>
+					name={field.name}
+					label={field.label}
+					type={field.type}
+					component={TextField}
+					fullWidth
+				/>
 			))}
-		</Grid>
+		</div>
 	)
 }
 

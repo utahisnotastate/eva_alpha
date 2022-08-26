@@ -3,12 +3,9 @@ import Button from '@mui/material/Button'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-mui'
 import { addNewPatient, getAllPatients } from '../../../api/patients.api'
-
 import Grid from '@material-ui/core/Grid'
-
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
-
 import CardContent from '@mui/material/CardContent'
 
 import CardActions from '@mui/material/CardActions'
@@ -56,6 +53,7 @@ export default function NewPatientForm(props) {
 				addNewPatient(patient)
 					.then((data) => {
 						console.log(data)
+						dispatch({ type: 'LOAD_PATIENT', patient: data })
 						actions.setSubmitting(false)
 						props.setModal(false)
 						getAllPatients().then((data) => {

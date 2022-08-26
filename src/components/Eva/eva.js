@@ -9,6 +9,9 @@ export default function Eva({ routes }) {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		getAllInitDataOnLoad()
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err))
 		getAllPatients()
 			.then((data) => {
 				console.log(data)
