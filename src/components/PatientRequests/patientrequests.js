@@ -46,10 +46,7 @@ export default function PatientRequests() {
 							tabContent: (
 								<MUIDataTable
 									title={`Active Requests`}
-									data={requests.filter(
-										(patientrequest) =>
-											patientrequest.status === 'active'
-									)}
+									data={requests}
 									columns={columns}
 									options={options}
 								/>
@@ -61,10 +58,7 @@ export default function PatientRequests() {
 							tabContent: (
 								<MUIDataTable
 									title={`Recently Completed`}
-									data={requests.filter(
-										(patientrequest) =>
-											patientrequest.status === 'active'
-									)}
+									data={requests}
 									columns={columns}
 									options={options}
 								/>
@@ -78,6 +72,23 @@ export default function PatientRequests() {
 }
 
 /*
+<MUIDataTable
+									title={`Active Requests`}
+									data={
+										requests
+											? requests.filter(
+													(patientrequest) =>
+														patientrequest.status ===
+														'active'
+											  )
+											: []
+									}
+									columns={columns}
+									options={options}
+								/>
+
+
+
 * const fetchData = async () => {
 			const result = await axios(
 				`http://127.0.0.1:8000/api/clinicalrequests`

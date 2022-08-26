@@ -47,8 +47,6 @@ function requests(state = [], action) {
 			return action.requests
 		case 'ADD_REQUEST':
 			return [...state, action.request]
-		case 'REMOVE_REQUEST':
-			return state.filter((request) => request.id !== action.id)
 		default:
 			return state
 	}
