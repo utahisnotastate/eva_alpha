@@ -6,5 +6,9 @@ import Button from '@mui/material/Button'
 import { TextField } from 'formik-mui'
 
 export default function NewItemForm() {
-	return ()
+	return (
+		<div>
+			<p>Test</p>
+		</div>
+	)
 }

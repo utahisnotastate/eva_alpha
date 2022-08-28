@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getAllAppointments } from './appointment.api'
 import { getAllPatients } from './patients.api'
 import { getAllRequests } from './requests.api'
+import fakepatients from '../components/Patient/patients.mock'
 import API_URL from './api_url'
 
 export const getSettings = async () => {
@@ -14,6 +15,12 @@ export const getSettings = async () => {
 export const updateSettings = async (settings) => {
 	console.log(settings)
 	const response = await axios.put(`${API_URL}/settings/1/`, settings)
+
+	return response.data
+}
+
+export const getPatientMockData = async () => {
+	const response = await axios(`https://www.mockaroo.com/2f1cf230`)
 
 	return response.data
 }
@@ -49,4 +56,14 @@ export const apifetch = async (apifunc, api_param, log_result = false) => {
 	} else {
 		return result
 	}
+}
+
+export const bulkCreatePatients = async () => {
+	//map over the patients and create them one by one in the database
+	await Promise.all(
+		fakepatients.map(async (patient) => {
+			const response = await axios.post(`${API_URL}/patients/`, patient)
+			return response.data
+		})
+	)
 }

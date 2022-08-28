@@ -3,6 +3,7 @@ import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllPatients } from '../../api/patients.api'
+import mockpatients from '../Patient/patients.mock'
 import columns from './patients.columns'
 import options from './patient.table.options'
 
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 20,
 	},
 	table: {
-		height: '100vh',
+		minHeight: '100vh',
 	},
 	textfield: {
 		marginRight: 10,
@@ -21,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Patients() {
 	const classes = useStyles()
-	const dispatch = useDispatch()
 	const patients = useSelector((state) => state.patients)
+	const dispatch = useDispatch()
 
-	useEffect(() => {
+	/*useEffect(() => {
 		const fetchPatients = async () => {
 			const response = await getAllPatients()
 			return response.data
@@ -39,7 +40,7 @@ export default function Patients() {
 			.catch((error) => {
 				console.log(error)
 			})
-	}, [])
+	}, [])*/
 
 	return (
 		<div className={classes.root}>

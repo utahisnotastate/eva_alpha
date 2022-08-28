@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import Card from '../../../basestyledcomponents/Card/Card'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import Autosuggest from 'react-autosuggest'
@@ -12,8 +13,6 @@ import Button from '@material-ui/core/Button'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../basestyledcomponents/Card/CardBody'
 import UpdateSurgicalHistoryItem from '../../../Forms/Clinical/Patient/updatesurgicalhistoryitem'
-import { useFormikContext, FieldArray, Field, Form } from 'formik'
-import { TextField } from 'formik-mui'
 
 const API_URL =
 	'https://clinicaltables.nlm.nih.gov/api/procedures/v3/search?terms='
@@ -28,7 +27,6 @@ function renderSuggestion(suggestion) {
 const classes = {
 	root: {
 		margin: 20,
-		minHeight: '100vh',
 	},
 	banner: {
 		marginBottom: 10,
@@ -58,86 +56,7 @@ const classes = {
 		backgroundColor: '#ffffff',
 	},
 }
-
-export default function SurgicalHistory() {
-	const { values } = useFormikContext()
-	return (
-		<Card className={classes.root}>
-			<CardHeader color="primary">
-				<Typography variant="h4">Surgical History</Typography>
-			</CardHeader>
-			<CardBody>
-				<GridContainer>
-					<GridItem xs={12} sm={12} md={12}>
-						<FieldArray name="details.surgicalhistory">
-							{({ insert, remove, push }) => (
-								<div>
-									{values.details.surgicalhistory &&
-									values.details.surgicalhistory.length > 0
-										? values.details.surgicalhistory.map(
-												(allergy, index) => (
-													<div
-														key={index}
-														style={{
-															display: 'flex',
-															flexDirection:
-																'row',
-														}}>
-														<Field
-															style={{
-																margin: '15px',
-															}}
-															InputLabelProps={{
-																shrink: true,
-															}}
-															name={`details.surgicalhistory[${index}].ICD10procedurecode`}
-															label={`ICD10 Procedure Code`}
-															type={`text`}
-															variant="standard"
-															component={
-																TextField
-															}
-															fullWidth
-														/>
-														<Field
-															style={{
-																margin: '15px',
-															}}
-															InputLabelProps={{
-																shrink: true,
-															}}
-															name={`details.surgicalhistory[${index}].performed_by`}
-															label={`Performed By`}
-															type={`text`}
-															variant="standard"
-															component={
-																TextField
-															}
-															fullWidth
-														/>
-													</div>
-												)
-										  )
-										: null}
-									<button
-										type="button"
-										className="secondary"
-										onClick={() =>
-											push({ allergy: '', note: '' })
-										}>
-										Add Surgery/Procedure
-									</button>
-								</div>
-							)}
-						</FieldArray>
-					</GridItem>
-				</GridContainer>
-			</CardBody>
-		</Card>
-	)
-}
-
-class SurgicalHistoryOld extends Component {
+class SurgicalHistory extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -265,6 +184,13 @@ class SurgicalHistoryOld extends Component {
 									</GridItem>
 								</Card>
 							</GridItem>
+							<div>
+								{surgicalhistory.map((surgery, index) => (
+									<UpdateSurgicalHistoryItem
+										surgery={surgery}
+									/>
+								))}
+							</div>
 						</div>
 					)}
 				</GridContainer>
@@ -302,3 +228,24 @@ class SurgicalHistoryOld extends Component {
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		surgicalhistory: state.patient.surgicalhistory,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	loadSurgicalHistory: (surgicalhistory) =>
+		dispatch({
+			type: 'load_surgical_history',
+			surgicalhistory: surgicalhistory,
+		}),
+	updateSurgicalHistory: (surgicalhistory) =>
+		dispatch({
+			type: 'update_surgical_history',
+			surgicalhistory: surgicalhistory,
+		}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SurgicalHistory)

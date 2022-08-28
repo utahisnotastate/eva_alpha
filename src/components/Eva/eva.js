@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from '../NavBar/navbar'
-import { getAllInitDataOnLoad } from '../../api/utility.api'
+import { getAllInitDataOnLoad, getPatientMockData } from '../../api/utility.api'
 import { getAllPatients } from '../../api/patients.api'
 
 export default function Eva({ routes }) {
@@ -10,26 +10,17 @@ export default function Eva({ routes }) {
 
 	useEffect(() => {
 		getAllInitDataOnLoad()
-			.then((data) => console.log(data))
-			.catch((err) => console.log(err))
-		getAllPatients()
 			.then((data) => {
 				console.log(data)
-				/*dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
+				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
 				dispatch({
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
-				})*/
-				dispatch({ type: 'LOAD_PATIENTS', patients: data })
-				/*dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-				dispatch({
-					type: 'LOAD_FORMS',
-					forms: data.settings.details.forms,
-				})*/
+				})
+				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
+				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
 			})
-			.catch((err) => {
-				console.log(err)
-			})
+			.catch((err) => console.log(err))
 	})
 
 	return (

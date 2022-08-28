@@ -32,7 +32,7 @@ export default function SimpleSideBar({ routes }) {
 			{routes.map((route) => (
 				<ListItem className={classes.listitem} key={route.path}>
 					<NavLink
-						activeStyle={{ color: '#0232b2' }}
+						activeStyle={{ color: 'white' }}
 						to={`${url}${route.path}`}>
 						<ListItemText
 							primary={

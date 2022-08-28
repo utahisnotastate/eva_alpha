@@ -20,15 +20,16 @@ const columns = [
 		},
 	},
 	{
-		name: 'details.demographics.date_of_birth',
-		label: 'First Name',
+		name: 'details.date_of_birth',
+		label: 'Date of Birth',
 		options: {
+			display: false,
 			filter: true,
 			sort: true,
 		},
 	},
 	{
-		name: 'details.demographics.name.last',
+		name: 'details.last_name',
 		label: 'Last Name',
 		options: {
 			filter: true,
@@ -36,15 +37,15 @@ const columns = [
 		},
 	},
 	{
-		name: 'details.demographics.date_of_birth',
-		label: 'Date of Birth',
+		name: 'details.first_name',
+		label: 'First Name',
 		options: {
 			filter: true,
 			sort: true,
 		},
 	},
 	{
-		name: 'gender',
+		name: 'details.gender',
 		label: 'Gender',
 		options: {
 			filter: true,

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-import { Formik, Form } from 'formik'
+import { Formik, Form, useFormikContext } from 'formik'
 import Paper from '@material-ui/core/Paper'
 import {
 	useParams,
@@ -16,6 +16,8 @@ import { Typography, Button } from '@material-ui/core'
 import SimpleSideBar from './patientcomponents/simplesidebar/simplesidebar'
 import routes from './routes'
 import blankpatient from './patient.mock'
+import PatientDetailsForm from './patientdetails.form'
+import { getPatientInformation } from '../../api/patient.api'
 
 const useStyles = makeStyles((theme) => ({
 	list: {
@@ -39,7 +41,7 @@ export default function Patient() {
 	let { path, url } = useRouteMatch()
 	const classes = useStyles()
 	let { id } = useParams()
-	const [patient, setPatient] = useState(blankpatient)
+	const patient = useSelector((state) => state.patient)
 
 	const dispatch = useDispatch()
 
@@ -47,7 +49,14 @@ export default function Patient() {
 		console.log(patient)
 	}
 	useEffect(() => {
-		console.log('lol')
+		getPatientInformation(id)
+			.then((patient) => {
+				console.log(patient)
+				dispatch({ type: 'LOAD_PATIENT', patient })
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}, [id])
 	return (
 		<Grid container>
@@ -55,8 +64,37 @@ export default function Patient() {
 				<SimpleSideBar routes={routes} />
 			</Grid>
 			<Grid item xs={10}>
-				<Paper>
-					<Formik
+				<Formik
+					initialValues={patient}
+					enableReinitialize
+					onSubmit={(patient) => handleSave(patient)}>
+					<Form>
+						<Button
+							variant={`contained`}
+							onClick={() => handleSave(patient)}>
+							Save!
+						</Button>
+						<Switch>
+							<Route exact path={path}>
+								<Typography variant="body1">Content</Typography>
+							</Route>
+							{routes.map((route, index) => (
+								<Route
+									key={index}
+									exact
+									path={`${path}${route.path}`}
+									component={route.component}
+								/>
+							))}
+						</Switch>
+					</Form>
+				</Formik>
+			</Grid>
+		</Grid>
+	)
+}
+/*
+* <Formik
 						initialValues={patient}
 						enableReinitialize
 						onSubmit={(patient) => handleSave(patient)}>
@@ -83,12 +121,13 @@ export default function Patient() {
 							</Switch>
 						</Form>
 					</Formik>
-				</Paper>
-			</Grid>
-		</Grid>
-	)
-}
-
+*
+*
+*
+*
+*
+*
+* */
 /*
 * <Grid item xs={10}>
 				<Switch>

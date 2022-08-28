@@ -2,6 +2,12 @@ import React, { Component, useEffect, useState } from 'react'
 import { Field } from 'formik'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core'
+import Card from '../../../basestyledcomponents/Card/Card'
+import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
+import CardBody from '../../../basestyledcomponents/Card/CardBody'
+import CardIcon from '../../../basestyledcomponents/Card/CardIcon'
+import LanguageIcon from '@material-ui/icons/Language'
+
 import { TextField } from 'formik-mui'
 
 const useStyles = makeStyles({
@@ -25,23 +31,18 @@ const useStyles = makeStyles({
 
 const basicfields = [
 	{
-		name: 'first_name',
+		name: 'details.first_name',
 		label: 'First Name',
 		type: 'text',
 	},
 	{
-		name: 'last_name',
+		name: 'details.last_name',
 		label: 'Last Name',
 		type: 'text',
 	},
 	{
-		name: 'middle_name',
+		name: 'details.middle_name',
 		label: 'Middle Name',
-		type: 'text',
-	},
-	{
-		name: 'preferred_name',
-		label: 'Preferred Name',
 		type: 'text',
 	},
 	{
@@ -50,48 +51,33 @@ const basicfields = [
 		type: 'text',
 	},
 	{
-		name: 'date_of_birth',
+		name: 'details.date_of_birth',
 		label: 'Date of Birth',
 		type: 'date',
 	},
+	{ name: 'details.gender', label: 'Gender', type: 'text' },
 	{
-		name: 'details.demographics.race',
-		label: 'Race',
-		type: 'text',
-	},
-	{ name: 'details.demographics.gender', label: 'Gender', type: 'text' },
-	{
-		name: 'details.demographics.marital_status',
-		label: 'Marital Status',
-		type: 'text',
-	},
-	{
-		name: 'details.demographics.employment_status',
-		label: 'Employment Status',
-		type: 'text',
-	},
-	{
-		name: 'details.address.address_one',
+		name: 'details.address_one',
 		label: 'Address 1',
 		type: 'text',
 	},
 	{
-		name: 'details.address.address_two',
+		name: 'details.address_two',
 		label: 'Address 2',
 		type: 'text',
 	},
 	{
-		name: 'details.address.city',
+		name: 'details.city',
 		label: 'City',
 		type: 'text',
 	},
 	{
-		name: 'details.address.state',
+		name: 'details.state',
 		label: 'State',
 		type: 'text',
 	},
 	{
-		name: 'details.address.zip',
+		name: 'details.zip',
 		label: 'Zip',
 		type: 'text',
 	},
@@ -100,19 +86,28 @@ const basicfields = [
 export default function Demographics() {
 	const classes = useStyles()
 	return (
-		<div>
-			{basicfields.map((field, index) => (
-				<Field
-					style={{ margin: '15px' }}
-					key={index}
-					name={field.name}
-					label={field.label}
-					type={field.type}
-					component={TextField}
-					fullWidth
-				/>
-			))}
-		</div>
+		<Card>
+			<CardHeader icon text={true}>
+				<CardIcon color="primary">
+					<LanguageIcon />
+				</CardIcon>
+			</CardHeader>
+			<CardBody>
+				{basicfields.map((field, index) => (
+					<Field
+						style={{ margin: '15px' }}
+						InputLabelProps={{ shrink: true }}
+						key={index}
+						name={field.name}
+						label={field.label}
+						type={field.type}
+						variant="standard"
+						component={TextField}
+						fullWidth
+					/>
+				))}
+			</CardBody>
+		</Card>
 	)
 }
 

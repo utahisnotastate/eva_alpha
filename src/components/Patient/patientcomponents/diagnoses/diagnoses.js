@@ -11,8 +11,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import { TextField } from 'formik-mui'
 import { useSelector, useDispatch } from 'react-redux'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
+import CollapsibleTable from './collapsibletable'
 
 const useStyles = makeStyles({
 	root: {
@@ -33,86 +32,38 @@ const useStyles = makeStyles({
 	},
 })
 
-export default function Allergies() {
+export default function Diagnoses() {
 	let { id } = useParams()
 	const classes = useStyles()
 	const dispatch = useDispatch()
 	const { values } = useFormikContext()
+	const tableheaderlabels = [
+		'ICD10 Diagnosis code',
+		'ICD10 Long Dx Description',
+		'ICD10 Short Dx Description',
+	]
 
 	return (
 		<div style={{ margin: '20px' }}>
-			<Card>
-				<CardHeader color="primary">
-					<h4 className={classes.cardTitleWhite}>
-						<AssignmentIcon /> Allergies
-					</h4>
-				</CardHeader>
-				<CardBody>
-					<FieldArray name="details.allergies">
-						{({ insert, remove, push }) => (
-							<div>
-								{values.details.allergies &&
-								values.details.allergies.length > 0
-									? values.details.allergies.map(
-											(allergy, index) => (
-												<div
-													key={index}
-													style={{
-														display: 'flex',
-														flexDirection: 'row',
-													}}>
-													<Field
-														style={{
-															margin: '15px',
-														}}
-														InputLabelProps={{
-															shrink: true,
-														}}
-														name={`details.allergies[${index}].allergy`}
-														label={`Allergy`}
-														type={`text`}
-														variant="standard"
-														component={TextField}
-														fullWidth
-													/>
-													<Field
-														style={{
-															margin: '15px',
-														}}
-														InputLabelProps={{
-															shrink: true,
-														}}
-														name={`details.allergies[${index}].notes`}
-														label={`Notes`}
-														type={`text`}
-														variant="standard"
-														component={TextField}
-														fullWidth
-													/>
-												</div>
-											)
-									  )
-									: null}
-								<button
-									type="button"
-									className="secondary"
-									onClick={() =>
-										push({ allergy: '', note: '' })
-									}>
-									Add Allergy
-								</button>
-							</div>
-						)}
-					</FieldArray>
-				</CardBody>
-				<CardActions>
-					<Button
-						color="primary"
-						onClick={() => console.log('Clicked!')}>
-						Add New Allergy
-					</Button>
-				</CardActions>
-			</Card>
+			<GridContainer>
+				<GridItem xs={12} sm={12} md={12}>
+					<Card>
+						<CardHeader color="primary">
+							<h4 className={classes.cardTitleWhite}>
+								<AssignmentIcon /> Diagnoses
+							</h4>
+						</CardHeader>
+						<CardBody>
+							<CollapsibleTable
+								headertitle={`Details`}
+								tableheaderlabels={tableheaderlabels}
+								values={values.details.diagnoses}
+							/>
+						</CardBody>
+					</Card>
+				</GridItem>
+			</GridContainer>
+			/>
 		</div>
 	)
 }
@@ -122,7 +73,7 @@ export default function Allergies() {
 										<GridItem xs={12} sm={12} md={12}>
 											<MUIDataTable
 												title={'Allergies'}
-												data={values.allergies}
+												data={values.diagnoses}
 												columns={[
 													{
 														name: 'allergy',
