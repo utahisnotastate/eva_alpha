@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { CssBaseline } from '@mui/material'
 import { blue } from '@mui/material/colors'
 import { Provider } from 'react-redux'
 import { ModalProvider } from 'react-modal-hook'
@@ -35,6 +36,7 @@ const theme = createTheme({
 export default function App() {
 	return (
 		<ThemeProvider theme={theme}>
+			<CssBaseline enableColorScheme />
 			<Provider store={store}>
 				<ModalProvider>
 					<Eva routes={routes} />

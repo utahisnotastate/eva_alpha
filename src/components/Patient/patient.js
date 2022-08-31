@@ -2,22 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-import { Formik, Form, useFormikContext } from 'formik'
-import Paper from '@material-ui/core/Paper'
-import {
-	useParams,
-	useRouteMatch,
-	Link,
-	Switch,
-	Route,
-	NavLink,
-} from 'react-router-dom'
-import { Typography, Button } from '@material-ui/core'
+import { Formik, Form } from 'formik'
+import { Button } from '@material-ui/core'
 import SimpleSideBar from './patientcomponents/simplesidebar/simplesidebar'
 import routes from './routes'
-import blankpatient from './patient.mock'
-import PatientDetailsForm from './patientdetails.form'
 import { getPatientInformation } from '../../api/patient.api'
+import { Route, Switch, useParams, useRouteMatch } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	list: {
@@ -38,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Patient() {
-	let { path, url } = useRouteMatch()
-	const classes = useStyles()
+	let { path } = useRouteMatch()
 	let { id } = useParams()
 	const patient = useSelector((state) => state.patient)
 
@@ -51,7 +40,6 @@ export default function Patient() {
 	useEffect(() => {
 		getPatientInformation(id)
 			.then((patient) => {
-				console.log(patient)
 				dispatch({ type: 'LOAD_PATIENT', patient })
 			})
 			.catch((error) => {
@@ -59,7 +47,7 @@ export default function Patient() {
 			})
 	}, [id])
 	return (
-		<Grid container>
+		<Grid container spacing={3}>
 			<Grid item xs={2}>
 				<SimpleSideBar routes={routes} />
 			</Grid>
@@ -75,9 +63,6 @@ export default function Patient() {
 							Save!
 						</Button>
 						<Switch>
-							<Route exact path={path}>
-								<Typography variant="body1">Content</Typography>
-							</Route>
 							{routes.map((route, index) => (
 								<Route
 									key={index}
@@ -93,119 +78,3 @@ export default function Patient() {
 		</Grid>
 	)
 }
-/*
-* <Formik
-						initialValues={patient}
-						enableReinitialize
-						onSubmit={(patient) => handleSave(patient)}>
-						<Form>
-							<Button
-								variant={`contained`}
-								onClick={() => handleSave(patient)}>
-								Save!
-							</Button>
-							<Switch>
-								<Route exact path={path}>
-									<Typography variant="body1">
-										Content
-									</Typography>
-								</Route>
-								{routes.map((route, index) => (
-									<Route
-										key={index}
-										exact
-										path={`${path}${route.path}`}
-										component={route.component}
-									/>
-								))}
-							</Switch>
-						</Form>
-					</Formik>
-*
-*
-*
-*
-*
-*
-* */
-/*
-* <Grid item xs={10}>
-				<Switch>
-					<Route exact path={path}>
-						<Typography variant="body1">Content</Typography>
-					</Route>
-					{routes.map((route) => (
-						<Route
-							key={route.path}
-							exact
-							path={`${path}${route.path}`}
-							component={route.component}
-						/>
-					))}
-				</Switch>
-			</Grid>
-*
-*
-* */
-/*
-				<List className={classes.list}>
-					{routes.map((route) => (
-						<ListItem className={classes.listitem} key={route.path}>
-							<NavLink
-								activeStyle={{ color: '#0232b2' }}
-								to={`${url}${route.path}`}>
-								<ListItemText
-									primary={
-										<Typography
-											className={classes.sideitem}
-											variant="body1">
-											{route.label}
-										</Typography>
-									}
-								/>
-							</NavLink>
-						</ListItem>
-					))}
-				</List>
-
-
-  useEffect(() => {
-    apifetch(getFullPatientInformation, id).then((fullpatientinformation) => {
-      handleDemographicsAddressContactMethodsReduxLoad(fullpatientinformation);
-    });
-  }, [id]);
-if (patient.address === null || patient.demographics === null) {
-      // set address to its default blank values
-      dispatch({ type: "address_is_null" });
-      // set demographics to its default blank values
-      dispatch({ type: "demographics_is_null" });
-      // set patient contact methods to values in DB
-      // handlePatientContactMethods(patient.patient_contact_methods);
-
-      dispatch({
-        type: "load_patient_contact_methods",
-        patient_contact_methods: patient.patient_contact_methods,
-      });
-    } else {
-      // load the address into the redux store
-      dispatch({ type: "load_address", address: patient.address });
-      //load the demographics into the store
-      dispatch({ type: "load_demographics", address: patient.demographics });
-      // handlePatientContactMethods(patient.patient_contact_methods);
-
-      // set patient contact methods to values in DB
-      dispatch({
-        type: "load_patient_contact_methods",
-        patient_contact_methods: patient.patient_contact_methods,
-      });
-    }
-
-useEffect(() => {
-  const fetchData = async () => {
-    const result = await getFullPatientInformation(id);
-    //const result = await axios(`http://127.0.0.1:8000/api/patients/${id}/demographics/`);
-    console.log(result);
-  };
-  fetchData();
-}, [id]);
- */

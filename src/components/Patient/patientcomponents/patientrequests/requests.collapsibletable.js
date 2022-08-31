@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Box from '@mui/material/Box'
 import Collapse from '@mui/material/Collapse'
 import IconButton from '@mui/material/IconButton'
@@ -14,16 +14,11 @@ import { useFormikContext } from 'formik'
 import { useTheme } from '@mui/material/styles'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import InsuranceCard from './InsuranceCard/insurancecard'
 import TableFooter from '@mui/material/TableFooter'
-import Divider from '@mui/material/Divider'
-import { DoNotDisturb } from '@mui/icons-material'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import Chip from '@mui/material/Chip'
 
 function Row(props) {
 	const theme = useTheme()
-	const { insurance } = props
+	const { request } = props
 	const [open, setOpen] = React.useState(false)
 
 	return (
@@ -42,36 +37,13 @@ function Row(props) {
 					</IconButton>
 				</TableCell>
 				<TableCell component="th" scope="row">
-					{insurance.active ? (
-						<Chip
-							label="Active"
-							color="success"
-							icon={<CheckCircleOutlineIcon />}
-						/>
-					) : (
-						<Chip
-							label="Inactive"
-							color="error"
-							icon={<DoNotDisturb />}
-						/>
-					)}
+					<Typography>{request.type}</Typography>
 				</TableCell>
 				<TableCell>
-					<Typography>{insurance.membernumber}</Typography>
+					<Typography>{request.status}</Typography>
 				</TableCell>
 				<TableCell>
-					<Typography>{insurance.company}</Typography>
-				</TableCell>
-				<TableCell>
-					<Typography>{insurance.eligibiltybegan}</Typography>
-				</TableCell>
-				<TableCell>
-					<Typography>{insurance.eligibiltyexpired}</Typography>
-				</TableCell>
-				<TableCell align={`center`}>
-					<Typography>
-						{insurance.dateeligibitylastchecked}
-					</Typography>
+					<Typography>{request.description}</Typography>
 				</TableCell>
 			</TableRow>
 			<TableRow sx={{ bgcolor: '#f3f3f3' }}>
@@ -79,23 +51,22 @@ function Row(props) {
 					style={{ paddingBottom: 0, paddingTop: 0, marginTop: 10 }}
 					colSpan={12}>
 					<Collapse in={open} timeout="auto">
-						<InsuranceCard insurance={insurance} />
 						<Paper>
 							<Typography variant="body2" gutterBottom>
-								Authorizations
+								Updates
 							</Typography>
 						</Paper>
 						<Paper>
 							<Table size="small" aria-label="purchases">
 								<TableHead>
 									<TableRow>
-										<TableCell>Procedure</TableCell>
-										<TableCell>Status</TableCell>
+										<TableCell>Date Prescribed</TableCell>
+										<TableCell>Refills</TableCell>
 										<TableCell align="right">
-											Amount
+											Dosage
 										</TableCell>
 										<TableCell align="right">
-											Total price ($)
+											Notes
 										</TableCell>
 									</TableRow>
 								</TableHead>
@@ -122,78 +93,52 @@ function Row(props) {
 	)
 }
 
-/*
-* {row.history.map((historyRow) => (
-										<TableRow key={historyRow.date}>
-											<TableCell
-												component="th"
-												scope="row">
-												{historyRow.date}
-											</TableCell>
-											<TableCell>
-												{historyRow.customerId}
-											</TableCell>
-											<TableCell align="right">
-												{historyRow.amount}
-											</TableCell>
-											<TableCell align="right">
-												{Math.round(
-													historyRow.amount *
-														row.price *
-														100
-												) / 100}
-											</TableCell>
-										</TableRow>
-									))}
-*
-* */
-
-export default function InsuranceCollapsibleTable() {
+export default function RequestsCollapsibleTable() {
 	const theme = useTheme()
 	const { values } = useFormikContext()
-	console.log(theme)
+	const requests = [
+		{
+			type: 'Medication Refill',
+			status: 'In Progress',
+			description: 'This is the description',
+			updates: [],
+		},
+		{
+			type: 'Adverse Event',
+			status: 'Urgent',
+			description: 'This is the Adverse description',
+			updates: [],
+		},
+		{
+			type: 'Health Questions',
+			status: 'Completed',
+			description: 'This is the  description of the health question',
+			updates: [],
+		},
+	]
 	return (
-		<TableContainer component={Paper}>
-			<Box style={{ backgroundColor: theme.palette.primary.main }}>
-				<Typography
-					variant="h4"
-					style={{
-						color: theme.palette.primary.contrastText,
-					}}>
-					Insurance
-				</Typography>
-				<Divider />
-			</Box>
+		<TableContainer>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell />
 						<TableCell>
-							<Typography>Active</Typography>
-						</TableCell>
-						<TableCell>
-							<Typography>Member Number</Typography>
+							<Typography>Expand</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography>Company</Typography>
+							<Typography>Type</Typography>
 						</TableCell>
-
 						<TableCell>
-							<Typography>Eligibility Began</Typography>
+							<Typography>Status</Typography>
 						</TableCell>
-						<TableCell align={`left`}>
-							<Typography>Eligibility Ended</Typography>
-						</TableCell>
-						<TableCell align={`left`}>
-							<Typography>Eligibility Last Checked On</Typography>
+						<TableCell>
+							<Typography>Description</Typography>
 						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{values.details.insurance &&
-					values.details.insurance.length > 0
-						? values.details.insurance.map((insurance, index) => (
-								<Row key={index} insurance={insurance} />
+					{requests && requests.length > 0
+						? requests.map((request, index) => (
+								<Row key={index} request={request} />
 						  ))
 						: null}
 				</TableBody>

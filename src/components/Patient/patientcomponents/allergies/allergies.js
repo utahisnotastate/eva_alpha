@@ -13,6 +13,7 @@ import { TextField } from 'formik-mui'
 import { useSelector, useDispatch } from 'react-redux'
 import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
+import { CollapsibleTable } from '../../../basestyledcomponents/CollapsibleTable/collapsibletable'
 
 const useStyles = makeStyles({
 	root: {
@@ -89,29 +90,27 @@ export default function Allergies() {
 														component={TextField}
 														fullWidth
 													/>
+													<Button
+														color={`error`}
+														variant={`contained`}
+														onClick={() =>
+															remove(index)
+														}>
+														-
+													</Button>
 												</div>
 											)
 									  )
 									: null}
-								<button
-									type="button"
-									className="secondary"
-									onClick={() =>
-										push({ allergy: '', note: '' })
-									}>
-									Add Allergy
-								</button>
+								<Button
+									color="primary"
+									onClick={() => console.log('Clicked!')}>
+									Add New Allergy
+								</Button>
 							</div>
 						)}
 					</FieldArray>
 				</CardBody>
-				<CardActions>
-					<Button
-						color="primary"
-						onClick={() => console.log('Clicked!')}>
-						Add New Allergy
-					</Button>
-				</CardActions>
 			</Card>
 		</div>
 	)

@@ -61,6 +61,32 @@ const classes = {
 
 export default function SurgicalHistory() {
 	const { values } = useFormikContext()
+	const [suggestions, setSuggestions] = React.useState([])
+	const [value, setValue] = React.useState('')
+
+	const onChange = (event, { newValue, method }) => {
+		setValue(newValue)
+	}
+
+	const onSuggestionsFetchRequested = ({ value }) => {
+		fetch(`${API_URL}${value}`)
+			.then((response) => response.json())
+			.then((data) => this.setState({ suggestions: data[3] }))
+			.catch((error) => console.log(error))
+	}
+
+	const onSuggestionsClearRequested = () => {
+		setSuggestions([])
+	}
+	const inputProps = {
+		placeholder: 'Search Medical Procedures',
+		value,
+		onChange: onChange,
+	}
+	function getSuggestionValue(suggestion) {
+		return suggestion[0]
+	}
+
 	return (
 		<Card className={classes.root}>
 			<CardHeader color="primary">
@@ -115,18 +141,84 @@ export default function SurgicalHistory() {
 															}
 															fullWidth
 														/>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].date`}
+															label={`Date`}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].additional_information`}
+															label={`Additional Information`}
+															rows={4}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Button
+															className="secondary"
+															variant="contained"
+															color={`secondary`}
+															onClick={() =>
+																remove(index)
+															}>
+															X
+														</Button>
+														<Autosuggest
+															suggestions={
+																suggestions
+															}
+															onSuggestionsFetchRequested={
+																onSuggestionsFetchRequested
+															}
+															onSuggestionsClearRequested={
+																onSuggestionsClearRequested
+															}
+															getSuggestionValue={
+																getSuggestionValue
+															}
+															renderSuggestion={
+																renderSuggestion
+															}
+															inputProps={
+																inputProps
+															}
+														/>
 													</div>
 												)
 										  )
 										: null}
-									<button
-										type="button"
+									<Button
 										className="secondary"
 										onClick={() =>
-											push({ allergy: '', note: '' })
+											push({
+												ICD10procedurecode: '',
+												performed_by: '',
+												date: '',
+												additional_information: '',
+											})
 										}>
 										Add Surgery/Procedure
-									</button>
+									</Button>
 								</div>
 							)}
 						</FieldArray>

@@ -1,66 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
-import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
-import Table from '../../../basestyledcomponents/Table/Table'
 import style from '../../../basestyledcomponents/Table/contentAreas'
-import InsuranceCard from './InsuranceCard/insurancecard'
-import AssignmentIcon from '@material-ui/icons/Assignment'
-import { useDispatch, useSelector } from 'react-redux'
-import { Typography } from '@material-ui/core'
-import Card from '../../../basestyledcomponents/Card/Card'
-import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
-import CardBody from '../../../basestyledcomponents/Card/CardBody'
-import NoInsuranceListed from './NoInsuranceListed/noinsurancelisted'
-import { useFormikContext, FieldArray } from 'formik'
+import { useFormikContext } from 'formik'
 import InsuranceCollapsibleTable from './insurance.collapsibletable'
-import MUIDataTable from 'mui-datatables'
-import { getPatientInsurance } from '../../../../api/patient.api'
-import ViewInsurance from './viewinsurance'
-import Button from '../../../basestyledcomponents/Table/Button'
-import Modal from '../../../basestyledcomponents/Modal/modal'
-import AddInsuranceForm from '../../../Forms/Administrative/addinsuranceform'
-import CardActions from '@mui/material/CardActions'
 
 const useStyles = makeStyles(style)
-const API_URL = 'http://127.0.0.1:8000/api'
 
-export default function Insurance(props) {
+export default function Insurance() {
 	let { id } = useParams()
 	const classes = useStyles()
 	const { values } = useFormikContext()
 
 	// <Modal buttontext={`Add Insurance`} form={AddInsuranceForm} />
 
-	return (
-		<GridContainer>
-			<GridItem xs={12} sm={12} md={12}>
-				<Card>
-					<CardHeader color="primary">
-						<h4 className={classes.cardTitleWhite}>
-							<AssignmentIcon /> Insurance
-						</h4>
-					</CardHeader>
-					<CardBody>
-						<InsuranceCollapsibleTable />
-					</CardBody>
-					<CardActions>
-						<Button
-							color="primary"
-							onClick={() => {
-								props.setOpen(true)
-							}}>
-							Add Insurance
-						</Button>
-					</CardActions>
-				</Card>
-			</GridItem>
-		</GridContainer>
-	)
+	return <InsuranceCollapsibleTable />
 }
 
 /*
+<Card>
+			<CardBody>
+				<CardHeader color="primary">
+					<h4 className={classes.cardTitleWhite}>
+						<AssignmentIcon /> Insurance
+					</h4>
+				</CardHeader>
+				<InsuranceCollapsibleTable />
+			</CardBody>
+			<CardActions>
+				<Button
+					color="primary"
+					onClick={() => {
+						props.setOpen(true)
+					}}>
+					Add Insurance
+				</Button>
+			</CardActions>
+		</Card>
+
 * <FieldArray name="details.insurance">
 								{({ insert, remove, push }) => (
 									<div>

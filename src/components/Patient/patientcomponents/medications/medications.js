@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useFormikContext, Formik, Form, Field, FieldArray } from 'formik'
+import { useFormikContext, Field, FieldArray } from 'formik'
 import Grid from '@material-ui/core/Grid'
 import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
@@ -10,7 +10,7 @@ import CardBody from '../../../basestyledcomponents/Card/CardBody'
 import { makeStyles } from '@material-ui/core/styles'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import { TextField } from 'formik-mui'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles({
 	root: {
@@ -71,6 +71,22 @@ export default function Allergies() {
 																}}
 																name={`details.medications[${index}].drugname`}
 																label={`Name`}
+																type={`text`}
+																variant="standard"
+																component={
+																	TextField
+																}
+																fullWidth
+															/>
+															<Field
+																style={{
+																	margin: '15px',
+																}}
+																InputLabelProps={{
+																	shrink: true,
+																}}
+																name={`details.medications[${index}].dosage`}
+																label={`Dosage`}
 																type={`text`}
 																variant="standard"
 																component={
