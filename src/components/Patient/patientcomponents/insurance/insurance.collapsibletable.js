@@ -20,11 +20,13 @@ import Divider from '@mui/material/Divider'
 import { DoNotDisturb } from '@mui/icons-material'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import Chip from '@mui/material/Chip'
+import Button from '@mui/material/Button'
 
 function Row(props) {
 	const theme = useTheme()
-	const { insurance } = props
+	const { insurance, index } = props
 	const [open, setOpen] = React.useState(false)
+	const { values, setFieldValue } = useFormikContext()
 
 	return (
 		<React.Fragment>
@@ -73,6 +75,20 @@ function Row(props) {
 						{insurance.dateeligibitylastchecked}
 					</Typography>
 				</TableCell>
+				<TableCell align={`center`}>
+					<Button
+						variant="contained"
+						color="secondary"
+						onClick={() => {
+							const insurance = values.details.insurance
+							//remove insurance from array
+							insurance.splice(index, 1)
+
+							setFieldValue('details.insurance', insurance)
+						}}>
+						Delete
+					</Button>
+				</TableCell>
 			</TableRow>
 			<TableRow sx={{ bgcolor: '#f3f3f3' }}>
 				<TableCell
@@ -80,41 +96,6 @@ function Row(props) {
 					colSpan={12}>
 					<Collapse in={open} timeout="auto">
 						<InsuranceCard insurance={insurance} />
-						<Paper>
-							<Typography variant="body2" gutterBottom>
-								Authorizations
-							</Typography>
-						</Paper>
-						<Paper>
-							<Table size="small" aria-label="purchases">
-								<TableHead>
-									<TableRow>
-										<TableCell>Procedure</TableCell>
-										<TableCell>Status</TableCell>
-										<TableCell align="right">
-											Amount
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>
-									<Typography variant="body2">
-										{' '}
-										Soon{' '}
-									</Typography>
-								</TableBody>
-								<TableFooter>
-									<TableRow>
-										<TableCell colSpan={3}>Total</TableCell>
-										<TableCell align="right">
-											$0.00
-										</TableCell>
-									</TableRow>
-								</TableFooter>
-							</Table>
-						</Paper>
 					</Collapse>
 				</TableCell>
 			</TableRow>
@@ -150,8 +131,15 @@ function Row(props) {
 
 export default function InsuranceCollapsibleTable() {
 	const theme = useTheme()
-	const { values } = useFormikContext()
-	console.log(theme)
+	const { values, setFieldValue } = useFormikContext()
+	const blankInsurance = {
+		active: true,
+		memberNumber: '',
+		company: '',
+		eligibilityBegan: '',
+		eligibilityEnded: '',
+		eligibilityLastCheckedOn: '',
+	}
 	return (
 		<TableContainer component={Paper}>
 			<Box style={{ backgroundColor: theme.palette.primary.main }}>
@@ -193,10 +181,58 @@ export default function InsuranceCollapsibleTable() {
 					{values.details.insurance &&
 					values.details.insurance.length > 0
 						? values.details.insurance.map((insurance, index) => (
-								<Row key={index} insurance={insurance} />
+								<Row
+									key={index}
+									insurance={insurance}
+									index={index}
+								/>
 						  ))
 						: null}
 				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TableCell colSpan={12}>
+							<Box
+								display="flex"
+								justifyContent="space-between"
+								alignItems="center">
+								<Typography>
+									{values.details.insurance &&
+									values.details.insurance.length > 0
+										? `${values.details.insurance.length} insurance(s)`
+										: 'No insurance'}
+								</Typography>
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={() => {
+										const insurance =
+											values.details.insurance
+										const newInsurance = {
+											active: true,
+											backimage: '',
+											frontimage: '',
+											membernumber: '',
+											company: '',
+											eligibilitybegan: '',
+											eligibilityexpired: '',
+											eligibilityLastCheckedOn: '',
+										}
+										const merged = [
+											...insurance,
+											newInsurance,
+										]
+										setFieldValue(
+											'details.insurance',
+											merged
+										)
+									}}>
+									<Typography>Add Insurance</Typography>
+								</Button>
+							</Box>
+						</TableCell>
+					</TableRow>
+				</TableFooter>
 			</Table>
 		</TableContainer>
 	)

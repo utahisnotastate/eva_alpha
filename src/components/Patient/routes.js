@@ -16,6 +16,12 @@ import PatientReports from './patientcomponents/reports/patientreports'
 import Diagnoses from './patientcomponents/diagnoses/diagnoses'
 /*
 *
+*
+* 	{
+		label: 'Medical History',
+		path: '/medicalhistory',
+		component: MedicalHistory,
+	},
 * {
 		label: 'Family Medical History',
 		path: '/familymedicalhistory',
@@ -40,11 +46,7 @@ const routes = [
 		path: '/appointmenthistory',
 		component: AppointmentHistory,
 	},
-	{
-		label: 'Requests',
-		path: '/patientrequests',
-		component: PatientRequests,
-	},
+
 	{
 		label: 'Insurance',
 		path: '/insurance',
@@ -69,12 +71,6 @@ const routes = [
 		label: 'Diagnoses',
 		path: '/diagnosis',
 		component: Diagnoses,
-	},
-
-	{
-		label: 'Medical History',
-		path: '/medicalhistory',
-		component: MedicalHistory,
 	},
 	{
 		label: 'Surgical History',

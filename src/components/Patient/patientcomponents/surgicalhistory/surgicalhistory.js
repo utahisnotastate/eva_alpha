@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-// import { Input } from 'react-formik-ui';
 import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import Card from '../../../basestyledcomponents/Card/Card'
-import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import Autosuggest from 'react-autosuggest'
 import './surgicalhistory.css'
@@ -11,7 +9,6 @@ import { Typography } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../basestyledcomponents/Card/CardBody'
-import UpdateSurgicalHistoryItem from '../../../Forms/Clinical/Patient/updatesurgicalhistoryitem'
 import { useFormikContext, FieldArray, Field, Form } from 'formik'
 import { TextField } from 'formik-mui'
 
@@ -62,7 +59,7 @@ const classes = {
 export default function SurgicalHistory() {
 	const { values } = useFormikContext()
 	const [suggestions, setSuggestions] = React.useState([])
-	const [value, setValue] = React.useState('')
+	const [value, setValue] = React.useState(null)
 
 	const onChange = (event, { newValue, method }) => {
 		setValue(newValue)
@@ -71,7 +68,7 @@ export default function SurgicalHistory() {
 	const onSuggestionsFetchRequested = ({ value }) => {
 		fetch(`${API_URL}${value}`)
 			.then((response) => response.json())
-			.then((data) => this.setState({ suggestions: data[3] }))
+			.then((data) => setSuggestions(data[3]))
 			.catch((error) => console.log(error))
 	}
 
@@ -88,7 +85,7 @@ export default function SurgicalHistory() {
 	}
 
 	return (
-		<Card className={classes.root}>
+		<Card>
 			<CardHeader color="primary">
 				<Typography variant="h4">Surgical History</Typography>
 			</CardHeader>
@@ -183,42 +180,29 @@ export default function SurgicalHistory() {
 															}>
 															X
 														</Button>
-														<Autosuggest
-															suggestions={
-																suggestions
-															}
-															onSuggestionsFetchRequested={
-																onSuggestionsFetchRequested
-															}
-															onSuggestionsClearRequested={
-																onSuggestionsClearRequested
-															}
-															getSuggestionValue={
-																getSuggestionValue
-															}
-															renderSuggestion={
-																renderSuggestion
-															}
-															inputProps={
-																inputProps
-															}
-														/>
 													</div>
 												)
 										  )
 										: null}
-									<Button
-										className="secondary"
-										onClick={() =>
-											push({
-												ICD10procedurecode: '',
-												performed_by: '',
-												date: '',
-												additional_information: '',
-											})
-										}>
-										Add Surgery/Procedure
-									</Button>
+									<div
+										style={{
+											display: 'flex',
+											flexDirection: 'row',
+										}}>
+										<Button
+											variant={`contained`}
+											color={`primary`}
+											onClick={() =>
+												push({
+													ICD10procedurecode: '',
+													performed_by: '',
+													date: '',
+													additional_information: '',
+												})
+											}>
+											Add Surgery/Procedure
+										</Button>
+									</div>
 								</div>
 							)}
 						</FieldArray>
@@ -239,6 +223,24 @@ class SurgicalHistoryOld extends Component {
 			suggestions: [],
 		}
 	}
+
+	/*
+	* <Autosuggest
+											suggestions={suggestions}
+											onSuggestionsFetchRequested={
+												onSuggestionsFetchRequested
+											}
+											onSuggestionsClearRequested={
+												onSuggestionsClearRequested
+											}
+											getSuggestionValue={
+												getSuggestionValue
+											}
+											renderSuggestion={renderSuggestion}
+											inputProps={inputProps}
+										/>
+	*
+	* */
 
 	async componentDidMount() {
 		console.log(this.props)

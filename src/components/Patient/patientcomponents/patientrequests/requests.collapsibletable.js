@@ -9,17 +9,22 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import Timeline from '../../../basestyledcomponents/TimeLineStyled/Timeline'
 import Paper from '@mui/material/Paper'
 import { useFormikContext } from 'formik'
 import { useTheme } from '@mui/material/styles'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import TableFooter from '@mui/material/TableFooter'
-
+import RequestTimeLine from '../../../PatientRequests/TimeLine/timeline'
+import PatientRequestsTimeline from './timeline'
+import Button from '@mui/material/Button'
+import AddIcon from '@mui/icons-material/Add'
 function Row(props) {
 	const theme = useTheme()
 	const { request } = props
 	const [open, setOpen] = React.useState(false)
+	const { values } = useFormikContext()
 
 	return (
 		<React.Fragment>
@@ -52,35 +57,57 @@ function Row(props) {
 					colSpan={12}>
 					<Collapse in={open} timeout="auto">
 						<Paper>
-							<Typography variant="body2" gutterBottom>
-								Updates
-							</Typography>
-						</Paper>
-						<Paper>
 							<Table size="small" aria-label="purchases">
 								<TableHead>
 									<TableRow>
-										<TableCell>Date Prescribed</TableCell>
-										<TableCell>Refills</TableCell>
-										<TableCell align="right">
-											Dosage
-										</TableCell>
-										<TableCell align="right">
-											Notes
-										</TableCell>
+										<TableCell>Time</TableCell>
+										<TableCell>Update</TableCell>
+										<TableCell>Notes</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									<Typography variant="body2">
-										{' '}
-										Soon{' '}
-									</Typography>
+									{props.request.updates.map(
+										(update, index) => (
+											<TableRow key={index}>
+												<TableCell
+													component="th"
+													scope="row">
+													<Typography>
+														{update.time}
+													</Typography>
+												</TableCell>
+												<TableCell>
+													<Typography>
+														{update.update}
+													</Typography>
+												</TableCell>
+												<TableCell align="right">
+													<Typography>
+														{update.notes}
+													</Typography>
+												</TableCell>
+											</TableRow>
+										)
+									)}
 								</TableBody>
 								<TableFooter>
 									<TableRow>
-										<TableCell colSpan={3}>Total</TableCell>
-										<TableCell align="right">
-											$0.00
+										<TableCell colSpan={3}>
+											<Button
+												variant="contained"
+												color="primary"
+												startIcon={<AddIcon />}
+												onClick={() => {
+													values.requests.updates.push(
+														{
+															time: '',
+															update: '',
+															notes: '',
+														}
+													)
+												}}>
+												Add Update
+											</Button>
 										</TableCell>
 									</TableRow>
 								</TableFooter>
@@ -93,29 +120,10 @@ function Row(props) {
 	)
 }
 
-export default function RequestsCollapsibleTable() {
+export default function RequestsCollapsibleTable({ requests, arrayHelpers }) {
 	const theme = useTheme()
 	const { values } = useFormikContext()
-	const requests = [
-		{
-			type: 'Medication Refill',
-			status: 'In Progress',
-			description: 'This is the description',
-			updates: [],
-		},
-		{
-			type: 'Adverse Event',
-			status: 'Urgent',
-			description: 'This is the Adverse description',
-			updates: [],
-		},
-		{
-			type: 'Health Questions',
-			status: 'Completed',
-			description: 'This is the  description of the health question',
-			updates: [],
-		},
-	]
+
 	return (
 		<TableContainer>
 			<Table>
@@ -138,11 +146,77 @@ export default function RequestsCollapsibleTable() {
 				<TableBody>
 					{requests && requests.length > 0
 						? requests.map((request, index) => (
-								<Row key={index} request={request} />
+								<Row
+									key={index}
+									request={request}
+									arrayHelpers={arrayHelpers}
+								/>
 						  ))
 						: null}
 				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TableCell colSpan={3}>
+							<Button
+								variant="contained"
+								color="primary"
+								startIcon={<AddIcon />}
+								onClick={() => {
+									values.requests.push({
+										type: '',
+										status: '',
+										description: '',
+										updates: [
+											{
+												time: '',
+												update: '',
+												notes: '',
+											},
+										],
+									})
+								}}>
+								Add Request to maintain
+							</Button>
+						</TableCell>
+					</TableRow>
+				</TableFooter>
 			</Table>
 		</TableContainer>
 	)
+	// create button that will add a new request
 }
+
+/*
+<TableRow>
+						<TableCell colSpan={4}>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={() => {
+									requests.push({
+										type: '',
+										status: '',
+										description: '',
+										updates: [],
+									})
+								}}
+								startIcon={<AddIcon />}>
+								Add Request
+							</Button>
+						</TableCell>
+					</TableRow>
+				</TableBody>
+			</Table>
+		</TableContainer>
+
+* <TableFooter>
+									<TableRow>
+										<TableCell colSpan={3}>Total</TableCell>
+										<TableCell align="right">
+											$0.00
+										</TableCell>
+									</TableRow>
+								</TableFooter>
+*
+*
+* */
