@@ -61,11 +61,11 @@ export default function SurgicalHistory() {
 	const [suggestions, setSuggestions] = React.useState([])
 	const [value, setValue] = React.useState(null)
 
-	const onChange = (event, { newValue, method }) => {
+	/*
+const onChange = (event, { newValue, method }) => {
 		setValue(newValue)
 	}
-
-	const onSuggestionsFetchRequested = ({ value }) => {
+const onSuggestionsFetchRequested = ({ value }) => {
 		fetch(`${API_URL}${value}`)
 			.then((response) => response.json())
 			.then((data) => setSuggestions(data[3]))
@@ -82,7 +82,7 @@ export default function SurgicalHistory() {
 	}
 	function getSuggestionValue(suggestion) {
 		return suggestion[0]
-	}
+	}*/
 
 	return (
 		<Card>
@@ -213,6 +213,7 @@ export default function SurgicalHistory() {
 	)
 }
 
+/*
 class SurgicalHistoryOld extends Component {
 	constructor(props) {
 		super(props)
@@ -223,31 +224,11 @@ class SurgicalHistoryOld extends Component {
 			suggestions: [],
 		}
 	}
-
-	/*
-	* <Autosuggest
-											suggestions={suggestions}
-											onSuggestionsFetchRequested={
-												onSuggestionsFetchRequested
-											}
-											onSuggestionsClearRequested={
-												onSuggestionsClearRequested
-											}
-											getSuggestionValue={
-												getSuggestionValue
-											}
-											renderSuggestion={renderSuggestion}
-											inputProps={inputProps}
-										/>
-	*
-	* */
-
 	async componentDidMount() {
 		console.log(this.props)
 		const result = await axios(
 			`http://127.0.0.1:8000/api/patients/${this.props.match.params.id}/surgicalhistory/`
 		)
-		console.log(result)
 		this.setState({ history: result.data })
 		this.props.loadSurgicalHistory(result.data)
 		console.log(this.state.history)
@@ -396,3 +377,4 @@ class SurgicalHistoryOld extends Component {
 		)
 	}
 }
+*/

@@ -3,6 +3,7 @@ import { getAllAppointments } from './appointment.api'
 import { getAllPatients } from './patients.api'
 import { getAllRequests } from './requests.api'
 import fakepatients from '../components/Patient/patients.mock'
+import { getAllForms } from './forms.redone.api'
 import API_URL from './api_url'
 
 export const getSettings = async () => {
@@ -39,13 +40,16 @@ export const getSchedulingComponentData = async () => {
 }
 
 export const getAllInitDataOnLoad = async () => {
-	const [appointments, patients, requests, settings] = await Promise.all([
-		getAllAppointments(),
-		getAllPatients(),
-		getAllRequests(),
-		getSettings(),
-	])
-	return { appointments, patients, requests, settings }
+	const [appointments, forms, patients, requests, settings] =
+		await Promise.all([
+			getAllAppointments(),
+			getAllForms(),
+			getAllPatients(),
+			getAllRequests(),
+			getSettings(),
+		])
+	console.log({ appointments, forms, patients, requests, settings })
+	return { appointments, forms, patients, requests, settings }
 }
 export const apifetch = async (apifunc, api_param, log_result = false) => {
 	const result = await apifunc(...api_param)

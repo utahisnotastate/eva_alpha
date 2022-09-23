@@ -14,6 +14,7 @@ import EVAFormFieldsPreview from './fields/preview'
 import { useTheme } from '@mui/material/styles'
 import FormsList from './sidebar'
 import { getSettings, updateSettings } from '../../../api/utility.api'
+import { getAllInitDataOnLoad } from '../../../api/utility.api'
 import inputs from './inputs'
 import _ from 'lodash'
 
@@ -21,31 +22,30 @@ export default function FormEditor() {
 	const theme = useTheme()
 	const dispatch = useDispatch()
 	const forms = useSelector((state) => state.forms)
-	const [title, setTitle] = useState()
 	const editform = useSelector((state) => state.editform)
 	const settings = useSelector((state) => state.settings)
 	const [view, setView] = useState('edit')
 
 	useEffect(() => {
-		getSettings()
+		getAllInitDataOnLoad()
 			.then((data) => {
 				console.log(data)
-				dispatch({ type: 'LOAD_SETTINGS', settings: data })
+				/*dispatch({ type: 'LOAD_SETTINGS', settings: data })
 				dispatch({ type: 'LOAD_FORMS', forms: data.details.forms })
 				dispatch({
 					type: 'LOAD_EDITFORM',
 					editform: data.details.forms[0],
-				})
+				})*/
 			})
 			.catch((err) => {
 				console.log(err)
 			})
 	})
-
+	console.log(editform)
 	return (
 		<Formik
 			initialValues={editform}
-			enableReinitialize={true}
+			enableReinitialize
 			onSubmit={(values, actions) => {
 				const updatedforms = _.merge(values, forms)
 				settings.details.forms = updatedforms
@@ -64,10 +64,9 @@ export default function FormEditor() {
 						<FormsList forms={forms} formikProps={formikProps} />
 					</Grid>
 					<Grid item xs={10}>
-						{' '}
 						<Card sx={{ boxShadow: 3 }}>
 							<CardHeader
-								title={title}
+								title={editform.title}
 								sx={{
 									bgcolor: 'primary.main',
 									color: 'primary.contrastText',

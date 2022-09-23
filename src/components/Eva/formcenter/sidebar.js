@@ -2,10 +2,7 @@ import * as React from 'react'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -16,7 +13,6 @@ export default function FormsList({ setFields }) {
 		<List
 			sx={{
 				width: '100%',
-
 				bgcolor: 'background.paper',
 			}}>
 			{forms && forms.length > 0
@@ -44,6 +40,7 @@ export default function FormsList({ setFields }) {
 									<Button
 										variant={`text`}
 										onClick={() => {
+											console.log(form)
 											dispatch({
 												type: 'LOAD_EDITFORM',
 												editform: form,

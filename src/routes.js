@@ -4,6 +4,7 @@ import MedicalAppointment from './components/Appointment/components/medicalappoi
 import ClinicalQueue from './components/ClinicalQueue/clinicalqueue'
 import Patients from './components/Patients/patients'
 import PatientRequests from './components/PatientRequests/patientrequests'
+import FormsBuilder from './redone/FormsBuilder/FormsBuilder'
 import FormCenter from './components/Eva/formcenter/formcenter'
 import FormBuilder from './components/FormBuilder/formbuilder'
 import Patient from './components/Patient/patient'
@@ -71,7 +72,7 @@ const routes = [
 		path: '/formscenter',
 		exact: false,
 		displayInNav: true,
-		component: FormCenter,
+		component: FormsBuilder,
 		label: 'Forms Center',
 	},
 	{

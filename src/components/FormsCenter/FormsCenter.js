@@ -4,22 +4,22 @@
  *
  * */
 
-import React from "react";
-import "./formscenter.css";
-import { useRouteMatch, Route } from "react-router-dom";
-import FormsCenterHome from "./FormsCenterHome";
-import FormEditor from "./FormsCustomizer/FormEdItor/FormEditor";
-import FormPreview from "./FormPreview/formpreview";
+import React from 'react'
+import './formscenter.css'
+import { useRouteMatch, Route } from 'react-router-dom'
+import FormsCenterHome from './FormsCenterHome'
+import FormEditor from './FormsCustomizer/FormEdItor/FormEditor'
+import FormPreview from './FormPreview/formpreview'
 
 export default function FormsCenter() {
-  const { path } = useRouteMatch();
-  return (
-    <>
-      <Route component={FormsCenterHome} exact path={`${path}`} />
-      <Route component={FormEditor} path={`${path}/:formId/edit`} />
-      <Route component={FormPreview} path={`${path}/:formId/preview`} />
-    </>
-  );
+	const { path } = useRouteMatch()
+	return (
+		<>
+			<Route component={FormsCenterHome} exact path={`${path}`} />
+			<Route component={FormEditor} path={`${path}/:formId/edit`} />
+			<Route component={FormPreview} path={`${path}/:formId/preview`} />
+		</>
+	)
 }
 /*
 <Route component={FormsCustomizer} path={`${path}/:formId/edit`} />

@@ -41,7 +41,7 @@ export default function FormEditor({ activeEditForm }) {
 		console.log(form)
 	}
 
-	useEffect(() => {
+	/*useEffect(() => {
 		const getForm = async () => {
 			return fetchForm(id)
 		}
@@ -52,7 +52,7 @@ export default function FormEditor({ activeEditForm }) {
 			})
 			setLoading(false)
 		})
-	}, [id])
+	}, [id])*/
 
 	return (
 		<Container>

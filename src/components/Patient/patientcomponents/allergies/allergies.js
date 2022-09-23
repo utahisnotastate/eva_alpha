@@ -50,7 +50,7 @@ export default function Allergies() {
 				</CardHeader>
 				<CardBody>
 					<FieldArray name="details.allergies">
-						{({ insert, remove, push }) => (
+						{({ remove, push }) => (
 							<div>
 								{values.details.allergies &&
 								values.details.allergies.length > 0
@@ -104,7 +104,9 @@ export default function Allergies() {
 									: null}
 								<Button
 									color="primary"
-									onClick={() => console.log('Clicked!')}>
+									onClick={() => {
+										push({ allergy: '', notes: '' })
+									}}>
 									Add New Allergy
 								</Button>
 							</div>

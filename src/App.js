@@ -11,9 +11,7 @@ import routes from './routes'
 const theme = createTheme({
 	palette: {
 		primary: {
-			//light: '#757ce8',
 			main: blue[500],
-			//dark: '#002884',
 			contrastText: '#fff',
 		},
 		secondary: {
@@ -32,7 +30,7 @@ const theme = createTheme({
 		},
 	},
 })
-
+//dedicated
 export default function App() {
 	return (
 		<ThemeProvider theme={theme}>

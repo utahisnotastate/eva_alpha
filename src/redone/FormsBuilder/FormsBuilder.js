@@ -19,12 +19,12 @@ export default function FormsBuilder() {
 	const [forms, setForms] = useState([])
 	const activeEditForm = useSelector((state) => state.activeEditForm)
 
-	useEffect(() => {
+	/*useEffect(() => {
 		fetchAllForms().then((response) => {
 			setForms(response)
 			//dispatch({ type: 'load_forms', forms: response })
 		})
-	}, [])
+	}, [])*/
 
 	return (
 		<div className={classes.root}>

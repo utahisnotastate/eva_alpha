@@ -63,45 +63,6 @@ export default function Diagnoses() {
 					</Card>
 				</GridItem>
 			</GridContainer>
-			/>
 		</div>
 	)
 }
-
-/*
-* <GridContainer>
-										<GridItem xs={12} sm={12} md={12}>
-											<MUIDataTable
-												title={'Allergies'}
-												data={values.diagnoses}
-												columns={[
-													{
-														name: 'allergy',
-														label: 'Allergy',
-														options: {
-															filter: true,
-															sort: true,
-														},
-													},
-													{
-														name: 'reaction',
-														label: 'Reaction',
-														options: {
-															filter: true,
-															sort: true,
-														},
-													},
-													{
-														name: 'severity',
-														label: 'Severity',
-														options: {
-															filter: true,
-															sort: true,
-														},
-													},
-												]}
-											/>
-										</GridItem>
-									</GridContainer>
-*
-* */

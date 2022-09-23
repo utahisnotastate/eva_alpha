@@ -64,7 +64,7 @@ function settings(state = {}, action) {
 	}
 }
 
-function editform(state = { id: '', title: '', fields: [] }, action) {
+function editform(state = {}, action) {
 	switch (action.type) {
 		case 'LOAD_EDITFORM':
 			return action.editform

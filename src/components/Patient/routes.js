@@ -1,18 +1,10 @@
 import PatientActions from './patientcomponents/patientactions/patientactions'
 import Allergies from './patientcomponents/allergies/allergies'
 import AppointmentHistory from './patientcomponents/appointmenthistory/appointmenthistory'
-import PatientRequests from './patientcomponents/patientrequests/patientrequests'
 import Insurance from './patientcomponents/insurance/insurance'
 import Demographics from './patientcomponents/demographics/demographics'
 import Medications from './patientcomponents/medications/medications'
-import Diagnosis from './patientcomponents/diagnosis/diagnosis'
-import Documentation from './patientcomponents/documentation/documentation'
-import PatientForms from './patientcomponents/patientforms/patientforms'
-import MedicalHistory from './patientcomponents/medicalhistory/medicalhistory'
 import SurgicalHistory from './patientcomponents/surgicalhistory/surgicalhistory'
-import FamilyMedicalHistory from './patientcomponents/familymedicalhistory/familymedicalhistory'
-import SocialHistory from './patientcomponents/socialhistory/socialhistory'
-import PatientReports from './patientcomponents/reports/patientreports'
 import Diagnoses from './patientcomponents/diagnoses/diagnoses'
 /*
 *
