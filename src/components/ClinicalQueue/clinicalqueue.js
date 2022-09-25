@@ -76,6 +76,7 @@ export default function ClinicalQueue() {
 									title={`Appointments`}
 									data={appointments}
 									columns={appointmentscolumns}
+									options={{ elevation: 0 }}
 								/>
 							</div>
 						),
