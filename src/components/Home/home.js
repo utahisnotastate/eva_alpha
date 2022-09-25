@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux'
 import { bulkCreatePatients } from '../../api/utility.api'
 import { CollapsibleTable } from '../basestyledcomponents/CollapsibleTable/collapsibletable'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
+import TextField from '@mui/material/TextField'
 
 const styles = {
 	cardTitle: {
@@ -74,51 +75,10 @@ function Home() {
 		<GridContainer direction="column" alignContent="center">
 			<GridItem xs={12} sm={12} md={4}>
 				<Card>
-					<CardHeader icon>
-						<CardIcon color="primary">
-							<LanguageIcon />
-						</CardIcon>
-					</CardHeader>
-					<CardBody>
-						<h4 className={classes.cardTitle}>Practice News</h4>
-						The place is close to Barceloneta Beach and bus stop
-						just 2 min by walk and near to "Naviglio" where you can
-						enjoy the main night life in Barcelona...
-					</CardBody>
+					<TextField fullWidth label="fullWidth" id="fullWidth" />
 				</Card>
 			</GridItem>
-			<GridItem xs={12} sm={12} md={4}>
-				<Card>
-					<CardHeader icon>
-						<CardIcon color="primary">
-							<LanguageIcon />
-						</CardIcon>
-					</CardHeader>
-					<CardBody>
-						<h4 className={classes.cardTitle}>
-							Patient Requests Im assigned too
-						</h4>
-						The place is close to Barceloneta Beach and bus stop
-						just 2 min by walk and near to "Naviglio" where you can
-						enjoy the main night life in Barcelona...
-					</CardBody>
-				</Card>
-			</GridItem>
-			<GridItem xs={12} sm={12} md={4}>
-				<Card>
-					<CardHeader icon>
-						<CardIcon color="success">
-							<LanguageIcon />
-						</CardIcon>
-					</CardHeader>
-					<CardBody>
-						<h4 className={classes.cardTitle}>My Schedule</h4>
-						The place is close to Barceloneta Beach and bus stop
-						just 2 min by walk and near to "Naviglio" where you can
-						enjoy the main night life in Barcelona...
-					</CardBody>
-				</Card>
-			</GridItem>
+
 			<GridItem xs={12} sm={12} md={4}>
 				<Card>
 					<CardHeader icon>
