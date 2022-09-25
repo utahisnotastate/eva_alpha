@@ -31,11 +31,11 @@ export default function ClinicalQueue() {
 						),
 					},
 					{
-						tabName: 'Waiting List',
+						tabName: 'Requests',
 						tabIcon: PeopleIcon,
 						tabContent: (
 							<div>
-								<p>Today's appointments</p>
+								<p>Requests</p>
 							</div>
 						),
 					},
@@ -49,7 +49,7 @@ export default function ClinicalQueue() {
 						),
 					},
 					{
-						tabName: 'New Patients',
+						tabName: 'Quick Actions',
 						tabIcon: HowToRegIcon,
 						tabContent: (
 							<div>

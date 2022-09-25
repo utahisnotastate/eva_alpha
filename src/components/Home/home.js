@@ -18,6 +18,8 @@ import { bulkCreatePatients } from '../../api/utility.api'
 import { CollapsibleTable } from '../basestyledcomponents/CollapsibleTable/collapsibletable'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import TextField from '@mui/material/TextField'
+import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
+import CardFooter from '../basestyledcomponents/Card/CardFooter'
 
 const styles = {
 	cardTitle: {
@@ -56,39 +58,28 @@ function createData(name, calories, fat, carbs, protein, price) {
 
 function Home() {
 	const classes = useStyles()
-	const [headers, setHeaders] = useState([
-		'header 1',
-		'header 2',
-		'header 3',
-		'header 4',
-		'header 5',
-	])
-	const rows = [
-		createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-		createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-		createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-		createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-		createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-	]
+	const [quickactions, setQuickActions] = useState(['Create New Patient'])
 
 	return (
 		<GridContainer direction="column" alignContent="center">
-			<GridItem xs={12} sm={12} md={4}>
+			<GridItem xs={12} sm={12} md={12}>
 				<Card>
-					<TextField fullWidth label="fullWidth" id="fullWidth" />
-				</Card>
-			</GridItem>
-
-			<GridItem xs={12} sm={12} md={4}>
-				<Card>
-					<CardHeader icon>
-						<CardIcon color="success">
-							<LanguageIcon />
-						</CardIcon>
-					</CardHeader>
 					<CardBody>
-						<CollapsibleTable headers={headers} rows={rows} />
+						<ClinicalQueue />
 					</CardBody>
+					<CardFooter>
+						{quickactions.map((action, index) => {
+							return (
+								<Button
+									key={index}
+									variant="contained"
+									color="primary"
+									style={{ margin: '10px' }}>
+									{action}
+								</Button>
+							)
+						})}
+					</CardFooter>
 				</Card>
 			</GridItem>
 		</GridContainer>
