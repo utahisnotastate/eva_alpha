@@ -20,6 +20,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css'
 import TextField from '@mui/material/TextField'
 import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
+import AppointmentsList from './appointments.table'
 
 const styles = {
 	cardTitle: {

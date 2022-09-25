@@ -4,6 +4,8 @@ import PersonIcon from '@material-ui/icons/Person'
 import PeopleIcon from '@material-ui/icons/People'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
+import AppointmentsList from '../Home/appointments.table'
+
 export default function ClinicalQueue() {
 	const [stages, setStates] = React.useState([
 		{ title: 'Todays Appointments' },
@@ -26,7 +28,35 @@ export default function ClinicalQueue() {
 						tabIcon: AirlineSeatLegroomExtraIcon,
 						tabContent: (
 							<div>
-								<p>Today's appointments</p>
+								<AppointmentsList
+									title={`Appointments`}
+									data={[
+										[
+											'Joe James',
+											'Test Corp',
+											'Yonkers',
+											'NY',
+										],
+										[
+											'John Walsh',
+											'Test Corp',
+											'Hartford',
+											'CT',
+										],
+										[
+											'Bob Herm',
+											'Test Corp',
+											'Tampa',
+											'FL',
+										],
+										[
+											'James Houston',
+											'Test Corp',
+											'Dallas',
+											'TX',
+										],
+									]}
+								/>
 							</div>
 						),
 					},
@@ -35,7 +65,35 @@ export default function ClinicalQueue() {
 						tabIcon: PeopleIcon,
 						tabContent: (
 							<div>
-								<p>Requests</p>
+								<AppointmentsList
+									title={`Requests`}
+									data={[
+										[
+											'Joe James',
+											'Test Corp',
+											'Yonkers',
+											'NY',
+										],
+										[
+											'John Walsh',
+											'Test Corp',
+											'Hartford',
+											'CT',
+										],
+										[
+											'Bob Herm',
+											'Test Corp',
+											'Tampa',
+											'FL',
+										],
+										[
+											'James Houston',
+											'Test Corp',
+											'Dallas',
+											'TX',
+										],
+									]}
+								/>
 							</div>
 						),
 					},
@@ -44,7 +102,35 @@ export default function ClinicalQueue() {
 						tabIcon: PersonIcon,
 						tabContent: (
 							<div>
-								<p>Today's appointments</p>
+								<AppointmentsList
+									title={`Patients`}
+									data={[
+										[
+											'Joe James',
+											'Test Corp',
+											'Yonkers',
+											'NY',
+										],
+										[
+											'John Walsh',
+											'Test Corp',
+											'Hartford',
+											'CT',
+										],
+										[
+											'Bob Herm',
+											'Test Corp',
+											'Tampa',
+											'FL',
+										],
+										[
+											'James Houston',
+											'Test Corp',
+											'Dallas',
+											'TX',
+										],
+									]}
+								/>
 							</div>
 						),
 					},
