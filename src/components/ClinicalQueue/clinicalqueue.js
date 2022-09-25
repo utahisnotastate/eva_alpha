@@ -6,8 +6,13 @@ import HowToRegIcon from '@material-ui/icons/HowToReg'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
 import AppointmentsList from '../Home/appointments.table'
 import Patients from '../Patients/patients'
+import PatientRequests from '../PatientRequests/patientrequests'
+import patientrequestscolumns from '../PatientRequests/patientrequests.columns'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function ClinicalQueue() {
+	const requests = useSelector((state) => state.requests)
+
 	const [stages, setStates] = React.useState([
 		{ title: 'Todays Appointments' },
 		{ title: 'In Waiting Room' },
@@ -65,37 +70,11 @@ export default function ClinicalQueue() {
 						tabName: 'Requests',
 						tabIcon: PeopleIcon,
 						tabContent: (
-							<div>
-								<AppointmentsList
-									title={`Requests`}
-									data={[
-										[
-											'Joe James',
-											'Test Corp',
-											'Yonkers',
-											'NY',
-										],
-										[
-											'John Walsh',
-											'Test Corp',
-											'Hartford',
-											'CT',
-										],
-										[
-											'Bob Herm',
-											'Test Corp',
-											'Tampa',
-											'FL',
-										],
-										[
-											'James Houston',
-											'Test Corp',
-											'Dallas',
-											'TX',
-										],
-									]}
-								/>
-							</div>
+							<AppointmentsList
+								data={requests}
+								columns={patientrequestscolumns}
+								options={{ elevation: 0 }}
+							/>
 						),
 					},
 					{

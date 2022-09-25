@@ -19,7 +19,7 @@ function NameColumn(tableMeta) {
 	)
 }
 
-const columns = [
+const patientrequestcolumns = [
 	{
 		name: 'id',
 		label: 'Request ID',
@@ -82,4 +82,4 @@ const columns = [
 	},
 ]
 
-export default columns
+export default patientrequestcolumns
