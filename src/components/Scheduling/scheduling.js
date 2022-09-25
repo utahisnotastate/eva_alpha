@@ -154,7 +154,7 @@ export default function Scheduling() {
 			setResources(result.data)
 		}
 		fetchData().catch((err) => console.log(err))
-	})
+	}, [appointments])
 
 	useEffect(() => {
 		//gets appointments on mount
@@ -180,7 +180,7 @@ export default function Scheduling() {
 				dispatch({ type: 'LOAD_APPOINTMENTS', appointments })
 			})
 			.catch((err) => console.log(err))
-	})
+	}, [appointments])
 	const handleSelect = ({ start, end, resourceId }) => {
 		if (start === end) {
 			return false

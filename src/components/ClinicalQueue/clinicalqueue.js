@@ -9,9 +9,47 @@ import Patients from '../Patients/patients'
 import PatientRequests from '../PatientRequests/patientrequests'
 import patientrequestscolumns from '../PatientRequests/patientrequests.columns'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
 
 export default function ClinicalQueue() {
 	const requests = useSelector((state) => state.requests)
+	const appointments = useSelector((state) => state.appointments)
+	const appointmentscolumns = [
+		{
+			name: 'id',
+			label: 'Appointment ID',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'start',
+			label: 'Start',
+			options: {
+				filter: true,
+				sort: true,
+				display: true,
+				//format value so it is in MM-DD-YYYY format using moment.js
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return moment(value).format('HH-MM')
+				},
+			},
+		},
+		{
+			name: 'end',
+			label: 'End',
+
+			options: {
+				filter: true,
+				display: true,
+				sort: true,
+				//format value so it is in MM-DD-YYYY format using moment.js
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return moment(value).format('HH-MM')
+				},
+			},
+		},
+	]
 
 	const [stages, setStates] = React.useState([
 		{ title: 'Todays Appointments' },
@@ -36,32 +74,8 @@ export default function ClinicalQueue() {
 							<div>
 								<AppointmentsList
 									title={`Appointments`}
-									data={[
-										[
-											'Joe James',
-											'Test Corp',
-											'Yonkers',
-											'NY',
-										],
-										[
-											'John Walsh',
-											'Test Corp',
-											'Hartford',
-											'CT',
-										],
-										[
-											'Bob Herm',
-											'Test Corp',
-											'Tampa',
-											'FL',
-										],
-										[
-											'James Houston',
-											'Test Corp',
-											'Dallas',
-											'TX',
-										],
-									]}
+									data={appointments}
+									columns={appointmentscolumns}
 								/>
 							</div>
 						),
