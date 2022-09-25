@@ -5,6 +5,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
 import AppointmentsList from '../Home/appointments.table'
+import Patients from '../Patients/patients'
 
 export default function ClinicalQueue() {
 	const [stages, setStates] = React.useState([
@@ -100,39 +101,7 @@ export default function ClinicalQueue() {
 					{
 						tabName: 'Patients',
 						tabIcon: PersonIcon,
-						tabContent: (
-							<div>
-								<AppointmentsList
-									title={`Patients`}
-									data={[
-										[
-											'Joe James',
-											'Test Corp',
-											'Yonkers',
-											'NY',
-										],
-										[
-											'John Walsh',
-											'Test Corp',
-											'Hartford',
-											'CT',
-										],
-										[
-											'Bob Herm',
-											'Test Corp',
-											'Tampa',
-											'FL',
-										],
-										[
-											'James Houston',
-											'Test Corp',
-											'Dallas',
-											'TX',
-										],
-									]}
-								/>
-							</div>
-						),
+						tabContent: <Patients />,
 					},
 					{
 						tabName: 'Quick Actions',
