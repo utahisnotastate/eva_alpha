@@ -88,7 +88,10 @@ export default function ClinicalQueue() {
 							<AppointmentsList
 								data={requests}
 								columns={patientrequestscolumns}
-								options={{ elevation: 0 }}
+								options={{
+									elevation: 0,
+									enableNestedDataAccess: '.',
+								}}
 							/>
 						),
 					},

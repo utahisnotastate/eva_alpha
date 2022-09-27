@@ -32,7 +32,13 @@ function TimeLineTitle(props) {
 	)
 }
 
-export default function RequestTimeLine(props) {
+export default function RequestTimeLine({
+	patient_request_updates,
+	request_description,
+	type,
+	status,
+	requestId,
+}) {
 	const [modal, setModal] = React.useState(false)
 	const classes = useStyles()
 	const [combinedupdates, setCombinedUpdates] = useState([
@@ -62,7 +68,7 @@ export default function RequestTimeLine(props) {
 		badgeIcon: CardTravel,
 		title: <TimeLineTitle />,
 		titleColor: 'danger',
-		body: <p>{props.request_description}</p>,
+		body: <p>{request_description}</p>,
 	}
 
 	return (
@@ -99,12 +105,12 @@ export default function RequestTimeLine(props) {
 						<Close className={classes.modalClose} />
 					</Button>
 					<h4 className={classes.modalTitle}>Patient Request:</h4>
-					<Typography>{props.request_description}</Typography>
+					<Typography>{request_description}</Typography>
 				</DialogTitle>
 				<DialogContent
 					id="modal-slide-description"
 					className={classes.modalBody}>
-					<TimelineComponent stories={combinedupdates} />
+					<TimelineComponent stories={patient_request_updates} />
 					<Divider />
 					<div>
 						<Typography variant={`h6`}>
@@ -120,7 +126,7 @@ export default function RequestTimeLine(props) {
 						</div>
 						<div>
 							<UpdatePatientRequestForm
-								requestId={props.requestId}
+								requestId={requestId}
 								firststory={firststory}
 								setModal={setModal}
 								setCombinedUpdates={setCombinedUpdates}

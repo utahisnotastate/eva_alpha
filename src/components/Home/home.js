@@ -14,13 +14,14 @@ import CardText from '../basestyledcomponents/Card/CardText'
 import LanguageIcon from '@material-ui/icons/Language'
 import PatientSearch from './PatientSearch/patientsearch'
 import { useSelector } from 'react-redux'
-import { bulkCreatePatients } from '../../api/utility.api'
+import { bulkCreatePatients, bulkCreateItems } from '../../api/utility.api'
 import { CollapsibleTable } from '../basestyledcomponents/CollapsibleTable/collapsibletable'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import TextField from '@mui/material/TextField'
 import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import AppointmentsList from './appointments.table'
+import mockpatientrequests from '../PatientRequests/mockrequests.json'
 
 const styles = {
 	cardTitle: {
@@ -80,6 +81,17 @@ function Home() {
 								</Button>
 							)
 						})}
+
+						<Button
+							variant="contained"
+							color="primary"
+							style={{ margin: '10px' }}
+							onClick={() =>
+								//bulkCreateItems(mockpatientrequests, 'requests')
+								console.log('clicked')
+							}>
+							Create Requests
+						</Button>
 					</CardFooter>
 				</Card>
 			</GridItem>

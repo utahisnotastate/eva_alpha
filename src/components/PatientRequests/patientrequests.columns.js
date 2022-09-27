@@ -6,12 +6,16 @@ function viewRequestColumn(tableMeta) {
 	return (
 		<RequestTimeLine
 			requestId={tableMeta.rowData[0]}
+			type={tableMeta.rowData[2]}
+			status={tableMeta.rowData[3]}
 			request_description={tableMeta.rowData[4]}
+			patient_request_updates={tableMeta.rowData[5]}
 		/>
 	)
 }
 
 function NameColumn(tableMeta) {
+	console.log(tableMeta)
 	return (
 		<Typography>
 			{tableMeta.rowData[2].first_name} {tableMeta.rowData[2].last_name}
@@ -24,11 +28,18 @@ const patientrequestcolumns = [
 		name: 'id',
 		label: 'Request ID',
 		options: {
+			display: true,
+		},
+	},
+	{
+		name: 'details.date',
+		label: 'Type',
+		options: {
 			display: false,
 		},
 	},
 	{
-		name: 'type',
+		name: 'details.type',
 		label: 'Type',
 		options: {
 			filter: true,
@@ -36,18 +47,7 @@ const patientrequestcolumns = [
 		},
 	},
 	{
-		name: 'patient',
-		label: 'Name',
-		options: {
-			filter: true,
-			sort: true,
-			empty: true,
-			customBodyRender: (value, tableMeta, updateValue) =>
-				NameColumn(tableMeta),
-		},
-	},
-	{
-		name: 'status',
+		name: 'details.status',
 		label: 'Status',
 		options: {
 			filter: true,
@@ -55,18 +55,17 @@ const patientrequestcolumns = [
 		},
 	},
 	{
-		name: 'request_description',
+		name: 'details.request_description',
 		label: 'Request Description',
 		options: {
-			display: false,
+			display: true,
 		},
 	},
 	{
-		name: 'patient_request_updates',
+		name: 'details.patient_request_updates',
 		label: 'Request Updates',
 		options: {
 			display: false,
-			empty: true,
 		},
 	},
 	{

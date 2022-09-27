@@ -71,3 +71,13 @@ export const bulkCreatePatients = async () => {
 		})
 	)
 }
+
+export const bulkCreateItems = async (items, route) => {
+	//map over the patients and create them one by one in the database
+	await Promise.all(
+		items.map(async (item) => {
+			const response = await axios.post(`${API_URL}/${route}/`, item)
+			return response.data
+		})
+	)
+}
