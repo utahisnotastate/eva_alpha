@@ -9,6 +9,7 @@ import Patients from '../Patients/patients'
 import PatientRequests from '../PatientRequests/patientrequests'
 import patientrequestscolumns from '../PatientRequests/patientrequests.columns'
 import { useDispatch, useSelector } from 'react-redux'
+import PatientDisplayName from '../../api/patientname'
 import moment from 'moment'
 
 export default function ClinicalQueue() {
@@ -23,6 +24,22 @@ export default function ClinicalQueue() {
 			},
 		},
 		{
+			name: 'type',
+			label: 'Type',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: 'status',
+			label: 'Status',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
 			name: 'start',
 			label: 'Start',
 			options: {
@@ -31,7 +48,29 @@ export default function ClinicalQueue() {
 				display: true,
 				//format value so it is in MM-DD-YYYY format using moment.js
 				customBodyRender: (value, tableMeta, updateValue) => {
-					return moment(value).format('HH-MM')
+					return moment(value).format('h:mm a')
+				},
+			},
+		},
+		{
+			name: 'patient.details',
+			label: 'Name',
+			options: {
+				filter: true,
+				sort: false,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return <PatientDisplayName patient={value} />
+				},
+			},
+		},
+		{
+			name: 'details.date_of_birth',
+			label: 'Date of Birth',
+			options: {
+				filter: true,
+				sort: true,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return moment(value).format('MM-DD-YYYY')
 				},
 			},
 		},
@@ -45,7 +84,7 @@ export default function ClinicalQueue() {
 				sort: true,
 				//format value so it is in MM-DD-YYYY format using moment.js
 				customBodyRender: (value, tableMeta, updateValue) => {
-					return moment(value).format('HH-MM')
+					return moment(value).format('h:mm a')
 				},
 			},
 		},
@@ -76,7 +115,10 @@ export default function ClinicalQueue() {
 									title={`Appointments`}
 									data={appointments}
 									columns={appointmentscolumns}
-									options={{ elevation: 0 }}
+									options={{
+										elevation: 0,
+										enableNestedDataAccess: '.',
+									}}
 								/>
 							</div>
 						),

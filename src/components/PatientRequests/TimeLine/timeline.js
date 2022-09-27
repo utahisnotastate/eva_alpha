@@ -44,17 +44,21 @@ export default function RequestTimeLine({
 	const [combinedupdates, setCombinedUpdates] = useState([])
 
 	useEffect(() => {
-		const updates = patient_request_updates.map((update) => {
-			return {
-				inverted: true,
-				badgeColor: 'success',
-				badgeIcon: Build,
-				title: <TimeLineTitle />,
-				titleColor: 'success',
-				body: <p>{update}</p>,
-			}
-		})
-		setCombinedUpdates([updates])
+		const updates =
+			patient_request_updates && patient_request_updates.length > 0
+				? patient_request_updates.map((update) => {
+						return {
+							inverted: true,
+							badgeColor: 'success',
+							badgeIcon: Build,
+							title: <TimeLineTitle />,
+							titleColor: 'success',
+							body: <p>{update.update}</p>,
+						}
+				  })
+				: []
+		//async wait for updates to be set
+		setCombinedUpdates(updates)
 	})
 
 	return (

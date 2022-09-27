@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import RequestTimeLine from './TimeLine/timeline'
+import PatientDisplayName from '../../api/patientname'
 import { Typography } from '@material-ui/core'
 
 function viewRequestColumn(tableMeta) {
@@ -14,21 +15,12 @@ function viewRequestColumn(tableMeta) {
 	)
 }
 
-function NameColumn(tableMeta) {
-	console.log(tableMeta)
-	return (
-		<Typography>
-			{tableMeta.rowData[2].first_name} {tableMeta.rowData[2].last_name}
-		</Typography>
-	)
-}
-
 const patientrequestcolumns = [
 	{
 		name: 'id',
 		label: 'Request ID',
 		options: {
-			display: true,
+			display: false,
 		},
 	},
 	{
@@ -39,11 +31,14 @@ const patientrequestcolumns = [
 		},
 	},
 	{
-		name: 'details.type',
-		label: 'Type',
+		name: 'patient.details',
+		label: 'Name',
 		options: {
 			filter: true,
 			sort: false,
+			customBodyRender: (value, tableMeta, updateValue) => {
+				return <PatientDisplayName patient={value} />
+			},
 		},
 	},
 	{
