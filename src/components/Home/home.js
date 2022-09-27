@@ -22,6 +22,7 @@ import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import AppointmentsList from './appointments.table'
 import mockpatientrequests from '../PatientRequests/mockrequests.json'
+import mockappointmentsdata from '../Appointment/mockappointmentsdata.json'
 
 const styles = {
 	cardTitle: {
@@ -87,10 +88,12 @@ function Home() {
 							color="primary"
 							style={{ margin: '10px' }}
 							onClick={() =>
-								//bulkCreateItems(mockpatientrequests, 'requests')
-								console.log('clicked')
+								bulkCreateItems(
+									mockappointmentsdata,
+									'appointments'
+								)
 							}>
-							Create Requests
+							Create Appointments
 						</Button>
 					</CardFooter>
 				</Card>

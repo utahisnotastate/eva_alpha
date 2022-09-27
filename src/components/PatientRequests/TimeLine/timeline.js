@@ -41,35 +41,21 @@ export default function RequestTimeLine({
 }) {
 	const [modal, setModal] = React.useState(false)
 	const classes = useStyles()
-	const [combinedupdates, setCombinedUpdates] = useState([
-		{
-			// First story
-			inverted: false,
-			badgeColor: 'danger',
-			badgeIcon: CardTravel,
-			title: <TimeLineTitle />,
-			titleColor: 'danger',
-			body: <p>Hello</p>,
-		},
-		{
-			// First story
-			inverted: false,
-			badgeColor: 'danger',
-			badgeIcon: CardTravel,
-			title: <TimeLineTitle />,
-			titleColor: 'danger',
-			body: <p>Hello 2</p>,
-		},
-	])
-	const firststory = {
-		// First story
-		inverted: false,
-		badgeColor: 'danger',
-		badgeIcon: CardTravel,
-		title: <TimeLineTitle />,
-		titleColor: 'danger',
-		body: <p>{request_description}</p>,
-	}
+	const [combinedupdates, setCombinedUpdates] = useState([])
+
+	useEffect(() => {
+		const updates = patient_request_updates.map((update) => {
+			return {
+				inverted: true,
+				badgeColor: 'success',
+				badgeIcon: Build,
+				title: <TimeLineTitle />,
+				titleColor: 'success',
+				body: <p>{update}</p>,
+			}
+		})
+		setCombinedUpdates([updates])
+	})
 
 	return (
 		<div>
@@ -110,13 +96,8 @@ export default function RequestTimeLine({
 				<DialogContent
 					id="modal-slide-description"
 					className={classes.modalBody}>
-					<TimelineComponent stories={patient_request_updates} />
+					<TimelineComponent stories={combinedupdates} />
 					<Divider />
-					<div>
-						<Typography variant={`h6`}>
-							Log Unsuccesful Contact Attempt
-						</Typography>
-					</div>
 					<Divider />
 					<div>
 						<div>
@@ -127,7 +108,7 @@ export default function RequestTimeLine({
 						<div>
 							<UpdatePatientRequestForm
 								requestId={requestId}
-								firststory={firststory}
+								firststory={combinedupdates[0]}
 								setModal={setModal}
 								setCombinedUpdates={setCombinedUpdates}
 							/>
