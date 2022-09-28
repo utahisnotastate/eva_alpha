@@ -30,47 +30,6 @@ export const getPatientInformation = async (patientId) => {
 
 
  */
-const phone_prefix = '+1'
-export const saveDemographicsFormToDB = async (patientId, demographicsform) => {
-	console.log(demographicsform)
-	const stringedobject = JSON.stringify(demographicsform)
-	//console.log(JSON.stringify(demographicsform));
-	const exampleform = {
-		first_name: demographicsform.first_name,
-		patient_demographics: {
-			race: 'unknown',
-			gender: 'unknown',
-			marital_status: 'unknown',
-			employment_status: 'unknown',
-			email: '',
-		},
-		patient_address: demographicsform.patient_address,
-		//patient_contact_methods: demographicsform.patient_contact_methods,
-		last_name: demographicsform.last_name,
-		middle_name: demographicsform.middle_name,
-		preferred_name: demographicsform.preferred_name,
-		date_of_birth: demographicsform.date_of_birth,
-		ssn: demographicsform.ssn,
-	}
-	const result = await axios.put(`${API_URL}/patients/${patientId}/`, {
-		first_name: demographicsform.first_name,
-		patient_demographics: {
-			race: 'unknown',
-			gender: 'unknown',
-			marital_status: 'unknown',
-			employment_status: 'unknown',
-			email: '',
-		},
-		patient_address: demographicsform.patient_address,
-		patient_contact_methods: [],
-		last_name: demographicsform.last_name,
-		middle_name: demographicsform.middle_name,
-		preferred_name: demographicsform.preferred_name,
-		date_of_birth: demographicsform.date_of_birth,
-		ssn: demographicsform.ssn,
-	})
-	return result.data
-}
 
 export const getBasicPatientInformation = async (patientId) => {
 	const result = await axios.get(`${API_URL}/patients/${patientId}/`)
@@ -78,9 +37,10 @@ export const getBasicPatientInformation = async (patientId) => {
 	return result.data
 }
 
-export const getPatientAddress = async (patientId) => {
-	const result = await axios.get(`${API_URL}/patients/${patientId}/`)
-	console.log(result.data)
+export const getPatientAppointments = async (patientId) => {
+	const result = await axios.get(
+		`${API_URL}/patients/${patientId}/appointments/`
+	)
 	return result.data
 }
 
@@ -101,50 +61,12 @@ export const updatePatientBasicInfo = async (patientId, demographics) => {
 	return result.data
 }
 
-export const updatePatientAddressInfo = async (patientId, address) => {
-	const result = await axios.patch(
-		`${API_URL}/patients/${patientId}/address/`,
-		address
-	)
-	return result.data
-}
-
 const default_demographics = {
 	race: '',
 	gender: '',
 	marital_status: '',
 	employment_status: '',
 	email: '',
-}
-export const updatePatientDemographics = async (
-	patientId,
-	patientnamedetails,
-	address,
-	patient_contact_methods = [],
-	demographics = default_demographics
-) => {
-	console.log(demographics)
-	/*
-      address,
-    patient_contact_methods,
-   */
-	const new_demographics = {
-		first_name: patientnamedetails.first_name,
-		middle_name: patientnamedetails.middle_name,
-		last_name: patientnamedetails.last_name,
-		preferred_name: patientnamedetails.preferred_name,
-		date_of_birth: patientnamedetails.date_of_birth,
-		ssn: patientnamedetails.ssn,
-	}
-	console.log(new_demographics)
-	//const result = await updatePatientBasicInfo(patientId, demographics);
-	const result = await axios.put(
-		`${API_URL}/patients/${patientId}/`,
-		new_demographics
-	)
-
-	console.log(result)
-	//return result;
 }
 
 export const getPatientDiagnoses = async (patientId) => {
@@ -156,6 +78,7 @@ export const getPatientInsurance = async (patientId) => {
 	const result = await axios.get(
 		`${API_URL}/patients/${patientId}/patient_insurances/`
 	)
+	// 	return result.dataI love you Manda
 	return result.data
 }
 
@@ -168,10 +91,6 @@ export const addNewInsuranceForPatient = async (patientId, insurance) => {
 	return result.data
 }
 
-export const getPatientAndDemographics = async (patientId) => {
-	const result = await axios.get(`${API_URL}/patients/${patientId}/`)
-	return result.data
-}
 export const setPatientDiagnosisStatus = async (
 	patientId,
 	diagnosisId,
@@ -212,21 +131,6 @@ export const addNewPatientDiagnosis = async (patientId, diagnosis) => {
 
 export const getPatientMedications = async (patientId) => {
 	const result = await axios(`${API_URL}/patients/${patientId}/medications/`)
-	return result.data
-}
-
-export const addNewPatientMedication = async (patientId, medication) => {
-	const result = await axios.post(
-		`${API_URL}/patients/${patientId}/medications/`,
-		{
-			patient: patientId,
-			name: medication.name,
-			active: true,
-			medication_diagnoses: [],
-			strength: medication.dosage,
-			frequency: medication.frequency,
-		}
-	)
 	return result.data
 }
 

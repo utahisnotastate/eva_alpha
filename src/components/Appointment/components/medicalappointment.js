@@ -13,6 +13,8 @@ import { fetchAllForms } from '../../../api/forms.api'
 import { useParams } from 'react-router-dom'
 import AppointmentHeader from './AppointmentHeader/appointmentheader'
 import moment from 'moment'
+import { useSelector, useDispatch } from 'react-redux'
+import Typography from '@mui/material/Typography'
 
 const useStyles = makeStyles({
 	header: {
@@ -30,44 +32,15 @@ const useStyles = makeStyles({
 export default function MedicalAppointment() {
 	let { id } = useParams()
 	let { path, url } = useRouteMatch()
+	const dispatch = useDispatch()
 	const classes = useStyles()
-	const [status, setStatus] = useState('')
 	const [appointmentforms, setAppointmentForms] = useState()
-	const [appointment, setAppointment] = useState({
-		actual_end: null,
-		actual_start: null,
-		clinical_data: {
-			plans: [],
-			summary: '',
-			complaints: [],
-			assessments: [],
-			clinical_forms: [],
-			physical_exam: [],
-			review_of_systems: [],
-		},
-		end: '2021-02-15T22:00:00Z',
-		id: 1,
-		patient: 1,
-		patient_display_name: '',
-		provider: 2,
-		scheduled_on: '',
-		scheduling_note: '',
-		start: '',
-		status: '',
-		type: '',
-	})
+	const appointment = useSelector((state) => state.appointment)
+
+	//destructure appointment so it has appointment.details, appointment.patient.details, and appointment.details.clinical_data
+	const { details, patient, status, type } = appointment
+
 	// Determines which component to render based on the status propert
-	function handleEncounterEnd() {
-		const encounter_end = {
-			status: 'encounter_ended',
-			actual_end: moment().toISOString(),
-		}
-		const encounter_ended_appointment = {
-			...appointment,
-			...encounter_end,
-		}
-		setAppointment(encounter_ended_appointment)
-	}
 
 	/*
   This changes the state of the appointment component to in progress. it was most likely in the scheduled
@@ -94,39 +67,22 @@ export default function MedicalAppointment() {
 			complaints: [],
 			assessments: [],
 		}
-
-		setAppointment({
-			...appointment,
-			status: 'in_progress',
-			clinical_data: new_clinical_data,
-		})
 	}
 	/*
   instead of splitting the medical appointment into different routes, it's easier to just render different
   components based on the status of the appointment.
    */
 
-	function handleNotesCompleted() {
-		const notes_completed = {
-			status: 'notes_completed',
-		}
-		const notes_completed_appointment = {
-			...appointment,
-			...notes_completed,
-		}
-		setAppointment(notes_completed_appointment)
-	}
-
-	function determineAppointmentComponentToRender(details) {
-		switch (details.status) {
+	function determineAppointmentComponentToRender() {
+		switch (appointment.status) {
 			case 'encounter_ended':
-				return <CompletedAppointment appointment={details} />
+				return <CompletedAppointment appointment={appointment} />
 			case 'in_progress':
 				return (
 					<Grid container direction={`column`}>
 						<Grid item>
 							<PatientEncounter
-								appointment={details}
+								appointment={appointment}
 								appointmentforms={appointmentforms}
 								complaints={``}
 								assessments={``}
@@ -158,40 +114,16 @@ export default function MedicalAppointment() {
    */
 
 	useEffect(() => {
-		const getAppointmentAndPopulateDetails = async (appointmentId) => {
-			const appointment = await getAppointment(appointmentId)
-			/*
-
-      complaints: [
-                                  {
-                                      id: "" + Math.random(),
-                                      complaint_name: "Test Complaint Name",
-                                      complaint_description: "This is complaint description",
-                                      fieldname: "complaint_name",
-                                  },
-                              ]
-      {
-        actual_end: null
-        actual_start: null
-        clinical_data: {plans: Array(0), summary: "", complaints: Array(0), assessments: Array(0), physical_exam: Array(0), …}
-        end: "2021-02-15T22:00:00Z"
-        id: 1
-        patient: 1
-        patient_display_name: "Jack Robles"
-        provider: 2
-        provider_display_name: "Nurse Howard"
-        scheduled_on: "2021-02-15T07:50:55.743111Z"
-        scheduling_note: ""
-        start: "2021-02-15T20:30:00Z"
-        status: "scheduled"
-        type: "first_appointment"
-      }
-       */
-			setAppointment(appointment)
-		}
-		getAppointmentAndPopulateDetails(id)
+		getAppointment(id)
+			.then((appointment) => {
+				console.log(appointment)
+				dispatch({ type: 'LOAD_APPOINTMENT', appointment })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 	}, [id])
-	console.log(path)
+	console.log({ details, patient })
 	return (
 		<Grid container direction="row" spacing={1}>
 			<Grid item xs={12} style={{ margin: '20px' }}>
@@ -199,7 +131,7 @@ export default function MedicalAppointment() {
 					<Grid container direction={`column`}>
 						<Grid item className={classes.header}>
 							<CardHeader color={`primary`}>
-								<AppointmentHeader appointment={appointment} />
+								<Typography>Header goes here</Typography>
 							</CardHeader>
 						</Grid>
 						<Formik
@@ -208,9 +140,11 @@ export default function MedicalAppointment() {
 							{({ values }) => (
 								<Grid item className={classes.content}>
 									{determineAppointmentComponentToRender(
-										values
+										appointment
 									)}
-									<pre>{JSON.stringify(values, null, 2)}</pre>
+									<pre>
+										{JSON.stringify(appointment, null, 2)}
+									</pre>
 								</Grid>
 							)}
 						</Formik>

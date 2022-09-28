@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography, Button } from "@material-ui/core";
-import AppointmentDetails from "./appointmentdetails";
-import AppointmentHeaderAction from "./appointmentheaderaction";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import { Grid, Typography, Button } from '@material-ui/core'
+import AppointmentDetails from './appointmentdetails'
+import AppointmentHeaderAction from './appointmentheaderaction'
 
-export default function AppointmentHeader(props) {
-  return (
-    <Grid container direction="column">
-      <Grid item>
-        <div style={{ float: "right" }}>
-          <Button variant={`outlined`} color={`secondary`}>
-            Save
-          </Button>
-        </div>
-      </Grid>
-      <Grid item>
-        <Grid container direction="column">
-          <Grid item>
-            <Typography>Medical Appointment</Typography>
-            <Typography>
-              Patient: {props.appointment.patient_display_name}
-            </Typography>
-            <Typography>Scheduled Start: {props.appointment.start}</Typography>
+export default function AppointmentHeader({ appointment, patient }) {
+	const { details } = patient
+
+	return (
+		<Grid container direction="column">
+			<Grid item>
+				<div style={{ float: 'right' }}>
+					<Button variant={`outlined`} color={`secondary`}>
+						Save
+					</Button>
+				</div>
+			</Grid>
+			<Grid item>
+				<Grid container direction="column">
+					<Grid item>
+						<Typography>Medical Appointment</Typography>
+						<Typography>Patient </Typography>
+						<Typography>
+							<pre>
+								{JSON.stringify(patient.details, null, 2)}
+							</pre>
+						</Typography>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+	)
+}
+/*
+ <Typography>Scheduled Start: {props.appointment.start}</Typography>
             <Typography>Appointment end: {props.appointment.end}</Typography>
             <Typography>
               Actual start:{" "}
@@ -36,13 +48,7 @@ export default function AppointmentHeader(props) {
                 ? props.appointment.actual_end
                 : null}
             </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-}
-/*
+
 
 <Grid item>
         <AppointmentDetails appointment={props.appointment} />
