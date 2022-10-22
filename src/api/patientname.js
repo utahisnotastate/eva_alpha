@@ -1,10 +1,5 @@
-//import react
 import React, { useState, useEffect } from 'react'
-//import Typography component
 import Typography from '@material-ui/core/Typography'
-//import getBasicPatientInformation from patient.api.js file
-import { getBasicPatientInformation } from './patient.api'
-import moment from 'moment'
 
 export default function PatientDisplayName({ patient }) {
 	//create a state variable for patient information

@@ -44,31 +44,6 @@ export const getPatientAppointments = async (patientId) => {
 	return result.data
 }
 
-export const updatePatientBasicInfo = async (patientId, demographics) => {
-	const result = await axios.patch(`${API_URL}/patients/${patientId}/`, {
-		demographics: {
-			race: demographics.patientnamedetails(),
-		},
-		first_name: demographics.patientnamedetails.first_name,
-		last_name: demographics.patientnamedetails.last_name,
-		date_of_birth: demographics.patientnamedetails.date_of_birth,
-		middle_name: demographics.patientnamedetails.middle_name,
-		preferred_name: demographics.patientnamedetails.preferred_name,
-		address: demographics.address,
-		patient_contact_methods: demographics.patient_contact_methods,
-		ssn: demographics.patientnamedetails.ssn,
-	})
-	return result.data
-}
-
-const default_demographics = {
-	race: '',
-	gender: '',
-	marital_status: '',
-	employment_status: '',
-	email: '',
-}
-
 export const getPatientDiagnoses = async (patientId) => {
 	const result = await axios(`${API_URL}/patients/${patientId}/diagnoses/`)
 	return result.data
@@ -207,12 +182,6 @@ export const getMedicationClinicalDetails = async (name) => {
 	return result.data
 }
 
-export const getPatientMedicationSummary = async (patientId, medicationId) => {
-	const result = await axios(
-		`${API_URL}/patients/${patientId}/medications/${medicationId}/`
-	)
-	return result.data
-}
 export const getPatientLatexAllergies = async (patientId) => {
 	const result = await axios(`${API_URL}/patients/${patientId}/latexallergy/`)
 	return result.data
@@ -258,11 +227,3 @@ export const getAllPatientAllergyInfo = async (patientId) => {
 	])
 	return result
 }
-
-/*
-  const [pollenstatus, setPollenStatus] = useState();
-  const [petstatus, setPetStatus] = useState();
-  const [drugstatus, setDrugStatus] = useState();
-  const [foodstatus, setFoodStatus] = useState();
-  const [insectstatus, setInsectStatus] = useState();
- */

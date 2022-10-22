@@ -80,30 +80,12 @@ export const saveAppointmentAssessments = async (
 	return result.data
 }
 
-export const checkIfAppointmentHasForms = async () => {
-	getAppointmentForms()
-		.then((response) => {
-			console.log('appointment forms = ' + response)
-		})
-		.catch((error) => console.log(error))
-}
 export const getAppointmentComplaints = async (appointmentId) => {
 	const result = await axios(
 		`http://127.0.0.1:8000/api/appointments/${appointmentId}/complaints/`
 	)
 	console.log(result.data)
 	return result.data
-}
-
-export const addNewAppointmentComplaint = async (appointmentId, complaint) => {
-	axios.post(`${API_URL}/appointments/${appointmentId}/complaints/`, {
-		appointment: appointmentId,
-		complaint_name: complaint.complaint_name,
-		complaint_description: complaint.complaint_description,
-		patient_belief_caused_by: complaint.patient_belief_caused_by,
-		patient_therapeutic_attempts: complaint.patient_therapeutic_attempts,
-		other_notes: complaint.other_notes,
-	})
 }
 
 export const createAppointmentComplaints = async (appointmentId) => {
@@ -134,24 +116,3 @@ export const saveAppointmentPlan = async (appointmentId, plan) => {
 	)
 	return result.data
 }
-
-export const getAppointmentFindings = (id) => {
-	getAppointmentForms(id).then((response) => {
-		//console.log(response);
-		let appointmentfindings = []
-		for (let appointmentform of response) {
-			//console.log(appointmentform.form.customformfields);
-			let checkedfields = appointmentform.form.customformfields.filter(
-				(field) => field.checked === true
-			)
-			checkedfields.forEach((checkedfield) =>
-				appointmentfindings.push(checkedfield)
-			)
-		}
-		//console.log("We got the findings!");
-		//console.log(appointmentfindings);
-		return appointmentfindings
-	})
-}
-
-export const getAppointmentSummary = async (appointmentId) => {}
