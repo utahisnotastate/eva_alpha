@@ -1,11 +1,6 @@
 import API_URL from './api_url'
 import axios from 'axios'
 
-export const getAllForms = async () => {
-	const result = await axios(`${API_URL}/forms/`)
-	return result.data
-}
-
 /*
  * {
  * 	type: "string" reviewofsystems/physicalexam

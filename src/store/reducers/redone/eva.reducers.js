@@ -1,5 +1,3 @@
-import { defaultsettings } from '../../../api/constants'
-import mockpatients from '../../../components/Patient/patients.mock'
 import { combineReducers } from 'redux'
 
 function appointments(state = [], action) {

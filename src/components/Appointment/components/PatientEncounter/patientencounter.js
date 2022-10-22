@@ -14,7 +14,7 @@ import InsertInvitationIcon from '@material-ui/icons/InsertInvitation'
 import PatientComplaints from './Complaints/complaints'
 import Assessment from './Assessment/assessments'
 import * as PropTypes from 'prop-types'
-import ReviewOfSystems from './ReviewOfSystems/reviewofsystems'
+import ReviewOfSystems from './ReviewOfSystems/ReviewOfSystems'
 
 const useStyles = makeStyles((theme) => ({
 	root: {

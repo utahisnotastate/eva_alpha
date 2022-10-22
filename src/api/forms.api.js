@@ -6,6 +6,10 @@ export const fetchAllForms = async () => {
 	return result.data
 }
 
+export const getAllForms = async () => {
+	const result = await axios(`${API_URL}/forms/`)
+	return result.data
+}
 //not used
 
 export const fetchForm = async (formId) => {

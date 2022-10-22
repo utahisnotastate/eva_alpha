@@ -1,28 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import GridContainer from '../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../basestyledcomponents/Grid/GridItem'
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import { Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import Card from '../basestyledcomponents/Card/Card'
 import CardBody from '../basestyledcomponents/Card/CardBody'
-import CardHeader from '../basestyledcomponents/Card/CardHeader'
-import CardIcon from '../basestyledcomponents/Card/CardIcon'
-import CardText from '../basestyledcomponents/Card/CardText'
-import LanguageIcon from '@material-ui/icons/Language'
-import PatientSearch from './PatientSearch/patientsearch'
-import { useSelector } from 'react-redux'
-import { bulkCreatePatients, bulkCreateItems } from '../../api/utility.api'
-import { CollapsibleTable } from '../basestyledcomponents/CollapsibleTable/collapsibletable'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
-import TextField from '@mui/material/TextField'
 import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import AppointmentsList from './appointments.table'
-import mockpatientrequests from '../PatientRequests/mockrequests.json'
-import mockappointmentsdata from '../Appointment/mockappointmentsdata.json'
+import { getAllForms } from '../../api/forms.api'
+import { getAllInitDataOnLoad } from '../../api/utility.api'
 
 const styles = {
 	cardTitle: {
@@ -36,32 +24,25 @@ const styles = {
 }
 const useStyles = makeStyles(styles)
 
-function createData(name, calories, fat, carbs, protein, price) {
-	return {
-		name,
-		calories,
-		fat,
-		carbs,
-		protein,
-		price,
-		history: [
-			{
-				date: '2020-01-05',
-				customerId: '11091700',
-				amount: 3,
-			},
-			{
-				date: '2020-01-02',
-				customerId: 'Anonymous',
-				amount: 1,
-			},
-		],
-	}
-}
-
 function Home() {
 	const classes = useStyles()
 	const [quickactions, setQuickActions] = useState(['Create New Patient'])
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		getAllInitDataOnLoad()
+			.then((data) => {
+				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
+				dispatch({
+					type: 'LOAD_APPOINTMENTS',
+					appointments: data.appointments,
+				})
+				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
+				dispatch({ type: 'LOAD_EDITFORM', editform: data.forms[0] })
+				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
+			})
+			.catch((err) => console.log(err))
+	})
 
 	return (
 		<GridContainer direction="column" alignContent="center">
@@ -87,12 +68,7 @@ function Home() {
 							variant="contained"
 							color="primary"
 							style={{ margin: '10px' }}
-							onClick={() =>
-								bulkCreateItems(
-									mockappointmentsdata,
-									'appointments'
-								)
-							}>
+							onClick={() => console.log('create appointment')}>
 							Create Appointments
 						</Button>
 					</CardFooter>

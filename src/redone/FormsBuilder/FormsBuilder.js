@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import FormsBuilderHome from './FormsBuilderHome/FormsBuilderHome'
 import FormEditor from './FormEditor/FormEditor'
 import FormPreview from './FormPreview/formpreview'
-import { fetchAllForms } from '../../api/forms.api'
+import { getAllForms } from '../../api/forms.api'
 
 const useStyles = makeStyles({
 	root: {
@@ -16,15 +16,14 @@ const useStyles = makeStyles({
 export default function FormsBuilder() {
 	const { path } = useRouteMatch()
 	const classes = useStyles()
-	const [forms, setForms] = useState([])
+	const forms = useSelector((state) => state.forms)
 	const activeEditForm = useSelector((state) => state.activeEditForm)
-
-	/*useEffect(() => {
-		fetchAllForms().then((response) => {
-			setForms(response)
-			//dispatch({ type: 'load_forms', forms: response })
+	const dispatch = useDispatch()
+	useEffect(() => {
+		getAllForms().then((forms) => {
+			dispatch({ type: 'LOAD_FORMS', forms })
 		})
-	}, [])*/
+	})
 
 	return (
 		<div className={classes.root}>

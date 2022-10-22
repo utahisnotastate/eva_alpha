@@ -76,6 +76,20 @@ const routes = [
 		label: 'Forms Center',
 	},
 	{
+		path: '/Eva/formcenter/formcenter',
+		exact: false,
+		displayInNav: true,
+		component: FormCenter,
+		label: 'compoents/eva/formcenter/formcenter',
+	},
+	{
+		path: '/components/FormBuilder/formbuilder',
+		exact: false,
+		displayInNav: true,
+		component: FormBuilder,
+		label: 'components/eva/FormBuilder/formbuilder',
+	},
+	{
 		path: '/patient/:id',
 		exact: false,
 		component: Patient,

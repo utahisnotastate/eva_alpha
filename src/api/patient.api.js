@@ -31,12 +31,6 @@ export const getPatientInformation = async (patientId) => {
 
  */
 
-export const getBasicPatientInformation = async (patientId) => {
-	const result = await axios.get(`${API_URL}/patients/${patientId}/`)
-	console.log(result.data)
-	return result.data
-}
-
 export const getPatientAppointments = async (patientId) => {
 	const result = await axios.get(
 		`${API_URL}/patients/${patientId}/appointments/`

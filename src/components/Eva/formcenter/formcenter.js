@@ -16,7 +16,6 @@ import FormsList from './sidebar'
 import { updateSettings } from '../../../api/utility.api'
 import { getAllInitDataOnLoad } from '../../../api/utility.api'
 import inputs from './inputs'
-import _ from 'lodash'
 
 export default function FormEditor() {
 	const theme = useTheme()
@@ -47,7 +46,8 @@ export default function FormEditor() {
 			initialValues={editform}
 			enableReinitialize
 			onSubmit={(values, actions) => {
-				const updatedforms = _.merge(values, forms)
+				console.log(values)
+				/*const updatedforms = _.merge(values, forms)
 				settings.details.forms = updatedforms
 				updateSettings(settings)
 					.then((data) => {
@@ -56,7 +56,7 @@ export default function FormEditor() {
 					.catch((err) => {
 						console.log(err)
 						actions.setSubmitting(false)
-					})
+					})*/
 			}}>
 			{(formikProps) => (
 				<Grid container spacing={3}>

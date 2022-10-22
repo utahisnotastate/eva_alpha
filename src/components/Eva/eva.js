@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from '../NavBar/navbar'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
+import { getAllForms } from '../../api/forms.api'
 
 export default function Eva({ routes }) {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		/*getAllForms()
 		getAllInitDataOnLoad()
 			.then((data) => {
 				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
@@ -20,7 +22,7 @@ export default function Eva({ routes }) {
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => console.log(err))*/
 	})
 	return (
 		<Router>

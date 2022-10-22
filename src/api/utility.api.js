@@ -3,7 +3,7 @@ import { getAllAppointments } from './appointment.api'
 import { getAllPatients } from './patients.api'
 import { getAllRequests } from './requests.api'
 import fakepatients from '../components/Patient/patients.mock'
-import { getAllForms } from './forms.redone.api'
+import { getAllForms } from './forms.api'
 import API_URL from './api_url'
 
 export const getSettings = async () => {
@@ -46,10 +46,10 @@ export const getAllInitDataOnLoad = async () => {
 			getAllForms(),
 			getAllPatients(),
 			getAllRequests(),
-			getSettings(),
+			//getSettings(),
 		])
-	console.log({ appointments, forms, patients, requests, settings })
-	return { appointments, forms, patients, requests, settings }
+	console.log({ appointments, forms, patients, requests })
+	return { appointments, forms, patients, requests }
 }
 
 export const bulkCreatePatients = async () => {
