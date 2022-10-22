@@ -76,39 +76,6 @@ const routes = [
 		label: 'Forms Center',
 	},
 	{
-		path: '/formscenter/physical_exam',
-		exact: true,
-		displayInNav: false,
-		component: () => (
-			<FormBuilder
-				fields={physicalexamfields}
-				inputs={physicalexaminputs}
-			/>
-		),
-		label: 'Physical Exam Editor',
-	},
-	{
-		path: '/formscenter/review_of_systems',
-		exact: true,
-		displayInNav: false,
-		component: FormBuilder,
-		label: 'Review of Systems Editor',
-	},
-	{
-		path: '/formscenter/new_complaint',
-		exact: true,
-		displayInNav: false,
-		component: FormBuilder,
-		label: 'New Complaint Editor',
-	},
-	{
-		path: '/formscenter/Demographics',
-		exact: true,
-		displayInNav: false,
-		component: FormBuilder,
-		label: 'Demographics Editor',
-	},
-	{
 		path: '/patient/:id',
 		exact: false,
 		component: Patient,

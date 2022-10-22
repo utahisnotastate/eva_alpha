@@ -23,24 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Patients() {
 	const classes = useStyles()
 	const patients = useSelector((state) => state.patients)
-	const dispatch = useDispatch()
-
-	/*useEffect(() => {
-		const fetchPatients = async () => {
-			const response = await getAllPatients()
-			return response.data
-		}
-		fetchPatients()
-			.then((patients) => {
-				return dispatch({
-					type: 'LOAD_PATIENTS',
-					patients: patients,
-				})
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-	}, [])*/
 
 	return (
 		<div className={classes.root}>
