@@ -1,24 +1,49 @@
-//IGNORE THIS FILE
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import { Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import React, { useEffect, useState } from "react";
+import { Grid, Typography, Checkbox, TextField } from "@material-ui/core";
+import MUIDataTable from "mui-datatables";
+import Button from "../../../basestyledcomponents/Table/Button";
 
-export default function DiagnosisSummary(props) {
+export default function DiagnosisMedications(props) {
+  const columns = [
+    { label: "ICD Code", name: "diagnosis_icd_code" },
+    { label: "ICD Description", name: "diagnosis_description" },
+    { label: "Strength", name: "strength" },
+    { label: "Frequency", name: "frequency" },
+    {
+      name: "id",
+      label: "Reactivate Diagnoses",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.setDiagnosisActive(value)}
+            >
+              Reactive Dx
+            </Button>
+          </div>
+        ),
+      },
+    },
+  ];
+
+  const data = [
+    ["Joe James", "Test Corp", "Yonkers", "NY"],
+    ["John Walsh", "Test Corp", "Hartford", "CT"],
+    ["Bob Herm", "Test Corp", "Tampa", "FL"],
+    ["James Houston", "Test orp", "Dallas", "TX"],
+  ];
+  useEffect(() => {}, [props.medications]);
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Typography>Medications</Typography>
+    <Grid container direction="column">
+      <Grid item>
+        <MUIDataTable
+          title={"Resolved Diagnoses"}
+          data={props.resolveddiagnoses}
+          columns={columns}
+        />
       </Grid>
-      <Grid item xs={12}>
-        <List component="div" disablePadding>
-          <Typography>Current Medications</Typography>
-          <ListItem>Medication Name</ListItem>
-        </List>
-      </Grid>
-      <Grid item xs={12}></Grid>
     </Grid>
   );
 }
