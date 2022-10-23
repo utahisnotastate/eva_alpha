@@ -33,14 +33,13 @@ export default function FormsList({ setFields }) {
 											fontWeight: 'bold',
 											color: '#000',
 										}}>
-										{form.title}
+										{form.details.title}
 									</Typography>
 								}
 								secondary={
 									<Button
 										variant={`text`}
 										onClick={() => {
-											console.log(form)
 											dispatch({
 												type: 'LOAD_EDITFORM',
 												editform: form,

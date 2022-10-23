@@ -1,22 +1,8 @@
 import * as React from 'react'
-import { Formik, Form, Field, FieldArray } from 'formik'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import EditField from './EditField'
+import { Formik, Form } from 'formik'
 import styled from '@mui/system/styled'
-import Button from '@mui/material/Button'
 
 import FormBuilderArrayField from './FormBuilderArrayField'
-
-const Item = styled('div')(({ theme }) => ({
-	//backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-	backgroundColor: 'lightgray',
-	//border: "1px solid",
-	//borderColor: theme.palette.mode === "dark" ? "#444d58" : "#ced7e0",
-	padding: theme.spacing(1),
-	//borderRadius: "4px",
-	textAlign: 'center',
-}))
 
 export default function FormBuilder({ fields, inputs }) {
 	return (

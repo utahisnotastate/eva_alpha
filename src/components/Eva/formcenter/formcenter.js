@@ -22,25 +22,24 @@ export default function FormEditor() {
 	const dispatch = useDispatch()
 	const forms = useSelector((state) => state.forms)
 	const editform = useSelector((state) => state.editform)
-	const settings = useSelector((state) => state.settings)
 	const [view, setView] = useState('edit')
 
-	useEffect(() => {
+	/*	useEffect(() => {
 		getAllInitDataOnLoad()
 			.then((data) => {
 				console.log(data)
-				/*dispatch({ type: 'LOAD_SETTINGS', settings: data })
+				/!*dispatch({ type: 'LOAD_SETTINGS', settings: data })
 				dispatch({ type: 'LOAD_FORMS', forms: data.details.forms })
 				dispatch({
 					type: 'LOAD_EDITFORM',
 					editform: data.details.forms[0],
-				})*/
+				})*!/
 			})
 			.catch((err) => {
 				console.log(err)
 			})
-	})
-	console.log(editform)
+	})*/
+	//console.log(editform)
 	return (
 		<Formik
 			initialValues={editform}

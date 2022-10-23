@@ -8,6 +8,7 @@ import FormsBuilder from './redone/FormsBuilder/FormsBuilder'
 import FormCenter from './components/Eva/formcenter/formcenter'
 import FormBuilder from './components/FormBuilder/formbuilder'
 import Patient from './components/Patient/patient'
+import FormsCenterHome from './components/FormsCenter/FormsCenterHome'
 import Scheduling from './components/Scheduling/scheduling'
 
 const physicalexamfields = [
@@ -87,7 +88,14 @@ const routes = [
 		exact: false,
 		displayInNav: true,
 		component: FormBuilder,
-		label: 'components/eva/FormBuilder/formbuilder',
+		label: 'components/FormBuilder/formbuilder',
+	},
+	{
+		path: './components/FormsCenter/FormsCenterHome',
+		exact: false,
+		displayInNav: true,
+		component: FormsCenterHome,
+		label: 'components/FormsCenter/FormsCenterHome',
 	},
 	{
 		path: '/patient/:id',

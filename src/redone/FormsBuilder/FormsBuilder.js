@@ -19,12 +19,6 @@ export default function FormsBuilder() {
 	const forms = useSelector((state) => state.forms)
 	const activeEditForm = useSelector((state) => state.activeEditForm)
 	const dispatch = useDispatch()
-	useEffect(() => {
-		getAllForms().then((forms) => {
-			dispatch({ type: 'LOAD_FORMS', forms })
-		})
-	})
-
 	return (
 		<div className={classes.root}>
 			<Route exact path={`${path}`}>
