@@ -1,130 +1,108 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Field, Form } from "formik";
-import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import { TextField } from "formik-material-ui";
-import { useParams, useRouteMatch, NavLink } from "react-router-dom";
-import Button from "../../../basestyledcomponents/Button";
-import Card from "../../../basestyledcomponents/Card/Card";
-import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
-import CardBody from "../../../basestyledcomponents/Card/CardBody";
-import EditorHeader from "./EditorHeader/EditorHeader";
-import FormFields from "./FormFields/FormFields";
-import { updateForm, fetchForm } from "../../../../api/forms.api";
-import AddNewCustomField from "./EditorInput/AddNewCustomField";
-import CardFooter from "../../../basestyledcomponents/Card/CardFooter";
+import React, { useEffect, useState } from 'react'
+import { Formik, Field, Form } from 'formik'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid'
+import { TextField } from 'formik-material-ui'
+import { useParams, useRouteMatch, NavLink } from 'react-router-dom'
+import Button from '../../../basestyledcomponents/Button'
+import Card from '../../../basestyledcomponents/Card/Card'
+import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
+import CardBody from '../../../basestyledcomponents/Card/CardBody'
+import EditorHeader from './EditorHeader/EditorHeader'
+import FormFields from './FormFields/FormFields'
+import { updateForm, fetchForm } from '../../../../api/forms.api'
+import AddNewCustomField from './EditorInput/AddNewCustomField'
+import CardFooter from '../../../basestyledcomponents/Card/CardFooter'
 
 const useStyles = makeStyles({
-  builderroot: {
-    border: 1,
-    borderColor: "black",
-    padding: "10px",
-    // backgroundColor: 'lightgrey'
-  },
-  addfieldcontainer: {
-    backgroundColor: "white",
-    padding: "10px",
-  },
-  addfielditem: {
-    padding: "10px",
-    flexGrow: 2,
-  },
-  formTitle: {
-    padding: "15px",
-  },
-  formTypeSelectContainer: {
-    marginTop: "5px",
-  },
-});
+	builderroot: {
+		border: 1,
+		borderColor: 'black',
+		padding: '10px',
+		// backgroundColor: 'lightgrey'
+	},
+	addfieldcontainer: {
+		backgroundColor: 'white',
+		padding: '10px',
+	},
+	addfielditem: {
+		padding: '10px',
+		flexGrow: 2,
+	},
+	formTitle: {
+		padding: '15px',
+	},
+	formTypeSelectContainer: {
+		marginTop: '5px',
+	},
+})
 /*
 
  */
 
 export default function FormEditor(props) {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  // let { path, url } = useRouteMatch();
-  const { formId } = useParams();
-  const formtitle = useSelector(
-    (state) => state.formsmanager.newform.newformtitle
-  );
-  const formtype = useSelector(
-    (state) => state.formsmanager.newform.newformtype
-  );
-  const customfields = useSelector(
-    (state) => state.formsmanager.newform.newformfields
-  );
+	const dispatch = useDispatch()
+	const classes = useStyles()
+	// let { path, url } = useRouteMatch();
+	const { formId } = useParams()
 
-  const defaultValues = {
-    id: formId,
-    form_title: "Test Form TItle",
-    form_type: "review_of_systems",
-    fields: [],
-    new_checkbox_field: "",
-    new_field: {
-      type: "",
-      label: "",
-    },
-  };
+	const defaultValues = {
+		id: formId,
+		form_title: 'Test Form TItle',
+		form_type: 'review_of_systems',
+		fields: [],
+		new_checkbox_field: '',
+		new_field: {
+			type: '',
+			label: '',
+		},
+	}
 
-  async function handleSubmit(values) {
-    console.log(values);
-  }
-  function dispatchFormDetailsToStore(formdetails) {
-    dispatch({ type: "update_form_title", newtitle: formdetails.title });
-    if (formdetails.form) {
-      dispatch({ type: "load_form_fields", newformfields: formdetails.form });
-    } else {
-      dispatch({ type: "load_form_fields", newformfields: {} });
-    }
-  }
+	async function handleSubmit(values) {
+		console.log(values)
+	}
 
-  useEffect(() => {
-    async function getFormDetailsFromServer(id) {
-      const form = await fetchForm(id);
-      console.log(`form response is: ${JSON.stringify(form)}`);
-      // dispatchFormDetailsToStore(form);
-    }
-    getFormDetailsFromServer(formId);
-  }, [formId]);
-  return (
-    <Formik
-      enableReinitialize
-      initialValues={defaultValues}
-      onSubmit={handleSubmit}
-    >
-      {(formikProps) => (
-        <Form>
-          <Grid container direction="column">
-            <Grid item>
-              <Card>
-                <CardHeader>
-                  <EditorHeader formId={formId} />
-                </CardHeader>
-                <CardBody>
-                  <Grid container direction="column">
-                    <Grid item>
-                      <Typography>
-                        Tesdt githubPlaceholder for Form Fields
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography>Placeholder for Form Editor Input</Typography>
-                    </Grid>
-                  </Grid>
-                </CardBody>
-                <CardFooter>
-                  <Typography>Test</Typography>
-                </CardFooter>
-              </Card>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
-  );
+	return (
+		<Formik
+			enableReinitialize
+			initialValues={defaultValues}
+			onSubmit={handleSubmit}>
+			{(formikProps) => (
+				<Form>
+					<Grid container direction="column">
+						<Grid item>
+							<Card>
+								<CardHeader>
+									<EditorHeader formId={formId} />
+								</CardHeader>
+								<CardBody>
+									<Grid container direction="column">
+										<Grid item>
+											<Typography>
+												Tesdt githubPlaceholder for Form
+												Fields
+											</Typography>
+										</Grid>
+										<Grid item>
+											<Typography>
+												Placeholder for Form Editor
+												Input
+											</Typography>
+										</Grid>
+									</Grid>
+								</CardBody>
+								<CardFooter>
+									<Typography>Test</Typography>
+								</CardFooter>
+							</Card>
+						</Grid>
+					</Grid>
+				</Form>
+			)}
+		</Formik>
+	)
 }
 
 /*

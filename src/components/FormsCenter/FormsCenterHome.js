@@ -43,3 +43,27 @@ export default function FormsCenterHome() {
 		</div>
 	)
 }
+
+/*
+* <div className={classes.root}>
+			<GridContainer>
+				<GridItem md={4} xs={10}>
+					<CustomFormsCard
+						forms={forms}
+						listlabel={`Physical Exam`}
+						typeOfFormToShow={'physical_exam'}
+						url={url}
+					/>
+				</GridItem>
+				<GridItem md={4} xs={10}>
+					<CustomFormsCard
+						forms={forms}
+						listlabel={`Review Of Systems`}
+						typeOfFormToShow={'review_of_systems'}
+						url={url}
+					/>
+				</GridItem>
+			</GridContainer>
+		</div>
+*
+* */
