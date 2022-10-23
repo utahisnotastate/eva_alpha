@@ -63,14 +63,6 @@ function Home() {
 								</Button>
 							)
 						})}
-
-						<Button
-							variant="contained"
-							color="primary"
-							style={{ margin: '10px' }}
-							onClick={() => console.log('create appointment')}>
-							Create Appointments
-						</Button>
 					</CardFooter>
 				</Card>
 			</GridItem>

@@ -1,38 +1,39 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
-import LanguageIcon from "@material-ui/icons/Language";
-import Card from "../../../basestyledcomponents/Card/Card";
-import CardIcon from "../../../basestyledcomponents/Card/CardIcon";
-import CardHeader from "../../../basestyledcomponents/Card/CardHeader";
-import CardBody from "../../../basestyledcomponents/Card/CardBody";
-import CustomFormsList from "./CustomFormsList";
+import React from 'react'
+import { Typography } from '@material-ui/core'
+import LanguageIcon from '@material-ui/icons/Language'
+import Card from '../../../basestyledcomponents/Card/Card'
+import CardIcon from '../../../basestyledcomponents/Card/CardIcon'
+import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
+import CardBody from '../../../basestyledcomponents/Card/CardBody'
+import CustomFormsList from './CustomFormsList'
 
-function CustomFormsCard(props) {
-  return (
-    <Card>
-      <CardHeader icon>
-        <CardIcon color="primary">
-          <LanguageIcon />
-        </CardIcon>
-      </CardHeader>
-      <CardBody>
-        <Typography>{props.listlabel} Forms</Typography>
-        {props.forms && props.forms.length > 0 ? (
-          <CustomFormsList
-            forms={props.forms}
-            typeOfFormToShow={props.typeOfFormToShow}
-            url={props.url}
-          />
-        ) : (
-          <Typography>
-            There have been no {props.listlabel} forms created. Create One!
-          </Typography>
-        )}
-      </CardBody>
-    </Card>
-  );
+function CustomFormsCard({ forms, listlabel, typeOfFormToShow, url }) {
+	return (
+		<Card>
+			<CardHeader icon>
+				<CardIcon color="primary">
+					<LanguageIcon />
+				</CardIcon>
+			</CardHeader>
+			<CardBody>
+				<Typography>{listlabel} Forms</Typography>
+				{forms && forms.length > 0 ? (
+					<CustomFormsList
+						forms={forms}
+						typeOfFormToShow={typeOfFormToShow}
+						url={url}
+					/>
+				) : (
+					<Typography>
+						There have been no {listlabel} forms created. Create
+						One!
+					</Typography>
+				)}
+			</CardBody>
+		</Card>
+	)
 }
-export default React.memo(CustomFormsCard);
+export default React.memo(CustomFormsCard)
 /*
 <List>
           {props.forms && props.forms.length === 0 ? (

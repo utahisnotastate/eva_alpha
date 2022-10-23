@@ -49,7 +49,7 @@ const routes = [
 		exact: false,
 		displayInNav: true,
 		component: FormsCenterHome,
-		label: 'components/FormsCenter/FormsCenterHome',
+		label: 'Forms Center',
 	},
 	{
 		path: '/patient/:id',
