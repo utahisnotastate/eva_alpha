@@ -98,6 +98,9 @@ const routes = [
 		label: 'components/FormsCenter/FormsCenterHome',
 	},
 	{
+		path: '/redone/F',
+	},
+	{
 		path: '/patient/:id',
 		exact: false,
 		component: Patient,
