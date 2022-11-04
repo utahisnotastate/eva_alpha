@@ -151,7 +151,6 @@ export default function Appointment() {
 			component: AppointmentROS,
 		},
 		{
-			// path: '/appointmentexam/',
 			path: '/appointmentforms/',
 			label: 'Physical Exam Forms',
 			nestedroutes: true,

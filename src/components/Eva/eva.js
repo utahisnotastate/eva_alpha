@@ -8,6 +8,10 @@ import { getAllForms } from '../../api/forms.api'
 export default function Eva({ routes }) {
 	const dispatch = useDispatch()
 
+	console.log(
+		'Find the inspiration for your new button design. Click on an element to copy the CSS!'
+	)
+
 	useEffect(() => {
 		/*getAllForms()
 		getAllInitDataOnLoad()
