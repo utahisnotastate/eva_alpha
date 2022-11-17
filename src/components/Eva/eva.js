@@ -13,7 +13,7 @@ export default function Eva({ routes }) {
 	)
 
 	useEffect(() => {
-		/*getAllForms()
+		getAllForms()
 		getAllInitDataOnLoad()
 			.then((data) => {
 				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
@@ -26,7 +26,7 @@ export default function Eva({ routes }) {
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
 			})
-			.catch((err) => console.log(err))*/
+			.catch((err) => console.log(err))
 	})
 	return (
 		<Router>
