@@ -11,6 +11,8 @@ import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import { getAllForms } from '../../api/forms.api'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
+import { bulkCreateItems } from '../../api/utility.api'
+import mockappointments from '../../api/mockappointments'
 
 const styles = {
 	cardTitle: {
@@ -63,6 +65,18 @@ function Home() {
 								</Button>
 							)
 						})}
+						<Button
+							variant="contained"
+							color="primary"
+							style={{ margin: '10px' }}
+							onClick={() =>
+								bulkCreateItems(
+									mockappointments,
+									'appointments'
+								)
+							}>
+							Bulk Add Appointments
+						</Button>
 					</CardFooter>
 				</Card>
 			</GridItem>
@@ -73,6 +87,13 @@ function Home() {
 export default Home
 
 /*
+
+onClick={() =>
+								bulkCreateItems(
+									mockappointments,
+									'appointments'
+								)
+							}
 * 				<Button
 					variant="contained"
 					color="primary"

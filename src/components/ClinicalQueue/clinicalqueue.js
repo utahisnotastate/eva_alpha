@@ -10,6 +10,7 @@ import patientrequestscolumns from '../PatientRequests/patientrequests.columns'
 import { useSelector } from 'react-redux'
 import PatientDisplayName from '../../api/patientname'
 import moment from 'moment'
+import { Typography } from '@mui/material'
 
 export default function ClinicalQueue() {
 	const requests = useSelector((state) => state.requests)
@@ -58,7 +59,7 @@ export default function ClinicalQueue() {
 				filter: true,
 				sort: false,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					return <PatientDisplayName patient={value} />
+					return <Typography>`$.{value}`</Typography>
 				},
 			},
 		},
