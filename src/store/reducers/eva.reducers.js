@@ -82,7 +82,29 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	}
 }
 
-function appointment(state = {}, action) {
+function appointment(
+	state = {
+		id: '',
+		details: {
+			status: '',
+			summary: '',
+			followup: '',
+			diagnoses: [],
+			complaints: [],
+			assessments: [],
+			physicalexam: [],
+			reviewofsystems: [],
+			preappointmentnotes: '',
+		},
+		type: '',
+		status: 'scheduled',
+		start: '',
+		end: '',
+		patient: '',
+		provider: '',
+	},
+	action
+) {
 	switch (action.type) {
 		case 'LOAD_APPOINTMENT':
 			return action.appointment

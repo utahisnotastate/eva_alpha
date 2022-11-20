@@ -215,69 +215,7 @@ export default function Appointment() {
 		)
 	}
 
-	const convertAppointmentForms = (forms) => {
-		let activeforms = forms
-		let appointmentforms = []
-		for (const form of activeforms) {
-			appointmentforms.push({
-				id: form.id,
-				title: form.title,
-				form_type: form.form_type,
-				form: form.form,
-				route: `/${form.title.replace(/\s/g, '').toLocaleLowerCase()}`,
-			})
-		}
-		for (const appointmentform of appointmentforms) {
-			for (let field in appointmentform.form) {
-				//console.log(`Form field label is ${filteredform.form[field].label}`)
-				appointmentform.form[field].checked = false
-				appointmentform.form[field].value = null
-			}
-		}
-		console.log('Appointment forms are ' + JSON.stringify(appointmentforms))
-		return appointmentforms
-		//save the converted forms to the db
-		//saveAppointmentFormsToDB(appointmentforms);
-	}
-	useEffect(() => {
-		const getClinicalDataAndAllForms = async (appointmentId) => {
-			const appointmentdetails = await getAllAppointmentInformation(id)
-			const allforms = await fetchAllForms()
-			return {
-				appointmentdetails,
-				allforms,
-			}
-		}
-		getClinicalDataAndAllForms().then((dataandforms) => {
-			console.log(dataandforms)
-			if (dataandforms.appointmentdetails.status === 'scheduled') {
-				setAppointmentStatus('active')
-			} else if (
-				dataandforms.appointmentdetails.status === 'encounter_ended'
-			) {
-			} else {
-				setAppointmentStatus('scheduled')
-			}
-			setPatientName(dataandforms.appointmentdetails.patient_display_name)
-			setAssignedProvider(
-				dataandforms.appointmentdetails.provider_display_name
-			)
-			const convertedforms = convertAppointmentForms(
-				dataandforms.allforms
-			)
-			console.log(convertedforms)
-
-			dispatch({
-				type: 'load_all_practice_forms',
-				forms: convertedforms,
-			})
-
-			dispatch({
-				type: 'load_clinical_data',
-				clinical_data: dataandforms.appointmentdetails.clinical_data,
-			})
-		})
-	}, [id])
+	useEffect(() => {}, [id])
 
 	return (
 		<Grid container className={classes.base} spacing={2}>

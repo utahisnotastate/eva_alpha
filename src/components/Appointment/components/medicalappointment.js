@@ -9,10 +9,7 @@ import CompletedAppointment from './CompletedAppointment/completedappointment'
 import PatientEncounter from './PatientEncounter/patientencounter'
 import PreAppointment from './PreAppointment/PreAppointment'
 import { getAppointment } from '../../../api/appointment.api'
-import { fetchAllForms } from '../../../api/forms.api'
 import { useParams } from 'react-router-dom'
-import AppointmentHeader from './AppointmentHeader/appointmentheader'
-import moment from 'moment'
 import { useSelector, useDispatch } from 'react-redux'
 import Typography from '@mui/material/Typography'
 
@@ -31,47 +28,22 @@ const useStyles = makeStyles({
 
 export default function MedicalAppointment() {
 	let { id } = useParams()
-	let { path, url } = useRouteMatch()
 	const dispatch = useDispatch()
 	const classes = useStyles()
 	const [appointmentforms, setAppointmentForms] = useState()
 	const appointment = useSelector((state) => state.appointment)
 
-	//destructure appointment so it has appointment.details, appointment.patient.details, and appointment.details.clinical_data
-	const { details, patient, status, type } = appointment
+	const { details, patient } = appointment
 
-	// Determines which component to render based on the status propert
-
-	/*
-  This changes the state of the appointment component to in progress. it was most likely in the scheduled
-  state before meaning that the only thing showing was the scheduling note. Now it will show the exam forms and such
-   */
-
-	const handleEncounterBegin = async () => {
-		//get all forms from server
-		const allforms = await fetchAllForms()
-		//remove all the inactive forms
-		setAppointmentForms(allforms)
-		const activeforms = allforms.filter((form) => form.active)
-		// split the forms into 2 groups: physical exam forms, and ROS forms
-		const activephysicalexamforms = activeforms.filter(
-			(form) => form.form_type === 'physical_exam'
-		)
-
-		const activeROSforms = activeforms.filter(
-			(form) => form.form_type === 'review_of_systems'
-		)
-
-		const new_clinical_data = {
-			clinical_forms: activeforms,
-			complaints: [],
-			assessments: [],
-		}
-	}
-	/*
-  instead of splitting the medical appointment into different routes, it's easier to just render different
-  components based on the status of the appointment.
-   */
+	useEffect(() => {
+		getAppointment(id)
+			.then((appointment) => {
+				dispatch({ type: 'LOAD_APPOINTMENT', appointment })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}, [id])
 
 	function determineAppointmentComponentToRender() {
 		switch (appointment.status) {
@@ -101,29 +73,7 @@ export default function MedicalAppointment() {
 				)
 		}
 	}
-	/*
-  The button rendered by this function is what the provider uses to change the progress of an appointment.
 
-  An appointment progress should go something like
-  scheduled (which means you only need to display any notes made during scheduling --> "in progress" which
-  means that the doctor can fill out the medical forms
-  --> encounter ended which means that the clinical documentation still isn't done, but the patient is no
-  longer in the office and follow up can be scheduled (if necessary)
-  --> "notes completed" which means the final notes have been written, and no one besides the provider can make
-  changes to it. Additionallyu this will only show the medical chart fields that were filled out as a summary
-   */
-
-	useEffect(() => {
-		getAppointment(id)
-			.then((appointment) => {
-				console.log(appointment)
-				dispatch({ type: 'LOAD_APPOINTMENT', appointment })
-			})
-			.catch((err) => {
-				console.log(err)
-			})
-	}, [id])
-	console.log({ details, patient })
 	return (
 		<Grid container direction="row" spacing={1}>
 			<Grid item xs={12} style={{ margin: '20px' }}>
@@ -136,7 +86,10 @@ export default function MedicalAppointment() {
 						</Grid>
 						<Formik
 							enableReinitialize={true}
-							initialValues={appointment}>
+							initialValues={appointment}
+							onSubmit={() => {
+								console.log(`Submitted`)
+							}}>
 							{({ values }) => (
 								<Grid item className={classes.content}>
 									{determineAppointmentComponentToRender(
