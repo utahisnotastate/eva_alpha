@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useFormikContext } from 'formik'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import {
 	Stepper,
@@ -47,11 +48,7 @@ function getSteps() {
 }
 
 function FakeCompoent(props) {
-	return (
-		<div>
-			<Typography>{props.label}</Typography>
-		</div>
-	)
+	return <div></div>
 }
 
 function EncounterStepper(props) {
@@ -117,6 +114,7 @@ EncounterStep.propTypes = {
 export default function PatientEncounter(props) {
 	const classes = useStyles()
 	const [activeStep, setActiveStep] = useState(0)
+	const appointment = useSelector((state) => state.appointment)
 	const { values } = useFormikContext()
 	// i have no idea why i did the steps like this
 	const steps = getSteps()
@@ -149,7 +147,7 @@ export default function PatientEncounter(props) {
 				return <PatientComplaints />
 
 			default:
-				return <FakeCompoent label="Unknown" />
+				return <Typography>Unknown step</Typography>
 		}
 	}
 	return (
@@ -174,98 +172,3 @@ export default function PatientEncounter(props) {
 		</Grid>
 	)
 }
-
-/*
-
-<ReviewOfSystems
-            name={`clinical_data.review_of_systems`}
-            rosforms={props.appointmentforms.filter(
-              (form) => form.form_type === "review_of_systems"
-            )}
-          />
-<Formik
-        enableReinitialize={true}
-        initialValues={{
-          clinical_data: {
-            complaints: [
-              {
-                id: "" + Math.random(),
-                complaint_name: "Test Complaint Name",
-                complaint_description: "This is complaint description",
-                fieldname: "complaint_name",
-              },
-            ],
-            review_of_systems: props.rosforms,
-            physical_exam: props.peforms,
-            assessments: [],
-            plan: [],
-            followup: [],
-            summary: "",
-          },
-        }}
-      >
-        {({ values }) => (
-          <Form>
-            <Grid container direction={`column`} className={classes.root}>
-              <EncounterStepper
-                activeStep={activeStep}
-                steps={steps}
-                prop2={(step, index) => (
-                  <EncounterStep
-                    key={step.label}
-                    activeStep={activeStep}
-                    step={step}
-                    classes={classes}
-                    onClick={handleStep(step.index)}
-                  />
-                )}
-                classes={classes}
-              />
-              <Grid item>
-                <div>{getStepContent(activeStep, values)}</div>
-              </Grid>
-            </Grid>
-          </Form>
-        )}
-      </Formik>
-
-
-
-      case 1:
-        return (
-          <ReviewOfSystems
-            label="Review of Systems"
-            form_type={`review_of_systems`}
-          />
-        );
-      //display physical exam component
-      // case "Physical Exam":
-      case 2:
-        return (
-          <Physicalexam label="Physical Exam" form_type={`physical_exam`} />
-        );
-      //display assessment component
-      // case "Assessment":
-      case 3:
-        return <AppointmentAssessment />;
-      //display plan component
-      // case "Plan":
-      case 4:
-        return <AppointmentPlan />;
-      //display follow up component
-      // case "Follow Up":
-      case 5:
-        return <FakeCompoent label="Follow Up" />;
-      // case "Summary":
-      case 6:
-        return <AppointmentSummary summary={props.summary} />;
-
-
-
-
-                    <Typography
-                      className={activeStep === label ? classes.active : ""}
-                    >
-                      Test
-                    </Typography>
- */

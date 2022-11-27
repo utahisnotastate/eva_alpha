@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import Card from '../../basestyledcomponents/Card/Card'
 import CardHeader from '../../basestyledcomponents/Card/CardHeader'
-import { Formik } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
-import CompletedAppointment from './CompletedAppointment/completedappointment'
-import PatientEncounter from './PatientEncounter/patientencounter'
-import PreAppointment from './PreAppointment/PreAppointment'
+import CustomTabs from '../../basestyledcomponents/CustomTabs/CustomTabs'
 import { getAppointment } from '../../../api/appointment.api'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
+import { TextField } from 'formik-mui'
+import CardBody from '../../basestyledcomponents/Card/CardBody'
+import AirlineSeatLegroomExtraIcon from '@material-ui/icons/AirlineSeatLegroomExtra'
 
 const useStyles = makeStyles({
 	header: {
@@ -30,10 +29,35 @@ export default function MedicalAppointment() {
 	let { id } = useParams()
 	const dispatch = useDispatch()
 	const classes = useStyles()
-	const [appointmentforms, setAppointmentForms] = useState()
 	const appointment = useSelector((state) => state.appointment)
 
 	const { details, patient } = appointment
+
+	/*
+	* {
+		id: '',
+		details: {
+			status: '',
+			summary: '',
+			followup: '',
+			diagnoses: [],
+			complaints: [],
+			assessments: [],
+			physicalexam: [],
+			reviewofsystems: [],
+			preappointmentnotes: '',
+		},
+		type: '',
+		status: 'scheduled',
+		start: '',
+		end: '',
+		patient: '',
+		provider: '',
+	}
+	*
+	*
+	*
+	* */
 
 	useEffect(() => {
 		getAppointment(id)
@@ -44,40 +68,119 @@ export default function MedicalAppointment() {
 				console.log(err)
 			})
 	}, [id])
-
-	function determineAppointmentComponentToRender() {
-		switch (appointment.status) {
-			case 'encounter_ended':
-				return <CompletedAppointment appointment={appointment} />
-			case 'in_progress':
-				return (
-					<Grid container direction={`column`}>
-						<Grid item>
-							<PatientEncounter
-								appointment={appointment}
-								appointmentforms={appointmentforms}
-								complaints={``}
-								assessments={``}
-								physical_exam_forms={``}
-								review_of_systems_forms={``}
-							/>
-						</Grid>
-					</Grid>
-				)
-			default:
-				return (
-					<PreAppointment
-						appointment={appointment}
-						buttonAction={handleEncounterBegin}
-					/>
-				)
-		}
-	}
+	// setToDos([...todos, ...[newToDo]])
 
 	return (
-		<Grid container direction="row" spacing={1}>
-			<Grid item xs={12} style={{ margin: '20px' }}>
-				<Card>
+		<Card>
+			<CardHeader className={classes.header}>
+				<Typography>Medical Appointment</Typography>
+			</CardHeader>
+			<CardBody>
+				<CustomTabs
+					headerColor="primary"
+					tabs={[
+						{
+							tabName: 'Complaints',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Complaints</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Assessments',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Assessments</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Physical Exam',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Physical Exam</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Review of Systems',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Review of Systems</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Diagnoses',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Diagnoses</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Follow Up',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Follow Ups</Typography>
+								</div>
+							),
+						},
+						{
+							tabName: 'Summary',
+							tabIcon: AirlineSeatLegroomExtraIcon,
+							tabContent: (
+								<div>
+									<Typography>Summary</Typography>
+								</div>
+							),
+						},
+					]}
+				/>
+
+				<Formik
+					initialValues={appointment}
+					onSubmit={async (values) =>
+						alert(JSON.stringify(values, null, 2))
+					}>
+					<Form>
+						<Field
+							component={TextField}
+							fullWidth
+							name={`details.preappointmentnotes`}
+							multiline
+							minRows={4}
+							variant="outlined"
+							label="Pre Appointment Notes"
+							placeholder="Pre Appointment Notes"
+						/>
+						<Field
+							component={TextField}
+							fullWidth
+							name={`details.summary`}
+							multiline
+							minRows={4}
+							variant="outlined"
+							label="Summary"
+							placeholder="Pre Appointment Notes"
+						/>
+						<button type="submit">Submit</button>
+					</Form>
+				</Formik>
+			</CardBody>
+		</Card>
+	)
+}
+
+/*
+<Card>
 					<Grid container direction={`column`}>
 						<Grid item className={classes.header}>
 							<CardHeader color={`primary`}>
@@ -92,9 +195,14 @@ export default function MedicalAppointment() {
 							}}>
 							{({ values }) => (
 								<Grid item className={classes.content}>
-									{determineAppointmentComponentToRender(
-										appointment
-									)}
+									<PatientEncounter
+										appointment={appointment}
+										appointmentforms={appointmentforms}
+										complaints={``}
+										assessments={``}
+										physical_exam_forms={``}
+										review_of_systems_forms={``}
+									/>
 									<pre>
 										{JSON.stringify(appointment, null, 2)}
 									</pre>
@@ -103,91 +211,4 @@ export default function MedicalAppointment() {
 						</Formik>
 					</Grid>
 				</Card>
-			</Grid>
-		</Grid>
-	)
-}
-
-/*
-
-                    <Grid item>
-                      <pre>{JSON.stringify(values, null, 2)}</pre>
-                    </Grid>
-function determineAppointmentHeaderActionButtonToRender(appointment) {
-    switch (appointment.status) {
-      case "scheduled":
-        return (
-          <AppointmentHeaderButton
-            text={`Begin Encounter`}
-            buttonAction={handleEncounterBegin}
-            className={classes.button}
-          />
-        );
-      case "in_progress":
-        return (
-          <AppointmentHeaderButton
-            text={`End Encounter`}
-            buttonAction={handleEncounterEnd}
-            className={classes.button}
-          />
-        );
-      case "notes_completed":
-        return (
-          <AppointmentHeaderButton
-            text={`Edit Encounter Documentation`}
-            buttonAction={handleEncounterEnd}
-            className={classes.button}
-          />
-        );
-      case "encounter_ended":
-        return (
-          <AppointmentHeaderButton
-            text={`Mark notes complete`}
-            buttonAction={handleNotesCompleted}
-            className={classes.button}
-          />
-        );
-      default:
-        return (
-          <AppointmentHeaderButton
-            text={`Begin Appointment`}
-            buttonAction={handleEncounterBegin}
-            className={classes.button}
-          />
-        );
-    }
-  }
-
-
-{appointmentpatientroutes.map((route) => (
-                        <Route
-                          exact
-                          key={route.label}
-                          path={`${path}${route.path}/1`}
-                          component={route.component}
-                        />
-                      ))}
-
-// this is navlinks component
-
-  const [complaints, setComplaints] = useState([]);
-  const [review_of_systems, setReviewOfSystems] = useState([]);
-  const [physical_exam, setPhysicalExam] = useState([]);
-  const [plans, setPlans] = useState([]);
-  const [summary, setSummary] = useState([]);
-
-<Grid item xs={3}>
-            <Card>
-              <CardBody>
-                <NavLinks patientroutes={appointmentpatientroutes} />
-              </CardBody>
-            </Card>
-          </Grid>
-<Route path={`${path}/test`}>
-                      <AppointmentHeaderButton
-                        text={`Begin Appointment`}
-                        buttonAction={handleEncounterBegin}
-                        className={classes.button}
-                      />
-                    </Route>
  */
