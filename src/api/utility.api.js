@@ -43,7 +43,6 @@ export const getAllInitDataOnLoad = async () => {
 	const [appointments, forms, patients, requests, settings] =
 		await Promise.all([
 			getAllAppointments(),
-			getAllForms(),
 			getAllPatients(),
 			getAllRequests(),
 			//getSettings(),

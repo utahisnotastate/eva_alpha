@@ -14,7 +14,15 @@ function appointments(state = [], action) {
 }
 
 //create a reducer for the forms
-function forms(state = [], action) {
+function forms(
+	state = [
+		{ form: 'registration', fields: [] },
+		{ form: 'scheduling', fields: [] },
+		{ form: 'complaints', fields: [] },
+		{ form: 'assessments', fields: [] },
+	],
+	action
+) {
 	switch (action.type) {
 		case 'LOAD_FORMS':
 			return action.forms

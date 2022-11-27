@@ -6,6 +6,7 @@ import Patients from './components/Patients/patients'
 import PatientRequests from './components/PatientRequests/patientrequests'
 import Patient from './components/Patient/patient'
 import FormsCenterHome from './components/FormsCenter/FormsCenterHome'
+import FormBuilder from './components/FormBuilder/formbuilder'
 import Scheduling from './components/Scheduling/scheduling'
 
 const routes = [
@@ -48,7 +49,7 @@ const routes = [
 		path: '/formscenter',
 		exact: false,
 		displayInNav: true,
-		component: FormsCenterHome,
+		component: FormBuilder,
 		label: 'Forms Center',
 	},
 	{
