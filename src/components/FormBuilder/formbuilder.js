@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Card from '../../components/basestyledcomponents/Card/Card'
-import { Formik, Form, FieldArray, useFormikContext, useFormik } from 'formik'
-import { TextField, Field } from 'formik-mui'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@material-ui/core/Tab'
+import { FormGenerator } from 'formik-generator-materialui'
 import { Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import Button from '@mui/material/Button'
-import EVAForm from './evaform'
+import Card from '../basestyledcomponents/Card/Card'
 
 export default function FormBuilder() {
 	const forms = useSelector((state) => state.forms)
+	const formRef = useRef(null)
 
 	return (
 		<Card>
@@ -42,8 +38,45 @@ export default function FormBuilder() {
 					</div>
 				</div>
 				<div style={{ marginLeft: '15px' }}>
-					<Typography variant="h6">Fields</Typography>
-					<EVAForm />
+					<FormGenerator
+						onSubmit={(values) => {
+							console.log(values) // {fullname : "john", ...}
+						}}
+						fields={[
+							{
+								title: 'Complaints',
+								path: 'complaints',
+								typeField: 'arrayObject',
+								subfields: [
+									{
+										title: 'Type',
+										name: 'type',
+										typeField: 'select',
+										choices: [
+											'text',
+											'select',
+											'checkbox',
+											'radio',
+											'textarea',
+											'date',
+											'time',
+										],
+									},
+									{
+										title: 'Label',
+										name: 'label',
+										typeField: 'text',
+									},
+								],
+							},
+						]}
+						formRef={formRef}
+						initialValues={{
+							complaints: [],
+						}}
+						readOnly={false}
+					/>
+					<button onClick={() => formRef.current.submitForm()} />
 				</div>
 			</div>
 		</Card>

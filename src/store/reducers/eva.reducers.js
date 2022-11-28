@@ -177,7 +177,7 @@ function fields(
 	state = [
 		{
 			title: 'Complaints',
-			path: 'complaints',
+			path: 'fields',
 			type: 'arrayObject',
 			label: 'Complaints Label',
 			subfields: [
@@ -205,6 +205,7 @@ function fields(
 						'color',
 					],
 				},
+				{ title: 'Label', name: 'label', typeField: 'text' },
 			],
 		},
 	],
