@@ -7,8 +7,6 @@ import { ModalProvider } from 'react-modal-hook'
 import store from './store/store'
 import Eva from './components/Eva/eva'
 import routes from './routes'
-import 'react-quill/dist/quill.snow.css'
-
 const theme = createTheme({
 	palette: {
 		primary: {
