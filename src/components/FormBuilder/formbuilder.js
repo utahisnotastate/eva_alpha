@@ -34,7 +34,6 @@ export default function FormBuilder() {
 										}}>
 										<Typography variant="body1">
 											{form.form}
-											{JSON.stringify(form, null, 2)}
 										</Typography>
 										<Divider />
 									</div>

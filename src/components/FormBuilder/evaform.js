@@ -42,6 +42,8 @@ export default function EVAForm() {
 												component={TextField}
 												label={field.label}
 												placeholder={field.defaultValue}
+												variant="outlined"
+												InputProps={{ notched: true }}
 												fullWidth
 											/>
 											<button
