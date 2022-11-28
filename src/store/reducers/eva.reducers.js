@@ -176,10 +176,36 @@ function form(state = 'complaints', action) {
 function fields(
 	state = [
 		{
-			type: 'text',
+			title: 'Complaints',
+			path: 'complaints',
+			type: 'arrayObject',
 			label: 'Complaints Label',
-			defaultValue: 'test default',
-			value: '',
+			subfields: [
+				{
+					title: 'Type',
+					name: 'type',
+					typeField: 'select',
+					choices: [
+						'text',
+						'textarea',
+						'select',
+						'checkbox',
+						'radio',
+						'date',
+						'time',
+						'datetime',
+						'file',
+						'hidden',
+						'number',
+						'range',
+						'email',
+						'url',
+						'tel',
+						'search',
+						'color',
+					],
+				},
+			],
 		},
 	],
 	action

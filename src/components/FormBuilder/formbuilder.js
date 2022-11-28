@@ -42,6 +42,7 @@ export default function FormBuilder() {
 					</div>
 				</div>
 				<div style={{ marginLeft: '15px' }}>
+					<Typography variant="h6">Fields</Typography>
 					<EVAForm />
 				</div>
 			</div>
