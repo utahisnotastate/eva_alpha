@@ -16,10 +16,50 @@ function appointments(state = [], action) {
 //create a reducer for the forms
 function forms(
 	state = [
-		{ form: 'registration', fields: [] },
-		{ form: 'scheduling', fields: [] },
-		{ form: 'complaints', fields: [] },
-		{ form: 'assessments', fields: [] },
+		{
+			form: 'registration',
+			fields: [
+				{
+					type: 'text',
+					label: 'Registration Label',
+					defaultValue: 'test default',
+					value: '',
+				},
+			],
+		},
+		{
+			form: 'scheduling',
+			fields: [
+				{
+					type: 'text',
+					label: 'Scheduling Label',
+					defaultValue: 'test default',
+					value: '',
+				},
+			],
+		},
+		{
+			form: 'complaints',
+			fields: [
+				{
+					type: 'text',
+					label: 'Complaints Label',
+					defaultValue: 'test default',
+					value: '',
+				},
+			],
+		},
+		{
+			form: 'assessments',
+			fields: [
+				{
+					type: 'text',
+					label: 'Assessments Label',
+					defaultValue: 'test default',
+					value: '',
+				},
+			],
+		},
 	],
 	action
 ) {
@@ -122,9 +162,46 @@ function appointment(
 	}
 }
 
+//create a reducer for the form property 'form'
+function form(state = 'complaints', action) {
+	switch (action.type) {
+		case 'SET_FORM':
+			return action.form
+
+		default:
+			return state
+	}
+}
+
+function fields(
+	state = [
+		{
+			type: 'text',
+			label: 'Complaints Label',
+			defaultValue: 'test default',
+			value: '',
+		},
+	],
+	action
+) {
+	switch (action.type) {
+		case 'ADD_FIELD':
+			return [...state, ...[action.field]]
+		default:
+			return state
+	}
+}
+
+//create a combined reducer with the properties of form and fields
+const activeform = combineReducers({
+	form,
+	fields,
+})
+
 const allReducers = combineReducers({
 	appointments,
 	forms,
+	activeform,
 	patients,
 	requests,
 	settings,

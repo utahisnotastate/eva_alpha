@@ -13,7 +13,6 @@ export default function Eva({ routes }) {
 	)
 
 	useEffect(() => {
-		getAllForms()
 		getAllInitDataOnLoad()
 			.then((data) => {
 				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
@@ -21,8 +20,6 @@ export default function Eva({ routes }) {
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
 				})
-				//dispatch({ type: 'LOAD_FORMS', forms: data.forms })
-				dispatch({ type: 'LOAD_EDITFORM', editform: data.forms[0] })
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
 			})
