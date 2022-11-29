@@ -116,7 +116,10 @@ function appointment(
 }
 
 //create a reducer for the form property 'form'
-function form(state = { form: '', title: '', inputs: [] }, action) {
+function form(
+	state = { form: 'complaints', title: 'New Complaint', inputs: [] },
+	action
+) {
 	switch (action.type) {
 		case 'SET_FORM':
 			return action.form

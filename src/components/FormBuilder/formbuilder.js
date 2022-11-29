@@ -14,7 +14,6 @@ import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import { Form } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import FormBuilderHeader from './components/header'
-import NewItem from './newitem'
 import EVAForm from './components/EVAForm'
 import Footer from './components/footer'
 
@@ -23,6 +22,12 @@ export default function FormBuilder() {
 
 	const forms = useSelector((state) => state.forms)
 	const form = useSelector((state) => state.form)
+	const blankitem = {
+		type: 'text',
+		component: 'input',
+		label: '',
+		placeholder: '',
+	}
 
 	const handleFormSelect = (event) => {
 		dispatch({ type: 'SET_FORM', form: event.target.value })
@@ -64,12 +69,7 @@ export default function FormBuilder() {
 						<Footer
 							name={`inputs`}
 							push={push}
-							blankitem={{
-								type: 'text',
-								component: 'input',
-								label: '',
-								placeholder: '',
-							}}
+							blankitem={blankitem}
 							label={`Add Input`}
 						/>
 					</Card>
