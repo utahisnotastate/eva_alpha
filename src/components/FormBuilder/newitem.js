@@ -1,23 +1,22 @@
 import React from 'react'
 import { Field } from 'react-final-form'
+import { Button } from '@mui/material'
 import _ from 'lodash'
 
-export default function NewItem({ fields }) {
+export default function NewItem({ fields, label, push }) {
 	return (
-		<div>
-			{fields && fields.length > 0
-				? fields.map((field, index) => (
-						<div key={index}>
-							<Field
-								name={`${_.camelCase(field.label)}`}
-								component={field.component}
-								label={field.label}
-								type={field.type}
-								placeholder={field.placeholder}
-							/>
-						</div>
-				  ))
-				: null}
-		</div>
+		<Button
+			onClick={() => {
+				push(fields, {
+					type: 'text',
+					name: 'label',
+					label: 'Label',
+					component: 'input',
+					placeholder: 'Label',
+				})
+			}}
+			variant="contained">
+			{label}
+		</Button>
 	)
 }

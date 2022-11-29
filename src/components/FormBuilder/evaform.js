@@ -1,54 +1,78 @@
 import React, { useRef, useState } from 'react'
-import { Formik, Form, Field, FieldArray } from 'formik'
-import { FormGenerator } from 'formik-generator-materialui'
-import { TextField } from 'formik-mui'
-import { useSelector } from 'react-redux'
+import { Form, Field } from 'react-final-form'
 import { Typography } from '@mui/material'
-
+import arrayMutators from 'final-form-arrays'
+import { FieldArray } from 'react-final-form-arrays'
 // Here is an example of a form with an editable list.
 // Next to each input are buttons for insert and remove.
 // If the list is empty, there is a button to add an item.
-export default function EVAForm() {
-	const fields = useState([
-		{
-			title: 'Complaints',
-			typeField: 'array',
-			path: 'fields',
-			subfield: [
-				{
-					title: 'Type',
-					name: 'type',
-					typeField: 'select',
-
-					choices: [
-						'text',
-						'select',
-						'checkbox',
-						'radio',
-						'textarea',
-						'date',
-						'time',
-						'datetime-local',
-						'number',
-						'range',
-						'email',
-						'url',
-						'tel',
-						'search',
-						'color',
-						'file',
-						'group',
-					],
-				},
-				{ title: 'Label', name: 'label', typeField: 'text' },
-			],
-		},
-	])
+export default function EVAForm({ fields, newitem, label, push }) {
 	return (
-		<FormGenerator
-			formRef={formRef}
-			fields={fields}
-			initialValues={{ fields: fields }}
+		<Form
+			onSubmit={onSubmit}
+			mutators={{
+				// potentially other mutators could be merged here
+				...arrayMutators,
+			}}
+			initialValues={{
+				form: 'complaint',
+				fields: [
+					{
+						type: 'text',
+						name: 'label',
+						label: 'Label',
+						component: 'input',
+						placeholder: 'Label',
+					},
+				],
+			}}
+			render={({
+				handleSubmit,
+				form: {
+					mutators: { push, pop },
+				}, // injected from final-form-arrays above
+				pristine,
+				form,
+				submitting,
+				values,
+			}) => (
+				<form onSubmit={handleSubmit}>
+					<FieldArray name={`fields`}>
+						{({ fields }) =>
+							fields.map((name, index) => (
+								<div key={name}>
+									<Field
+										name={`${name}.type`}
+										component="select">
+										<option value="text">Text</option>
+										<option value="radio">Radio</option>
+										<option value="checkbox">
+											Checkbox
+										</option>
+									</Field>
+									<Field
+										name={`${name}.name`}
+										component="input"
+										type="text"
+										placeholder="Name"
+									/>
+									<Field
+										name={`${name}.label`}
+										component="input"
+										type="text"
+										placeholder="Label"
+									/>
+									<button
+										type="button"
+										onClick={() => fields.remove(index)}>
+										Remove
+									</button>
+								</div>
+							))
+						}
+					</FieldArray>
+				</form>
+			)}
 		/>
 	)
 }
