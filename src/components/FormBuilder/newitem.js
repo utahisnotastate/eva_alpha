@@ -1,21 +1,14 @@
 import React from 'react'
-import { Field } from 'react-final-form'
 import { Button } from '@mui/material'
-import _ from 'lodash'
 
-export default function NewItem({ fields, label, push }) {
+export default function NewItem({ name, push, blankitem, label, ...rest }) {
 	return (
 		<Button
-			onClick={() => {
-				push(fields, {
-					type: 'text',
-					name: 'label',
-					label: 'Label',
-					component: 'input',
-					placeholder: 'Label',
-				})
-			}}
-			variant="contained">
+			variant={`contained`}
+			fullWidth
+			color={`primary`}
+			onClick={() => push(name, blankitem)}
+			{...rest}>
 			{label}
 		</Button>
 	)

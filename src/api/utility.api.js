@@ -40,15 +40,14 @@ export const getSchedulingComponentData = async () => {
 }
 
 export const getAllInitDataOnLoad = async () => {
-	const [appointments, forms, patients, requests, settings] =
-		await Promise.all([
-			getAllAppointments(),
-			getAllPatients(),
-			getAllRequests(),
-			//getSettings(),
-		])
-	console.log({ appointments, forms, patients, requests })
-	return { appointments, forms, patients, requests }
+	const [appointments, patients, requests] = await Promise.all([
+		getAllAppointments(),
+		getAllPatients(),
+		getAllRequests(),
+		//getSettings(),
+	])
+	console.log({ appointments, patients, requests })
+	return { appointments, patients, requests }
 }
 
 export const bulkCreatePatients = async () => {

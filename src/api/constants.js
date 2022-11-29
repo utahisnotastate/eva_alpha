@@ -92,4 +92,102 @@ const request_details = {
 	updates: [],
 }
 
-export { defaultsettings, appointment, patient_details, request_details }
+const defaultforms = [
+	{
+		form: 'registration',
+		title: 'Registration',
+		inputs: [
+			{
+				type: 'text',
+				label: 'Registration Label',
+				defaultValue: 'test default',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'scheduling',
+		title: 'Scheduling',
+		inputs: [
+			{
+				type: 'text',
+				label: 'Scheduling Label',
+				defaultValue: 'test default',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'complaints',
+		title: 'Add New Complaint',
+		inputs: [
+			{
+				type: 'text',
+				component: 'input',
+				label: 'Complaints Label',
+				placeholder: 'Enter Complaint',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'assessments',
+		title: 'Add New Assessment',
+		inputs: [
+			{
+				type: 'text',
+				component: 'input',
+				label: 'Complaints Label',
+				placeholder: 'Enter Complaint',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'plans',
+		title: 'Add New Plan',
+		inputs: [
+			{
+				type: 'text',
+				component: 'input',
+				label: 'Plan label',
+				placeholder: 'Enter Plan',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'reviewofsystems',
+		title: 'Review of Systems',
+		inputs: [
+			{
+				type: 'text',
+				component: 'input',
+				label: 'Plan label',
+				placeholder: 'Enter Plan',
+				value: '',
+			},
+		],
+	},
+	{
+		form: 'physicalexam',
+		title: 'Physical Exam',
+		inputs: [
+			{
+				type: 'text',
+				component: 'input',
+				label: 'Plan label',
+				placeholder: 'Enter Plan',
+				value: '',
+			},
+		],
+	},
+]
+
+export {
+	defaultsettings,
+	appointment,
+	patient_details,
+	request_details,
+	defaultforms,
+}

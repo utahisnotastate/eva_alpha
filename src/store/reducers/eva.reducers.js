@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { defaultforms } from '../../api/constants'
 
 function appointments(state = [], action) {
 	switch (action.type) {
@@ -14,55 +15,7 @@ function appointments(state = [], action) {
 }
 
 //create a reducer for the forms
-function forms(
-	state = [
-		{
-			form: 'registration',
-			fields: [
-				{
-					type: 'text',
-					label: 'Registration Label',
-					defaultValue: 'test default',
-					value: '',
-				},
-			],
-		},
-		{
-			form: 'scheduling',
-			fields: [
-				{
-					type: 'text',
-					label: 'Scheduling Label',
-					defaultValue: 'test default',
-					value: '',
-				},
-			],
-		},
-		{
-			form: 'complaints',
-			fields: [
-				{
-					type: 'text',
-					label: 'Complaints Label',
-					defaultValue: 'test default',
-					value: '',
-				},
-			],
-		},
-		{
-			form: 'assessments',
-			fields: [
-				{
-					type: 'text',
-					label: 'Assessments Label',
-					defaultValue: 'test default',
-					value: '',
-				},
-			],
-		},
-	],
-	action
-) {
+function forms(state = defaultforms, action) {
 	switch (action.type) {
 		case 'LOAD_FORMS':
 			return action.forms
@@ -163,72 +116,21 @@ function appointment(
 }
 
 //create a reducer for the form property 'form'
-function form(state = 'complaints', action) {
+function form(state = { form: '', title: '', inputs: [] }, action) {
 	switch (action.type) {
 		case 'SET_FORM':
 			return action.form
-
-		default:
-			return state
-	}
-}
-
-function fields(
-	state = [
-		{
-			title: 'Complaints',
-			path: 'fields',
-			type: 'arrayObject',
-			label: 'Complaints Label',
-			subfields: [
-				{
-					title: 'Type',
-					name: 'type',
-					typeField: 'select',
-					choices: [
-						'text',
-						'textarea',
-						'select',
-						'checkbox',
-						'radio',
-						'date',
-						'time',
-						'datetime',
-						'file',
-						'hidden',
-						'number',
-						'range',
-						'email',
-						'url',
-						'tel',
-						'search',
-						'color',
-					],
-				},
-				{ title: 'Label', name: 'label', typeField: 'text' },
-			],
-		},
-	],
-	action
-) {
-	switch (action.type) {
-		case 'ADD_FIELD':
-			return [...state, ...[action.field]]
 		default:
 			return state
 	}
 }
 
 //create a combined reducer with the properties of form and fields
-const activeform = combineReducers({
-	form,
-	fields,
-})
 
 const allReducers = combineReducers({
 	appointments,
 	forms,
-	activeform,
+	form,
 	patients,
 	requests,
 	settings,
