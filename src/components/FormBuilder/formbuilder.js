@@ -1,25 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-	Typography,
-	Divider,
-	Select,
-	FormControl,
-	MenuItem,
-	ButtonGroup,
-	Button,
-} from '@mui/material'
 import Card from '../basestyledcomponents/Card/Card'
-import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import { Form } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import FormBuilderHeader from './components/header'
-import EVAForm from './components/EVAForm'
 import Footer from './components/footer'
+import Chapters from '../Appointment/chapters'
 
 export default function FormBuilder() {
 	const dispatch = useDispatch()
-
 	const forms = useSelector((state) => state.forms)
 	const form = useSelector((state) => state.form)
 	const blankitem = {
@@ -38,44 +27,38 @@ export default function FormBuilder() {
 		window.alert(JSON.stringify(values, 0, 2))
 	}
 	return (
-		<Card>
-			<Form
-				onSubmit={onSubmit}
-				mutators={{
-					...arrayMutators,
-				}}
-				initialValues={form}
-				render={({
-					handleSubmit,
-					form: {
-						mutators: { push, pop },
-					}, // injected from final-form-arrays above
-					pristine,
-					form,
-					submitting,
-					values,
-				}) => (
-					<Card>
-						<FormBuilderHeader
-							forms={forms}
-							title={`Form Builder`}
-							handleFormSelect={handleFormSelect}
-						/>
-						<EVAForm
-							onSubmit={onSubmit}
-							form={form}
-							name={`inputs`}
-						/>
-						<Footer
-							name={`inputs`}
-							push={push}
-							blankitem={blankitem}
-							label={`Add Input`}
-						/>
-					</Card>
-				)}
-			/>
-		</Card>
+		<Form
+			onSubmit={onSubmit}
+			mutators={{
+				...arrayMutators,
+			}}
+			initialValues={form}
+			render={({
+				handleSubmit,
+				form: {
+					mutators: { push, pop },
+				}, // injected from final-form-arrays above
+				pristine,
+				form,
+				submitting,
+				values,
+			}) => (
+				<Card>
+					<FormBuilderHeader
+						forms={forms}
+						title={`Form Builder`}
+						handleFormSelect={handleFormSelect}
+					/>
+					<Chapters forms={forms} onSubmit={onSubmit} />
+					<Footer
+						name={`inputs`}
+						push={push}
+						blankitem={blankitem}
+						label={`Add Input`}
+					/>
+				</Card>
+			)}
+		/>
 	)
 }
 

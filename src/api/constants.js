@@ -96,6 +96,7 @@ const defaultforms = [
 	{
 		form: 'registration',
 		title: 'Registration',
+
 		inputs: [
 			{
 				type: 'text',

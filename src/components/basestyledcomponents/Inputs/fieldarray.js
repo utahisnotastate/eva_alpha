@@ -9,21 +9,16 @@ import ArrayFieldRow from './arrayfieldrow'
 
 export default function EVAForm({ onSubmit, form, name }) {
 	return (
-		<CardBody>
-			<form onSubmit={onSubmit}>
-				<label>{form.title}</label>
-				<FieldArray name={name}>
-					{({ fields }) =>
-						fields.map((name, index) => (
-							<ArrayFieldRow
-								key={index}
-								name={name}
-								remove={fields.remove}
-							/>
-						))
-					}
-				</FieldArray>
-			</form>
-		</CardBody>
+		<FieldArray name={name}>
+			{({ fields }) =>
+				fields.map((name, index) => (
+					<ArrayFieldRow
+						key={index}
+						name={name}
+						remove={fields.remove}
+					/>
+				))
+			}
+		</FieldArray>
 	)
 }

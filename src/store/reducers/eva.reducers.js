@@ -83,6 +83,40 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	}
 }
 
+function chapter(
+	state = { title: 'Complaints', form: 'complaints', fields: [], inputs: [] },
+	action
+) {
+	switch (action.type) {
+		case 'SET_CHAPTER':
+			return action.chapter
+		default:
+			return state
+	}
+}
+
+function details(
+	state = {
+		status: '',
+		summary: '',
+		followup: '',
+		diagnoses: [],
+		complaints: [],
+		assessments: [],
+		physicalexam: [],
+		reviewofsystems: [],
+		preappointmentnotes: '',
+	},
+	action
+) {
+	switch (action.type) {
+		case 'SET_DETAILS':
+			return action.details
+		default:
+			return state
+	}
+}
+
 function appointment(
 	state = {
 		id: '',

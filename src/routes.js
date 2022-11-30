@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from './components/Home/home'
-import MedicalAppointment from './components/Appointment/components/medicalappointment'
+import MedicalAppointment from './components/old/Appointment/components/medicalappointment'
+import Appointment from './components/Appointment/appointment'
 import ClinicalQueue from './components/ClinicalQueue/clinicalqueue'
 import Patients from './components/Patients/patients'
 import PatientRequests from './components/PatientRequests/patientrequests'
@@ -19,10 +20,10 @@ const routes = [
 	},
 	{
 		path: '/appointments/:id',
-		exact: false,
+		exact: true,
 		label: null,
 		displayInNav: false,
-		component: MedicalAppointment,
+		component: Appointment,
 	},
 	{
 		path: '/clinicalqueue',
