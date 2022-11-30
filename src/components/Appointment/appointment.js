@@ -1,49 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Typography } from '@mui/material'
 import Card from '../basestyledcomponents/Card/Card'
 import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
-
 import { useParams, useRouteMatch } from 'react-router-dom'
-import EVAStepper from './EVAStepper'
 import { useSelector } from 'react-redux'
-import { Form } from 'react-final-form'
+import { Form, Field } from 'react-final-form'
+import { FieldArray } from 'react-final-form-arrays'
 import arrayMutators from 'final-form-arrays'
-import { useDispatch } from 'react-redux'
-import { Wizard } from 'react-wizardry'
 import 'react-wizardry/dist/react-wizardry.css'
 
 export default function Appointment() {
 	let { path } = useRouteMatch()
 	let { id } = useParams()
-	const dispatch = useDispatch()
 	const forms = useSelector((state) => state.forms)
-	const [activeStep, setActiveStep] = useState({
-		title: 'Complaints',
-		form: 'complaints',
-		fields: [],
-		inputs: [],
-	})
-
-	const [steps, setSteps] = useState([
-		{ title: 'Complaints', form: 'complaints', fields: [], inputs: [] },
-		{ title: 'Assessments', form: 'assessments', fields: [], inputs: [] },
-		{ title: 'Plans', form: 'plans', fields: [], inputs: [] },
-		{
-			title: 'Physical Exam',
-			form: 'physicalexam',
-			fields: [],
-			inputs: [],
-		},
-		{
-			title: 'Review of Systems',
-			form: 'reviewofsystems',
-			fields: [],
-			inputs: [],
-		},
-		{ title: 'Summary', form: 'summary', fields: [], inputs: [] },
-	])
-
 	const handleSubmit = (values) => {
 		console.log(values)
 	}
@@ -51,34 +22,70 @@ export default function Appointment() {
 	// this will be used in the switch statement below
 
 	return (
-		<Form
-			onSubmit={(values) => console.log(values)}
-			initialValues={activeStep}
+		<Card>
+			<CardHeader color="primary">
+				<Typography variant="h4" component="h4">
+					Appointment
+				</Typography>
+			</CardHeader>
+			<CardBody>
+				<Typography variant="h4" component="h4">
+					Test
+				</Typography>
+			</CardBody>
+			<CardFooter>
+				<Typography variant="h4" component="h4"></Typography>
+			</CardFooter>
+		</Card>
+	)
+}
+
+/*
+
+<Tabs>
+							<Tab label="Complaints" />
+							<Tab label="Assessments" />
+							<Tab label="Plans" />
+							<Tab label={`Review of Systems`} />
+							<Tab label={`Physical Exam`} />
+							<Tab label={`Summary`} />
+						</Tabs>
+<Form
+			onSubmit={handleSubmit}
+			initialValues={forms}
 			mutators={{
 				// potentially other mutators could be merged here
 				...arrayMutators,
 			}}
 			render={({ handleSubmit, pristine, invalid, form }) => (
-				<Card>
-					<CardHeader>
-						<EVAStepper
-							steps={steps}
-							setActiveStep={setActiveStep}
-						/>
-					</CardHeader>
+				<form onSubmit={handleSubmit}>
 					<Wizard
 						noPageTitle
 						onFinish={(val) => console.log(val)}
 						strict={false}
-						pages={steps}
+						pages={forms}
 					/>
-				</Card>
+				</form>
 			)}
 		/>
-	)
-}
 
-/*
+
+<Card>
+					<CardHeader>
+						<Typography variant="body1">Card Header</Typography>
+					</CardHeader>
+					<CardBody>
+						<Wizard
+							noPageTitle
+							onFinish={(val) => console.log(val)}
+							strict={false}
+							pages={steps}
+						/>
+					</CardBody>
+					<CardFooter>
+						<Typography variant="body1">Card Footer</Typography>
+					</CardFooter>
+				</Card>
  * <EVAStepper steps={steps} setActiveStep={setActiveStep} />
  *
  * */

@@ -1,29 +1,25 @@
 import React from 'react'
-import Card from '../../basestyledcomponents/Card/Card'
-import CardBody from '../../basestyledcomponents/Card/CardBody'
-import CardFooter from '../../basestyledcomponents/Card/CardFooter'
-import { Form, Field } from 'react-final-form'
+import { Field } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays'
-import ArrayFieldRow from './arrayfieldrow'
 
-export default function EVAForm({ onSubmit, form, name }) {
+export default function EVAForm({ onSubmit, title, name, fields }) {
 	return (
-		<CardBody>
-			<form onSubmit={onSubmit}>
-				<label>{form.title}</label>
-				<FieldArray name={name}>
-					{({ fields }) =>
-						fields.map((name, index) => (
-							<ArrayFieldRow
+		<form onSubmit={onSubmit}>
+			<label>{title}</label>
+			<FieldArray name={name}>
+				{fields && fields.length > 0
+					? fields.map((field, index) => (
+							<Field
 								key={index}
-								name={name}
-								remove={fields.remove}
+								name={`${name}.value`}
+								component="input"
+								type="text"
+								label={`${name}.label`}
 							/>
-						))
-					}
-				</FieldArray>
-			</form>
-		</CardBody>
+					  ))
+					: null}
+			</FieldArray>
+		</form>
 	)
 }

@@ -17,11 +17,9 @@ export default function FormBuilder() {
 		label: '',
 		placeholder: '',
 	}
-
 	const handleFormSelect = (event) => {
 		dispatch({ type: 'SET_FORM', form: event.target.value })
 	}
-
 	const onSubmit = async (values) => {
 		console.log(values)
 		window.alert(JSON.stringify(values, 0, 2))

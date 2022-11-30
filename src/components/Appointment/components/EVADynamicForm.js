@@ -4,7 +4,12 @@ import { Form, Field } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays'
 
-export default function EVADynamicForm({ name, handleSubmit, children }) {
+export default function EVADynamicForm({
+	name,
+	handleSubmit,
+	initialValues,
+	children,
+}) {
 	return (
 		<Form
 			onSubmit={handleSubmit}
@@ -21,20 +26,52 @@ export default function EVADynamicForm({ name, handleSubmit, children }) {
 				submitting,
 				values,
 			}) => {
-				return (
-					<form onSubmit={handleSubmit}>
-						{children}
-						<div className="buttons">
-							<button
-								type="button"
-								onClick={() => push('customers', undefined)}>
-								Add Customer
-							</button>
-						</div>
-						<pre>{JSON.stringify(values, 0, 2)}</pre>
-					</form>
-				)
+				return <form onSubmit={handleSubmit}>{children}</form>
 			}}
 		/>
 	)
 }
+
+/*
+
+<div className="buttons">
+										<button
+											type="button"
+											onClick={() =>
+												push('customers', undefined)
+											}>
+											Add Customer
+										</button>
+									</div>
+* <FieldArray name={name}>
+										{({ fields }) =>
+											fields.map((name, index) => (
+												<div key={index}>
+													<label>
+														Cust. #{index + 1}
+													</label>
+													<Field
+														name={`${name}.firstName`}
+														component="input"
+														placeholder="First Name"
+													/>
+													<Field
+														name={`${name}.lastName`}
+														component="input"
+														placeholder="Last Name"
+													/>
+													<span
+														onClick={() =>
+															fields.remove(index)
+														}
+														style={{
+															cursor: 'pointer',
+														}}>
+														❌
+													</span>
+												</div>
+											))
+										}
+									</FieldArray>
+*
+* */

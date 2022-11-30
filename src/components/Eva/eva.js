@@ -8,10 +8,6 @@ import { getAllForms } from '../../api/forms.api'
 export default function Eva({ routes }) {
 	const dispatch = useDispatch()
 
-	console.log(
-		'Find the inspiration for your new button design. Click on an element to copy the CSS!'
-	)
-
 	useEffect(() => {
 		getAllInitDataOnLoad()
 			.then((data) => {
@@ -20,6 +16,7 @@ export default function Eva({ routes }) {
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
 				})
+				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
 			})

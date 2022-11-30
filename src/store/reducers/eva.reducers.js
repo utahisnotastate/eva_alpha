@@ -83,67 +83,19 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	}
 }
 
-function chapter(
-	state = { title: 'Complaints', form: 'complaints', fields: [], inputs: [] },
-	action
-) {
+function pages(state = [], action) {
 	switch (action.type) {
-		case 'SET_CHAPTER':
-			return action.chapter
+		case 'LOAD_PAGES':
+			return action.pages
 		default:
 			return state
 	}
 }
 
-function details(
-	state = {
-		status: '',
-		summary: '',
-		followup: '',
-		diagnoses: [],
-		complaints: [],
-		assessments: [],
-		physicalexam: [],
-		reviewofsystems: [],
-		preappointmentnotes: '',
-	},
-	action
-) {
-	switch (action.type) {
-		case 'SET_DETAILS':
-			return action.details
-		default:
-			return state
-	}
-}
-
-function appointment(
-	state = {
-		id: '',
-		details: {
-			status: '',
-			summary: '',
-			followup: '',
-			diagnoses: [],
-			complaints: [],
-			assessments: [],
-			physicalexam: [],
-			reviewofsystems: [],
-			preappointmentnotes: '',
-		},
-		type: '',
-		status: 'scheduled',
-		start: '',
-		end: '',
-		patient: '',
-		provider: '',
-	},
-	action
-) {
+function appointment(state = { details: {} }, action) {
 	switch (action.type) {
 		case 'LOAD_APPOINTMENT':
 			return action.appointment
-
 		default:
 			return state
 	}

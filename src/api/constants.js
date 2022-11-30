@@ -97,7 +97,7 @@ const defaultforms = [
 		form: 'registration',
 		title: 'Registration',
 
-		inputs: [
+		inputs: [You aren't full force going chiropractor'
 			{
 				type: 'text',
 				label: 'Registration Label',
