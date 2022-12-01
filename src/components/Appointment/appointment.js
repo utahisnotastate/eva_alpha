@@ -5,7 +5,9 @@ import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import { useParams, useRouteMatch } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import { useSelector } from 'react-redux'
+import Section from '../basestyledcomponents/wizard/section'
 import { Form, Field } from 'react-final-form'
 import { FieldArray } from 'react-final-form-arrays'
 import arrayMutators from 'final-form-arrays'
@@ -19,8 +21,7 @@ export default function Appointment() {
 		console.log(values)
 	}
 	// create a function that will render the correct component based on the view
-	// this will be used in the switch statement below
-
+	// this will be used in the switch statement belo
 	return (
 		<Card>
 			<CardHeader color="primary">
@@ -29,9 +30,24 @@ export default function Appointment() {
 				</Typography>
 			</CardHeader>
 			<CardBody>
-				<Typography variant="h4" component="h4">
-					Test
-				</Typography>
+				<FieldArray name={`complaints`}>
+					{({ fields }) => (
+						<div>
+							{fields && fields.length > 0
+								? fields.map((name, index) => (
+										<div key={index}></div>
+								  ))
+								: null}
+							<Button
+								type="button"
+								onClick={() =>
+									fields.push({ firstName: '', lastName: '' })
+								}>
+								Add
+							</Button>
+						</div>
+					)}
+				</FieldArray>
 			</CardBody>
 			<CardFooter>
 				<Typography variant="h4" component="h4"></Typography>
