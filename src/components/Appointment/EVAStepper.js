@@ -4,14 +4,17 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepButton from '@mui/material/StepButton'
 
-export default function EVAStepper({ steps, setActiveStep }) {
+export default function EVAStepper({ setActiveStep, sections, fields }) {
+	const handleStepClick = (step) => {
+		setActiveStep(step)
+	}
 	return (
 		<CardHeader>
 			<Stepper nonLinear>
-				{steps.map((step, index) => (
+				{sections.map((section, index) => (
 					<Step key={index}>
-						<StepButton onClick={() => setActiveStep(step)}>
-							{step.title}
+						<StepButton onClick={() => setActiveStep(index)}>
+							{section}
 						</StepButton>
 					</Step>
 				))}

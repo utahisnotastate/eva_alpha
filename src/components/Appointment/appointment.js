@@ -1,53 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams, useRouteMatch } from 'react-router-dom'
 import { Typography } from '@mui/material'
 import Card from '../basestyledcomponents/Card/Card'
-import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import { useParams, useRouteMatch } from 'react-router-dom'
-import Button from '@mui/material/Button'
-import { useSelector } from 'react-redux'
-import Section from '../basestyledcomponents/wizard/section'
-import { Form, Field } from 'react-final-form'
-import { FieldArray } from 'react-final-form-arrays'
-import arrayMutators from 'final-form-arrays'
+import EVAStepper from './EVAStepper'
+import { Field } from 'react-final-form'
+import EVADynamicForm from './components/EVADynamicForm'
 import 'react-wizardry/dist/react-wizardry.css'
+import EVAFieldArray from './components/EVAFieldArray'
 
 export default function Appointment() {
 	let { path } = useRouteMatch()
 	let { id } = useParams()
-	const forms = useSelector((state) => state.forms)
+	const [appointment, setAppointment] = useState({})
+	const [section, setSection] = useState('complaints')
+	const [activeStep, setActiveStep] = useState(0)
+
 	const handleSubmit = (values) => {
 		console.log(values)
 	}
+	const { clinical_data } = appointment
 	// create a function that will render the correct component based on the view
 	// this will be used in the switch statement belo
 	return (
 		<Card>
-			<CardHeader color="primary">
-				<Typography variant="h4" component="h4">
-					Appointment
-				</Typography>
-			</CardHeader>
+			<EVAStepper
+				sections={section}
+				setActiveStep={setActiveStep}
+				activeStep={activeStep}
+			/>
 			<CardBody>
-				<FieldArray name={`complaints`}>
-					{({ fields }) => (
-						<div>
-							{fields && fields.length > 0
-								? fields.map((name, index) => (
-										<div key={index}></div>
-								  ))
-								: null}
-							<Button
-								type="button"
-								onClick={() =>
-									fields.push({ firstName: '', lastName: '' })
-								}>
-								Add
-							</Button>
-						</div>
-					)}
-				</FieldArray>
+				<EVADynamicForm
+					handleSubmit={handleSubmit}
+					initialValues={clinical_data}>
+					<EVAFieldArray name={'complaints'} />
+				</EVADynamicForm>
 			</CardBody>
 			<CardFooter>
 				<Typography variant="h4" component="h4"></Typography>

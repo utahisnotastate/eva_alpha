@@ -2,7 +2,6 @@ import React from 'react'
 import { Form } from 'react-final-form'
 import { useSelector } from 'react-redux'
 import arrayMutators from 'final-form-arrays'
-import { FieldArray } from 'react-final-form-arrays'
 import Chapter from './chapter'
 
 export default function Chapters({ onSubmit }) {
@@ -16,7 +15,7 @@ export default function Chapters({ onSubmit }) {
 				// potentially other mutators could be merged here
 				...arrayMutators,
 			}}
-			render={({ handleSubmit, pristine, invalid }) => (
+			render={({ handleSubmit, pristine, invalid, form }) => (
 				<form onSubmit={handleSubmit}>
 					{forms && forms.length > 0
 						? forms.map((form, index) => (

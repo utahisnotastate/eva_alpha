@@ -15,7 +15,7 @@ function appointments(state = [], action) {
 }
 
 //create a reducer for the forms
-function forms(state = defaultforms, action) {
+function forms(state = [], action) {
 	switch (action.type) {
 		case 'LOAD_FORMS':
 			return action.forms
@@ -77,7 +77,6 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	switch (action.type) {
 		case 'LOAD_PATIENT':
 			return action.patient
-
 		default:
 			return state
 	}
