@@ -1,62 +1,53 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Card from '../basestyledcomponents/Card/Card'
-import { Form } from 'react-final-form'
-import arrayMutators from 'final-form-arrays'
-import FormBuilderHeader from './components/header'
-import Footer from './components/footer'
-import Chapters from '../Appointment/chapters'
+import CardHeader from '../basestyledcomponents/Card/CardHeader'
+import EVAForm from './components/EVAForm'
+import CardBody from '../basestyledcomponents/Card/CardBody'
+import CardFooter from '../basestyledcomponents/Card/CardFooter'
+import { Typography, ButtonGroup, Button } from '@mui/material'
 
 export default function FormBuilder() {
 	const dispatch = useDispatch()
 	const forms = useSelector((state) => state.forms)
-	const form = useSelector((state) => state.form)
+	//const form = useSelector((state) => state.form)
+	const form = useState({
+		title: 'Appointment',
+		name: 'appointment',
+		inputs: [],
+		fields: [],
+	})
+
 	const blankitem = {
 		type: 'text',
-		component: 'input',
+		value: '',
+		helperText: '',
 		label: '',
 		placeholder: '',
 	}
+
 	const handleFormSelect = (event) => {
 		dispatch({ type: 'SET_FORM', form: event.target.value })
 	}
+
+	// <Chapters forms={forms} onSubmit={onSubmit} />
 	const onSubmit = async (values) => {
 		console.log(values)
 		window.alert(JSON.stringify(values, 0, 2))
 	}
+
 	return (
-		<Form
-			onSubmit={onSubmit}
-			mutators={{
-				...arrayMutators,
-			}}
-			initialValues={form}
-			render={({
-				handleSubmit,
-				form: {
-					mutators: { push, pop },
-				}, // injected from final-form-arrays above
-				pristine,
-				form,
-				submitting,
-				values,
-			}) => (
-				<Card>
-					<FormBuilderHeader
-						forms={forms}
-						title={`Form Builder`}
-						handleFormSelect={handleFormSelect}
-					/>
-					<Chapters forms={forms} onSubmit={onSubmit} />
-					<Footer
-						name={`inputs`}
-						push={push}
-						blankitem={blankitem}
-						label={`Add Input`}
-					/>
-				</Card>
-			)}
-		/>
+		<Card>
+			<CardHeader>
+				<h4>Form Builder</h4>
+			</CardHeader>
+			<CardBody>
+				<EVAForm form={form} handleSubmit={onSubmit} />
+			</CardBody>
+			<CardFooter>
+				<Button color="primary">Save</Button>
+			</CardFooter>
+		</Card>
 	)
 }
 
