@@ -4,6 +4,7 @@ import Card from '../basestyledcomponents/Card/Card'
 import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import EVAForm from './components/EVAForm'
 import CardBody from '../basestyledcomponents/Card/CardBody'
+import CustomForm from '../CustomForm/customform'
 
 export default function FormBuilder() {
 	const dispatch = useDispatch()
@@ -12,7 +13,7 @@ export default function FormBuilder() {
 		{
 			label: 'Registration',
 			name: 'registration',
-			fields: [
+			inputs: [
 				{
 					label: 'First Name',
 					name: 'first_name',
@@ -25,7 +26,7 @@ export default function FormBuilder() {
 		{
 			label: 'Complaint',
 			name: 'complaint',
-			fields: [
+			inputs: [
 				{
 					label: 'Description',
 					name: 'description',
@@ -45,7 +46,7 @@ export default function FormBuilder() {
 		{
 			label: 'Plan',
 			name: 'plan',
-			fields: [
+			inputs: [
 				{
 					label: 'Description',
 					name: 'description',
@@ -58,7 +59,7 @@ export default function FormBuilder() {
 		{
 			label: 'Assessment',
 			name: 'assessment',
-			fields: [
+			inputs: [
 				{
 					label: 'Description',
 					name: 'description',
@@ -71,7 +72,7 @@ export default function FormBuilder() {
 		{
 			label: 'Review of Systems',
 			name: 'review_of_systems',
-			fields: [
+			inputs: [
 				{
 					label: 'Description',
 					name: 'description',
@@ -84,7 +85,7 @@ export default function FormBuilder() {
 		{
 			label: 'Physical Exam',
 			name: 'physical_exam',
-			fields: [
+			inputs: [
 				{
 					label: 'Description',
 					name: 'description',
@@ -124,10 +125,22 @@ export default function FormBuilder() {
 
 	return (
 		<Card>
-			<CardHeader>
-				<h4>Form Builder</h4>
-			</CardHeader>
 			<CardBody>
+				<CustomForm
+					form={{
+						label: 'Registration',
+						name: 'registration',
+						inputs: [
+							{
+								label: 'First Name',
+								name: 'first_name',
+								type: 'text',
+								required: true,
+								placeholder: 'First Name',
+							},
+						],
+					}}
+				/>
 				<EVAForm
 					evaform={form}
 					formName={`complaints`}
