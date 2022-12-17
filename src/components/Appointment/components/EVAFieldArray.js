@@ -21,31 +21,3 @@ export default function EVAFieldArray({ name }) {
 		</FieldArray>
 	)
 }
-
-/*
-<FieldArray name="complaints">
-              {({ fields }) =>
-                fields.map((name, index) => (
-                  <div key={name}>
-                    <label>Cust. #{index + 1}</label>
-                    <Field
-                      name={`${name}.firstName`}
-                      component="input"
-                      placeholder="First Name"
-                    />
-                    <Field
-                      name={`${name}.lastName`}
-                      component="input"
-                      placeholder="Last Name"
-                    />
-                    <span
-                      onClick={() => fields.remove(index)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      ❌
-                    </span>
-                  </div>
-                ))
-              }
-            </FieldArray>
- */

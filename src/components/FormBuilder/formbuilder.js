@@ -1,16 +1,102 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Card from '../basestyledcomponents/Card/Card'
 import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import EVAForm from './components/EVAForm'
 import CardBody from '../basestyledcomponents/Card/CardBody'
-import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import { Typography, ButtonGroup, Button } from '@mui/material'
 
 export default function FormBuilder() {
 	const dispatch = useDispatch()
-	const forms = useSelector((state) => state.forms)
+	//const forms = useSelector((state) => state.forms)
+	const forms = [
+		{
+			label: 'Registration',
+			name: 'registration',
+			fields: [
+				{
+					label: 'First Name',
+					name: 'first_name',
+					type: 'text',
+					required: true,
+					placeholder: 'First Name',
+				},
+			],
+		},
+		{
+			label: 'Complaint',
+			name: 'complaint',
+			fields: [
+				{
+					label: 'Description',
+					name: 'description',
+					type: 'text',
+					required: true,
+					placeholder: 'Description',
+				},
+				{
+					label: 'Location',
+					name: 'location',
+					type: 'text',
+					required: true,
+					placeholder: 'Location',
+				},
+			],
+		},
+		{
+			label: 'Plan',
+			name: 'plan',
+			fields: [
+				{
+					label: 'Description',
+					name: 'description',
+					type: 'text',
+					required: true,
+					placeholder: 'Description',
+				},
+			],
+		},
+		{
+			label: 'Assessment',
+			name: 'assessment',
+			fields: [
+				{
+					label: 'Description',
+					name: 'description',
+					type: 'text',
+					required: true,
+					placeholder: 'Description',
+				},
+			],
+		},
+		{
+			label: 'Review of Systems',
+			name: 'review_of_systems',
+			fields: [
+				{
+					label: 'Description',
+					name: 'description',
+					type: 'text',
+					required: true,
+					placeholder: 'Description',
+				},
+			],
+		},
+		{
+			label: 'Physical Exam',
+			name: 'physical_exam',
+			fields: [
+				{
+					label: 'Description',
+					name: 'description',
+					type: 'text',
+					required: true,
+					placeholder: 'Description',
+				},
+			],
+		},
+	]
 	//const form = useSelector((state) => state.form)
+
 	const form = useState({
 		title: 'Appointment',
 		name: 'appointment',
@@ -30,7 +116,7 @@ export default function FormBuilder() {
 		dispatch({ type: 'SET_FORM', form: event.target.value })
 	}
 
-	// <Chapters forms={forms} onSubmit={onSubmit} />
+	// <Chapters forms={forms} onSubmit={ontSubmit} />
 	const onSubmit = async (values) => {
 		console.log(values)
 		window.alert(JSON.stringify(values, 0, 2))
@@ -42,109 +128,12 @@ export default function FormBuilder() {
 				<h4>Form Builder</h4>
 			</CardHeader>
 			<CardBody>
-				<EVAForm form={form} handleSubmit={onSubmit} />
+				<EVAForm
+					evaform={form}
+					formName={`complaints`}
+					handleSubmit={onSubmit}
+				/>
 			</CardBody>
-			<CardFooter>
-				<Button color="primary">Save</Button>
-			</CardFooter>
 		</Card>
 	)
 }
-
-/*
-
-<CardFooter>
-							<NewItem
-								name={`inputs`}
-								push={push}
-								label={`Add Input`}
-
-							/>
-						</CardFooter>
-<CardFooter>
-							<NewItem
-								push={push}
-								name={`inputs`}
-								label={`Add New Field`}
-								blankitem={{
-									label: '',
-									type: '',
-									placeholder: '',
-								}}
-							/>
-						</CardFooter>
-
-
-<CardBody>
-							<form onSubmit={handleSubmit}>
-								<label>{form.title}</label>
-								<FieldArray name="inputs">
-									{({ fields }) =>
-										fields.map((name, index) => (
-											<ArrayFieldRow
-												key={index}
-												name={name}
-												remove={fields.remove}
-											/>
-										))
-									}
-								</FieldArray>
-							</form>
-						</CardBody>
-
-
-<FieldArray name="inputs">
-								{({ fields }) =>
-									fields.map((name, index) => (
-										<div key={index}>
-											<Field
-												name={`${name}.type`}
-												component="select">
-												<option />
-												<option value="text">
-													Text
-												</option>
-												<option value="number">
-													Number
-												</option>
-											</Field>
-											<Field
-												name={`${name}.label`}
-												component="input"
-												type="text"
-												placeholder="Label"
-											/>
-											<Field
-												name={`${name}.placeholder`}
-												component="input"
-												type="text"
-												placeholder="Placeholder"
-											/>
-										</div>
-									))
-								}
-							</FieldArray>
-
-
-
-* <CardHeader>
-				<Typography variant="body1">Form Builder</Typography>
-				<ButtonGroup variant={`text`}>
-					{forms && forms.length > 0
-						? forms.map((form, index) => (
-								<Button
-									key={index}
-									color={`primary`}
-									onClick={() => {
-										console.log(form)
-										dispatch({ type: 'SET_FORM', form })
-									}}>
-									{form.title}
-								</Button>
-						  ))
-						: null}
-				</ButtonGroup>
-			</CardHeader>
-*
-*
-* */

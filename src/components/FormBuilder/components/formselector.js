@@ -12,7 +12,7 @@ export default function FormSelector({ forms, form, handleFormSelect }) {
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select">
-				{JSON.stringify(form)}
+				Select a Form to Edit
 			</InputLabel>
 			<Select
 				labelId="demo-simple-select-label"
@@ -22,7 +22,7 @@ export default function FormSelector({ forms, form, handleFormSelect }) {
 				{forms && forms.length > 0 ? (
 					forms.map((form, index) => (
 						<MenuItem key={index} value={form}>
-							{form.title}
+							{form.label}
 						</MenuItem>
 					))
 				) : (
