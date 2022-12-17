@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
@@ -6,10 +6,28 @@ import CardText from '../basestyledcomponents/Card/CardText'
 import Card from '../basestyledcomponents/Card/Card'
 import { Button, Stack, Typography, MenuItem, TextField } from '@mui/material'
 
-export default function CustomForm({ form, onSubmit }) {
-	// create a handleChange function for the TextField component that changes the form object
-	const handleChange = (event) => {
-		form[event.target.name] = event.target.value
+export default function CustomForm({ onSubmit }) {
+	const [form, setForm] = useState({
+		newitem: [
+			{ value: '', type: 'text', label: 'Test Label' },
+			{ value: '', type: 'text', label: 'Test label 2' },
+			{ name: '', type: 'text', label: '' },
+		],
+		fields: [],
+		label: 'Appointment',
+		zone: 'appointment',
+	})
+
+	//create a function that adds a new item to the fields property of the form state
+	//this function will be passed to the AddItem component
+	const addNewItem = () => {
+		setForm({
+			...form,
+			fields: [
+				...form.fields,
+				...[{ value: '', type: 'text', label: 'Test 1' }],
+			],
+		})
 	}
 	return (
 		<Card>
@@ -18,26 +36,48 @@ export default function CustomForm({ form, onSubmit }) {
 			</CardHeader>
 			<CardBody>
 				<CardText>{form.description}</CardText>
-				{form.inputs && form.inputs.length > 0
-					? form.inputs.map((input, index) => (
+				{form.fields && form.fields.length > 0
+					? form.fields.map((input, index) => (
 							<div key={index}>
 								<TextField
 									key={index}
+									{...input}
+									label={input.label}
+									name={`${input}.value`}
+									onChange={(e) => {
+										const newFields = form.fields.map(
+											(field, i) => {
+												if (i === index) {
+													return {
+														...field,
+														value: e.target.value,
+													}
+												}
+												return field
+											}
+										)
+										setForm({
+											...form,
+											fields: newFields,
+										})
+									}}
+									value={input.value}
 									fullWidth
 									variant={`standard`}
-									onChange={handleChange}
-									{...input}
 								/>
 							</div>
 					  ))
 					: null}
 			</CardBody>
+			<CardBody>
+				<pre>{JSON.stringify(form, null, 2)}</pre>
+			</CardBody>
 			<CardFooter>
 				<Button
 					variant={'contained'}
 					color={`primary`}
-					onClick={() => onSubmit(form)}>
-					Submit
+					onClick={addNewItem}>
+					Add Item
 				</Button>
 			</CardFooter>
 		</Card>
