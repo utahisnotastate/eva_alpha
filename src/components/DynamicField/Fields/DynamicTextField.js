@@ -1,16 +1,14 @@
 import React from 'react'
-import { Field } from 'formik'
-import { TextField } from 'formik-mui'
+import { TextField, Select } from 'mui-rff'
 
 export default function DynamicTextField({ label, name, type }) {
 	console.log({ label, name })
 
 	return (
-		<Field
+		<TextField
 			name={`${name}.value`}
 			label={label}
 			type={type}
-			component={TextField}
 			variant="standard"
 			fullWidth
 		/>

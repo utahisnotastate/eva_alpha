@@ -127,13 +127,14 @@ export default function FormBuilder() {
 		<Card>
 			<CardBody>
 				<CustomForm
-					form={{
+					customform={{
 						label: 'Registration',
 						name: 'registration',
 						inputs: [
 							{
 								label: 'First Name',
 								name: 'first_name',
+
 								type: 'text',
 								required: true,
 								placeholder: 'First Name',

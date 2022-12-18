@@ -4,16 +4,30 @@ import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import CardText from '../basestyledcomponents/Card/CardText'
 import Card from '../basestyledcomponents/Card/Card'
-import { Button, Stack, Typography, MenuItem, TextField } from '@mui/material'
+import ArrayFieldRow from '../FormBuilder/components/arrayfieldrow'
+import { Field } from 'react-final-form'
+import {
+	Button,
+	Stack,
+	Typography,
+	MenuItem,
+	TextField,
+	Select,
+} from '@mui/material'
+import DynamicField from '../DynamicField/DynamicField'
 
-export default function CustomForm({ onSubmit }) {
+export default function CustomForm({ onSubmit, customform }) {
 	const [form, setForm] = useState({
 		newitem: [
 			{ value: '', type: 'text', label: 'Test Label' },
 			{ value: '', type: 'text', label: 'Test label 2' },
 			{ name: '', type: 'text', label: '' },
 		],
-		fields: [],
+		fields: [
+			{ value: '', type: 'text', label: '' },
+			{ value: '', type: 'text', label: '' },
+			{ name: '', type: 'text', label: '' },
+		],
 		label: 'Appointment',
 		zone: 'appointment',
 	})
@@ -25,7 +39,7 @@ export default function CustomForm({ onSubmit }) {
 			...form,
 			fields: [
 				...form.fields,
-				...[{ value: '', type: 'text', label: 'Test 1' }],
+				...[{ value: '', type: 'text', label: '' }],
 			],
 		})
 	}
@@ -39,9 +53,21 @@ export default function CustomForm({ onSubmit }) {
 				{form.fields && form.fields.length > 0
 					? form.fields.map((input, index) => (
 							<div key={index}>
+								<Select
+									name={`${input}.value`}
+									label={input.label}
+									formControlProps={{
+										margin: 'normal',
+									}}>
+									<MenuItem value="text">Text</MenuItem>
+									<MenuItem value="number">Number</MenuItem>
+									<MenuItem value="textarea">
+										Text Area
+									</MenuItem>
+									<MenuItem value="select">Select</MenuItem>
+								</Select>
 								<TextField
 									key={index}
-									{...input}
 									label={input.label}
 									name={`${input}.value`}
 									onChange={(e) => {
@@ -68,6 +94,7 @@ export default function CustomForm({ onSubmit }) {
 							</div>
 					  ))
 					: null}
+				)) : null}
 			</CardBody>
 			<CardBody>
 				<pre>{JSON.stringify(form, null, 2)}</pre>
@@ -83,9 +110,3 @@ export default function CustomForm({ onSubmit }) {
 		</Card>
 	)
 }
-
-/*
- *
- *
- *
- * */

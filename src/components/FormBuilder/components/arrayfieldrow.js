@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import { Field } from 'react-final-form'
 import EVASelect from './evaselect'
 
-export default function ArrayFieldRow({ name, index, remove, options }) {
+export default function ArrayFieldRow({ name, index, options }) {
 	const fieldnames = ['type', 'value', 'label', 'placeholder']
 	return (
 		<div key={index}>
@@ -11,6 +11,7 @@ export default function ArrayFieldRow({ name, index, remove, options }) {
 			{fieldnames && fieldnames.length > 0
 				? fieldnames.map((fieldname, index) => (
 						<Field
+							key={index}
 							name={`${name}.${fieldname}`}
 							label={`Label`}
 							component="input"
@@ -38,12 +39,16 @@ export default function ArrayFieldRow({ name, index, remove, options }) {
 				type="text"
 				placeholder="Placeholder"
 			/>
-			<Button
+		</div>
+	)
+}
+
+/*
+* <Button
 				variant={'contained'}
 				color={`secondary`}
 				onClick={() => remove(index)}>
 				X
 			</Button>
-		</div>
-	)
-}
+*
+* */
