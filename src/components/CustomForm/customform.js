@@ -4,8 +4,7 @@ import CardBody from '../basestyledcomponents/Card/CardBody'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import CardText from '../basestyledcomponents/Card/CardText'
 import Card from '../basestyledcomponents/Card/Card'
-import ArrayFieldRow from '../FormBuilder/components/arrayfieldrow'
-import { Field } from 'react-final-form'
+
 import {
 	Button,
 	Stack,
@@ -14,20 +13,33 @@ import {
 	TextField,
 	Select,
 } from '@mui/material'
-import DynamicField from '../DynamicField/DynamicField'
 
 export default function CustomForm({ onSubmit, customform }) {
 	const [form, setForm] = useState({
 		newitem: [
-			{ value: '', type: 'text', label: 'Test Label' },
-			{ value: '', type: 'text', label: 'Test label 2' },
-			{ name: '', type: 'text', label: '' },
+			{
+				value: '',
+				type: '',
+				label: '',
+				helperText: '',
+				placeholder: '',
+			},
+			{
+				value: '',
+				type: '',
+				label: '',
+				helperText: '',
+				placeholder: '',
+			},
+			{
+				value: '',
+				type: '',
+				label: '',
+				helperText: '',
+				placeholder: '',
+			},
 		],
-		fields: [
-			{ value: '', type: 'text', label: '' },
-			{ value: '', type: 'text', label: '' },
-			{ name: '', type: 'text', label: '' },
-		],
+		fields: [],
 		label: 'Appointment',
 		zone: 'appointment',
 	})
@@ -39,10 +51,27 @@ export default function CustomForm({ onSubmit, customform }) {
 			...form,
 			fields: [
 				...form.fields,
-				...[{ value: '', type: 'text', label: '' }],
+				...[
+					{
+						value: '',
+						type: '',
+						label: '',
+						helperText: '',
+						placeholder: '',
+					},
+				],
 			],
 		})
 	}
+	// create an onChange function that will be passed to the form fields
+	// this function will be passed to each of the form fields
+	const handleChange = (e) => {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		})
+	}
+
 	return (
 		<Card>
 			<CardHeader color="primary">
@@ -52,12 +81,32 @@ export default function CustomForm({ onSubmit, customform }) {
 				<CardText>{form.description}</CardText>
 				{form.fields && form.fields.length > 0
 					? form.fields.map((input, index) => (
-							<div key={index}>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+									gap: '1rem',
+									borderColor: 'grey',
+									borderWidth: '1px',
+									borderStyle: 'solid',
+									padding: '1rem',
+									margin: '1rem',
+								}}
+								key={index}>
 								<Select
-									name={`${input}.value`}
-									label={input.label}
+									name={`${input}.type`}
+									label="Field Type"
 									formControlProps={{
 										margin: 'normal',
+									}}
+									onChange={(e) => {
+										const newFields = [...form.fields]
+										newFields[index].type = e.target.value
+										setForm({
+											...form,
+											fields: newFields,
+										})
 									}}>
 									<MenuItem value="text">Text</MenuItem>
 									<MenuItem value="number">Number</MenuItem>
@@ -66,10 +115,11 @@ export default function CustomForm({ onSubmit, customform }) {
 									</MenuItem>
 									<MenuItem value="select">Select</MenuItem>
 								</Select>
+
 								<TextField
 									key={index}
-									label={input.label}
-									name={`${input}.value`}
+									label={`Label`}
+									name={`${input}.label`}
 									onChange={(e) => {
 										const newFields = form.fields.map(
 											(field, i) => {
@@ -87,14 +137,62 @@ export default function CustomForm({ onSubmit, customform }) {
 											fields: newFields,
 										})
 									}}
-									value={input.value}
+									fullWidth
+									variant={`standard`}
+								/>
+								<TextField
+									key={index}
+									label={`Placeholder`}
+									name={`${input}.placeHolder`}
+									helperText={`When form is empty, this will show in the input`}
+									onChange={(e) => {
+										const newFields = form.fields.map(
+											(field, i) => {
+												if (i === index) {
+													return {
+														...field,
+														value: e.target.value,
+													}
+												}
+												return field
+											}
+										)
+										setForm({
+											...form,
+											fields: newFields,
+										})
+									}}
+									fullWidth
+									variant={`standard`}
+								/>
+								<TextField
+									key={index}
+									label={`Helper Text`}
+									name={`${input}.helperText`}
+									helperText={`This will show below the input`}
+									onChange={(e) => {
+										const newFields = form.fields.map(
+											(field, i) => {
+												if (i === index) {
+													return {
+														...field,
+														value: e.target.value,
+													}
+												}
+												return field
+											}
+										)
+										setForm({
+											...form,
+											fields: newFields,
+										})
+									}}
 									fullWidth
 									variant={`standard`}
 								/>
 							</div>
 					  ))
 					: null}
-				)) : null}
 			</CardBody>
 			<CardBody>
 				<pre>{JSON.stringify(form, null, 2)}</pre>
@@ -110,3 +208,33 @@ export default function CustomForm({ onSubmit, customform }) {
 		</Card>
 	)
 }
+
+/*
+* <TextField
+										key={index}
+										label={input.label}
+										name={`${input}.value`}
+										onChange={(e) => {
+											const newFields = form.fields.map(
+												(field, i) => {
+													if (i === index) {
+														return {
+															...field,
+															value: e.target
+																.value,
+														}
+													}
+													return field
+												}
+											)
+											setForm({
+												...form,
+												fields: newFields,
+											})
+										}}
+										fullWidth
+										variant={`standard`}
+									/>
+*
+*
+* */
