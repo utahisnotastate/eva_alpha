@@ -113,6 +113,15 @@ function form(
 	}
 }
 
+function newitems(state = [], action) {
+	switch (action.type) {
+		case 'LOAD_NEWITEMS':
+			return action.newitem
+		default:
+			return state
+	}
+}
+
 //create a combined reducer with the properties of form and fields
 
 const allReducers = combineReducers({
@@ -125,6 +134,7 @@ const allReducers = combineReducers({
 	editform,
 	patient,
 	appointment,
+	newitems,
 })
 
 export default allReducers

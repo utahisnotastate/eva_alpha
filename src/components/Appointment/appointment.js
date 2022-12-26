@@ -1,45 +1,53 @@
 import React, { useState } from 'react'
 import { useParams, useRouteMatch } from 'react-router-dom'
-import { Typography } from '@mui/material'
 import Card from '../basestyledcomponents/Card/Card'
-import CardBody from '../basestyledcomponents/Card/CardBody'
-import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import EVAStepper from './EVAStepper'
-import { Field } from 'react-final-form'
-import EVADynamicForm from './components/EVADynamicForm'
+import { Wizard } from 'react-wizardry'
 import 'react-wizardry/dist/react-wizardry.css'
-import EVAFieldArray from './components/EVAFieldArray'
 
-export default function Appointment() {
+export default function Appointment({ customForm }) {
 	let { path } = useRouteMatch()
 	let { id } = useParams()
-	const [appointment, setAppointment] = useState({})
+	const [appointment, setAppointment] = useState({
+		complaints: [],
+		physicalexam: [],
+		reviewofsystems: [],
+		assessments: [],
+		plan: [],
+		summary: '',
+	})
 	const [section, setSection] = useState('complaints')
 	const [activeStep, setActiveStep] = useState(0)
 
-	const handleSubmit = (values) => {
-		console.log(values)
-	}
-	const { clinical_data } = appointment
 	// create a function that will render the correct component based on the view
 	// this will be used in the switch statement belo
 	return (
 		<Card>
-			<EVAStepper
-				sections={section}
-				setActiveStep={setActiveStep}
-				activeStep={activeStep}
+			<Wizard
+				onFinish={(val) => console.log(val)}
+				strict={false}
+				pages={[
+					{
+						title: 'Complaints',
+						fields: [],
+					},
+					{
+						title: 'Physical Exam',
+						fields: [],
+					},
+					{
+						title: 'Review of Systems',
+						fields: [],
+					},
+					{
+						title: 'Assessment',
+						fields: [],
+					},
+					{
+						title: 'Summary',
+						fields: [],
+					},
+				]}
 			/>
-			<CardBody>
-				<EVADynamicForm
-					handleSubmit={handleSubmit}
-					initialValues={clinical_data}>
-					<EVAFieldArray name={'complaints'} />
-				</EVADynamicForm>
-			</CardBody>
-			<CardFooter>
-				<Typography variant="h4" component="h4"></Typography>
-			</CardFooter>
 		</Card>
 	)
 }

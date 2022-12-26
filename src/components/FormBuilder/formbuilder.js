@@ -127,6 +127,8 @@ export default function FormBuilder() {
 		<Card>
 			<CardBody>
 				<CustomForm
+					fields={form.fields}
+					newitem={[]}
 					customform={{
 						label: 'Registration',
 						name: 'registration',
@@ -141,11 +143,6 @@ export default function FormBuilder() {
 							},
 						],
 					}}
-				/>
-				<EVAForm
-					evaform={form}
-					formName={`complaints`}
-					handleSubmit={onSubmit}
 				/>
 			</CardBody>
 		</Card>
