@@ -22,6 +22,7 @@ export default function Eva({ routes }) {
 			})
 			.catch((err) => console.log(err))
 	})
+
 	return (
 		<Router>
 			<Navbar routes={routes} />

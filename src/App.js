@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import { blue } from '@mui/material/colors'
 import { Provider } from 'react-redux'
 import { ModalProvider } from 'react-modal-hook'
 import store from './store/store'
+import FormBuilder from './components/CustomForm/formbuilder'
 import Eva from './components/Eva/eva'
 import routes from './routes'
+
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -29,7 +31,7 @@ const theme = createTheme({
 		},
 	},
 })
-//dedicated
+
 export default function App() {
 	return (
 		<ThemeProvider theme={theme}>

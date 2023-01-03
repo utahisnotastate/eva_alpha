@@ -5,18 +5,31 @@ import CardBody from '../basestyledcomponents/Card/CardBody'
 export default function CustomForm({ form }) {
 	return (
 		<CardBody>
-			{form.fields.map((field, index) => (
-				<TextField
-					key={index}
-					name={`${field.name}.value`}
-					label={field.label}
-					type={field.type}
-					variant={field.variant}
-					fullWidth={field.full_width}
-					helperText={field.helperText}
-					options={field.options}
-				/>
-			))}
+			{form.fields.map(
+				(
+					{
+						full_width,
+						helperText,
+						label,
+						name,
+						options,
+						type,
+						variant,
+					},
+					index
+				) => (
+					<TextField
+						key={index}
+						name={`${name}.value`}
+						label={label}
+						type={type}
+						variant={variant}
+						fullWidth={full_width}
+						helperText={helperText}
+						options={options}
+					/>
+				)
+			)}
 		</CardBody>
 	)
 }

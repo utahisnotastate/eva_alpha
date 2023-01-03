@@ -1,13 +1,10 @@
 import React from 'react'
 import Home from './components/Home/home'
-import MedicalAppointment from './components/old/Appointment/components/medicalappointment'
 import Appointment from './components/Appointment/appointment'
 import ClinicalQueue from './components/ClinicalQueue/clinicalqueue'
 import Patients from './components/Patients/patients'
 import PatientRequests from './components/PatientRequests/patientrequests'
 import Patient from './components/Patient/patient'
-import FormsCenterHome from './components/FormsCenter/FormsCenterHome'
-import FormBuilder from './components/FormBuilder/formbuilder'
 import Scheduling from './components/Scheduling/scheduling'
 
 const routes = [
@@ -45,13 +42,6 @@ const routes = [
 		component: PatientRequests,
 		label: 'Patient Requests',
 		displayInNav: true,
-	},
-	{
-		path: '/formscenter',
-		exact: false,
-		displayInNav: true,
-		component: FormBuilder,
-		label: 'Forms Center',
 	},
 	{
 		path: '/patient/:id',
