@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from '../NavBar/navbar'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
-import { getAllForms } from '../../api/forms.api'
 
 export default function Eva({ routes }) {
 	const dispatch = useDispatch()

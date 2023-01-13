@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { defaultforms } from '../../api/constants'
 
 function appointments(state = [], action) {
 	switch (action.type) {

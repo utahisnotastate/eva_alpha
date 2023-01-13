@@ -5,14 +5,13 @@ import { blue } from '@mui/material/colors'
 import { Provider } from 'react-redux'
 import { ModalProvider } from 'react-modal-hook'
 import store from './store/store'
-import FormBuilder from './components/CustomForms/formbuilder'
 import Eva from './components/Eva/eva'
 import routes from './routes'
 
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: blue[500],
+			main: blue[100],
 			contrastText: '#fff',
 		},
 		secondary: {
