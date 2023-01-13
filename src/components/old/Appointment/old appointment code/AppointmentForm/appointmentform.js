@@ -15,7 +15,7 @@ import Card from '../../../../basestyledcomponents/Card/Card.js'
 import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../../basestyledcomponents/Card/CardBody'
 import FormTemplate from './appointmentformtemplate.js'
-import MedicalAppointmentForm from '../../../../Forms/components/MedicalAppointmentForm/medicalappointmentform'
+import MedicalAppointmentForm from '../../../Forms/components/MedicalAppointmentForm/medicalappointmentform'
 import './appointmentform.css'
 import ActiveAppointmentForm from './activeappointmentform'
 

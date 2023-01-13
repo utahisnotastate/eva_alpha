@@ -12,7 +12,7 @@ import { Typography } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../basestyledcomponents/Card/CardBody'
-import UpdateSurgicalHistoryItem from '../../../Forms/Clinical/Patient/updatesurgicalhistoryitem'
+import UpdateSurgicalHistoryItem from '../../../old/Forms/Clinical/Patient/updatesurgicalhistoryitem'
 
 const API_URL =
 	'https://clinicaltables.nlm.nih.gov/api/procedures/v3/search?terms='

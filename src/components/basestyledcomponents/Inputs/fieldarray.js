@@ -5,7 +5,7 @@ import CardFooter from '../../basestyledcomponents/Card/CardFooter'
 import { Form, Field } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays'
-import ArrayFieldRow from '../../FormBuilder/components/arrayfieldrow'
+import ArrayFieldRow from '../../old/FormBuilder/components/arrayfieldrow'
 
 export default function EVAForm({ onSubmit, form, name }) {
 	return (
