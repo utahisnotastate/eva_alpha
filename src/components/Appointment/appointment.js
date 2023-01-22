@@ -37,7 +37,6 @@ export default function Appointment() {
 					activeStep={activeStep}
 					setActiveStep={setActiveStep}
 				/>
-				<Typography variant={'body1'}>Preappointment</Typography>
 			</CardContent>
 			<CardActionArea>
 				<CardActions>
