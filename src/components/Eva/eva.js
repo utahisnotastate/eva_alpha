@@ -1,6 +1,6 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from '../NavBar/navbar'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
 
@@ -10,7 +10,6 @@ export default function Eva({ routes }) {
 	useEffect(() => {
 		getAllInitDataOnLoad()
 			.then((data) => {
-				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
 				dispatch({
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
@@ -21,7 +20,6 @@ export default function Eva({ routes }) {
 			})
 			.catch((err) => console.log(err))
 	})
-
 	return (
 		<Router>
 			<Navbar routes={routes} />

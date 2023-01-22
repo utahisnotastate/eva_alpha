@@ -17,7 +17,6 @@ export default function FormBuilder({ form }) {
 	return (
 		<Card>
 			<CardHeader color="primary" title={form.title} />
-
 			<CardBody>
 				{form.fields &&
 					form.fields.map(
@@ -61,7 +60,6 @@ export default function FormBuilder({ form }) {
 						)
 					)}
 			</CardBody>
-
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Add</Button>

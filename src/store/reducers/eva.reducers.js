@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import appointment from './appointment.reducers'
 
 function appointments(state = [], action) {
 	switch (action.type) {
@@ -90,15 +91,6 @@ function pages(state = [], action) {
 	}
 }
 
-function appointment(state = { details: {} }, action) {
-	switch (action.type) {
-		case 'LOAD_APPOINTMENT':
-			return action.appointment
-		default:
-			return state
-	}
-}
-
 //create a reducer for the form property 'form'
 function form(
 	state = { form: 'complaints', title: 'New Complaint', inputs: [] },
@@ -133,7 +125,6 @@ const allReducers = combineReducers({
 	editform,
 	patient,
 	appointment,
-	newitems,
 })
 
 export default allReducers

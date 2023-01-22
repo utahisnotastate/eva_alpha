@@ -1,98 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams, useRouteMatch } from 'react-router-dom'
 import Card from '../basestyledcomponents/Card/Card'
-import { Wizard } from 'react-wizardry'
+import AppointmentStepper from './components/appointmentstepper'
+import Typography from '@mui/material/Typography'
 import 'react-wizardry/dist/react-wizardry.css'
+import Button from '@mui/material/Button'
+import CardHeader from '@mui/material/CardHeader'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import { CardActionArea } from '@mui/material'
 
-export default function Appointment({ customForm }) {
+export default function Appointment() {
 	let { path } = useRouteMatch()
 	let { id } = useParams()
+	const [activeStep, setActiveStep] = useState(2)
+	const appointment = useSelector((state) => state.appointment)
+
+	const {
+		preappointment,
+		complaints,
+		diagnoses,
+		physical_exam,
+		review_of_systems,
+		treatment_plan,
+	} = appointment
 
 	// create a function that will render the correct component based on the view
 	// this will be used in the switch statement belo
 	return (
 		<Card>
-			<Wizard
-				onFinish={(val) => console.log(val)}
-				strict={false}
-				pages={[
-					{
-						title: 'Pre Appointment',
-						fields: [
-							{
-								name: 'were here',
-								label: 'About time',
-								type: 'text',
-							},
-							{
-								name: 'email',
-								label: 'Email',
-								type: 'email',
-							},
-						],
-					},
-					{
-						title: 'Complaints',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-					{
-						title: 'Physical Exam',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-					{
-						title: 'Review of Systems',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-					{
-						title: 'Assessment',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-					{
-						title: 'Plan',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-					{
-						title: 'Summary',
-						fields: [
-							{
-								name: 'complaints',
-								label: 'Complaints',
-								type: 'text',
-							},
-						],
-					},
-				]}
-			/>
+			<Button>Save</Button>
+			<CardHeader title="Appointment" color={'primary'} />
+			<CardContent>
+				<AppointmentStepper
+					activeStep={activeStep}
+					setActiveStep={setActiveStep}
+				/>
+				<Typography variant={'body1'}>Preappointment</Typography>
+			</CardContent>
+			<CardActionArea>
+				<CardActions>
+					<Button variant={`contained`}>Add</Button>
+				</CardActions>
+				<CardActions>
+					<Typography> This is the `${} page`</Typography>
+					<Button>Save</Button>
+				</CardActions>
+			</CardActionArea>
 		</Card>
 	)
 }

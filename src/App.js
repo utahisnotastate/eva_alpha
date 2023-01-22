@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import { blue } from '@mui/material/colors'
@@ -11,7 +11,7 @@ import routes from './routes'
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: blue[100],
+			main: blue[500],
 			contrastText: '#fff',
 		},
 		secondary: {
