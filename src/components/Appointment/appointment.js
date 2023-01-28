@@ -33,9 +33,7 @@ export default function Appointment() {
 			</CardContent>
 			<CardActionArea>
 				<CardActions>
-					<Button variant={`contained`} onClick={addItem}>
-						Add
-					</Button>
+					<Button variant={`contained`}>Add</Button>
 				</CardActions>
 				<CardActions>
 					<Typography> This is the `${} page`</Typography>

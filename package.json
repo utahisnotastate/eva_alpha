@@ -23,6 +23,8 @@
     "@mui/styles": "^5.4.2",
     "@mui/system": "^5.4.3",
     "@mui/x-date-pickers": "^5.0.9",
+    "@react-buddy/ide-toolbox": "^2.3.1",
+    "@react-buddy/palette-mui": "^5.0.1",
     "@redux-devtools/extension": "^3.2.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -64,7 +66,7 @@
     "react-modal": "^3.14.4",
     "react-modal-hook": "^3.0.0",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.8.0",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-use-wizard": "^1.0.0",
@@ -75,9 +77,7 @@
     "rhfa-material-ui": "^1.1.0",
     "rjsf-material-ui": "^0.3.9",
     "tss-react": "^3.5.2",
-    "yup": "^0.32.11",
-    "@react-buddy/ide-toolbox": "^2.3.1",
-    "@react-buddy/palette-mui": "^5.0.1"
+    "yup": "^0.32.11"
   },
   "main": "public/electron.js",
   "scripts": {

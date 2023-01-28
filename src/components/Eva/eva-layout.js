@@ -1,44 +1,25 @@
-import React, { useEffect } from 'react'
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import {
-	Box,
-	Drawer,
-	Toolbar,
-	Typography,
-	AppBar,
-	Divider,
-	ListItemButton,
-	List,
-	ListItem,
-	ListItemText,
-	ListItemIcon,
-} from '@mui/material'
-import { useDispatch } from 'react-redux'
-import Navbar from '../NavBar/navbar'
-import { getAllInitDataOnLoad } from '../../api/utility.api'
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import Drawer from '@mui/material/Drawer'
+import CssBaseline from '@mui/material/CssBaseline'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 
 const drawerWidth = 240
-export default function Eva({ routes }) {
-	const dispatch = useDispatch()
 
-	useEffect(() => {
-		getAllInitDataOnLoad()
-			.then((data) => {
-				dispatch({
-					type: 'LOAD_APPOINTMENTS',
-					appointments: data.appointments,
-				})
-				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
-				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
-			})
-			.catch((err) => console.log(err))
-	})
+export default function PermanentDrawerLeft() {
 	return (
 		<Box sx={{ display: 'flex' }}>
+			<CssBaseline />
 			<AppBar
 				position="fixed"
 				sx={{
@@ -47,7 +28,7 @@ export default function Eva({ routes }) {
 				}}>
 				<Toolbar>
 					<Typography variant="h6" noWrap component="div">
-						EVA EMR
+						Permanent drawer
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -141,22 +122,3 @@ export default function Eva({ routes }) {
 		</Box>
 	)
 }
-
-/*
-
-<Router>
-			<Navbar routes={routes} />
-			<Switch>
-				{routes.map((route, index) => (
-					<Route
-						key={index}
-						path={route.path}
-						exact={route.exact}
-						component={route.component}
-					/>
-				))}
-			</Switch>
-		</Router>
- *
- *
- * */
