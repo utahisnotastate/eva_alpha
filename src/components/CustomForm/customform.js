@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Stack, TextField } from '@mui/material'
+import { Stack } from '@mui/material'
+import DynamicField from '../DynamicField/DynamicField'
 
 export default function CustomForm({ fields }) {
 	return (
@@ -7,8 +8,8 @@ export default function CustomForm({ fields }) {
 			{fields && fields.length > 0
 				? fields.map((field, index) => (
 						<div key={index}>
-							<TextField
-								name={`${field}[${index}].value`}
+							<DynamicField
+								value={field.value}
 								label={field.label}
 								type={field.type}
 								variant={
@@ -20,7 +21,7 @@ export default function CustomForm({ fields }) {
 								helperText={
 									field.helperText ? field.helperText : ''
 								}
-								options={field.options ? field.options : []}
+								options={field.options ? field.options : null}
 							/>
 						</div>
 				  ))

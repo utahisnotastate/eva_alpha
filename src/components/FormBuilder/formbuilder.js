@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
 import CardHeader from '../basestyledcomponents/Card/CardHeader'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import Card from '../basestyledcomponents/Card/Card'
@@ -8,16 +9,49 @@ import {
 	List,
 	ListItem,
 	ListItemText,
+	ListItemIcon,
 	Button,
+	Stack,
+	ListItemButton,
 } from '@mui/material'
 import CardFooter from '../basestyledcomponents/Card/CardFooter'
 import CardActions from '@mui/material/CardActions'
+import CustomForm from '../CustomForm/customform'
 
-export default function FormBuilder({ form }) {
+//create a MUI style object for the form builder
+
+export default function FormBuilder() {
+	const zones = useSelector((state) => state.zones)
 	return (
 		<Card>
-			<CardHeader color="primary" title={form.title} />
-			<CardBody>
+			<CardBody style={{ display: 'flex', flexDirection: 'row' }}>
+				<List style={{ flexGrow: 1 }}>
+					{zones && zones.length > 0
+						? zones.map((zone, index) => (
+								<ListItem key={index} disablePadding>
+									<ListItemButton>
+										<ListItemText primary={zone.zone} />
+									</ListItemButton>
+								</ListItem>
+						  ))
+						: null}
+				</List>
+				<div style={{ flexGrow: 3 }}>
+					<CustomForm fields={[]} />
+				</div>
+			</CardBody>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Add</Button>
+					<Button size="small">Save</Button>
+				</CardActions>
+			</CardFooter>
+		</Card>
+	)
+}
+
+/*
+<CardBody>
 				{form.fields &&
 					form.fields.map(
 						(
@@ -60,17 +94,9 @@ export default function FormBuilder({ form }) {
 						)
 					)}
 			</CardBody>
-			<CardFooter>
-				<CardActions>
-					<Button size="small">Add</Button>
-					<Button size="small">Save</Button>
-				</CardActions>
-			</CardFooter>
-		</Card>
-	)
-}
 
-/*
+
+
 
 {fields &&
 fields.map(

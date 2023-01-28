@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import appointment from './appointment.reducers'
+import base_zones from '../../api/zones'
 
 function appointments(state = [], action) {
 	switch (action.type) {
@@ -9,6 +10,19 @@ function appointments(state = [], action) {
 			return [...state, action.appointment]
 		case 'REMOVE_APPOINTMENT':
 			return state.filter((appointment) => appointment.id !== action.id)
+		default:
+			return state
+	}
+}
+
+function zones(state = base_zones, action) {
+	switch (action.type) {
+		case 'LOAD_ZONES':
+			return action.zones
+		case 'ADD_ZONE':
+			return [...state, action.zone]
+		case 'REMOVE_ZONE':
+			return state.filter((zone) => zone.id !== action.id)
 		default:
 			return state
 	}
@@ -82,15 +96,6 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	}
 }
 
-function pages(state = [], action) {
-	switch (action.type) {
-		case 'LOAD_PAGES':
-			return action.pages
-		default:
-			return state
-	}
-}
-
 //create a reducer for the form property 'form'
 function form(
 	state = { form: 'complaints', title: 'New Complaint', inputs: [] },
@@ -99,15 +104,6 @@ function form(
 	switch (action.type) {
 		case 'SET_FORM':
 			return action.form
-		default:
-			return state
-	}
-}
-
-function newitems(state = [], action) {
-	switch (action.type) {
-		case 'LOAD_NEWITEMS':
-			return action.newitem
 		default:
 			return state
 	}
@@ -124,6 +120,7 @@ const allReducers = combineReducers({
 	settings,
 	editform,
 	patient,
+	zones,
 	appointment,
 })
 

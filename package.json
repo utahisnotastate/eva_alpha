@@ -75,7 +75,9 @@
     "rhfa-material-ui": "^1.1.0",
     "rjsf-material-ui": "^0.3.9",
     "tss-react": "^3.5.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@react-buddy/ide-toolbox": "^2.3.1",
+    "@react-buddy/palette-mui": "^5.0.1"
   },
   "main": "public/electron.js",
   "scripts": {

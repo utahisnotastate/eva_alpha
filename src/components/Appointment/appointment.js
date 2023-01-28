@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams, useRouteMatch } from 'react-router-dom'
+import CustomForm from '../CustomForm/customform'
 import Card from '../basestyledcomponents/Card/Card'
 import AppointmentStepper from './components/appointmentstepper'
 import Typography from '@mui/material/Typography'
@@ -15,16 +16,7 @@ export default function Appointment() {
 	let { path } = useRouteMatch()
 	let { id } = useParams()
 	const [activeStep, setActiveStep] = useState(2)
-	const appointment = useSelector((state) => state.appointment)
-
-	const {
-		preappointment,
-		complaints,
-		diagnoses,
-		physical_exam,
-		review_of_systems,
-		treatment_plan,
-	} = appointment
+	const fields = useSelector((state) => state.appointment.fields)
 
 	// create a function that will render the correct component based on the view
 	// this will be used in the switch statement belo
@@ -37,10 +29,13 @@ export default function Appointment() {
 					activeStep={activeStep}
 					setActiveStep={setActiveStep}
 				/>
+				<CustomForm fields={fields} />
 			</CardContent>
 			<CardActionArea>
 				<CardActions>
-					<Button variant={`contained`}>Add</Button>
+					<Button variant={`contained`} onClick={addItem}>
+						Add
+					</Button>
 				</CardActions>
 				<CardActions>
 					<Typography> This is the `${} page`</Typography>

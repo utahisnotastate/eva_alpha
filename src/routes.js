@@ -1,5 +1,5 @@
-import React from 'react'
 import Home from './components/Home/home'
+import FormBuilder from './components/FormBuilder/formbuilder'
 import Appointment from './components/Appointment/appointment'
 import ClinicalQueue from './components/ClinicalQueue/clinicalqueue'
 import Patients from './components/Patients/patients'
@@ -41,6 +41,13 @@ const routes = [
 		exact: true,
 		component: PatientRequests,
 		label: 'Patient Requests',
+		displayInNav: true,
+	},
+	{
+		path: '/formbuilder',
+		exact: false,
+		component: FormBuilder,
+		label: 'Form Builder',
 		displayInNav: true,
 	},
 	{

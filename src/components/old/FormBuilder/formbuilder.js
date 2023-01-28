@@ -4,7 +4,7 @@ import Card from '../../basestyledcomponents/Card/Card'
 import CardHeader from '../../basestyledcomponents/Card/CardHeader'
 import EVAForm from './components/EVAForm'
 import CardBody from '../../basestyledcomponents/Card/CardBody'
-import CustomForm from '../../CustomForms/formbuilder'
+import CustomForm from '../../FormBuilder/formbuilder'
 
 export default function FormBuilder() {
 	const dispatch = useDispatch()

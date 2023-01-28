@@ -31,7 +31,7 @@ export default function EVADynamicField({ field, ...rest }) {
 			)
 		case 'date':
 			return (
-				<DatePicker name={field.name} label={field.label} {...rest} />
+				<DatePicker name={field.value} label={field.label} {...rest} />
 			)
 		case 'time':
 			return (

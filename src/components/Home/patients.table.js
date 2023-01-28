@@ -9,6 +9,8 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
+import { DevSupport } from '@react-buddy/ide-toolbox'
+import { ComponentPreviews, useInitial } from '../../dev'
 
 const muiCache = createCache({
 	key: 'mui-datatables',
@@ -76,4 +78,11 @@ function App() {
 	)
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+	<DevSupport
+		ComponentPreviews={ComponentPreviews}
+		useInitialHook={useInitial}>
+		<App />
+	</DevSupport>,
+	document.getElementById('root')
+)

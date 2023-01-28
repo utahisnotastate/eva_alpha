@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-function preappointment(state = '', action) {
+/*function preappointment(state = '', action) {
 	switch (action.type) {
 		case 'LOAD_PREAPPOINTMENT':
 			return action.preappointment
@@ -76,15 +76,21 @@ function treatment_plan(state = [], action) {
 		default:
 			return state
 	}
+}*/
+
+function fields(state = [], action) {
+	switch (action.type) {
+		case 'LOAD_FIELDS':
+			return action.fields
+		case 'ADD_FIELD':
+			return [...state, action.field]
+		default:
+			return state
+	}
 }
 
 const appointment = combineReducers({
-	preappointment,
-	complaints,
-	diagnoses,
-	physical_exam,
-	review_of_systems,
-	treatment_plan,
+	fields,
 })
 
 export default appointment
