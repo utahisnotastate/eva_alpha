@@ -7,18 +7,47 @@ import {
 	List,
 	ListItem,
 	ListItemButton,
-	ListItemIcon,
 	ListItemText,
+	TextField,
 	Toolbar,
-	Typography,
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+import { createBrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+
 import Home from '../Home/home'
+import Patient from '../Patient/patient'
+import Schedule from '../Scheduling/Schedule'
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Home />,
+		children: [
+			{
+				path: '/formbuilder',
+				element: <Patient />,
+			},
+			{
+				path: '/settings',
+				element: <Patient />,
+			},
+			{
+				path: '/patient/:id',
+				element: <Patient />,
+			},
+			{
+				path: '/schedule',
+				element: <Schedule />,
+			},
+		],
+	},
+])
 
 const drawerWidth = 240
+
+//create a router for the app using the Home and Patient components
+//create a router for the app using the Home and Patient components
 
 export default function Eva({ routes }) {
 	const dispatch = useDispatch()
@@ -45,9 +74,12 @@ export default function Eva({ routes }) {
 					ml: `${drawerWidth}px`,
 				}}>
 				<Toolbar>
-					<Typography variant="h6" noWrap component="div">
-						EVA EMR
-					</Typography>
+					<TextField
+						id="filled-basic"
+						sx={{ width: '100%', color: 'white' }}
+						label="Search Patients"
+						variant="standard"
+					/>
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -64,32 +96,39 @@ export default function Eva({ routes }) {
 				<Toolbar />
 				<Divider />
 				<List>
-					{[
-						'Home',
-						'Scheduling',
-						'Requests',
-						'Form Builder',
-						'Settings',
-					].map((text, index) => (
-						<ListItem key={text} disablePadding>
+					<ListItem disablePadding>
+						<NavLink to={`/`}>
 							<ListItemButton>
-								<ListItemIcon>
-									{index % 2 === 0 ? (
-										<InboxIcon />
-									) : (
-										<MailIcon />
-									)}
-								</ListItemIcon>
-								<ListItemText primary={text} />
+								<ListItemText primary={`Home`} />
 							</ListItemButton>
-						</ListItem>
-					))}
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
+						<NavLink to={`/formbuilder`}>
+							<ListItemButton>
+								<ListItemText primary={`Form Builder`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
+						<NavLink to={`/settings`}>
+							<ListItemButton>
+								<ListItemText primary={`Settings`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
 				</List>
 			</Drawer>
 			<Box
 				component="main"
 				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
-				<Home />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/formbuilder" element={<Patient />} />
+					<Route path="/settings" element={<Patient />} />
+					<Route path="/patient/:id" element={<Patient />} />
+					<Route path="/schedule" element={<Schedule />} />
+				</Routes>
 			</Box>
 		</Box>
 	)

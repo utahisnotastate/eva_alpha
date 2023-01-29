@@ -1,128 +1,96 @@
-import * as React from 'react'
-import { useSelector } from 'react-redux'
-import CardBody from '../basestyledcomponents/Card/CardBody'
-import Card from '../basestyledcomponents/Card/Card'
-import { Button, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
-import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import CardActions from '@mui/material/CardActions'
-import CustomForm from '../CustomForm/customform'
-
-//create a MUI style object for the form builder
+import React from 'react'
+import {
+	Box,
+	Card,
+	CardContent,
+	CardHeader,
+	Container,
+	Divider,
+	Grid,
+	Typography,
+} from '@mui/material'
+import Button from '@mui/material/Button'
+import Menu from './Menu'
 
 export default function FormBuilder() {
-	const zones = useSelector((state) => state.zones)
 	return (
-		<Card>
-			<CardBody style={{ display: 'flex', flexDirection: 'row' }}>
-				<List style={{ flexGrow: 1 }}>
-					{zones && zones.length > 0
-						? zones.map((zone, index) => (
-								<ListItem key={index} disablePadding>
-									<ListItemButton>
-										<ListItemText primary={zone.zone} />
-									</ListItemButton>
-								</ListItem>
-						  ))
-						: null}
-				</List>
-				<div style={{ flexGrow: 3 }}>
-					<CustomForm fields={[]} />
-				</div>
-			</CardBody>
-			<CardFooter>
-				<CardActions>
-					<Button size="small">Add</Button>
-					<Button size="small">Save</Button>
-				</CardActions>
-			</CardFooter>
-		</Card>
+		<Box
+			component="main"
+			sx={{
+				flexGrow: 1,
+				py: 8,
+			}}>
+			<Container maxWidth="lg">
+				<Typography sx={{ mb: 3 }} variant="h4">
+					Form Builder
+				</Typography>
+				<Grid container spacing={3}>
+					<Grid item lg={4} md={6} xs={12}>
+						<Menu />
+					</Grid>
+					<Grid item lg={8} md={6} xs={12}>
+						<Card>
+							<CardHeader
+								subheader="Edit the fields shown in the form"
+								title="Registration Details"
+							/>
+							<Divider />
+							<CardContent>
+								<Typography
+									color="textPrimary"
+									gutterBottom
+									variant="h6">
+									Test
+								</Typography>
+							</CardContent>
+							<Divider />
+							<Box
+								sx={{
+									display: 'flex',
+									justifyContent: 'flex-end',
+									p: 2,
+								}}>
+								<Button color="primary" variant="contained">
+									Save details
+								</Button>
+							</Box>
+						</Card>
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
 	)
 }
 
 /*
-<CardBody>
-				{form.fields &&
-					form.fields.map(
-						(
-							{
-								fullWidth,
-								helperText,
-								label,
-								options,
-								type,
-								variant,
-								zone,
-								style,
-							},
-							index
-						) => (
-							<div key={index}>
-								<Typography>
-									<TextField
-										className={style}
-										name={`${label}.value`}
-										label={label}
-										type={type}
-										variant={variant}
-										fullWidth={fullWidth}
-										helperText={helperText}
-										options={options}
-									/>
-								</Typography>
-								<List>
-									{options &&
-										options.map((option, index) => (
-											<ListItem key={index}>
-												<ListItemText>
-													{option.label}
-												</ListItemText>
-											</ListItem>
-										))}
-								</List>
-							</div>
-						)
-					)}
-			</CardBody>
-
-
-
-
-{fields &&
-fields.map(
-	(
-		{
-			class_name,
-			fullWidth,
-			helperText,
-			label,
-			options,
-			type,
-			variant,
-			zone,
-		},
-		index
-	) => (
-		<div key={index}>
-			<Typography>
-				<TextField
-					className={class_name}
-					name={zone}
-					label={label}
-					type={type}
-					variant={variant}
-					fullWidth={fullWidth}
-					helperText={helperText}
-					options={options}
-				/>
-			</Typography>
-			<List>
-				{options &&
-					options.map((option, index) => (
-						<ListItem key={index}>
-							<ListItemText>{option.label}</ListItemText>
-						</ListItem>
-					))}
-			</List>
-		</div>
-	)
-)}*/
+* <Grid container spacing={3}>
+			<Grid item xs={2}>
+				<SimpleSideBar routes={routes} />
+			</Grid>
+			<Grid item xs={10}>
+				<Formik
+					initialValues={patient}
+					enableReinitialize
+					onSubmit={(patient) => handleSave(patient)}>
+					<Form>
+						<Button
+							variant={`contained`}
+							onClick={() => handleSave(patient)}>
+							Save!
+						</Button>
+						<Switch>
+							{routes.map((route, index) => (
+								<Route
+									key={index}
+									exact
+									path={`${path}${route.path}`}
+									component={route.component}
+								/>
+							))}
+						</Switch>
+					</Form>
+				</Formik>
+			</Grid>
+		</Grid>
+*
+* */

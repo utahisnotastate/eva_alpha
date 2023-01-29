@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { ModalProvider } from 'react-modal-hook'
 import store from './store/store'
 import Eva from './components/Eva/eva'
+import { BrowserRouter } from 'react-router-dom'
 import routes from './routes'
 
 export default function App() {
@@ -14,7 +15,9 @@ export default function App() {
 			<CssBaseline enableColorScheme />
 			<Provider store={store}>
 				<ModalProvider>
-					<Eva routes={routes} />
+					<BrowserRouter>
+						<Eva routes={routes} />
+					</BrowserRouter>
 				</ModalProvider>
 			</Provider>
 		</ThemeProvider>

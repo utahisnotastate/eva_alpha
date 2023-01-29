@@ -12,10 +12,6 @@ import {
 import Button from '@mui/material/Button'
 import PatientMenu from './PatientMenu'
 
-function AccountProfile() {
-	return null
-}
-
 export default function Patient() {
 	return (
 		<Box
