@@ -18,7 +18,9 @@ const Appointments = (props) => {
 				action={
 					<Button
 						endIcon={<ArrowDropDownIcon fontSize="small" />}
-						size="small">
+						size="small"
+						color={'primary'}
+						component={Card}>
 						Last 7 days
 					</Button>
 				}

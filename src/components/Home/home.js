@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Box, Container, Grid } from '@mui/material'
-import Appointments from './appointments'
 import MetricsTracker from './MetricsTracker'
 import TotalProfit from './total-profit'
+import LatestProducts from './latest-products'
+import Schedule from '../Scheduling/Schedule'
 
 function Metric({ label, value, feedback, col }) {
 	return (
@@ -44,7 +45,10 @@ const Home = () => (
 						<TotalProfit sx={{ height: '100%' }} />
 					</Grid>
 					<Grid item lg={8} md={12} xl={9} xs={12}>
-						<Appointments />
+						<Schedule />
+					</Grid>
+					<Grid item lg={4} md={6} xl={3} xs={12}>
+						<LatestProducts />
 					</Grid>
 				</Grid>
 			</Container>

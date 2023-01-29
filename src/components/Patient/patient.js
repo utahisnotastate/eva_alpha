@@ -19,13 +19,13 @@ function AccountProfile() {
 export default function Patient() {
 	return (
 		<Box
-			component='main'
+			component="main"
 			sx={{
 				flexGrow: 1,
 				py: 8,
 			}}>
-			<Container maxWidth='lg'>
-				<Typography sx={{ mb: 3 }} variant='h4'>
+			<Container maxWidth="lg">
+				<Typography sx={{ mb: 3 }} variant="h4">
 					Patient Profile
 				</Typography>
 				<Grid container spacing={3}>
@@ -35,15 +35,15 @@ export default function Patient() {
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>
 							<CardHeader
-								subheader='The information can be edited'
-								title='Registration Details'
+								subheader="The information can be edited"
+								title="Registration Details"
 							/>
 							<Divider />
 							<CardContent>
 								<Typography
-									color='textPrimary'
+									color="textPrimary"
 									gutterBottom
-									variant='h6'>
+									variant="h6">
 									Test
 								</Typography>
 							</CardContent>
@@ -54,7 +54,7 @@ export default function Patient() {
 									justifyContent: 'flex-end',
 									p: 2,
 								}}>
-								<Button color='primary' variant='contained'>
+								<Button color="primary" variant="contained">
 									Save details
 								</Button>
 							</Box>

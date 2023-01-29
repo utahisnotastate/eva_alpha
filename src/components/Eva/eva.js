@@ -89,7 +89,6 @@ export default function Eva({ routes }) {
 			<Box
 				component="main"
 				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
-				<Toolbar />
 				<Home />
 			</Box>
 		</Box>

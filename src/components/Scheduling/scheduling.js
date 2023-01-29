@@ -217,7 +217,7 @@ export default function Scheduling() {
 			<GridContainer justify="center">
 				<GridItem xs={12} sm={12} md={10}>
 					<Card>
-						<CardBody calendar>
+						<CardBody calendar={false}>
 							<BigCalendar
 								selectable
 								localizer={localizer}
