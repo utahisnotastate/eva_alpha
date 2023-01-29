@@ -12,9 +12,8 @@ import styles from './timelineStyle.js'
 
 const useStyles = makeStyles(styles)
 
-export default function Timeline(props) {
+export default function Timeline({ simple, stories }) {
 	const classes = useStyles()
-	const { stories, simple } = props
 	const timelineClass =
 		classes.timeline +
 		' ' +

@@ -1,96 +1,56 @@
 import React from 'react'
 import {
 	Box,
+	Button,
 	Card,
+	CardActions,
 	CardContent,
 	CardHeader,
-	Container,
 	Divider,
-	Grid,
-	Typography,
 } from '@mui/material'
-import Button from '@mui/material/Button'
-import Menu from './Menu'
+import FormBuilderRow from './FormBuilderRow'
 
-export default function FormBuilder() {
+import { FieldArray, Form, Formik } from 'formik'
+
+export default function FormBuilder({ title, fields }) {
 	return (
-		<Box
-			component="main"
-			sx={{
-				flexGrow: 1,
-				py: 8,
-			}}>
-			<Container maxWidth="lg">
-				<Typography sx={{ mb: 3 }} variant="h4">
-					Form Builder
-				</Typography>
-				<Grid container spacing={3}>
-					<Grid item lg={4} md={6} xs={12}>
-						<Menu />
-					</Grid>
-					<Grid item lg={8} md={6} xs={12}>
-						<Card>
-							<CardHeader
-								subheader="Edit the fields shown in the form"
-								title="Registration Details"
-							/>
-							<Divider />
-							<CardContent>
-								<Typography
-									color="textPrimary"
-									gutterBottom
-									variant="h6">
-									Test
-								</Typography>
-							</CardContent>
-							<Divider />
-							<Box
-								sx={{
-									display: 'flex',
-									justifyContent: 'flex-end',
-									p: 2,
-								}}>
-								<Button color="primary" variant="contained">
-									Save details
-								</Button>
-							</Box>
-						</Card>
-					</Grid>
-				</Grid>
-			</Container>
-		</Box>
+		<Card>
+			<CardHeader title={title} />
+			<Divider />
+			<CardContent>
+				<Formik initialValues={{ fields }} onSubmit={console.log}>
+					{({ values }) => (
+						<Form>
+							<FieldArray name="fields">
+								{({ push, remove }) => (
+									<>
+										{values.fields &&
+										values.fields.length > 0
+											? values.fields.map(
+													(field, index) => (
+														<FormBuilderRow
+															key={index}
+															field={field}
+															index={index}
+															push={push}
+															remove={remove}
+														/>
+													)
+											  )
+											: null}
+									</>
+								)}
+							</FieldArray>
+						</Form>
+					)}
+				</Formik>
+			</CardContent>
+
+			<CardActions>
+				<Button color="primary" size="small" variant="text">
+					View all <Box component="span" sx={{ pl: 1 }} />
+				</Button>
+			</CardActions>
+		</Card>
 	)
 }
-
-/*
-* <Grid container spacing={3}>
-			<Grid item xs={2}>
-				<SimpleSideBar routes={routes} />
-			</Grid>
-			<Grid item xs={10}>
-				<Formik
-					initialValues={patient}
-					enableReinitialize
-					onSubmit={(patient) => handleSave(patient)}>
-					<Form>
-						<Button
-							variant={`contained`}
-							onClick={() => handleSave(patient)}>
-							Save!
-						</Button>
-						<Switch>
-							{routes.map((route, index) => (
-								<Route
-									key={index}
-									exact
-									path={`${path}${route.path}`}
-									component={route.component}
-								/>
-							))}
-						</Switch>
-					</Form>
-				</Formik>
-			</Grid>
-		</Grid>
-*
-* */

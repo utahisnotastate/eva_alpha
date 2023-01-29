@@ -18,6 +18,7 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import Home from '../Home/home'
 import Patient from '../Patient/patient'
 import Schedule from '../Scheduling/Schedule'
+import FormBuilder from '../FormBuilder/formbuilder'
 
 const drawerWidth = 240
 
@@ -101,7 +102,26 @@ export default function Eva() {
 					<Route path="/" element={<Home />} />
 					<Route
 						path="/formbuilder"
-						element={<Patient title={`Form Builder`} />}
+						element={
+							<FormBuilder
+								title={`Physical Exam`}
+								fields={[
+									{
+										type: 'text',
+										label: 'This is a text field',
+									},
+									{
+										type: 'text',
+										label: 'Second Field',
+									},
+								]}
+								blankField={{
+									type: 'text',
+									label: '',
+									options: [],
+								}}
+							/>
+						}
 					/>
 					<Route
 						path="/settings"

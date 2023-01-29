@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Paper from '@mui/material/Paper'
+import { Card, CardContent, CardHeader, Divider } from '@mui/material'
 import { ViewState } from '@devexpress/dx-react-scheduler'
 import {
 	Appointments,
@@ -22,13 +22,17 @@ const schedulerData = [
 ]
 export default function Schedule() {
 	return (
-		<Paper>
-			<Scheduler data={schedulerData}>
-				<ViewState currentDate={currentDate} />
-				<DayView startDayHour={8} endDayHour={22} />
+		<Card>
+			<CardHeader title="Schedule" />
+			<Divider />
+			<CardContent>
+				<Scheduler data={schedulerData}>
+					<ViewState currentDate={currentDate} />
+					<DayView startDayHour={8} endDayHour={22} />
 
-				<Appointments />
-			</Scheduler>
-		</Paper>
+					<Appointments />
+				</Scheduler>
+			</CardContent>
+		</Card>
 	)
 }

@@ -1,12 +1,12 @@
 import React from 'react'
-import { TextField } from 'mui-rff'
+import { TextField } from '@mui/material'
 
 export default function DynamicTextField({ label, name, type }) {
 	console.log({ label, name })
 
 	return (
 		<TextField
-			name={`${name}.value`}
+			name={`${name}`}
 			label={label}
 			type={type}
 			variant="standard"
