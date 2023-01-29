@@ -12,7 +12,7 @@ import {
 import Button from '@mui/material/Button'
 import PatientMenu from './PatientMenu'
 
-export default function Patient() {
+export default function Patient({ title }) {
 	return (
 		<Box
 			component="main"
@@ -22,7 +22,7 @@ export default function Patient() {
 			}}>
 			<Container maxWidth="lg">
 				<Typography sx={{ mb: 3 }} variant="h4">
-					Patient Profile
+					{title}
 				</Typography>
 				<Grid container spacing={3}>
 					<Grid item lg={4} md={6} xs={12}>

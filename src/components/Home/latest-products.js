@@ -51,10 +51,7 @@ const products = [
 
 const LatestProducts = (props) => (
 	<Card {...props}>
-		<CardHeader
-			subtitle={`${products.length} in total`}
-			title="Open Requests"
-		/>
+		<CardHeader subtitle={`${products.length} in total`} title="Requests" />
 		<Divider />
 		<List>
 			{products.map((product, i) => (

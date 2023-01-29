@@ -13,43 +13,18 @@ import {
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
-import { createBrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 
 import Home from '../Home/home'
 import Patient from '../Patient/patient'
 import Schedule from '../Scheduling/Schedule'
-
-const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <Home />,
-		children: [
-			{
-				path: '/formbuilder',
-				element: <Patient />,
-			},
-			{
-				path: '/settings',
-				element: <Patient />,
-			},
-			{
-				path: '/patient/:id',
-				element: <Patient />,
-			},
-			{
-				path: '/schedule',
-				element: <Schedule />,
-			},
-		],
-	},
-])
 
 const drawerWidth = 240
 
 //create a router for the app using the Home and Patient components
 //create a router for the app using the Home and Patient components
 
-export default function Eva({ routes }) {
+export default function Eva() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -124,9 +99,18 @@ export default function Eva({ routes }) {
 				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/formbuilder" element={<Patient />} />
-					<Route path="/settings" element={<Patient />} />
-					<Route path="/patient/:id" element={<Patient />} />
+					<Route
+						path="/formbuilder"
+						element={<Patient title={`Form Builder`} />}
+					/>
+					<Route
+						path="/settings"
+						element={<Patient title={`Settings`} />}
+					/>
+					<Route
+						path="/patient/:id"
+						element={<Patient title={`First Name Last Name`} />}
+					/>
 					<Route path="/schedule" element={<Schedule />} />
 				</Routes>
 			</Box>

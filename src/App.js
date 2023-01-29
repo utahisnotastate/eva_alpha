@@ -7,7 +7,6 @@ import { ModalProvider } from 'react-modal-hook'
 import store from './store/store'
 import Eva from './components/Eva/eva'
 import { BrowserRouter } from 'react-router-dom'
-import routes from './routes'
 
 export default function App() {
 	return (
@@ -16,7 +15,7 @@ export default function App() {
 			<Provider store={store}>
 				<ModalProvider>
 					<BrowserRouter>
-						<Eva routes={routes} />
+						<Eva />
 					</BrowserRouter>
 				</ModalProvider>
 			</Provider>
