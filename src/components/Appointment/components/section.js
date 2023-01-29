@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Divider } from '@mui/material'
+import { Divider, Stack } from '@mui/material'
 
 export default function Section({ title, children }) {
 	return (

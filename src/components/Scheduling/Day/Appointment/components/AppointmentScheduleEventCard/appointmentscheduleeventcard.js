@@ -2,13 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import CheckInForm from '../../../../../old/Forms/Administrative/Scheduling/CheckIn/checkin'
 import Card from '../../../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../../../basestyledcomponents/Card/CardHeader'
-import { Button, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import Modal from '../../../../../basestyledcomponents/Modal/modal'
-import NewRequest from '../../../../../old/Forms/Clinical/Patient/newrequest'
 
 export default function AppointmentScheduleEventCard(props) {
 	return (

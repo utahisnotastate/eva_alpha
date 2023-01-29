@@ -3,13 +3,13 @@ import { useFormikContext } from 'formik'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-	Stepper,
-	Step,
+	Button,
 	Grid,
+	Step,
 	StepButton,
 	StepLabel,
+	Stepper,
 	Typography,
-	Button,
 } from '@material-ui/core'
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation'
 import PatientComplaints from './Complaints/complaints'
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 	},
 }))
+
 function getSteps() {
 	return [
 		{ index: 0, label: 'Complaints' },
@@ -122,6 +123,7 @@ export default function PatientEncounter(props) {
 	const handleStep = (step) => () => {
 		setActiveStep(step)
 	}
+
 	function getStepContent(step, formvalues) {
 		switch (step) {
 			//display patient complaints component
@@ -150,6 +152,7 @@ export default function PatientEncounter(props) {
 				return <Typography>Unknown step</Typography>
 		}
 	}
+
 	return (
 		<Grid container direction={`column`} className={classes.root}>
 			<EncounterStepper

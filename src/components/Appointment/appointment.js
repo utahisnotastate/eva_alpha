@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, useRouteMatch } from 'react-router-dom'
 import CustomForm from '../CustomForm/customform'
 import Card from '../basestyledcomponents/Card/Card'
 import AppointmentStepper from './components/appointmentstepper'
@@ -13,8 +12,6 @@ import CardActions from '@mui/material/CardActions'
 import { CardActionArea } from '@mui/material'
 
 export default function Appointment() {
-	let { path } = useRouteMatch()
-	let { id } = useParams()
 	const [activeStep, setActiveStep] = useState(2)
 	const fields = useSelector((state) => state.appointment.fields)
 

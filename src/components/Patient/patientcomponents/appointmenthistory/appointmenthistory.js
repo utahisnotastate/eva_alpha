@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { NavLink, useParams } from 'react-router-dom'
 import style from '../../../basestyledcomponents/Table/contentAreas'
@@ -6,7 +6,6 @@ import moment from 'moment'
 import { Typography } from '@material-ui/core'
 import MUIDataTable from 'mui-datatables'
 import { getPatientAppointments } from '../../../../api/patient.api'
-import { getAllRequests } from '../../../../api/requests.api'
 
 const useStyles = makeStyles(style)
 
@@ -19,6 +18,7 @@ function ViewAppointment({ tableMeta }) {
 		</div>
 	)
 }
+
 export default function AppointmentHistory() {
 	const [appointments, setAppointments] = useState([])
 

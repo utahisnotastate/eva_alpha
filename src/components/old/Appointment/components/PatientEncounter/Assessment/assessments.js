@@ -1,68 +1,71 @@
-import React, { useEffect } from "react";
-import { useFormikContext, Field, FieldArray } from "formik";
-import Grid from "@material-ui/core/Grid";
-import AddAssessment from "./addassessment";
-import RelatedToAssessment from "./relatedToAssessments";
+import React from 'react'
+import { FieldArray, useFormikContext } from 'formik'
+import Grid from '@material-ui/core/Grid'
+import AddAssessment from './addassessment'
+import RelatedToAssessment from './relatedToAssessments'
 
 export default function AppointmentAssessment(props) {
-  const { values } = useFormikContext();
-  const complaints = values.clinical_data.complaints;
+	const { values } = useFormikContext()
+	const complaints = values.clinical_data.complaints
 
-  const handleAddNewItem = (helper, baseObject) => {
-    helper.push(baseObject);
-  };
+	const handleAddNewItem = (helper, baseObject) => {
+		helper.push(baseObject)
+	}
 
-  return (
-    <Grid container direction={`column`}>
-      <Grid item xs={12}>
-        <FieldArray
-          name={`clinical_data.assessments`}
-          render={(arrayHelpers) => (
-            <Grid container direction={`column`}>
-              {values.clinical_data.assessments &&
-              values.clinical_data.assessments.length > 0 ? (
-                values.clinical_data.assessments.map(
-                  (assessment, assessmentindex) => (
-                    <Grid container direction={`column`} key={assessmentindex}>
-                      <Grid item>
-                        <p>{assessment.code}</p>
-                        <p>{assessment.description}</p>
-                      </Grid>
-                      <Grid item>
-                        <p>Related To:</p>
-                      </Grid>
-                      <Grid item>
-                        <p>Complaints</p>
-                        <Grid container>
-                          <RelatedToAssessment
-                            name={`clinical_data.assessments[${assessmentindex}].complaints`}
-                            items={complaints}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  )
-                )
-              ) : (
-                <Grid item>
-                  <p>
-                    No complaints, physical exam findings, or review of system
-                    findings found
-                  </p>
-                </Grid>
-              )}
-              <Grid item>
-                <AddAssessment arrayHelpers={arrayHelpers} />
-              </Grid>
-            </Grid>
-          )}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <pre>{JSON.stringify()}</pre>
-      </Grid>
-    </Grid>
-  );
+	return (
+		<Grid container direction={`column`}>
+			<Grid item xs={12}>
+				<FieldArray
+					name={`clinical_data.assessments`}
+					render={(arrayHelpers) => (
+						<Grid container direction={`column`}>
+							{values.clinical_data.assessments &&
+							values.clinical_data.assessments.length > 0 ? (
+								values.clinical_data.assessments.map(
+									(assessment, assessmentindex) => (
+										<Grid
+											container
+											direction={`column`}
+											key={assessmentindex}>
+											<Grid item>
+												<p>{assessment.code}</p>
+												<p>{assessment.description}</p>
+											</Grid>
+											<Grid item>
+												<p>Related To:</p>
+											</Grid>
+											<Grid item>
+												<p>Complaints</p>
+												<Grid container>
+													<RelatedToAssessment
+														name={`clinical_data.assessments[${assessmentindex}].complaints`}
+														items={complaints}
+													/>
+												</Grid>
+											</Grid>
+										</Grid>
+									)
+								)
+							) : (
+								<Grid item>
+									<p>
+										No complaints, physical exam findings,
+										or review of system findings found
+									</p>
+								</Grid>
+							)}
+							<Grid item>
+								<AddAssessment arrayHelpers={arrayHelpers} />
+							</Grid>
+						</Grid>
+					)}
+				/>
+			</Grid>
+			<Grid item xs={12}>
+				<pre>{JSON.stringify()}</pre>
+			</Grid>
+		</Grid>
+	)
 }
 
 /*

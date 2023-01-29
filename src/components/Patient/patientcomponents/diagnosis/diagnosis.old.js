@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
-import Table from '../../../basestyledcomponents/Table/Table'
 import style from '../../../basestyledcomponents/Table/contentAreas'
 import Person from '@material-ui/icons/Person'
 import Button from '../../../basestyledcomponents/Table/Button'
-import { Paper, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import CustomTabs from '../../../basestyledcomponents/CustomTabs/CustomTabs'
 import DiagnosisSummary from './diagnosissummary'
-import { getPatientDiagnoses } from '../../../../api/patient.api'
-import { useSelector, useDispatch } from 'react-redux'
-import { patientdiagnoses } from '../../../../store/reducers/patient/patient.reducers'
+import {
+	getPatientDiagnoses,
+	setPatientDiagnosisActive,
+	setPatientDiagnosisStatus,
+} from '../../../../api/patient.api'
+import { useDispatch, useSelector } from 'react-redux'
 import NewDiagnosis from './addDiagnosis'
 import ResolvedDiagnoses from './ResolvedDiagnoses'
 import DiagnosisMedications from './diagnosismedications'
 import DiagnosisRadiology from './diagnosisRadiology'
 import DiagnosisLabs from './diagnosisLabs'
 import DiagnosisReferrals from './diagnosisReferrals'
-import {
-	setPatientDiagnosisActive,
-	setPatientDiagnosisStatus,
-} from '../../../../api/patient.api'
 
 const useStyles = makeStyles(style)
 

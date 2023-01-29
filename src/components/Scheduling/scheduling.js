@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useParams, useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
 	Calendar as BigCalendar,
 	momentLocalizer,
@@ -9,7 +9,7 @@ import {
 import moment from 'moment'
 import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -23,13 +23,10 @@ import API_URL from '../../api/api_url'
 import Card from '../basestyledcomponents/Card/Card'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import AppointmentScheduleEvent from './Day/Appointment/appointmentscheduleevent'
-import WaitListCountCard from './WaitList/waitlistcountcard'
-import ReferralsToSchedule from './ReferralsToSchedule/referralstoschedule'
 import ScheduleAppointmentModal from './ScheduleAppointmentModal/scheduleappointmentmodal'
 import styles from '../basestyledcomponents/buttonStyle'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { getAllAppointments } from '../../api/appointment.api'
-import { getSchedulingComponentData } from '../../api/utility.api'
 
 var toDate = require('@fav/type.to-date')
 
@@ -49,7 +46,6 @@ const blankclinicaldata = {
 
 export default function Scheduling() {
 	const dispatch = useDispatch()
-	let { path, url } = useRouteMatch()
 	let { id } = useParams()
 	const appointments = useSelector((state) => state.appointments)
 

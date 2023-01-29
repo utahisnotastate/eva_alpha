@@ -1,27 +1,14 @@
-import React, { useEffect, useState, Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-	TextField,
-	Checkbox,
-	Typography,
 	FormControl,
 	FormControlLabel,
 	FormLabel,
-	FormGroup,
-	InputLabel,
-	RadioGroup,
 	Radio,
-	Input,
+	RadioGroup,
+	Typography,
 } from '@material-ui/core'
-import {
-	useForm,
-	Controller,
-	useFieldArray,
-	useFormContext,
-} from 'react-hook-form'
-import Grid from '@material-ui/core/Grid'
-import Button from '../../../../../../basestyledcomponents/Button'
+import { useFormContext } from 'react-hook-form'
 import CheckboxGroupPreview from './CheckboxGroupPreview'
 import CheckboxPreview from './CheckboxPreview'
 import TextFieldPreview from './TextFieldPreview'

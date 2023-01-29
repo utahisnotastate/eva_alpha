@@ -1,4 +1,3 @@
-import PatientActions from '../../../Patient/patientcomponents/patientactions/patientactions'
 import AppointmentHistory from '../../../Patient/patientcomponents/appointmenthistory/appointmenthistory'
 import PatientRequests from '../../../Patient/patientcomponents/patientrequests/patientrequests'
 import Insurance from '../../../Patient/patientcomponents/insurance/insurance'

@@ -1,7 +1,5 @@
 import React from 'react'
-import { FormGroup } from '@mui/material'
-import { FormControlLabel } from '@mui/material'
-import { Checkbox } from '@mui/material'
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 export default function CheckboxGroup({ options, control }) {
 	return (

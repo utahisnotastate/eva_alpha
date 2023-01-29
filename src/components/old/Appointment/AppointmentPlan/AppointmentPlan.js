@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextField, Typography } from '@material-ui/core'
-import { Card } from '@material-ui/core'
-import CardContent from '@material-ui/core/CardContent'
+import { Typography } from '@material-ui/core'
 import {
 	getAppointmentBasicDetails,
 	saveAppointmentPlan,
 } from '../../../../api/appointment.api'
 import DiagnosisPlan from './diagnosisplan'
-import {
-	useForm,
-	FormProvider,
-	useFormContext,
-	useFieldArray,
-} from 'react-hook-form'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 
 const useStyles = makeStyles({
 	builderroot: {

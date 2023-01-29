@@ -1,104 +1,83 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import GridContainer from '../basestyledcomponents/Grid/GridContainer'
-import GridItem from '../basestyledcomponents/Grid/GridItem'
-import { Button } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import Card from '../basestyledcomponents/Card/Card'
-import CardBody from '../basestyledcomponents/Card/CardBody'
-import 'react-bootstrap-typeahead/css/Typeahead.css'
-import ClinicalQueue from '../ClinicalQueue/clinicalqueue'
-import CardFooter from '../basestyledcomponents/Card/CardFooter'
-import { getAllForms } from '../../api/forms.api'
-import { getAllInitDataOnLoad } from '../../api/utility.api'
-import { bulkCreateItems } from '../../api/utility.api'
-import mockappointments from '../../api/mockappointments'
+import * as React from 'react'
+import { Box, Container, Grid } from '@mui/material'
+import Appointments from './appointments'
+import MetricsTracker from './MetricsTracker'
+import TotalProfit from './total-profit'
 
-const styles = {
-	cardTitle: {
-		marginTop: '0',
-		minHeight: 'auto',
-		fontWeight: '300',
-		fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-		marginBottom: '3px',
-		textDecoration: 'none',
-	},
-}
-const useStyles = makeStyles(styles)
-
-function Home() {
-	const classes = useStyles()
-	const [quickactions, setQuickActions] = useState(['Create New Patient'])
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		getAllInitDataOnLoad()
-			.then((data) => {
-				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
-				dispatch({
-					type: 'LOAD_APPOINTMENTS',
-					appointments: data.appointments,
-				})
-				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
-				dispatch({ type: 'LOAD_EDITFORM', editform: data.forms[0] })
-				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-			})
-			.catch((err) => console.log(err))
-	})
-
+function Metric({ label, value, feedback, col }) {
 	return (
-		<GridContainer direction="column" alignContent="center">
-			<GridItem xs={12} sm={12} md={12}>
-				<Card>
-					<CardBody>
-						<ClinicalQueue />
-					</CardBody>
-					<CardFooter>
-						{quickactions.map((action, index) => {
-							return (
-								<Button
-									key={index}
-									variant="contained"
-									color="primary"
-									style={{ margin: '10px' }}>
-									{action}
-								</Button>
-							)
-						})}
-						<Button
-							variant="contained"
-							color="primary"
-							style={{ margin: '10px' }}
-							onClick={() =>
-								bulkCreateItems(
-									mockappointments,
-									'appointments'
-								)
-							}>
-							Bulk Add Appointments
-						</Button>
-					</CardFooter>
-				</Card>
-			</GridItem>
-		</GridContainer>
+		<Grid item lg={col.lg} sm={col.sm} xl={col.xl} xs={col.xs}>
+			<MetricsTracker label={label} value={value} feedback={feedback} />
+		</Grid>
 	)
 }
+
+const Home = () => (
+	<>
+		<Box
+			component="main"
+			sx={{
+				flexGrow: 1,
+				py: 8,
+			}}>
+			<Container maxWidth={false}>
+				<Grid container spacing={3}>
+					<Metric
+						label={`Patients in Waiting Room`}
+						value={5}
+						feedback={`Test This`}
+						col={{ lg: 3, sm: 6, xl: 3, xs: 12 }}
+					/>
+					<Metric
+						label="Appointments in Progress"
+						value={1.6}
+						feedback="Test This"
+						col={{ lg: 3, sm: 3, xl: 3, xs: 12 }}
+					/>
+					<Metric
+						label="Requests in Progress"
+						value={1.6}
+						feedback="Test This"
+						col={{ lg: 3, sm: 6, xl: 3, xs: 12 }}
+					/>
+					<Grid item xl={3} lg={3} sm={6} xs={12}>
+						<TotalProfit sx={{ height: '100%' }} />
+					</Grid>
+					<Grid item lg={8} md={12} xl={9} xs={12}>
+						<Appointments />
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
+	</>
+)
 
 export default Home
 
 /*
 
-onClick={() =>
-								bulkCreateItems(
-									mockappointments,
-									'appointments'
-								)
-							}
-* 				<Button
-					variant="contained"
-					color="primary"
-					onClick={bulkCreatePatients}>
-					Please
-				</Button>
+<Grid
+            item
+            xl={3}
+            lg={3}
+            sm={6}
+            xs={12}
+          >
+            <TasksProgress/>
+          </Grid>
+
+
+* <Grid
+            item
+            xl={3}
+            lg={3}
+            sm={6}
+            xs={12}
+          >
+            <TotalCustomers/>
+          </Grid>
+*
+*
+*
 *
 * */

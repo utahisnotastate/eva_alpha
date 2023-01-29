@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Autosuggest from 'react-autosuggest'
 import { useField, useFormikContext } from 'formik'
 import Grid from '@material-ui/core/Grid'

@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormContext } from 'react-hook-form'
-import {
-	TextField,
-	Typography,
-	FormControlLabel,
-	FormLabel,
-	RadioGroup,
-	Radio,
-	FormControl,
-} from '@material-ui/core'
+import { TextField, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Button from '../../../../../../../basestyledcomponents/Button'
-import AppointmentField from '../../../../../../Forms/components/AppointmentField/appointmentfield'
 
 const useStyles = makeStyles({
 	fullsize: {

@@ -1,21 +1,14 @@
-import React, { useEffect, useState, Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
 	Checkbox,
-	FormControl,
 	FormControlLabel,
-	FormLabel,
-	FormGroup,
-	Typography,
-	Radio,
 	TextField,
-	Box,
+	Typography,
 } from '@material-ui/core'
-import { flexbox } from '@material-ui/system'
 import Grid from '@material-ui/core/Grid'
 import Button from '../../../../../../basestyledcomponents/Button'
-import { useFormContext, useFieldArray } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
 const useStyles = makeStyles({
 	fullsize: {

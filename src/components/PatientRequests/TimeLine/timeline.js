@@ -4,10 +4,8 @@ import Slide from '@material-ui/core/Slide'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogActions from '@material-ui/core/DialogActions'
 import Close from '@material-ui/icons/Close'
 // @material-ui/icons
-import CardTravel from '@material-ui/icons/CardTravel'
 import Build from '@material-ui/icons/Build'
 import TimelineComponent from '../../basestyledcomponents/TimeLineStyled/Timeline'
 import Button from '../../basestyledcomponents/Button'
@@ -15,8 +13,6 @@ import styles from '../../basestyledcomponents/Modal/modalStyle'
 import { Typography } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import UpdatePatientRequestForm from './UpdatePatientRequestForm/updatepatientrequestform'
-import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="down" ref={ref} {...props} />

@@ -14,10 +14,12 @@
     padding-left: 20px;
 
 }
+
 .MuiFormControl-root > label {
     width: 20%;
     padding-bottom: 5px;
 }
+
 .MuiGrid-grid-xs-12 {
 }
 
@@ -25,9 +27,11 @@
     width: 100%;
 
 }
+
 .react-autosuggest__input {
     width: 80%;
 }
+
 .react-autosuggest__suggestions-container--open {
     width: 100%;
 }

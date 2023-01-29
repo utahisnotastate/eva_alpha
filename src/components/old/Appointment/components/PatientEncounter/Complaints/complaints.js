@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
-import { FieldArray } from "formik";
-import Grid from "@material-ui/core/Grid";
-import { Complaint } from "./Complaint/complaint";
-import AddNewComplaint from "./addcomplaint";
+import React from 'react'
+import { makeStyles } from '@material-ui/core'
+import { FieldArray } from 'formik'
+import Grid from '@material-ui/core/Grid'
+import { Complaint } from './Complaint/complaint'
+import AddNewComplaint from './addcomplaint'
 
 const editorStyle = {
-  minWidth: "100px",
-  minHeight: "100px",
-  "touch-action": "none",
-};
-const API_URL = "http://127.0.0.1:8000/api";
+	minWidth: '100px',
+	minHeight: '100px',
+	'touch-action': 'none',
+}
+const API_URL = 'http://127.0.0.1:8000/api'
 const useStyles = makeStyles((theme) => ({
-  headercontainer: {
-    margin: "10px",
-  },
-  sectioncontainer: {
-    margin: "10px",
-  },
-}));
+	headercontainer: {
+		margin: '10px',
+	},
+	sectioncontainer: {
+		margin: '10px',
+	},
+}))
 /*
         <TextField
           name={`new_complaint_description`}
@@ -86,44 +86,57 @@ const useStyles = makeStyles((theme) => ({
   );
 }*/
 export default function PatientComplaints({ complaints, name }) {
-  const classes = useStyles();
-  return (
-    <>
-      <Grid container direction={`column`} justify="space-evenly" spacing={2}>
-        <Grid item>
-          <Grid container direction="column">
-            <FieldArray name={name}>
-              {(arrayHelpers) => (
-                <>
-                  {complaints && complaints.length > 0 ? (
-                    <Grid container direction="column">
-                      {complaints.map((complaint, index) => (
-                        <Complaint
-                          arrayHelpers={arrayHelpers}
-                          key={index}
-                          name={name}
-                          index={index}
-                          classes={classes}
-                        />
-                      ))}
-                    </Grid>
-                  ) : (
-                    <Grid item>
-                      <p>No complaints yet. Add some below!</p>
-                    </Grid>
-                  )}
+	const classes = useStyles()
+	return (
+		<>
+			<Grid
+				container
+				direction={`column`}
+				justify="space-evenly"
+				spacing={2}>
+				<Grid item>
+					<Grid container direction="column">
+						<FieldArray name={name}>
+							{(arrayHelpers) => (
+								<>
+									{complaints && complaints.length > 0 ? (
+										<Grid container direction="column">
+											{complaints.map(
+												(complaint, index) => (
+													<Complaint
+														arrayHelpers={
+															arrayHelpers
+														}
+														key={index}
+														name={name}
+														index={index}
+														classes={classes}
+													/>
+												)
+											)}
+										</Grid>
+									) : (
+										<Grid item>
+											<p>
+												No complaints yet. Add some
+												below!
+											</p>
+										</Grid>
+									)}
 
-                  <Grid item>
-                    <AddNewComplaint arrayHelpers={arrayHelpers} />
-                  </Grid>
-                </>
-              )}
-            </FieldArray>
-          </Grid>
-        </Grid>
-      </Grid>
-    </>
-  );
+									<Grid item>
+										<AddNewComplaint
+											arrayHelpers={arrayHelpers}
+										/>
+									</Grid>
+								</>
+							)}
+						</FieldArray>
+					</Grid>
+				</Grid>
+			</Grid>
+		</>
+	)
 }
 
 /*

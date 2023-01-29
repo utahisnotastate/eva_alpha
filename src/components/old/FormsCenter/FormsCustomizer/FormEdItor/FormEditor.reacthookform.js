@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-	useForm,
-	Controller,
-	FormContext,
-	FormProvider,
-	useFieldArray,
-} from 'react-hook-form'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { TextField, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Button from '../../../../basestyledcomponents/Button'
@@ -15,12 +9,9 @@ import Card from '../../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../../basestyledcomponents/Card/CardBody'
 import FormFields from './FormFields/FormFields'
-import { useParams, useRouteMatch, NavLink } from 'react-router-dom'
-import { updateForm, fetchForm } from '../../../../../api/forms.api'
-import FieldOptionsEditor from './FormFields/FieldOptionsEditor/FieldOptionsEditor'
-import EditorHeader from './EditorHeader/EditorHeader'
+import { NavLink, useParams, useRouteMatch } from 'react-router-dom'
+import { fetchForm, updateForm } from '../../../../../api/forms.api'
 import AddNewCustomField from './EditorInput/AddNewCustomField'
-import FormPreview from '../../FormPreview/formpreview'
 
 const API_URL = 'http://127.0.0.1:8000/api'
 

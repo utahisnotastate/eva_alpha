@@ -1,7 +1,4 @@
 import React from 'react'
-import Button from '../../../basestyledcomponents/Button'
-import Typography from '@material-ui/core/Typography'
-import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined'
 import { Input } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
@@ -24,6 +21,7 @@ export default function MoveBackToWaitingRoom(props) {
 			)
 			return result
 		}
+
 		moveBackPatient()
 			.then((response) => {
 				async function getUpdatedClinicalQueue() {
@@ -31,6 +29,7 @@ export default function MoveBackToWaitingRoom(props) {
 					let appointments = result.data
 					return appointments
 				}
+
 				getUpdatedClinicalQueue().then((response) => {
 					console.log(response)
 					let modifiedappointments = []

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllPatients } from '../../api/patients.api'
-import mockpatients from '../Patient/patients.mock'
+import { useSelector } from 'react-redux'
 import columns from './patients.columns'
 import options from './patient.table.options'
 

@@ -25,6 +25,7 @@ export default class PatientsearchOld extends React.Component {
 	}
 	_handleSearch = (query) => {
 		this.setState({ isLoading: true })
+
 		async function searchPatients() {
 			const result = await axios.get(
 				`http://127.0.0.1:8000/api/patients?search=${query}`
@@ -32,6 +33,7 @@ export default class PatientsearchOld extends React.Component {
 			console.log(result.data)
 			return result.data
 		}
+
 		searchPatients()
 			.then((response) => {
 				this.setState({

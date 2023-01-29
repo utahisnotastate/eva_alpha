@@ -1,31 +1,16 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Divider from '@material-ui/core/Divider'
-import {
-	useForm,
-	FormProvider,
-	useFormContext,
-	useFieldArray,
-} from 'react-hook-form'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import NewAssessment from './newassessment'
-import ICD10Search from '../../../basestyledcomponents/ICD10Search/icd10search'
 import AssessmentsList from './assessmentslist'
 import { Card } from '@material-ui/core'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import {
 	getAppointmentForms,
-	getAppointmentAssessments,
-	getAppointmentComplaints,
-	createAppointmentComplaints,
-	getAppointmentBasicDetails,
 	saveAppointmentAssessments,
 } from '../../../../api/appointment.api'
-import NewComplaint from '../Complaints/NewComplaint/NewComplaint.FunComp'
-import { appointmentfindings } from '../../../store/reducers/appointment/appointment.reducers'
 
 const API_URL = 'http://127.0.0.1:8000/api'
 

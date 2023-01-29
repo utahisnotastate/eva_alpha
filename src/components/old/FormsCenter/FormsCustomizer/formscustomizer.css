@@ -1,8 +1,22 @@
-i.glyphicon { display: none; }
-.btn-add::after { content: 'Add'; }
-.array-item-move-up::after { content: 'Move Up'; }
-.array-item-move-down::after { content: 'Move Down'; }
-.array-item-remove::after { content: 'Remove'; }
+i.glyphicon {
+    display: none;
+}
+
+.btn-add::after {
+    content: 'Add';
+}
+
+.array-item-move-up::after {
+    content: 'Move Up';
+}
+
+.array-item-move-down::after {
+    content: 'Move Down';
+}
+
+.array-item-remove::after {
+    content: 'Remove';
+}
 
 .custom-field-input {
     width: 50%;

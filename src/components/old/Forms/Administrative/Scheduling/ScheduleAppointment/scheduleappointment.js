@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import GridContainer from '../../../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../../../basestyledcomponents/Grid/GridItem'
 import { useForm } from 'react-hook-form'
 import { Typography } from '@material-ui/core'
-import { useModal } from 'react-modal-hook'
 import { useParams } from 'react-router-dom'
 
 export default function ScheduleAppointment(props) {

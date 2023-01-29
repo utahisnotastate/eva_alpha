@@ -1,100 +1,2002 @@
-[{"patient":127,"provider":2,"start":"2022-01-09T19:16:53Z","end":"2022-01-09T20:16:53Z","type":"initial_appointment","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":134,"provider":2,"start":"2021-06-16T17:03:16Z","end":"2021-06-16T18:03:16Z","type":"medication_management","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":2,"start":"2021-11-18T22:08:16Z","end":"2021-11-18T23:08:16Z","type":"new_issue","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":2,"start":"2021-07-25T01:07:16Z","end":"2021-07-25T02:07:16Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":2,"start":"2022-05-31T15:54:59Z","end":"2022-05-31T16:54:59Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":3,"start":"2022-01-24T04:12:14Z","end":"2022-01-24T05:12:14Z","type":"follow_up","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":3,"start":"2021-08-05T22:54:30Z","end":"2021-08-05T23:54:30Z","type":"medication_management","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":134,"provider":3,"start":"2022-02-05T09:15:44Z","end":"2022-02-05T10:15:44Z","type":"new_issue","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":2,"start":"2022-08-12T06:57:30Z","end":"2022-08-12T07:57:30Z","type":"follow_up","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":1,"start":"2021-08-07T15:01:30Z","end":"2021-08-07T16:01:30Z","type":"follow_up","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":1,"start":"2021-12-01T15:14:00Z","end":"2021-12-01T16:14:00Z","type":"follow_up","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2022-08-03T04:57:51Z","end":"2022-08-03T05:57:51Z","type":"follow_up","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":2,"start":"2022-03-13T12:02:14Z","end":"2022-03-13T13:02:14Z","type":"initial_appointment","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":3,"start":"2021-07-20T16:12:13Z","end":"2021-07-20T17:12:13Z","type":"new_issue","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":130,"provider":2,"start":"2021-06-28T21:27:15Z","end":"2021-06-28T22:27:15Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":1,"start":"2022-07-22T23:51:03Z","end":"2022-07-23T00:51:03Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":2,"start":"2021-10-22T14:54:08Z","end":"2021-10-22T15:54:08Z","type":"medication_management","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":129,"provider":1,"start":"2021-09-18T12:32:55Z","end":"2021-09-18T13:32:55Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":1,"start":"2021-07-24T21:04:45Z","end":"2021-07-24T22:04:45Z","type":"initial_appointment","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":3,"start":"2021-06-19T21:40:29Z","end":"2021-06-19T22:40:29Z","type":"medication_management","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":3,"start":"2021-07-01T18:11:58Z","end":"2021-07-01T19:11:58Z","type":"new_issue","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":1,"start":"2021-12-03T01:52:38Z","end":"2021-12-03T02:52:38Z","type":"initial_appointment","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":3,"start":"2021-09-16T21:06:59Z","end":"2021-09-16T22:06:59Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":3,"start":"2022-04-06T03:46:41Z","end":"2022-04-06T04:46:41Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":2,"start":"2021-08-30T10:18:22Z","end":"2021-08-30T11:18:22Z","type":"follow_up","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":2,"start":"2022-01-10T12:54:04Z","end":"2022-01-10T13:54:04Z","type":"follow_up","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":3,"start":"2021-09-13T07:51:10Z","end":"2021-09-13T08:51:10Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":130,"provider":3,"start":"2021-08-03T11:21:32Z","end":"2021-08-03T12:21:32Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2021-05-15T19:20:07Z","end":"2021-05-15T20:20:07Z","type":"follow_up","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":1,"start":"2021-11-15T02:19:54Z","end":"2021-11-15T03:19:54Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":3,"start":"2021-08-19T23:37:48Z","end":"2021-08-20T00:37:48Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":2,"start":"2021-06-13T04:45:35Z","end":"2021-06-13T05:45:35Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":2,"start":"2022-06-05T01:19:44Z","end":"2022-06-05T02:19:44Z","type":"medication_management","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":2,"start":"2021-09-24T02:15:58Z","end":"2021-09-24T03:15:58Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":2,"start":"2021-06-06T05:34:15Z","end":"2021-06-06T06:34:15Z","type":"new_issue","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":3,"start":"2021-05-04T18:34:07Z","end":"2021-05-04T19:34:07Z","type":"medication_management","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":129,"provider":2,"start":"2022-03-15T19:49:42Z","end":"2022-03-15T20:49:42Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":3,"start":"2022-02-07T01:22:06Z","end":"2022-02-07T02:22:06Z","type":"new_issue","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":3,"start":"2021-09-19T16:18:32Z","end":"2021-09-19T17:18:32Z","type":"new_issue","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2022-04-10T18:24:36Z","end":"2022-04-10T19:24:36Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":3,"start":"2022-04-18T04:54:17Z","end":"2022-04-18T05:54:17Z","type":"medication_management","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":1,"start":"2022-07-09T19:08:47Z","end":"2022-07-09T20:08:47Z","type":"medication_management","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":1,"start":"2022-04-09T16:01:56Z","end":"2022-04-09T17:01:56Z","type":"new_issue","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":2,"start":"2021-09-06T13:28:08Z","end":"2021-09-06T14:28:08Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":3,"start":"2022-01-17T17:00:17Z","end":"2022-01-17T18:00:17Z","type":"follow_up","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":134,"provider":1,"start":"2021-07-29T10:47:58Z","end":"2021-07-29T11:47:58Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":134,"provider":2,"start":"2021-06-09T19:14:06Z","end":"2021-06-09T20:14:06Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":1,"start":"2022-08-06T02:30:32Z","end":"2022-08-06T03:30:32Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":1,"start":"2022-06-19T16:28:04Z","end":"2022-06-19T17:28:04Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":3,"start":"2021-10-16T19:33:36Z","end":"2021-10-16T20:33:36Z","type":"initial_appointment","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":3,"start":"2021-07-10T21:22:50Z","end":"2021-07-10T22:22:50Z","type":"medication_management","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":1,"start":"2022-03-16T22:00:08Z","end":"2022-03-16T23:00:08Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":1,"start":"2022-08-28T02:17:55Z","end":"2022-08-28T03:17:55Z","type":"initial_appointment","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":3,"start":"2021-05-21T01:57:51Z","end":"2021-05-21T02:57:51Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":2,"start":"2021-05-31T01:42:08Z","end":"2021-05-31T02:42:08Z","type":"medication_management","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":1,"start":"2021-06-11T20:46:13Z","end":"2021-06-11T21:46:13Z","type":"new_issue","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":1,"start":"2022-07-30T09:22:56Z","end":"2022-07-30T10:22:56Z","type":"follow_up","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":3,"start":"2022-08-27T09:26:44Z","end":"2022-08-27T10:26:44Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":130,"provider":3,"start":"2022-08-16T22:30:22Z","end":"2022-08-16T23:30:22Z","type":"follow_up","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":2,"start":"2022-02-07T21:08:24Z","end":"2022-02-07T22:08:24Z","type":"new_issue","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":135,"provider":1,"start":"2021-09-10T21:59:23Z","end":"2021-09-10T22:59:23Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":2,"start":"2021-12-13T20:41:05Z","end":"2021-12-13T21:41:05Z","type":"initial_appointment","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":2,"start":"2021-12-13T01:49:04Z","end":"2021-12-13T02:49:04Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":3,"start":"2021-10-05T20:56:00Z","end":"2021-10-05T21:56:00Z","type":"medication_management","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":2,"start":"2021-07-17T08:16:32Z","end":"2021-07-17T09:16:32Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":2,"start":"2022-05-23T18:14:55Z","end":"2022-05-23T19:14:55Z","type":"medication_management","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":1,"start":"2021-05-19T22:35:35Z","end":"2021-05-19T23:35:35Z","type":"initial_appointment","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":2,"start":"2021-11-16T13:07:13Z","end":"2021-11-16T14:07:13Z","type":"new_issue","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":2,"start":"2022-06-20T20:41:15Z","end":"2022-06-20T21:41:15Z","type":"initial_appointment","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":2,"start":"2021-05-07T11:34:55Z","end":"2021-05-07T12:34:55Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":121,"provider":3,"start":"2022-02-27T16:35:27Z","end":"2022-02-27T17:35:27Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":134,"provider":1,"start":"2022-01-29T12:03:50Z","end":"2022-01-29T13:03:50Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":3,"start":"2021-09-13T21:42:10Z","end":"2021-09-13T22:42:10Z","type":"medication_management","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":129,"provider":3,"start":"2022-03-22T21:11:42Z","end":"2022-03-22T22:11:42Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":3,"start":"2022-07-21T15:54:33Z","end":"2022-07-21T16:54:33Z","type":"follow_up","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2022-08-06T14:36:59Z","end":"2022-08-06T15:36:59Z","type":"new_issue","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":2,"start":"2022-06-13T03:14:42Z","end":"2022-06-13T04:14:42Z","type":"follow_up","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":1,"start":"2022-01-16T23:28:50Z","end":"2022-01-17T00:28:50Z","type":"new_issue","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":1,"start":"2022-08-06T11:36:53Z","end":"2022-08-06T12:36:53Z","type":"initial_appointment","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2022-03-05T17:48:42Z","end":"2022-03-05T18:48:42Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":125,"provider":2,"start":"2021-08-01T22:14:59Z","end":"2021-08-01T23:14:59Z","type":"new_issue","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":3,"start":"2021-05-26T08:36:56Z","end":"2021-05-26T09:36:56Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":3,"start":"2021-11-18T13:51:46Z","end":"2021-11-18T14:51:46Z","type":"new_issue","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":130,"provider":1,"start":"2022-02-02T13:30:34Z","end":"2022-02-02T14:30:34Z","type":"new_issue","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":128,"provider":3,"start":"2022-08-08T14:03:54Z","end":"2022-08-08T15:03:54Z","type":"initial_appointment","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":1,"start":"2021-10-07T18:08:18Z","end":"2021-10-07T19:08:18Z","type":"medication_management","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2022-02-25T16:22:17Z","end":"2022-02-25T17:22:17Z","type":"new_issue","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":2,"start":"2022-04-02T08:41:57Z","end":"2022-04-02T09:41:57Z","type":"new_issue","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":122,"provider":1,"start":"2021-07-14T16:14:25Z","end":"2021-07-14T17:14:25Z","type":"new_issue","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":126,"provider":3,"start":"2021-11-06T11:08:12Z","end":"2021-11-06T12:08:12Z","type":"follow_up","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":2,"start":"2021-05-30T12:23:09Z","end":"2021-05-30T13:23:09Z","type":"medication_management","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":127,"provider":2,"start":"2021-07-21T01:06:16Z","end":"2021-07-21T02:06:16Z","type":"medication_management","status":"waiting to be seen","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":2,"start":"2021-05-28T08:34:18Z","end":"2021-05-28T09:34:18Z","type":"initial_appointment","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":132,"provider":2,"start":"2021-06-25T15:41:24Z","end":"2021-06-25T16:41:24Z","type":"new_issue","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":131,"provider":1,"start":"2022-01-24T20:17:46Z","end":"2022-01-24T21:17:46Z","type":"follow_up","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":2,"start":"2021-08-25T15:31:27Z","end":"2021-08-25T16:31:27Z","type":"initial_appointment","status":"cancelled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":133,"provider":3,"start":"2022-04-28T06:06:45Z","end":"2022-04-28T07:06:45Z","type":"follow_up","status":"complete","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":123,"provider":3,"start":"2021-06-07T16:55:09Z","end":"2021-06-07T17:55:09Z","type":"new_issue","status":"scheduled","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":124,"provider":1,"start":"2021-10-01T08:52:56Z","end":"2021-10-01T09:52:56Z","type":"medication_management","status":"in waiting room","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}},
-{"patient":130,"provider":3,"start":"2021-09-20T15:53:06Z","end":"2021-09-20T16:53:06Z","type":"new_issue","status":"in progress","details":{"actual_start":null,"actual_end":null,"clinical_data":{"plans":[],"summary":"Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","assessments":[],"clinical_forms":[],"physical_exam":[],"review_of_systems":[]}}}]
+[
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-01-09T19:16:53Z",
+    "end": "2022-01-09T20:16:53Z",
+    "type": "initial_appointment",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 134,
+    "provider": 2,
+    "start": "2021-06-16T17:03:16Z",
+    "end": "2021-06-16T18:03:16Z",
+    "type": "medication_management",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 2,
+    "start": "2021-11-18T22:08:16Z",
+    "end": "2021-11-18T23:08:16Z",
+    "type": "new_issue",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 2,
+    "start": "2021-07-25T01:07:16Z",
+    "end": "2021-07-25T02:07:16Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 2,
+    "start": "2022-05-31T15:54:59Z",
+    "end": "2022-05-31T16:54:59Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 3,
+    "start": "2022-01-24T04:12:14Z",
+    "end": "2022-01-24T05:12:14Z",
+    "type": "follow_up",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 3,
+    "start": "2021-08-05T22:54:30Z",
+    "end": "2021-08-05T23:54:30Z",
+    "type": "medication_management",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 134,
+    "provider": 3,
+    "start": "2022-02-05T09:15:44Z",
+    "end": "2022-02-05T10:15:44Z",
+    "type": "new_issue",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 2,
+    "start": "2022-08-12T06:57:30Z",
+    "end": "2022-08-12T07:57:30Z",
+    "type": "follow_up",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 1,
+    "start": "2021-08-07T15:01:30Z",
+    "end": "2021-08-07T16:01:30Z",
+    "type": "follow_up",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 1,
+    "start": "2021-12-01T15:14:00Z",
+    "end": "2021-12-01T16:14:00Z",
+    "type": "follow_up",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-08-03T04:57:51Z",
+    "end": "2022-08-03T05:57:51Z",
+    "type": "follow_up",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 2,
+    "start": "2022-03-13T12:02:14Z",
+    "end": "2022-03-13T13:02:14Z",
+    "type": "initial_appointment",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 3,
+    "start": "2021-07-20T16:12:13Z",
+    "end": "2021-07-20T17:12:13Z",
+    "type": "new_issue",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 130,
+    "provider": 2,
+    "start": "2021-06-28T21:27:15Z",
+    "end": "2021-06-28T22:27:15Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 1,
+    "start": "2022-07-22T23:51:03Z",
+    "end": "2022-07-23T00:51:03Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 2,
+    "start": "2021-10-22T14:54:08Z",
+    "end": "2021-10-22T15:54:08Z",
+    "type": "medication_management",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 129,
+    "provider": 1,
+    "start": "2021-09-18T12:32:55Z",
+    "end": "2021-09-18T13:32:55Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 1,
+    "start": "2021-07-24T21:04:45Z",
+    "end": "2021-07-24T22:04:45Z",
+    "type": "initial_appointment",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 3,
+    "start": "2021-06-19T21:40:29Z",
+    "end": "2021-06-19T22:40:29Z",
+    "type": "medication_management",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 3,
+    "start": "2021-07-01T18:11:58Z",
+    "end": "2021-07-01T19:11:58Z",
+    "type": "new_issue",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 1,
+    "start": "2021-12-03T01:52:38Z",
+    "end": "2021-12-03T02:52:38Z",
+    "type": "initial_appointment",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 3,
+    "start": "2021-09-16T21:06:59Z",
+    "end": "2021-09-16T22:06:59Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 3,
+    "start": "2022-04-06T03:46:41Z",
+    "end": "2022-04-06T04:46:41Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 2,
+    "start": "2021-08-30T10:18:22Z",
+    "end": "2021-08-30T11:18:22Z",
+    "type": "follow_up",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 2,
+    "start": "2022-01-10T12:54:04Z",
+    "end": "2022-01-10T13:54:04Z",
+    "type": "follow_up",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 3,
+    "start": "2021-09-13T07:51:10Z",
+    "end": "2021-09-13T08:51:10Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 130,
+    "provider": 3,
+    "start": "2021-08-03T11:21:32Z",
+    "end": "2021-08-03T12:21:32Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2021-05-15T19:20:07Z",
+    "end": "2021-05-15T20:20:07Z",
+    "type": "follow_up",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 1,
+    "start": "2021-11-15T02:19:54Z",
+    "end": "2021-11-15T03:19:54Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 3,
+    "start": "2021-08-19T23:37:48Z",
+    "end": "2021-08-20T00:37:48Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 2,
+    "start": "2021-06-13T04:45:35Z",
+    "end": "2021-06-13T05:45:35Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 2,
+    "start": "2022-06-05T01:19:44Z",
+    "end": "2022-06-05T02:19:44Z",
+    "type": "medication_management",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 2,
+    "start": "2021-09-24T02:15:58Z",
+    "end": "2021-09-24T03:15:58Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 2,
+    "start": "2021-06-06T05:34:15Z",
+    "end": "2021-06-06T06:34:15Z",
+    "type": "new_issue",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 3,
+    "start": "2021-05-04T18:34:07Z",
+    "end": "2021-05-04T19:34:07Z",
+    "type": "medication_management",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 129,
+    "provider": 2,
+    "start": "2022-03-15T19:49:42Z",
+    "end": "2022-03-15T20:49:42Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 3,
+    "start": "2022-02-07T01:22:06Z",
+    "end": "2022-02-07T02:22:06Z",
+    "type": "new_issue",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 3,
+    "start": "2021-09-19T16:18:32Z",
+    "end": "2021-09-19T17:18:32Z",
+    "type": "new_issue",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-04-10T18:24:36Z",
+    "end": "2022-04-10T19:24:36Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 3,
+    "start": "2022-04-18T04:54:17Z",
+    "end": "2022-04-18T05:54:17Z",
+    "type": "medication_management",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 1,
+    "start": "2022-07-09T19:08:47Z",
+    "end": "2022-07-09T20:08:47Z",
+    "type": "medication_management",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 1,
+    "start": "2022-04-09T16:01:56Z",
+    "end": "2022-04-09T17:01:56Z",
+    "type": "new_issue",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 2,
+    "start": "2021-09-06T13:28:08Z",
+    "end": "2021-09-06T14:28:08Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 3,
+    "start": "2022-01-17T17:00:17Z",
+    "end": "2022-01-17T18:00:17Z",
+    "type": "follow_up",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 134,
+    "provider": 1,
+    "start": "2021-07-29T10:47:58Z",
+    "end": "2021-07-29T11:47:58Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 134,
+    "provider": 2,
+    "start": "2021-06-09T19:14:06Z",
+    "end": "2021-06-09T20:14:06Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 1,
+    "start": "2022-08-06T02:30:32Z",
+    "end": "2022-08-06T03:30:32Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 1,
+    "start": "2022-06-19T16:28:04Z",
+    "end": "2022-06-19T17:28:04Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 3,
+    "start": "2021-10-16T19:33:36Z",
+    "end": "2021-10-16T20:33:36Z",
+    "type": "initial_appointment",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 3,
+    "start": "2021-07-10T21:22:50Z",
+    "end": "2021-07-10T22:22:50Z",
+    "type": "medication_management",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 1,
+    "start": "2022-03-16T22:00:08Z",
+    "end": "2022-03-16T23:00:08Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 1,
+    "start": "2022-08-28T02:17:55Z",
+    "end": "2022-08-28T03:17:55Z",
+    "type": "initial_appointment",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 3,
+    "start": "2021-05-21T01:57:51Z",
+    "end": "2021-05-21T02:57:51Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 2,
+    "start": "2021-05-31T01:42:08Z",
+    "end": "2021-05-31T02:42:08Z",
+    "type": "medication_management",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 1,
+    "start": "2021-06-11T20:46:13Z",
+    "end": "2021-06-11T21:46:13Z",
+    "type": "new_issue",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 1,
+    "start": "2022-07-30T09:22:56Z",
+    "end": "2022-07-30T10:22:56Z",
+    "type": "follow_up",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 3,
+    "start": "2022-08-27T09:26:44Z",
+    "end": "2022-08-27T10:26:44Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 130,
+    "provider": 3,
+    "start": "2022-08-16T22:30:22Z",
+    "end": "2022-08-16T23:30:22Z",
+    "type": "follow_up",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 2,
+    "start": "2022-02-07T21:08:24Z",
+    "end": "2022-02-07T22:08:24Z",
+    "type": "new_issue",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 135,
+    "provider": 1,
+    "start": "2021-09-10T21:59:23Z",
+    "end": "2021-09-10T22:59:23Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 2,
+    "start": "2021-12-13T20:41:05Z",
+    "end": "2021-12-13T21:41:05Z",
+    "type": "initial_appointment",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 2,
+    "start": "2021-12-13T01:49:04Z",
+    "end": "2021-12-13T02:49:04Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 3,
+    "start": "2021-10-05T20:56:00Z",
+    "end": "2021-10-05T21:56:00Z",
+    "type": "medication_management",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 2,
+    "start": "2021-07-17T08:16:32Z",
+    "end": "2021-07-17T09:16:32Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 2,
+    "start": "2022-05-23T18:14:55Z",
+    "end": "2022-05-23T19:14:55Z",
+    "type": "medication_management",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 1,
+    "start": "2021-05-19T22:35:35Z",
+    "end": "2021-05-19T23:35:35Z",
+    "type": "initial_appointment",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 2,
+    "start": "2021-11-16T13:07:13Z",
+    "end": "2021-11-16T14:07:13Z",
+    "type": "new_issue",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 2,
+    "start": "2022-06-20T20:41:15Z",
+    "end": "2022-06-20T21:41:15Z",
+    "type": "initial_appointment",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 2,
+    "start": "2021-05-07T11:34:55Z",
+    "end": "2021-05-07T12:34:55Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 121,
+    "provider": 3,
+    "start": "2022-02-27T16:35:27Z",
+    "end": "2022-02-27T17:35:27Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 134,
+    "provider": 1,
+    "start": "2022-01-29T12:03:50Z",
+    "end": "2022-01-29T13:03:50Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 3,
+    "start": "2021-09-13T21:42:10Z",
+    "end": "2021-09-13T22:42:10Z",
+    "type": "medication_management",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 129,
+    "provider": 3,
+    "start": "2022-03-22T21:11:42Z",
+    "end": "2022-03-22T22:11:42Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 3,
+    "start": "2022-07-21T15:54:33Z",
+    "end": "2022-07-21T16:54:33Z",
+    "type": "follow_up",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-08-06T14:36:59Z",
+    "end": "2022-08-06T15:36:59Z",
+    "type": "new_issue",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 2,
+    "start": "2022-06-13T03:14:42Z",
+    "end": "2022-06-13T04:14:42Z",
+    "type": "follow_up",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 1,
+    "start": "2022-01-16T23:28:50Z",
+    "end": "2022-01-17T00:28:50Z",
+    "type": "new_issue",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 1,
+    "start": "2022-08-06T11:36:53Z",
+    "end": "2022-08-06T12:36:53Z",
+    "type": "initial_appointment",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-03-05T17:48:42Z",
+    "end": "2022-03-05T18:48:42Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 125,
+    "provider": 2,
+    "start": "2021-08-01T22:14:59Z",
+    "end": "2021-08-01T23:14:59Z",
+    "type": "new_issue",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 3,
+    "start": "2021-05-26T08:36:56Z",
+    "end": "2021-05-26T09:36:56Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 3,
+    "start": "2021-11-18T13:51:46Z",
+    "end": "2021-11-18T14:51:46Z",
+    "type": "new_issue",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 130,
+    "provider": 1,
+    "start": "2022-02-02T13:30:34Z",
+    "end": "2022-02-02T14:30:34Z",
+    "type": "new_issue",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 128,
+    "provider": 3,
+    "start": "2022-08-08T14:03:54Z",
+    "end": "2022-08-08T15:03:54Z",
+    "type": "initial_appointment",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 1,
+    "start": "2021-10-07T18:08:18Z",
+    "end": "2021-10-07T19:08:18Z",
+    "type": "medication_management",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2022-02-25T16:22:17Z",
+    "end": "2022-02-25T17:22:17Z",
+    "type": "new_issue",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 2,
+    "start": "2022-04-02T08:41:57Z",
+    "end": "2022-04-02T09:41:57Z",
+    "type": "new_issue",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 122,
+    "provider": 1,
+    "start": "2021-07-14T16:14:25Z",
+    "end": "2021-07-14T17:14:25Z",
+    "type": "new_issue",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 126,
+    "provider": 3,
+    "start": "2021-11-06T11:08:12Z",
+    "end": "2021-11-06T12:08:12Z",
+    "type": "follow_up",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 2,
+    "start": "2021-05-30T12:23:09Z",
+    "end": "2021-05-30T13:23:09Z",
+    "type": "medication_management",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 127,
+    "provider": 2,
+    "start": "2021-07-21T01:06:16Z",
+    "end": "2021-07-21T02:06:16Z",
+    "type": "medication_management",
+    "status": "waiting to be seen",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 2,
+    "start": "2021-05-28T08:34:18Z",
+    "end": "2021-05-28T09:34:18Z",
+    "type": "initial_appointment",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 132,
+    "provider": 2,
+    "start": "2021-06-25T15:41:24Z",
+    "end": "2021-06-25T16:41:24Z",
+    "type": "new_issue",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 131,
+    "provider": 1,
+    "start": "2022-01-24T20:17:46Z",
+    "end": "2022-01-24T21:17:46Z",
+    "type": "follow_up",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 2,
+    "start": "2021-08-25T15:31:27Z",
+    "end": "2021-08-25T16:31:27Z",
+    "type": "initial_appointment",
+    "status": "cancelled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 133,
+    "provider": 3,
+    "start": "2022-04-28T06:06:45Z",
+    "end": "2022-04-28T07:06:45Z",
+    "type": "follow_up",
+    "status": "complete",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 123,
+    "provider": 3,
+    "start": "2021-06-07T16:55:09Z",
+    "end": "2021-06-07T17:55:09Z",
+    "type": "new_issue",
+    "status": "scheduled",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 124,
+    "provider": 1,
+    "start": "2021-10-01T08:52:56Z",
+    "end": "2021-10-01T09:52:56Z",
+    "type": "medication_management",
+    "status": "in waiting room",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  },
+  {
+    "patient": 130,
+    "provider": 3,
+    "start": "2021-09-20T15:53:06Z",
+    "end": "2021-09-20T16:53:06Z",
+    "type": "new_issue",
+    "status": "in progress",
+    "details": {
+      "actual_start": null,
+      "actual_end": null,
+      "clinical_data": {
+        "plans": [],
+        "summary": "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+        "assessments": [],
+        "clinical_forms": [],
+        "physical_exam": [],
+        "review_of_systems": []
+      }
+    }
+  }
+]

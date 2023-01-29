@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { RHFInput } from 'react-hook-form-input'
@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Select from 'react-select'
 import GridContainer from '../../../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../../../basestyledcomponents/Grid/GridItem'
-import { Typography, Input } from '@material-ui/core'
+import { Input, Typography } from '@material-ui/core'
 // import {useStateValue} from "../../../../ClinicalQueue/context/ClinicalQueueContext";
 import './modal.css'
 import moment from 'moment'
@@ -36,6 +36,7 @@ export default function CheckInForm(props) {
 			)
 			return result
 		}
+
 		checkInPatient()
 			.then((response) => {
 				async function getUpdatedClinicalQueue() {
@@ -43,6 +44,7 @@ export default function CheckInForm(props) {
 					let appointments = result.data
 					return appointments
 				}
+
 				getUpdatedClinicalQueue().then((response) => {
 					console.log(response)
 					let modifiedappointments = []

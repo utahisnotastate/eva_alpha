@@ -33,6 +33,7 @@ function CustomFormsCard({ forms, listlabel, typeOfFormToShow, url }) {
 		</Card>
 	)
 }
+
 export default React.memo(CustomFormsCard)
 /*
 <List>

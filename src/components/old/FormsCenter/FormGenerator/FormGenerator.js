@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import { DevTool } from '@hookform/devtools'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
 import { Typography } from '@material-ui/core'
-import InputLabel from '@material-ui/core/InputLabel'
-import SingleField from './singlefield'
 import AppointmentField from '../../Forms/components/AppointmentField/appointmentfield'
-import {
-	useForm,
-	Controller,
-	FormContext,
-	FormProvider,
-	useFieldArray,
-} from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
+
 const handleFormSave = (formData) => {
 	console.log(formData)
 }

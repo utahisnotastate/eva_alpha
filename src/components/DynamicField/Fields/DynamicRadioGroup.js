@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControlLabel, Radio, LinearProgress } from '@mui/material'
+import { FormControlLabel, Radio } from '@mui/material'
 import { Field } from 'formik'
 import { RadioGroup } from 'formik-mui'
 

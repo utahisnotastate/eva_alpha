@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Field } from 'formik'
 import Typography from '@material-ui/core/Typography'
 import { useParams } from 'react-router-dom'
-import { RHFInput } from 'react-hook-form-input'
 import TextField from ''
-import axios from 'axios'
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({

@@ -1,5 +1,4 @@
 import React from 'react'
-import CheckInForm from '../../../old/Forms/Administrative/Scheduling/CheckIn/checkin'
 import Modal from '../../../basestyledcomponents/Modal/modal'
 
 export default function CheckInPatient(props) {

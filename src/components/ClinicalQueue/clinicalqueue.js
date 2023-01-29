@@ -8,7 +8,6 @@ import AppointmentsList from '../Home/appointments.table'
 import Patients from '../Patients/patients'
 import patientrequestscolumns from '../PatientRequests/patientrequests.columns'
 import { useSelector } from 'react-redux'
-import PatientDisplayName from '../../api/patientname'
 import moment from 'moment'
 import { Typography } from '@mui/material'
 

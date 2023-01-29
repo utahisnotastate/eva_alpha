@@ -1,35 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
-	Formik,
 	Field,
-	Form,
 	FieldArray,
+	Form,
+	Formik,
 	useField,
 	useFormikContext,
 } from 'formik'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-	Checkbox,
-	Grid,
-	Radio,
-	Typography,
-	FormControl,
-	FormControlLabel,
-	MenuItem,
-	FormLabel,
-	FormGroup,
-	InputLabel,
-	Input,
-} from '@material-ui/core'
-import {
-	fieldToTextField,
-	TextField,
-	TextFieldProps,
-	RadioGroup,
-	Select,
-	Switch,
-} from 'formik-material-ui'
+import { FormControlLabel, Grid, Radio, Typography } from '@material-ui/core'
+import { RadioGroup, Switch, TextField } from 'formik-material-ui'
 import { fetchForm } from '../../../../../api/forms.api'
 
 const useStyles = makeStyles({

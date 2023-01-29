@@ -1,26 +1,14 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import _ from 'lodash'
-import { Prompt } from 'react-router-dom'
-import {
-	useForm,
-	FormContext,
-	FormProvider,
-	useFormContext,
-} from 'react-hook-form'
+import React, { Fragment, useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import { Typography } from '@material-ui/core'
 import AppointmentFormFieldContainer from './AppointmentFormComponents/appointmentformfieldcontainer.js'
-import AppointmentFormField from './AppointmentFormComponents/appointmentformfield.js'
 import {
-	updateAppointmentForm,
 	getAppointmentForm,
+	updateAppointmentForm,
 } from '../../../../../api/appointment.api.js'
 import { fetchForm } from '../../../../../api/forms.api.js'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useStyles = makeStyles({
 	root: {

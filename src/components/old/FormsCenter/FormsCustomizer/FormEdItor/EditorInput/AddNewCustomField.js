@@ -2,14 +2,10 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormContext } from 'react-hook-form'
 import { useFormikContext } from 'formik'
-import { Typography, Divider } from '@material-ui/core'
+import { Divider, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import FieldOptionsEditor from '../FormFields/FieldOptionsEditor/FieldOptionsEditor'
-import Card from '../../../../../basestyledcomponents/Card/Card'
-import CardBody from '../../../../../basestyledcomponents/Card/CardBody'
-import CardHeader from '../../../../../basestyledcomponents/Card/CardHeader'
 import '../../../../../../styles/w3.css'
-import FormikMUISelectField from '../../../FormikFields/FormikMUISelect'
 
 const useStyles = makeStyles({
 	builderroot: {

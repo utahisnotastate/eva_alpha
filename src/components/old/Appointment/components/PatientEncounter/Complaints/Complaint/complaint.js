@@ -1,12 +1,8 @@
 import Grid from '@material-ui/core/Grid'
-import { Field } from 'formik'
 import Typography from '@material-ui/core/Typography'
 import { Box } from '@material-ui/core'
 import React from 'react'
-import Card from '../../../../../../basestyledcomponents/Card/Card'
 import Button from '../../../../../../basestyledcomponents/Button'
-import CardHeader from '../../../../../../basestyledcomponents/Card/CardHeader'
-import CardBody from '../../../../../../basestyledcomponents/Card/CardBody'
 import DynamicAppointmentField from '../../../DynamicAppointmentForm/DynamicAppointmentField/dynamicappointmentfield'
 
 export function Complaint(props) {

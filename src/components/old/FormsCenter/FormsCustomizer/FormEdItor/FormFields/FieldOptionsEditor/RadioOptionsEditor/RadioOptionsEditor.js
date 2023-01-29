@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useSelector, useDispatch } from 'react-redux'
 
-import { useFormContext, useFieldArray, Controller } from 'react-hook-form'
-import {
-	TextField,
-	Typography,
-	Divider,
-	Checkbox,
-	Radio,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	FormGroup,
-} from '@material-ui/core'
+import { useFormContext } from 'react-hook-form'
+import { TextField, Typography } from '@material-ui/core'
 import Button from '../../../../../../../basestyledcomponents/Button'
 import Grid from '@material-ui/core/Grid'
 

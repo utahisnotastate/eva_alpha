@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Button } from '@material-ui/core'
-import AppointmentDetails from './appointmentdetails'
-import AppointmentHeaderAction from './appointmentheaderaction'
+import React from 'react'
+import { Button, Grid, Typography } from '@material-ui/core'
 
 export default function AppointmentHeader({ appointment, patient }) {
 	const { details } = patient

@@ -1,34 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
-import { Formik, Form } from 'formik'
-import { Button } from '@material-ui/core'
-import SimpleSideBar from './patientcomponents/simplesidebar/simplesidebar'
-import routes from './routes'
-import { getPatientInformation } from '../../api/patient.api'
-import { Route, Switch, useParams, useRouteMatch } from 'react-router-dom'
+import React from 'react'
+import {
+	Box,
+	Card,
+	CardContent,
+	CardHeader,
+	Container,
+	Divider,
+	Grid,
+	Typography,
+} from '@mui/material'
+import Button from '@mui/material/Button'
+import PatientMenu from './PatientMenu'
+
+function AccountProfile() {
+	return null
+}
 
 export default function Patient() {
-	let { path } = useRouteMatch()
-	let { id } = useParams()
-	const patient = useSelector((state) => state.patient)
-
-	const dispatch = useDispatch()
-
-	const handleSave = (patient) => {
-		console.log(patient)
-	}
-	useEffect(() => {
-		getPatientInformation(id)
-			.then((patient) => {
-				dispatch({ type: 'LOAD_PATIENT', patient })
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-	}, [id])
 	return (
-		<Grid container spacing={3}>
+		<Box
+			component='main'
+			sx={{
+				flexGrow: 1,
+				py: 8,
+			}}>
+			<Container maxWidth='lg'>
+				<Typography sx={{ mb: 3 }} variant='h4'>
+					Patient Profile
+				</Typography>
+				<Grid container spacing={3}>
+					<Grid item lg={4} md={6} xs={12}>
+						<PatientMenu />
+					</Grid>
+					<Grid item lg={8} md={6} xs={12}>
+						<Card>
+							<CardHeader
+								subheader='The information can be edited'
+								title='Registration Details'
+							/>
+							<Divider />
+							<CardContent>
+								<Typography
+									color='textPrimary'
+									gutterBottom
+									variant='h6'>
+									Test
+								</Typography>
+							</CardContent>
+							<Divider />
+							<Box
+								sx={{
+									display: 'flex',
+									justifyContent: 'flex-end',
+									p: 2,
+								}}>
+								<Button color='primary' variant='contained'>
+									Save details
+								</Button>
+							</Box>
+						</Card>
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
+	)
+}
+
+/*
+* <Grid container spacing={3}>
 			<Grid item xs={2}>
 				<SimpleSideBar routes={routes} />
 			</Grid>
@@ -57,5 +96,5 @@ export default function Patient() {
 				</Formik>
 			</Grid>
 		</Grid>
-	)
-}
+*
+* */

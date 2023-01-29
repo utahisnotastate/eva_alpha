@@ -1,9 +1,4 @@
 import React from 'react'
-import Card from '../../basestyledcomponents/Card/Card'
-import CardBody from '../../basestyledcomponents/Card/CardBody'
-import CardFooter from '../../basestyledcomponents/Card/CardFooter'
-import { Form, Field } from 'react-final-form'
-import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays'
 import ArrayFieldRow from '../../old/FormBuilder/components/arrayfieldrow'
 

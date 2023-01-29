@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../../basestyledcomponents/Card/CardBody'
-import {
-	useParams,
-	useRouteMatch,
-	Switch,
-	Route,
-	Link,
-	NavLink,
-} from 'react-router-dom'
+import { useParams, useRouteMatch } from 'react-router-dom'
+
 function AppointmentROSSummary() {
 	let { id } = useParams()
 	let { path, url } = useRouteMatch()

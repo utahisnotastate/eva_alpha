@@ -1,23 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
-import Card from '../../../../basestyledcomponents/Card/Card'
-import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
-import CardBody from '../../../../basestyledcomponents/Card/CardBody'
+import React from 'react'
 import AppointmentHeaderButton from '../Buttons/AppointmentButtons/appointmentHeaderButton'
 
-import {
-	Formik,
-	Field,
-	Form,
-	ErrorMessage,
-	FieldArray,
-	useField,
-	useFormikContext,
-} from 'formik'
-
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, TextField } from '@material-ui/core'
+import { Grid, TextField, Typography } from '@material-ui/core'
 
 /*
  import {
@@ -29,8 +14,6 @@ import { Grid, Typography, TextField } from '@material-ui/core'
   Switch,
 } from "formik-material-ui";
 */
-
-import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles({
 	button: {

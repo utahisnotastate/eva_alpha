@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 // import FormBuilderTool from "./FormBuilderTool";
 import GridContainer from '../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../basestyledcomponents/Grid/GridItem'
@@ -68,6 +68,7 @@ function CustomFormComponent(props) {
 		</Draggable>
 	)
 }
+
 function FormBuilderTool(props) {
 	return (
 		<Draggable
@@ -108,6 +109,7 @@ export default function FormsCenter() {
 	function onDragUpdate(update) {
 		console.log(update)
 	}
+
 	function onDragEnd(result) {
 		console.log(result)
 
@@ -143,6 +145,7 @@ export default function FormsCenter() {
 			})
 		}
 	}
+
 	return (
 		<div style={{ padding: 15 }}>
 			<GridContainer>

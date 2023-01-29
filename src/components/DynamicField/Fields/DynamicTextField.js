@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, Select } from 'mui-rff'
+import { TextField } from 'mui-rff'
 
 export default function DynamicTextField({ label, name, type }) {
 	console.log({ label, name })

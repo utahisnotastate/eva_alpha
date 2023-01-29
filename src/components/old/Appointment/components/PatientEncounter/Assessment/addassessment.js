@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 //import ICD10search from "../../../../ICD10Search/icd10search";
-import AssessmentICD10search from "./assessmentICD10Search";
+import AssessmentICD10search from './assessmentICD10Search'
 
 const useStyles = makeStyles({
-  newcomplaintcontainer: {
-    display: "flex",
-    margin: "15px",
-    flexDirection: "row",
-    width: "100%",
-  },
-  searchinput: {
-    padding: "15px",
-    width: "100%",
-  },
-});
+	newcomplaintcontainer: {
+		display: 'flex',
+		margin: '15px',
+		flexDirection: 'row',
+		width: '100%',
+	},
+	searchinput: {
+		padding: '15px',
+		width: '100%',
+	},
+})
 
 export default function AddAssessment(props) {
-  return (
-    <Grid container direction="row">
-      <Grid item xs={1}>
-        <Typography>ICD Code</Typography>
-      </Grid>
-      <Grid item xs={11}>
-        <AssessmentICD10search
-          arrayHelpers={props.arrayHelpers}
-          extrafield={{ relatedTo: false }}
-        />
-      </Grid>
-    </Grid>
-  );
+	return (
+		<Grid container direction="row">
+			<Grid item xs={1}>
+				<Typography>ICD Code</Typography>
+			</Grid>
+			<Grid item xs={11}>
+				<AssessmentICD10search
+					arrayHelpers={props.arrayHelpers}
+					extrafield={{ relatedTo: false }}
+				/>
+			</Grid>
+		</Grid>
+	)
 }
 
 /*

@@ -11,6 +11,7 @@ function actionsColumn(tableMeta) {
 		</NavLink>
 	)
 }
+
 const columns = [
 	{
 		name: 'id',

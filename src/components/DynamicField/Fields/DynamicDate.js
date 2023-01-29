@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field } from 'formik'
-import { DatePicker } from 'formik-mui-lab'
 import { TextField } from 'formik-mui'
 
 export default function DynamicDate({ name, label }) {

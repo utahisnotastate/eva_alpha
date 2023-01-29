@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import RequestTimeLine from './TimeLine/timeline'
 import PatientDisplayName from '../../api/patientname'
-import { Typography } from '@material-ui/core'
 
 function viewRequestColumn(tableMeta) {
 	return (

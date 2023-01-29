@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Autosuggest from 'react-autosuggest'
 import { makeStyles } from '@material-ui/core/styles'
-import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
-import { useFormContext, Controller } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { Controller, useFormContext } from 'react-hook-form'
 //import "./newcomplaint.css";
-import { TextField, Checkbox } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '../../../basestyledcomponents/Button'
@@ -24,6 +23,7 @@ const EVA_URL = 'http://127.0.0.1:8000/api'
 function getComplaintNameSuggestionValue(suggestion) {
 	return `${suggestion[0]} ${suggestion[1]}`
 }
+
 function renderSuggestion(suggestion) {
 	return <span>{suggestion}</span>
 }

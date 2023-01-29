@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import { TextField, Typography } from '@material-ui/core'
+import React from 'react'
+import { Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-import Button from '../../../../../basestyledcomponents/Button'
 import InputPreview from './InputPreview/InputPreview.js'
 
 export default function FieldPreview(props) {

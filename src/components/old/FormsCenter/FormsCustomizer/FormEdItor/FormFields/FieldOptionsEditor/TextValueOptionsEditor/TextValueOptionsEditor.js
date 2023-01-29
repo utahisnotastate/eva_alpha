@@ -1,5 +1,5 @@
 // I DONT KNOW WHAT THIS IS OR WHERE ITS USED
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useFormContext } from 'react-hook-form'
 import Typography from '@material-ui/core/Typography'

@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import GridContainer from '../../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../../basestyledcomponents/Grid/GridItem'
 import Card from '../../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../../basestyledcomponents/Card/CardBody'
 import Modal from '../../../../basestyledcomponents/Modal/modal'
-import { Button, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 // import applyNavs from "react-jsonschema-form-pagination";
 import Form from 'react-jsonschema-form'
 import CreateCustomField from '../../../Forms/FormsCenter/createCustomField'
 import './createmedicalchartform.css'
-import { reviewofsystems } from '../../../../store/reducers/formscenter/MedicalAppointmentForm/medicalappointmentform.reducers'
 
 const log = (type) => console.log.bind(console, type)
 

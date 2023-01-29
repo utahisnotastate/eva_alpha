@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wizard, useWizard } from 'react-use-wizard'
+import { useWizard, Wizard } from 'react-use-wizard'
 import EVAStepper from '../EVAStepper'
 
 export default function EVAWizard({ steps, onSubmit }) {

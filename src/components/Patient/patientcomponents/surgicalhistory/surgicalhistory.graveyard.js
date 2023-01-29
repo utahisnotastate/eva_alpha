@@ -4,12 +4,10 @@ import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import Card from '../../../basestyledcomponents/Card/Card'
 import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import Autosuggest from 'react-autosuggest'
 import './surgicalhistory.css'
 import { Typography } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../basestyledcomponents/Card/CardBody'
 import UpdateSurgicalHistoryItem from '../../../old/Forms/Clinical/Patient/updatesurgicalhistoryitem'
@@ -24,6 +22,7 @@ function getSuggestionValue(suggestion) {
 function renderSuggestion(suggestion) {
 	return <span>{suggestion}</span>
 }
+
 const classes = {
 	root: {
 		margin: 20,
@@ -56,6 +55,7 @@ const classes = {
 		backgroundColor: '#ffffff',
 	},
 }
+
 class SurgicalHistory extends Component {
 	constructor(props) {
 		super(props)

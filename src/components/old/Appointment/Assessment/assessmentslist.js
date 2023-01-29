@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import { Typography, TextField, Card } from '@material-ui/core'
-import CardContent from '@material-ui/core/CardContent'
+import { Card, TextField, Typography } from '@material-ui/core'
 import { useFormContext } from 'react-hook-form'
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { fetchAllForms } from '../../../../api/forms.api'
 import { useParams } from 'react-router-dom'
-import { getAppointmentComplaints } from '../../../../api/appointment.api'
 
 const useStyles = makeStyles({
 	fieldcontainer: {

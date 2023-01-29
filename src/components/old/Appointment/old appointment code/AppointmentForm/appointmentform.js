@@ -1,21 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import API_URL from '../../../../../api/api_url'
-import {
-	useParams,
-	useRouteMatch,
-	Switch,
-	Route,
-	Link,
-	NavLink,
-} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 //import FormGenerator from '../../FormsCenter/FormGenerator/FormGenerator.js'
-import Card from '../../../../basestyledcomponents/Card/Card.js'
-import CardHeader from '../../../../basestyledcomponents/Card/CardHeader'
-import CardBody from '../../../../basestyledcomponents/Card/CardBody'
-import FormTemplate from './appointmentformtemplate.js'
-import MedicalAppointmentForm from '../../../Forms/components/MedicalAppointmentForm/medicalappointmentform'
 import './appointmentform.css'
 import ActiveAppointmentForm from './activeappointmentform'
 

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { makeStyles, Typography, Button } from '@material-ui/core'
-import { Field, FieldArray, useFormikContext } from 'formik'
+import { Button, makeStyles, Typography } from '@material-ui/core'
+import { Field, useFormikContext } from 'formik'
 import { TextField } from 'formik-material-ui'
 import Card from '../../../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../../../basestyledcomponents/Card/CardBody'
-import Grid from '@material-ui/core/Grid'
-import { Complaint } from './Complaint/complaint'
 
 const editorStyle = {
 	minWidth: '100px',
@@ -44,6 +42,7 @@ export default function AddNewComplaint(props) {
 		setComplaintName('')
 		setDescription('')
 	}
+
 	const handleComplaintNameChange = (event) => {
 		setComplaintName(event.target.value)
 	}

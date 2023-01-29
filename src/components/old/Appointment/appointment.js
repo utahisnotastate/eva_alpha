@@ -1,27 +1,26 @@
 // DO NOT USE THIS RIGHT NOW. USE Eva/appointment/appointment.js
 import React, { useEffect, useState } from 'react'
 import {
-	makeStyles,
-	Typography,
+	Collapse,
 	Grid,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	Collapse,
+	makeStyles,
+	Typography,
 } from '@material-ui/core'
-import { fetchAllForms } from '../../../api/forms.api'
 import PatientComplaints from './Complaints/PatientComplaints'
 import AppointmentROS from './old appointment code/AppointmentROS/AppointmentROS'
 import AppointmentAssessment from './Assessment/AppointmentAssessment'
 import AppointmentPlan from './AppointmentPlan/AppointmentPlan'
 import AppointmentSummary from './AppointmentSummary/AppointmentSummary'
 import {
+	NavLink,
+	Route,
+	Switch,
 	useParams,
 	useRouteMatch,
-	Switch,
-	Route,
-	NavLink,
 } from 'react-router-dom'
 import patientroutes from '../../Patient/routes'
 import Card from '../../basestyledcomponents/Card/Card'
@@ -31,7 +30,6 @@ import CardFooter from '../../basestyledcomponents/Card/CardFooter'
 import AppointmentForm from './old appointment code/AppointmentForm/appointmentform'
 import AppointmentAllergiesWarning from './appointmentallergieswarning'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllAppointmentInformation } from '../../../api/forms.api'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import DraftsIcon from '@material-ui/icons/Drafts'
 
@@ -339,7 +337,7 @@ export default function Appointment() {
 	)
 }
 
-/* 
+/*
 *   const saveAppointmentFormsToDB = (forms) => {
     console.log("save appointment forms is " + JSON.stringify(forms));
     let promiseforms = [];

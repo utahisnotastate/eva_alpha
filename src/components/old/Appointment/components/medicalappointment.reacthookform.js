@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { DevTool } from '@hookform/devtools'
-import { useForm, FormProvider, useFormContext } from 'react-hook-form'
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Route, Switch, useParams, useRouteMatch } from 'react-router-dom'
 import Card from '../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
-import CardBody from '../../../basestyledcomponents/Card/CardBody'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Divider } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import CompletedAppointment from './CompletedAppointment/completedappointment'
 import PatientEncounter from './PatientEncounter/patientencounter'
 import PreAppointment from './PreAppointment/PreAppointment'
 import AppointmentHeaderButton from './Buttons/AppointmentButtons/appointmentHeaderButton'
 import { getAppointment } from '../../../../api/appointment.api'
 import { fetchAllForms } from '../../../../api/forms.api'
-import { useParams } from 'react-router-dom'
 import AppointmentHeader from './AppointmentHeader/appointmentheader'
 import example_appointment from './fake.data'
 import moment from 'moment'
-import appointmentpatientroutes from './appointmentpatient.routes'
 
 const useStyles = makeStyles({
 	header: {
@@ -134,6 +129,7 @@ export default function MedicalAppointment() {
         setAppointment(in_progress_appointment);*/
 		//setStatus("in_progress");
 	}
+
 	/*
     instead of splitting the medical appointment into different routes, it's easier to just render different
     components based on the status of the appointment.
@@ -170,6 +166,7 @@ export default function MedicalAppointment() {
 				)
 		}
 	}
+
 	/*
     The button rendered by this function is what the provider uses to change the progress of an appointment.
 
@@ -225,6 +222,7 @@ export default function MedicalAppointment() {
 				)
 		}
 	}
+
 	useEffect(() => {
 		const getAppointmentAndPopulateDetails = async (appointmentId) => {
 			const appointment = await getAppointment(appointmentId)

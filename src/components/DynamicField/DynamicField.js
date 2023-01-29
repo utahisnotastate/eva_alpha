@@ -1,11 +1,7 @@
 import React from 'react'
 import DynamicTextField from './Fields/DynamicTextField'
 import DynamicRadioGroup from './Fields/DynamicRadioGroup'
-import DynamicTextArea from './Fields/DynamicTextArea'
 import DynamicPresentNotPresentField from './Fields/DynamicPresentNotPresentField'
-import DynamicNormalAbnormal from './Fields/DynamicNormalAbnormal'
-import DynamicNumberField from './Fields/DynamicNumber'
-import DynamicDate from './Fields/DynamicDate'
 import DynamicSelectField from './Fields/DynamicSelectField'
 
 const present_not_present_options = [

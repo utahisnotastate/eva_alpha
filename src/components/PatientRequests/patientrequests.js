@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-import { useParams } from 'react-router-dom'
-import RequestTimeLine from './TimeLine/timeline'
-import Table from '../basestyledcomponents/Table/Table'
 import style from '../basestyledcomponents/Table/contentAreas'
-import Button from '../basestyledcomponents/Table/Button'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
 import GridContainer from '../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../basestyledcomponents/Grid/GridItem'
 import Person from '@material-ui/icons/Person'
-import axios from 'axios'
-import { Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import columns from './patientrequests.columns'
 import { getAllRequests } from '../../api/requests.api'
+
 const useStyles = makeStyles(style)
 
 export default function PatientRequests() {
