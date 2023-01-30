@@ -95,9 +95,7 @@ export default function Eva() {
 					</ListItem>
 				</List>
 			</Drawer>
-			<Box
-				component="main"
-				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
+			<Box sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route

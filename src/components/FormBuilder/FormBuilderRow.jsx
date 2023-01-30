@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add'
 import ClearIcon from '@mui/icons-material/Clear'
 
 export default function FormBuilderRow({
-	field,
+	fieldt,
 	push,
 	remove,
 	index,
