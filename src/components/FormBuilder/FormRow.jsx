@@ -4,6 +4,7 @@ import { Field } from 'formik'
 import { Select, TextField } from 'formik-material-ui'
 import AddIcon from '@material-ui/icons/Add'
 import ClearIcon from '@material-ui/icons/Clear'
+import OptionsFieldArray from './OptionsFieldArray'
 
 export default function FormRow({
 	field,
@@ -46,7 +47,7 @@ export default function FormRow({
 						fullWidth
 					/>
 				</Grid>
-				{fiel'.type ==' 'select' || field.type === 'radiogroup' ? (
+				{field.type === 'select' || field.type === 'radiogroup' ? (
 					<Grid item xs={3}>
 						<OptionsFieldArray
 							index={index}
@@ -56,10 +57,10 @@ export default function FormRow({
 					</Grid>
 				) : null}
 				<Grid item>
-					<AddIcon color='primary' onClick={handleAddNewField} />
+					<AddIcon color="primary" onClick={handleAddNewField} />
 				</Grid>
 				<Grid item>
-					<ClearIcon color='error' onClick={handleRemoveField} />
+					<ClearIcon color="error" onClick={handleRemoveField} />
 				</Grid>
 			</Grid>
 		</FormGroup>
