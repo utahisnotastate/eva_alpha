@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	CardHeader,
-	Divider,
-} from '@mui/material'
+import { Button, Card, CardContent, CardHeader, Divider } from '@mui/material'
 import FormRow from './FormRow'
 
 import { FieldArray, Form, Formik } from 'formik'
@@ -21,7 +14,9 @@ export default function FormBuilder({ title }) {
 			<CardHeader title={title} />
 			<Divider />
 			<CardContent>
-				<Formik initialValues={{ fields: [] }} onSubmit={handleSubmit}>
+				<Formik
+					initialValues={{ fields: [] }}
+					onSubmit={(values) => console.log(values)}>
 					{({ values }) => (
 						<Form>
 							<FieldArray name="fields">
@@ -34,6 +29,12 @@ export default function FormBuilder({ title }) {
 													<FormRow
 														key={index}
 														field={field}
+														buttonLabel="Remove Field"
+														blankfield={{
+															type: 'text',
+															label: '',
+															options: [],
+														}}
 														index={index}
 														push={push}
 														remove={remove}
@@ -58,15 +59,11 @@ export default function FormBuilder({ title }) {
 									</>
 								)}
 							</FieldArray>
+							<input type="submit" />
 						</Form>
 					)}
 				</Formik>
 			</CardContent>
-			<CardActions>
-				<Button color="primary" size="small" variant="text">
-					Save
-				</Button>
-			</CardActions>
 		</Card>
 	)
 }
