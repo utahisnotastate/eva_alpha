@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { FormGroup, Grid, MenuItem, TextField } from '@material-ui/core'
+import { FormGroup, Grid, MenuItem } from '@material-ui/core'
 import { Field } from 'formik'
-import { Select } from 'formik-material-ui'
+import { Select, TextField } from 'formik-material-ui'
 import AddIcon from '@material-ui/icons/Add'
 import ClearIcon from '@material-ui/icons/Clear'
-import OptionsFieldArray from './OptionsFieldArray'
 
-export default function FormRow({ field, push, remove, index, blankfield }) {
+export default function FormRow({
+	field,
+	push,
+	remove,
+	index,
+	blankfield,
+	name,
+}) {
 	const handleAddNewField = () => {
 		push(blankfield)
 	}
@@ -16,11 +22,11 @@ export default function FormRow({ field, push, remove, index, blankfield }) {
 
 	return (
 		<FormGroup>
-			<Grid container spacing={2} alignItems="center">
+			<Grid container spacing={2} alignItems="center" direction={`row`}>
 				<Grid item xs={1}>
 					<Field
 						component={Select}
-						name={`fields[${index}].type`}
+						name={`${name}.type`}
 						label="Type"
 						fullWidth>
 						<MenuItem value={`text`}>Text</MenuItem>
@@ -35,23 +41,25 @@ export default function FormRow({ field, push, remove, index, blankfield }) {
 						component={TextField}
 						InputLabelProps={{ shrink: true }}
 						label={`Label`}
-						name={`fields[${index}].label`}
+						name={`${name}.label`}
 						variant="outlined"
 						fullWidth
 					/>
 				</Grid>
-
-				{field.type === 'select' || field.type === 'radiogroup' ? (
+				{fiel'.type ==' 'select' || field.type === 'radiogroup' ? (
 					<Grid item xs={3}>
-						<OptionsFieldArray index={index} />
+						<OptionsFieldArray
+							index={index}
+							name={`fields[${index}].options`}
+							options={field.options}
+						/>
 					</Grid>
 				) : null}
-
-				<Grid item xs={1}>
-					<AddIcon color="primary" onClick={handleAddNewField} />
+				<Grid item>
+					<AddIcon color='primary' onClick={handleAddNewField} />
 				</Grid>
-				<Grid item xs={1}>
-					<ClearIcon color="error" onClick={handleRemoveField} />
+				<Grid item>
+					<ClearIcon color='error' onClick={handleRemoveField} />
 				</Grid>
 			</Grid>
 		</FormGroup>

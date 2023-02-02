@@ -21,9 +21,7 @@ export default function OptionsFieldArray({ name, options }) {
 								</Button>
 								<Button
 									type="button"
-									onClick={() =>
-										push({ value: '', label: '' })
-									}>
+									onClick={() => push({ label: '' })}>
 									+
 								</Button>
 							</FormGroup>

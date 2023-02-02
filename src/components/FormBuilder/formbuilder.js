@@ -5,8 +5,9 @@ import FormRow from './FormRow'
 import { FieldArray, Form, Formik } from 'formik'
 
 export default function FormBuilder({ title }) {
-	const handleSubmit = (values) => {
+	const handleSubmit = (values, actions) => {
 		console.log(values)
+		actions.setSubmitting(false)
 	}
 
 	return (
@@ -15,8 +16,19 @@ export default function FormBuilder({ title }) {
 			<Divider />
 			<CardContent>
 				<Formik
-					initialValues={{ fields: [] }}
-					onSubmit={(values) => console.log(values)}>
+					initialValues={{
+						fields: [
+							{
+								type: 'text',
+								label: 'test physical exam',
+								zone: 'physical exam',
+								options: [],
+							},
+						],
+					}}
+					onSubmit={(values, actions) =>
+						handleSubmit(values, actions)
+					}>
 					{({ values }) => (
 						<Form>
 							<FieldArray name="fields">
@@ -29,6 +41,7 @@ export default function FormBuilder({ title }) {
 													<FormRow
 														key={index}
 														field={field}
+														name={`fields.${index}`}
 														buttonLabel="Remove Field"
 														blankfield={{
 															type: 'text',
