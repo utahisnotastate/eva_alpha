@@ -1,82 +1,59 @@
-import React from 'react'
-import { Button, Card, CardContent, CardHeader, Divider } from '@mui/material'
-import FormRow from './FormRow'
-
-import { FieldArray, Form, Formik } from 'formik'
+import * as React from 'react'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import EditForm from './EditForm'
+import PatientMenu from '../Patient/PatientMenu'
 
 export default function FormBuilder({ title }) {
 	const handleSubmit = (values, actions) => {
 		console.log(values)
 		actions.setSubmitting(false)
 	}
+	const [zone, setZone] = React.useState({
+		zone: 'Physical Exam',
+		fields: [],
+	})
 
+	const formData = [
+		{
+			type: 'header',
+			subtype: 'h1',
+			label: 'formBuilder in React',
+		},
+		{
+			type: 'paragraph',
+			label: 'This is a demonstration of formBuilder running in a React project.',
+		},
+	]
+
+	const [zones, setZones] = React.useState([
+		{ zone: 'Physical Exam', fields: [] },
+		{ zone: 'New Complaint', fields: [] },
+		{ zone: 'New Plan', fields: [] },
+		{ zone: 'New Diagnoses', fields: [] },
+		{ zone: 'Review of Systems', fields: [] },
+		{ zone: 'Demographics', fields: [] },
+	])
 	return (
-		<Card>
-			<CardHeader title={title} />
-			<Divider />
-			<CardContent>
-				<Formik
-					initialValues={{
-						fields: [
-							{
-								type: 'text',
-								label: 'test physical exam',
-								zone: 'physical exam',
-								options: [],
-							},
-						],
-					}}
-					onSubmit={(values, actions) =>
-						handleSubmit(values, actions)
-					}>
-					{({ values }) => (
-						<Form>
-							<FieldArray name="fields">
-								{({ push, remove }) => (
-									<>
-										{values.fields &&
-										values.fields.length > 0 ? (
-											values.fields.map(
-												(field, index) => (
-													<FormRow
-														key={index}
-														field={field}
-														name={`fields.${index}`}
-														buttonLabel="Remove Field"
-														blankfield={{
-															type: 'text',
-															label: '',
-															options: [],
-														}}
-														index={index}
-														push={push}
-														remove={remove}
-													/>
-												)
-											)
-										) : (
-											<Button
-												color="primary"
-												size="small"
-												variant="text"
-												onClick={() =>
-													push({
-														type: 'text',
-														label: '',
-														options: [],
-													})
-												}>
-												Add Field
-											</Button>
-										)}
-									</>
-								)}
-							</FieldArray>
-							<input type="submit" />
-						</Form>
-					)}
-				</Formik>
-			</CardContent>
-		</Card>
+		<Box
+			component="main"
+			sx={{
+				flexGrow: 1,
+				py: 8,
+			}}>
+			<Container maxWidth="lg">
+				<Typography sx={{ mb: 3 }} variant="h4">
+					{zone.zone}
+				</Typography>
+				<Grid container spacing={3}>
+					<Grid item lg={4} md={6} xs={12}>
+						<PatientMenu zones={zones} setZone={setZone} />
+					</Grid>
+					<Grid item lg={8} md={6} xs={12}>
+						<Button variant="contained">Save</Button>
+						<EditForm title={`Form Builder`} />
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
 	)
 }

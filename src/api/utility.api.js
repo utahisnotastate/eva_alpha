@@ -6,20 +6,6 @@ import fakepatients from '../components/Patient/patients.mock'
 import { getAllForms } from './forms.api'
 import API_URL from './api_url'
 
-export const getSettings = async () => {
-	const response = await axios.get(`${API_URL}/settings/1/`)
-
-	return response.data
-}
-
-//update the settings
-export const updateSettings = async (settings) => {
-	console.log(settings)
-	const response = await axios.put(`${API_URL}/settings/1/`, settings)
-
-	return response.data
-}
-
 export const getPatientMockData = async () => {
 	const response = await axios(`https://www.mockaroo.com/2f1cf230`)
 
@@ -29,14 +15,6 @@ export const getPatientMockData = async () => {
 export const getProviders = async () => {
 	const response = await axios(`${API_URL}/providers/`)
 	return response.data
-}
-
-export const getSchedulingComponentData = async () => {
-	const [appointments, providers] = await Promise.all([
-		getAllAppointments(),
-		getProviders(),
-	])
-	return { appointments, providers }
 }
 
 export const getAllInitDataOnLoad = async () => {

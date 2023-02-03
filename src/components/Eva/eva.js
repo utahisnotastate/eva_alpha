@@ -11,7 +11,7 @@ import {
 	TextField,
 	Toolbar,
 } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getAllInitDataOnLoad } from '../../api/utility.api'
 import { NavLink, Route, Routes } from 'react-router-dom'
 
@@ -19,6 +19,7 @@ import Home from '../Home/home'
 import Patient from '../Patient/patient'
 import Schedule from '../Scheduling/Schedule'
 import FormBuilder from '../FormBuilder/formbuilder'
+import Appointment from '../Appointment/appointment'
 
 const drawerWidth = 240
 
@@ -27,6 +28,11 @@ const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
+	const patients = useSelector((state) => state.patients)
+	const requests = useSelector((state) => state.requests)
+	const forms = useSelector((state) => state.forms)
+	const settings = useSelector((state) => state.settings)
+	const appointments = useSelector((state) => state.appointments)
 
 	useEffect(() => {
 		getAllInitDataOnLoad()
@@ -35,6 +41,7 @@ export default function Eva() {
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
 				})
+				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
 				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
@@ -55,6 +62,7 @@ export default function Eva() {
 						sx={{ width: '100%', color: 'white' }}
 						label="Search Patients"
 						variant="standard"
+						options={patients}
 					/>
 				</Toolbar>
 			</AppBar>
@@ -97,11 +105,20 @@ export default function Eva() {
 			</Drawer>
 			<Box sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route
+						path="/"
+						element={
+							<Home
+								requests={requests}
+								appointments={appointments}
+							/>
+						}
+					/>
 					<Route
 						path="/formbuilder"
 						element={
 							<FormBuilder
+								forms={forms}
 								title={`Physical Exam`}
 								fields={[
 									{
@@ -127,9 +144,41 @@ export default function Eva() {
 					/>
 					<Route
 						path="/patient/:id"
-						element={<Patient title={`First Name Last Name`} />}
+						element={
+							<Patient
+								patient={{
+									firstName: 'Utah',
+									lastname: 'Hans',
+									appointments: [],
+									requests: [],
+									diagnoses: [],
+									medications: [],
+								}}
+								title={`First Name Last Name`}
+							/>
+						}
 					/>
-					<Route path="/schedule" element={<Schedule />} />
+					<Route path="/appointment/:id" element={<Appointment />} />
+					<Route
+						path="/request/:id"
+						element={
+							<Patient
+								patient={{
+									firstName: 'Utah',
+									lastname: 'Hans',
+									appointments: [],
+									requests: [],
+									diagnoses: [],
+									medications: [],
+								}}
+								title={`Appointment`}
+							/>
+						}
+					/>
+					<Route
+						path="/schedule"
+						element={<Schedule appointments={appointments} />}
+					/>
 				</Routes>
 			</Box>
 		</Box>

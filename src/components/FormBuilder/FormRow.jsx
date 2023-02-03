@@ -23,11 +23,12 @@ export default function FormRow({
 
 	return (
 		<FormGroup>
-			<Grid container spacing={2} alignItems="center" direction={`row`}>
-				<Grid item xs={1}>
+			<Grid container spacing={2} columns={5} direction={`row`}>
+				<Grid item>
 					<Field
 						component={Select}
 						name={`${name}.type`}
+						sx={{ flexGrow: 2 }}
 						label="Type"
 						fullWidth>
 						<MenuItem value={`text`}>Text</MenuItem>
@@ -37,7 +38,7 @@ export default function FormRow({
 						<MenuItem value={`number`}>Number</MenuItem>
 					</Field>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item>
 					<Field
 						component={TextField}
 						InputLabelProps={{ shrink: true }}
@@ -66,3 +67,51 @@ export default function FormRow({
 		</FormGroup>
 	)
 }
+
+/*
+* <FormGroup>
+			<Grid container spacing={2} columns={5} direction={`row`}>
+				<Grid item>
+					<Field
+						component={Select}
+						name={`${name}.type`}
+						sx={{ flexGrow: 2 }}
+						label="Type"
+						fullWidth>
+						<MenuItem value={`text`}>Text</MenuItem>
+						<MenuItem value={`textarea`}>Text Area</MenuItem>
+						<MenuItem value={`time`}>Time</MenuItem>
+						<MenuItem value={`date`}>Date</MenuItem>
+						<MenuItem value={`number`}>Number</MenuItem>
+					</Field>
+				</Grid>
+				<Grid item>
+					<Field
+						component={TextField}
+						InputLabelProps={{ shrink: true }}
+						label={`Label`}
+						name={`${name}.label`}
+						variant="outlined"
+						fullWidth
+					/>
+				</Grid>
+				{field.type === 'select' || field.type === 'radiogroup' ? (
+					<Grid item xs={3}>
+						<OptionsFieldArray
+							index={index}
+							name={`fields[${index}].options`}
+							options={field.options}
+						/>
+					</Grid>
+				) : null}
+				<Grid item>
+					<AddIcon color="primary" onClick={handleAddNewField} />
+				</Grid>
+				<Grid item>
+					<ClearIcon color="error" onClick={handleRemoveField} />
+				</Grid>
+			</Grid>
+		</FormGroup>
+*
+*
+* */

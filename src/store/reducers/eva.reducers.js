@@ -96,25 +96,49 @@ function patient(state = { id: '', details: {}, ssn: '' }, action) {
 	}
 }
 
-//create a reducer for the form property 'form'
-function form(
-	state = { form: 'complaints', title: 'New Complaint', inputs: [] },
+function physical_exam(
+	state = [
+		{
+			type: 'number',
+			label: 'Temperature',
+			options: [],
+			helperText: 'Enter temperature in degrees F',
+		},
+		{
+			type: 'number',
+			label: 'Pulse',
+			options: [],
+			helperText: 'Enter pulse in beats per minute',
+		},
+		{
+			type: 'string',
+			label: 'When did it start?',
+			options: [],
+			helperText: 'Enter description',
+		},
+		{
+			type: 'number',
+			label: 'Respiration',
+			options: [],
+			helperText: 'Enter respiration in breaths per minute',
+		},
+	],
 	action
 ) {
 	switch (action.type) {
-		case 'SET_FORM':
-			return action.form
+		case 'LOAD_PHYSICAL_EXAM':
+			return action.physical_exam
 		default:
 			return state
 	}
 }
-
 //create a combined reducer with the properties of form and fields
 
 const allReducers = combineReducers({
 	appointments,
+	physical_exam,
 	forms,
-	form,
+
 	patients,
 	requests,
 	settings,

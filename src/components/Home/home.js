@@ -12,7 +12,7 @@ function Metric({ label, value, feedback, col }) {
 	)
 }
 
-const Home = () => (
+const Home = ({ appointments, requests, patients, settings }) => (
 	<>
 		<Box
 			component="main"
@@ -23,10 +23,10 @@ const Home = () => (
 			<Container maxWidth={false}>
 				<Grid container spacing={3}>
 					<Grid item lg={8} md={12} xl={9} xs={12}>
-						<Schedule />
+						<Schedule appointments={appointments} />
 					</Grid>
 					<Grid item lg={4} md={6} xl={3} xs={12}>
-						<Requests />
+						<Requests requests={requests} />
 					</Grid>
 				</Grid>
 			</Container>

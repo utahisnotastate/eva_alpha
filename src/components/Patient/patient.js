@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {
 	Box,
 	Card,
@@ -13,6 +13,16 @@ import Button from '@mui/material/Button'
 import PatientMenu from './PatientMenu'
 
 export default function Patient({ title }) {
+	const [zones, setZones] = React.useState([
+		{ zone: 'Medications' },
+		{ zone: 'Allergies' },
+		{ zone: 'Diagnoses' },
+		{ zone: 'History' },
+		{ zone: 'Registration' },
+		{ zone: 'Appointments' },
+		{ zone: 'Insurance' },
+		{ zone: 'Requests' },
+	])
 	return (
 		<Box
 			component="main"
@@ -26,7 +36,7 @@ export default function Patient({ title }) {
 				</Typography>
 				<Grid container spacing={3}>
 					<Grid item lg={4} md={6} xs={12}>
-						<PatientMenu />
+						<PatientMenu zones={zones} />
 					</Grid>
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>

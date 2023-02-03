@@ -47,16 +47,25 @@ const PatientMenu = (props) => (
 			</Box>
 		</CardContent>
 		<Divider />
-		<ListGroup variant="flush" style={{ textAlign: 'center' }}>
-			<ListGroup.Item>Registration</ListGroup.Item>
+		<ListGroup variant='flush' style={{ textAlign: 'center' }}>
+			{props.zones && props.zones.length > 0
+				? props.zones.map((zone, index) => (
+					<ListGroup.Item key={index}>{zone.zone}</ListGroup.Item>
+				))
+				: null}
+		</ListGroup>
+	</Card>
+)
+
+export default PatientMenu
+
+/*
+* <ListGroup.Item>Registration</ListGroup.Item>
 			<ListGroup.Item>Appointments</ListGroup.Item>
 			<ListGroup.Item>Insurance</ListGroup.Item>
 			<ListGroup.Item>Medications</ListGroup.Item>
 			<ListGroup.Item>Medical History</ListGroup.Item>
 			<ListGroup.Item>Requests</ListGroup.Item>
 			<ListGroup.Item>Diagnosis</ListGroup.Item>
-		</ListGroup>
-	</Card>
-)
-
-export default PatientMenu
+*
+* */
