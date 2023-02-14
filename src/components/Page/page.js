@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {
 	Box,
 	Card,
@@ -10,10 +10,9 @@ import {
 	Typography,
 } from '@mui/material'
 import Button from '@mui/material/Button'
-import PatientMenu from './PatientMenu'
-import CustomForm from '../CustomForm/customform'
+import SideNav from './sidenav'
 
-export default function Patient({ title }) {
+function Page({ title, children, side_nav_items }) {
 	return (
 		<Box
 			component="main"
@@ -27,7 +26,7 @@ export default function Patient({ title }) {
 				</Typography>
 				<Grid container spacing={3}>
 					<Grid item lg={4} md={6} xs={12}>
-						<PatientMenu />
+						<SideNav />
 					</Grid>
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>
@@ -36,9 +35,7 @@ export default function Patient({ title }) {
 								title="Registration Details"
 							/>
 							<Divider />
-							<CardContent>
-								<CustomForm />
-							</CardContent>
+							<CardContent>{children}</CardContent>
 							<Divider />
 							<Box
 								sx={{
@@ -57,7 +54,7 @@ export default function Patient({ title }) {
 		</Box>
 	)
 }
-
+export default Page
 /*
 * <Grid container spacing={3}>
 			<Grid item xs={2}>

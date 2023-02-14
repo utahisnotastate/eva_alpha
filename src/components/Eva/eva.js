@@ -17,8 +17,10 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 
 import Home from '../Home/home'
 import Patient from '../Patient/patient'
+import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
 import FormBuilder from '../FormBuilder/formbuilder'
+import Page from '../Page/page'
 
 const drawerWidth = 240
 
@@ -28,19 +30,6 @@ const drawerWidth = 240
 export default function Eva() {
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		getAllInitDataOnLoad()
-			.then((data) => {
-				dispatch({
-					type: 'LOAD_APPOINTMENTS',
-					appointments: data.appointments,
-				})
-				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
-				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-				dispatch({ type: 'LOAD_SETTINGS', settings: data.settings })
-			})
-			.catch((err) => console.log(err))
-	})
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<AppBar
@@ -87,6 +76,20 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
+						<NavLink to={`/patients`}>
+							<ListItemButton>
+								<ListItemText primary={`Patients`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
+						<NavLink to={`/patient/:id`}>
+							<ListItemButton>
+								<ListItemText primary={`Patient`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
 						<NavLink to={`/settings`}>
 							<ListItemButton>
 								<ListItemText primary={`Settings`} />
@@ -126,8 +129,12 @@ export default function Eva() {
 						element={<Patient title={`Settings`} />}
 					/>
 					<Route
+						path="/patients"
+						element={<Patients title={`Patients`} />}
+					/>
+					<Route
 						path="/patient/:id"
-						element={<Patient title={`First Name Last Name`} />}
+						element={<Page title={`Patient`} />}
 					/>
 					<Route path="/schedule" element={<Schedule />} />
 				</Routes>

@@ -5,9 +5,8 @@ import { useForm } from 'react-hook-form'
 import { RHFInput } from 'react-hook-form-input'
 import TextField from '@material-ui/core/TextField'
 import Select from 'react-select'
-import GridContainer from '../../../../../basestyledcomponents/Grid/GridContainer'
-import GridItem from '../../../../../basestyledcomponents/Grid/GridItem'
-import { Input, Typography } from '@material-ui/core'
+
+import { Input, Typography, Grid } from '@material-ui/core'
 // import {useStateValue} from "../../../../ClinicalQueue/context/ClinicalQueueContext";
 import './modal.css'
 import moment from 'moment'
@@ -81,13 +80,13 @@ export default function CheckInForm(props) {
 
 	return (
 		<form style={styles.container} onSubmit={handleSubmit(onSubmit)}>
-			<GridContainer direction="column">
-				<GridItem style={styles.row} xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+			<Grid container direction="column">
+				<Grid item style={styles.row} xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							<Typography>Insurance changes:</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<RHFInput
 								as={<Select options={options} />}
 								name="insurance_changes"
@@ -95,47 +94,47 @@ export default function CheckInForm(props) {
 								register={register}
 								setValue={setValue}
 							/>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							{' '}
 							<Typography>Copay Amount:</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<Typography>$50.00</Typography>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							{' '}
 							<Typography>Patient Balance:</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<Typography>$50.00</Typography>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							<Typography>Total Due:</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<Typography>$50.00</Typography>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							<Typography>Amount Paid:</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<RHFInput
 								as={
 									<TextField
@@ -148,15 +147,15 @@ export default function CheckInForm(props) {
 								register={register}
 								setValue={setValue}
 							/>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12}>
-					<GridContainer>
-						<GridItem xs={4}>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Grid container>
+						<Grid item xs={4}>
 							<Typography>Payment Method</Typography>
-						</GridItem>
-						<GridItem xs={8}>
+						</Grid>
+						<Grid item xs={8}>
 							<RHFInput
 								as={<Select options={paymentoptions} />}
 								name="payment_method"
@@ -164,10 +163,10 @@ export default function CheckInForm(props) {
 								register={register}
 								setValue={setValue}
 							/>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-			</GridContainer>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
 			<Input type="submit" />
 		</form>
 	)

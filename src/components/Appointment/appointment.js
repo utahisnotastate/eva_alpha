@@ -27,7 +27,9 @@ export default function Appointment() {
 					setActiveStep={setActiveStep}
 				/>
 				<CustomForm fields={fields} />
+				<br />
 			</CardContent>
+
 			<CardActionArea>
 				<CardActions>
 					<Button variant={`contained`}>Add</Button>

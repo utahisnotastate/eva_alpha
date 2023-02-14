@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
 import columns from './patients.columns'
 import options from './patient.table.options'
+import Page from '../Page/page'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,13 +25,15 @@ export default function Patients() {
 
 	return (
 		<div className={classes.root}>
-			<MUIDataTable
-				title="Patients"
-				data={patients}
-				columns={columns}
-				options={options}
-				className={classes.table}
-			/>
+			<Page title={`Patients`}>
+				<MUIDataTable
+					title="Patients"
+					data={patients}
+					columns={columns}
+					options={options}
+					className={classes.table}
+				/>
+			</Page>
 		</div>
 	)
 }

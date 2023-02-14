@@ -19,6 +19,7 @@ const options = {
 	filter: false,
 	download: false,
 	selectableRows: 'none',
+	elevation: 0,
 	customToolbar: addNewPatientButton,
 	viewColumns: false,
 	enableNestedDataAccess: '.',
