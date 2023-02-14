@@ -1,12 +1,15 @@
 import React from 'react'
 import { Button, Card, CardContent, CardHeader, Divider } from '@mui/material'
 import FormRow from './FormRow'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { FieldArray, Form, Formik } from 'formik'
 
-export default function FormBuilder({ title }) {
+export default function FormBuilder({ title, zone = 'physical_exam' }) {
+	const dispatch = useDispatch()
 	const handleSubmit = (values, actions) => {
 		console.log(values)
+		dispatch({ type: 'LOAD_CUSTOM_FIELDS', customfields: values.fields })
 		actions.setSubmitting(false)
 	}
 
@@ -17,14 +20,7 @@ export default function FormBuilder({ title }) {
 			<CardContent>
 				<Formik
 					initialValues={{
-						fields: [
-							{
-								type: 'text',
-								label: 'test physical exam',
-								zone: 'physical exam',
-								options: [],
-							},
-						],
+						fields: [],
 					}}
 					onSubmit={(values, actions) =>
 						handleSubmit(values, actions)
@@ -47,6 +43,7 @@ export default function FormBuilder({ title }) {
 															type: 'text',
 															label: '',
 															options: [],
+															zone: zone,
 														}}
 														index={index}
 														push={push}
@@ -64,6 +61,7 @@ export default function FormBuilder({ title }) {
 														type: 'text',
 														label: '',
 														options: [],
+														zone: zone,
 													})
 												}>
 												Add Field

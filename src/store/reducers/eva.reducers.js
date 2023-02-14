@@ -27,6 +27,21 @@ function zones(state = base_zones, action) {
 			return state
 	}
 }
+function customfields(state = [], action) {
+	switch (action.type) {
+		case 'LOAD_CUSTOM_FIELDS':
+			return action.customfields
+		case 'ADD_CUSTOM_FIELD':
+			return [...state, action.customfield]
+
+		case 'UPDATE_CUSTOM_FIELDS':
+			return action.customfields
+		case 'REMOVE_CUSTOM_FIELD':
+			return state.filter((customfield) => customfield.id !== action.id)
+		default:
+			return state
+	}
+}
 
 //create a reducer for the forms
 function forms(state = [], action) {
@@ -115,6 +130,7 @@ const allReducers = combineReducers({
 	appointments,
 	forms,
 	form,
+	customfields,
 	patients,
 	requests,
 	settings,
