@@ -14,18 +14,22 @@ export default function FormBuilder({ title, zone = 'physical_exam' }) {
 	}
 
 	return (
-		<Card>
-			<CardHeader title={title} />
-			<Divider />
-			<CardContent>
-				<Formik
-					initialValues={{
-						fields: [],
-					}}
-					onSubmit={(values, actions) =>
-						handleSubmit(values, actions)
-					}>
-					{({ values }) => (
+		<Formik
+			initialValues={{
+				fields: [],
+			}}
+			onSubmit={(values, actions) => handleSubmit(values, actions)}>
+			{({ values, handleSubmit }) => (
+				<Card variant={`outlined`}>
+					<CardHeader title={title} />
+					<Button
+						style={{ float: 'right' }}
+						variant="contained"
+						onClick={handleSubmit}>
+						Save Form
+					</Button>
+					<Divider />
+					<CardContent>
 						<Form>
 							<FieldArray name="fields">
 								{({ push, remove }) => (
@@ -55,7 +59,7 @@ export default function FormBuilder({ title, zone = 'physical_exam' }) {
 											<Button
 												color="primary"
 												size="small"
-												variant="text"
+												variant="contained"
 												onClick={() =>
 													push({
 														type: 'text',
@@ -70,11 +74,10 @@ export default function FormBuilder({ title, zone = 'physical_exam' }) {
 									</>
 								)}
 							</FieldArray>
-							<input type="submit" />
 						</Form>
-					)}
-				</Formik>
-			</CardContent>
-		</Card>
+					</CardContent>
+				</Card>
+			)}
+		</Formik>
 	)
 }
