@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Button, FormGroup, TextField, Typography } from '@material-ui/core'
-import { FieldArray } from 'formik'
+import { Button, FormGroup, Typography } from '@material-ui/core'
+import { FieldArray, Field } from 'formik'
+import { TextField } from 'formik-material-ui'
 
 export default function OptionsFieldArray({ name, options }) {
 	return (
@@ -10,7 +11,8 @@ export default function OptionsFieldArray({ name, options }) {
 					{options && options.length > 0 ? (
 						options.map((option, index) => (
 							<FormGroup key={index}>
-								<TextField
+								<Field
+									component={TextField}
 									label={`Label`}
 									name={`${name}[${index}].label`}
 								/>
@@ -27,7 +29,11 @@ export default function OptionsFieldArray({ name, options }) {
 							</FormGroup>
 						))
 					) : (
-						<Typography variant="body1">No options</Typography>
+						<Typography
+							variant="body1"
+							onClick={() => push({ label: '' })}>
+							Add options
+						</Typography>
 					)}
 				</>
 			)}

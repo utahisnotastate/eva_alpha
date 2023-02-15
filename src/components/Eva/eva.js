@@ -19,6 +19,7 @@ import Home from '../Home/home'
 import Patient from '../Patient/patient'
 import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
+import ChatGPTFormBuilder from '../FormBuilder/chatgptcomponents/chatgptformbuilder'
 import FormBuilder from '../FormBuilder/formbuilder'
 import Page from '../Page/page'
 
@@ -101,29 +102,7 @@ export default function Eva() {
 			<Box sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route
-						path="/formbuilder"
-						element={
-							<FormBuilder
-								title={`Physical Exam`}
-								fields={[
-									{
-										type: 'text',
-										label: 'This is a text field',
-									},
-									{
-										type: 'text',
-										label: 'Second Field',
-									},
-								]}
-								blankField={{
-									type: 'text',
-									label: '',
-									options: [],
-								}}
-							/>
-						}
-					/>
+					<Route path="/formbuilder" element={<FormBuilder />} />
 					<Route
 						path="/settings"
 						element={<Patient title={`Settings`} />}

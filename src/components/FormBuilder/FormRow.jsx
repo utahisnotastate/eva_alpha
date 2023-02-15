@@ -35,11 +35,14 @@ export default function FormRow({
 						<MenuItem value={`time`}>Time</MenuItem>
 						<MenuItem value={`date`}>Date</MenuItem>
 						<MenuItem value={`number`}>Number</MenuItem>
+						<MenuItem value={`select`}>Select</MenuItem>
+						<MenuItem value={`radiogroup`}>Radio Group</MenuItem>
 					</Field>
 				</Grid>
 				<Grid item xs={3}>
 					<Field
 						component={TextField}
+						type={field.type}
 						InputLabelProps={{ shrink: true }}
 						label={`Label`}
 						name={`${name}.label`}
@@ -50,8 +53,7 @@ export default function FormRow({
 				{field.type === 'select' || field.type === 'radiogroup' ? (
 					<Grid item xs={3}>
 						<OptionsFieldArray
-							index={index}
-							name={`fields[${index}].options`}
+							name={`${name}.${`options`}`}
 							options={field.options}
 						/>
 					</Grid>
