@@ -5,6 +5,7 @@ import { Select, TextField } from 'formik-material-ui'
 import AddIcon from '@material-ui/icons/Add'
 import ClearIcon from '@material-ui/icons/Clear'
 import OptionsFieldArray from './OptionsFieldArray'
+import Button from '@mui/material/Button'
 
 export default function FormRow({
 	field,
@@ -23,8 +24,17 @@ export default function FormRow({
 
 	return (
 		<FormGroup>
-			<Grid container spacing={2} alignItems="center" direction={`row`}>
-				<Grid item xs={1}>
+			<Grid
+				container
+				spacing={2}
+				alignItems="center"
+				direction={`column`}>
+				<Grid item>
+					<Button type="button" onClick={handleRemoveField}>
+						Delete Field
+					</Button>
+				</Grid>
+				<Grid item xs={12}>
 					<Field
 						component={Select}
 						name={`${name}.type`}
@@ -39,7 +49,7 @@ export default function FormRow({
 						<MenuItem value={`radiogroup`}>Radio Group</MenuItem>
 					</Field>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item xs={12}>
 					<Field
 						component={TextField}
 						type={field.type}
@@ -51,7 +61,7 @@ export default function FormRow({
 					/>
 				</Grid>
 				{field.type === 'select' || field.type === 'radiogroup' ? (
-					<Grid item xs={3}>
+					<Grid item xs={12}>
 						<OptionsFieldArray
 							name={`${name}.${`options`}`}
 							options={field.options}
@@ -59,10 +69,9 @@ export default function FormRow({
 					</Grid>
 				) : null}
 				<Grid item>
-					<AddIcon color="primary" onClick={handleAddNewField} />
-				</Grid>
-				<Grid item>
-					<ClearIcon color="error" onClick={handleRemoveField} />
+					<Button type="button" onClick={handleAddNewField}>
+						Add New Field
+					</Button>
 				</Grid>
 			</Grid>
 		</FormGroup>
