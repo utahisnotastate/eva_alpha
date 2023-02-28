@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Patients() {
 	const classes = useStyles()
-
 	const columns = [
 		{
 			name: 'id',
@@ -32,6 +31,14 @@ export default function Patients() {
 		{
 			name: 'name',
 			label: 'Name',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: 'dob',
+			label: 'Date of Birth',
 			options: {
 				filter: true,
 				sort: true,

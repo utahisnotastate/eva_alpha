@@ -22,7 +22,6 @@ const columns = [
 			display: false,
 		},
 	},
-
 	{
 		name: 'details.last_name',
 		label: 'Last Name',
