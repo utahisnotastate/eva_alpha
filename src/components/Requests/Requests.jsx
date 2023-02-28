@@ -25,18 +25,10 @@ export default function Requests() {
 		['Bob Herm', 'Test Corp', 'Tampa', 'FL'],
 		['James Houston', 'Test Corp', 'Dallas', 'TX'],
 	]
-	const options = {
-		filterType: 'checkbox',
-	}
 
 	return (
 		<div>
-			<MUIDataTable
-				title="Patients"
-				data={data}
-				columns={columns}
-				options={options}
-			/>
+			<MUIDataTable title="Requests" data={data} columns={columns} />
 		</div>
 	)
 }

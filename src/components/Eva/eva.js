@@ -119,6 +119,8 @@ export default function Eva() {
 						path="/settings"
 						element={<Patient title={`Settings`} />}
 					/>
+					<Route path="/requests" element={<Requests />} />
+					<Route path="/patients" element={<Patients />} />
 					<Route
 						path="/patient/:id"
 						element={<Page title={`Patient`} />}
