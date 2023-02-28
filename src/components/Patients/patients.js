@@ -18,17 +18,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Patients() {
 	const classes = useStyles()
 
-	const columns = ['Name', 'Company', 'City', 'State']
+	const columns = ['Name', 'DOB']
 	const data = [
-		['Joe James', 'Test Corp', 'Yonkers', 'NY'],
-		['John Walsh', 'Test Corp', 'Hartford', 'CT'],
-		['Bob Herm', 'Test Corp', 'Tampa', 'FL'],
-		['James Houston', 'Test Corp', 'Dallas', 'TX'],
+		['Joe James', '9/15/87'],
+		['John Walsh', '6/13/22'],
+		['Bob Herm', '3/18/97'],
+		['James Houston', '4/16/88'],
 	]
 
-	return (
-		<div>
-			<MUIDataTable title="Patients" data={data} columns={columns} />
-		</div>
-	)
+	return <MUIDataTable title="Patients" data={data} columns={columns} />
 }

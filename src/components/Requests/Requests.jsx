@@ -18,17 +18,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Requests() {
 	const classes = useStyles()
 
-	const columns = ['Name', 'Company', 'City', 'State']
+	const columns = ['Type', 'Status', 'Patient', 'View']
 	const data = [
-		['Joe James', 'Test Corp', 'Yonkers', 'NY'],
-		['John Walsh', 'Test Corp', 'Hartford', 'CT'],
-		['Bob Herm', 'Test Corp', 'Tampa', 'FL'],
-		['James Houston', 'Test Corp', 'Dallas', 'TX'],
+		['Medication', 'Waiting on patient follow up', 'Herbert Hoover'],
+		['Insurance', 'Waiting on Insurance', 'Jiminy Cricket'],
+		['Scheduling', 'Awaiting Dr. response', 'Wordle Burdle'],
+		['Insurance', 'Patient Followup', 'John Stamos'],
 	]
 
-	return (
-		<div>
-			<MUIDataTable title="Requests" data={data} columns={columns} />
-		</div>
-	)
+	return <MUIDataTable title="Requests" data={data} columns={columns} />
 }
