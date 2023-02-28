@@ -2,6 +2,7 @@ import React from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,7 +19,37 @@ const useStyles = makeStyles((theme) => ({
 export default function Patients() {
 	const classes = useStyles()
 
-	const columns = ['Name', 'DOB']
+	const columns = [
+		{
+			name: 'id',
+			label: 'ID',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'name',
+			label: 'Name',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: 'view',
+			label: 'View',
+			options: {
+				customBodyRender: (value, tableMeta, updateValue) => {
+					const patientId = tableMeta.rowData[0]
+					return (
+						<Link to={`/patients/${patientId}`}>
+							<button>View</button>
+						</Link>
+					)
+				},
+			},
+		},
+	]
 	const data = [
 		['Joe James', '9/15/87'],
 		['John Walsh', '6/13/22'],
