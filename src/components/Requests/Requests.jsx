@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Requests() {
 	const classes = useStyles()
-
 	const columns = [
 		{
 			name: 'id',
