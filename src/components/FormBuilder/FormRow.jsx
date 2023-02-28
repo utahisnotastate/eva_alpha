@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FormGroup, Grid, MenuItem } from '@material-ui/core'
+import { MenuItem } from '@material-ui/core'
 import { Field } from 'formik'
 import { Select, TextField } from 'formik-material-ui'
 import OptionsFieldArray from './OptionsFieldArray'

@@ -26,7 +26,7 @@ const normal_abnormal_options = [
 	},
 ]
 
-function DynamicField({ type, index, choices, label, name }) {
+function DynamicField({ type, index, choices, label, name, ...rest }) {
 	switch (type) {
 		case 'text':
 			return <DynamicTextField type={`text`} label={label} name={name} />

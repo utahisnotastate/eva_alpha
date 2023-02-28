@@ -6,11 +6,6 @@ export const getAppointment = async (appointmentId) => {
 	return result.data
 }
 
-export const getAllAppointments = async () => {
-	const result = await axios(`${API_URL}/appointments/`)
-	return result.data
-}
-
 export const getAppointmentForms = async (appointmentId) => {
 	const result = await axios(
 		`${API_URL}/appointments/${appointmentId}/forms/`
@@ -23,27 +18,10 @@ export const getAppointmentForm = async (appointmentId, formId) => {
 	)
 	return result.data
 }
-export const createAppointmentForm = async (appointmentId, form) => {
-	const result = await axios.post(
-		`${API_URL}/appointments/${appointmentId}/forms/`,
-		{
-			appointment: appointmentId,
-			form_type: form.form_type,
-			title: form.title,
-			form: form.form,
-		}
-	)
-	return result.data
-}
 export const getAppointmentBasicDetails = async (appointmentId) => {
 	const result = await axios(`${API_URL}/appointments/${appointmentId}/`)
 	return result.data
 }
-export const getAllActiveForms = async () => {
-	const result = await axios(`${API_URL}/activeforms`)
-	return result.data
-}
-
 export const updateAppointmentForm = async (appointmentId, form) => {
 	const result = await axios.patch(
 		`${API_URL}/appointments/${appointmentId}/forms/${form.id}/`,
@@ -53,65 +31,6 @@ export const updateAppointmentForm = async (appointmentId, form) => {
 			form_type: form.form_type,
 			form: { customformfields: form.formfields },
 			appointment: appointmentId,
-		}
-	)
-	return result.data
-}
-// THIS GET APPOINTMENT ASSESSMENTS NO LONGER USED. USE GETAPPOINTMENTBASICDETAILS
-export const getAppointmentAssessments = async (appointmentId, assessments) => {
-	const result = await axios(
-		`${API_URL}/appointments/${appointmentId}/assessments/`
-	)
-	return result.data
-}
-
-export const saveAppointmentAssessments = async (
-	appointmentId,
-	assessments
-) => {
-	const result = await axios.patch(
-		`${API_URL}/appointments/${appointmentId}/`,
-		{
-			appointment_assessment: {
-				assessments: assessments,
-			},
-		}
-	)
-	return result.data
-}
-
-export const getAppointmentComplaints = async (appointmentId) => {
-	const result = await axios(
-		`http://127.0.0.1:8000/api/appointments/${appointmentId}/complaints/`
-	)
-	console.log(result.data)
-	return result.data
-}
-
-export const createAppointmentComplaints = async (appointmentId) => {
-	axios.post(`${API_URL}/appointments/${appointmentId}/complaints/`, {
-		appointment: appointmentId,
-		appointment_complaints: { complaints: [] },
-	})
-}
-
-export const saveAppointmentComplaints = async (appointmentId, complaints) => {
-	const result = await axios.patch(
-		`${API_URL}/appointments/${appointmentId}/complaints/1/`,
-		{
-			appointment: appointmentId,
-			appointment_complaints: complaints,
-		}
-	)
-	return result.data
-}
-
-export const saveAppointmentPlan = async (appointmentId, plan) => {
-	const result = await axios.patch(
-		`${API_URL}/appointments/${appointmentId}/`,
-		{
-			appointment: appointmentId,
-			appointment_plan: { plan: plan },
 		}
 	)
 	return result.data

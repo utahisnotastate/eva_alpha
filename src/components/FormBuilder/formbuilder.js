@@ -1,14 +1,22 @@
 import React from 'react'
 import { Button, Card, CardContent, CardHeader, Divider } from '@mui/material'
 import FormRow from './FormRow'
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
 import { FieldArray, Form, Formik } from 'formik'
+import { saveForm } from '../../api/api'
 
 export default function FormBuilder({ title, zone = 'physical_exam' }) {
 	const dispatch = useDispatch()
 	const handleSubmit = (values, actions) => {
-		console.log(values)
+		actions.setSubmitting(true)
+		saveForm(values)
+			.then((response) => {
+				console.log(response)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+
 		dispatch({ type: 'LOAD_CUSTOM_FIELDS', customfields: values.fields })
 		actions.setSubmitting(false)
 	}

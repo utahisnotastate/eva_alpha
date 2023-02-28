@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
 	AppBar,
 	Box,
@@ -12,24 +12,28 @@ import {
 	Toolbar,
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { getAllInitDataOnLoad } from '../../api/utility.api'
 import { NavLink, Route, Routes } from 'react-router-dom'
-
 import Home from '../Home/home'
 import Patient from '../Patient/patient'
 import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
-import ChatGPTFormBuilder from '../FormBuilder/chatgptcomponents/chatgptformbuilder'
 import FormBuilder from '../FormBuilder/formbuilder'
 import Page from '../Page/page'
+import { getForms } from '../../api/api'
 
 const drawerWidth = 240
 
-//create a router for the app using the Home and Patient components
-//create a router for the app using the Home and Patient components
-
 export default function Eva() {
 	const dispatch = useDispatch()
+	React.useEffect(() => {
+		getForms()
+			.then((forms) => {
+				dispatch({ type: 'LOAD_FORMS', forms: forms })
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}, [])
 
 	return (
 		<Box sx={{ display: 'flex' }}>
@@ -121,22 +125,3 @@ export default function Eva() {
 		</Box>
 	)
 }
-
-/*
-
-<Router>
-			<Navbar routes={routes} />
-			<Switch>
-				{routes.map((route, index) => (
-					<Route
-						key={index}
-						path={route.path}
-						exact={route.exact}
-						component={route.component}
-					/>
-				))}
-			</Switch>
-		</Router>
- *
- *
- * */

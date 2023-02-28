@@ -12,11 +12,10 @@ import CardActions from '@mui/material/CardActions'
 import { CardActionArea } from '@mui/material'
 
 export default function Appointment() {
-	const [activeStep, setActiveStep] = useState(2)
+	const [activeStep, setActiveStep] = useState(0)
 	const fields = useSelector((state) => state.appointment.fields)
+	const appointment = useSelector((state) => state.appointment)
 
-	// create a function that will render the correct component based on the view
-	// this will be used in the switch statement belo
 	return (
 		<Card>
 			<Button>Save</Button>
@@ -26,10 +25,9 @@ export default function Appointment() {
 					activeStep={activeStep}
 					setActiveStep={setActiveStep}
 				/>
-				<CustomForm fields={fields} />
 				<br />
+				<CustomForm fields={fields} appointment={appointment} />
 			</CardContent>
-
 			<CardActionArea>
 				<CardActions>
 					<Button variant={`contained`}>Add</Button>
