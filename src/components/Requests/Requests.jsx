@@ -13,6 +13,10 @@ import {
 	TableHead,
 	TableRow,
 } from '@mui/material'
+import RequestModal from './RequestModal'
+
+//the react router link component
+import { Link as RouterLink } from 'react-router-dom'
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -87,7 +91,9 @@ export default function Requests() {
 								<TableCell>{row.date}</TableCell>
 								<TableCell>{row.name}</TableCell>
 								<TableCell>{row.paymentMethod}</TableCell>
-								<TableCell align="right">{`$${row.amount}`}</TableCell>
+								<TableCell align="right">
+									<RequestModal />
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

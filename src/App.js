@@ -13,11 +13,11 @@ export default function App() {
 		<ThemeProvider theme={theme}>
 			<CssBaseline enableColorScheme />
 			<Provider store={store}>
-				<ModalProvider>
-					<BrowserRouter>
+				<BrowserRouter>
+					<ModalProvider>
 						<Eva />
-					</BrowserRouter>
-				</ModalProvider>
+					</ModalProvider>
+				</BrowserRouter>
 			</Provider>
 		</ThemeProvider>
 	)
