@@ -1,8 +1,10 @@
 import React from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
+import { Button, Typography } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import RequestModal from '../Requests/RequestModal'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -41,11 +43,7 @@ export default function Patients() {
 			options: {
 				customBodyRender: (value, tableMeta, updateValue) => {
 					const patientId = tableMeta.rowData[0]
-					return (
-						<Link to={`/patients/${patientId}`}>
-							<button>View</button>
-						</Link>
-					)
+					return <RequestModal />
 				},
 			},
 		},
