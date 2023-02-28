@@ -25,7 +25,7 @@ export default function Patients() {
 		<div className={classes.root}>
 			<MUIDataTable
 				title="Patients"
-				data={patients}
+				data={[]}
 				columns={columns}
 				options={options}
 			/>

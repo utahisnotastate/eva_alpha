@@ -20,6 +20,7 @@ import Schedule from '../Scheduling/Schedule'
 import FormBuilder from '../FormBuilder/formbuilder'
 import Page from '../Page/page'
 import { getForms } from '../../api/api'
+import Requests from '../Requests/Requests'
 
 const drawerWidth = 240
 
@@ -117,10 +118,6 @@ export default function Eva() {
 					<Route
 						path="/settings"
 						element={<Patient title={`Settings`} />}
-					/>
-					<Route
-						path="/patients"
-						element={<Patients title={`Patients`} />}
 					/>
 					<Route
 						path="/patient/:id"

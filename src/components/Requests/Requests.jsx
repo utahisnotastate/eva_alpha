@@ -30,7 +30,7 @@ export default function Requests() {
 	}
 
 	return (
-		<div className={classes.root}>
+		<div>
 			<MUIDataTable
 				title="Patients"
 				data={data}
