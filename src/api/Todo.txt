@@ -1,0 +1,18 @@
+Requests Table(Home page)
+- Fix column headers
+- Put icons in or text
+
+Requests
+- Create a route /requests - Done
+- Create sidenav button - Done
+- Using MUI Datatable, create table which holds all requests
+
+Appointment
+
+
+Patients
+- Using MUI Datable, create table which holds all patients - Done
+
+Patient
+
+
