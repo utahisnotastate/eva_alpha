@@ -19,20 +19,22 @@ import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
 import FormBuilder from '../FormBuilder/formbuilder'
 import Page from '../Page/page'
-import { getForms } from '../../api/api'
+import { getForms, getPatients } from '../../api/api'
+import { getAllPatients } from '../../api/patients.api'
 import Requests from '../Requests/Requests'
 
 const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
+
 	React.useEffect(() => {
 		getForms()
 			.then((forms) => {
-				dispatch({ type: 'LOAD_FORMS', forms: forms })
+				dispatch({ type: 'LOAD_FORMS', forms })
 			})
-			.catch((error) => {
-				console.log(error)
+			.catch((err) => {
+				console.log(err)
 			})
 	}, [])
 

@@ -20,13 +20,13 @@ export default function RequestModal() {
 	const handleClose = () => setOpen(false)
 
 	return (
-		<div>
+		<>
 			<Button onClick={handleOpen}>View Request</Button>
 			<Modal open={open} onClose={handleClose}>
 				<Box sx={style}>
 					<Request />
 				</Box>
 			</Modal>
-		</div>
+		</>
 	)
 }

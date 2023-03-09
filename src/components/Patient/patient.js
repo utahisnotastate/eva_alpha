@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {
 	Box,
 	Card,
@@ -57,36 +57,3 @@ export default function Patient({ title }) {
 		</Box>
 	)
 }
-
-/*
-* <Grid container spacing={3}>
-			<Grid item xs={2}>
-				<SimpleSideBar routes={routes} />
-			</Grid>
-			<Grid item xs={10}>
-				<Formik
-					initialValues={patient}
-					enableReinitialize
-					onSubmit={(patient) => handleSave(patient)}>
-					<Form>
-						<Button
-							variant={`contained`}
-							onClick={() => handleSave(patient)}>
-							Save!
-						</Button>
-						<Switch>
-							{routes.map((route, index) => (
-								<Route
-									key={index}
-									exact
-									path={`${path}${route.path}`}
-									component={route.component}
-								/>
-							))}
-						</Switch>
-					</Form>
-				</Formik>
-			</Grid>
-		</Grid>
-*
-* */
