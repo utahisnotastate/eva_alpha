@@ -10,23 +10,76 @@ import {
 import FormRow from './FormRow'
 import { useDispatch, useSelector } from 'react-redux'
 import { FieldArray, Form, Formik } from 'formik'
-import { saveForm } from '../../api/api'
+import { updateForm } from '../../api/api'
 
+const dummyblanktext = {
+	autoComplete: 'on',
+	autoFocus: false,
+	classes: {
+		root: 'my-class',
+		input: 'my-input',
+	},
+	color: '',
+	defaultValue: '',
+	disabled: true,
+	error: false,
+	FormHelperTextProps: {
+		variant: '',
+	},
+	fullWidth: true,
+	helperText: '',
+	hiddenLabel: false,
+	InputLabelProps: {
+		shrink: true,
+	},
+	inputProps: {
+		maxLength: 10,
+	},
+	InputProps: {
+		disableUnderline: true,
+	},
+	inputRef: null,
+	label: '',
+	maxRows: 5,
+	minRows: 2,
+	multiline: true,
+	name: '',
+	placeholder: '',
+	required: true,
+	rows: 3,
+	rowsMax: 10,
+	select: true,
+	SelectProps: {
+		native: true,
+	},
+	size: '',
+	type: '',
+	value: '',
+}
 export default function FormBuilder() {
 	const formbuilder = useSelector((state) => state.formbuilder)
 	const forms = useSelector((state) => state.forms)
+	const [loading, setLoading] = React.useState(true)
 	const dispatch = useDispatch()
 	const handleSubmit = (values, actions) => {
-		console.log()
+		setLoading(true)
 		actions.setSubmitting(true)
-		//
-
-		dispatch({ type: 'LOAD_CUSTOM_FIELDS', customfields: values.fields })
+		updateForm(values)
+			.then((form) => {
+				console.log(form)
+				dispatch({ type: 'LOAD_FORM_TO_EDIT', form })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 		actions.setSubmitting(false)
+		setLoading(false)
 	}
+	// when the component submits the form, the form should be replaced with a spinny loading circle indicitating it is saving. Once it has saved then it must reload the component with the latest updates
 
 	return (
 		<Formik
+			enableReinitialize
 			initialValues={formbuilder}
 			onSubmit={(values, actions) => handleSubmit(values, actions)}>
 			{({ values, handleSubmit }) => (
@@ -44,12 +97,13 @@ export default function FormBuilder() {
 								<Button
 									key={index}
 									variant="contained"
-									onClick={() =>
+									onClick={() => {
+										console.log(form)
 										dispatch({
 											type: 'LOAD_FORM_TO_EDIT',
-											form: form,
+											form,
 										})
-									}>
+									}}>
 									<Typography variant="h6" gutterBottom>
 										{form.title}
 									</Typography>
@@ -74,51 +128,9 @@ export default function FormBuilder() {
 														field={field}
 														name={`fields.${index}`}
 														buttonLabel=""
-														blankfield={{
-															autoComplete: 'on',
-															autoFocus: false,
-															classes: {
-																root: 'my-class',
-																input: 'my-input',
-															},
-															color: '',
-															defaultValue: '',
-															disabled: true,
-															error: false,
-															FormHelperTextProps:
-																{
-																	variant: '',
-																},
-															fullWidth: true,
-															helperText: '',
-															hiddenLabel: false,
-															InputLabelProps: {
-																shrink: true,
-															},
-															inputProps: {
-																maxLength: 10,
-															},
-															InputProps: {
-																disableUnderline: true,
-															},
-															inputRef: null,
-															label: '',
-															maxRows: 5,
-															minRows: 2,
-															multiline: true,
-															name: '',
-															placeholder: '',
-															required: true,
-															rows: 3,
-															rowsMax: 10,
-															select: true,
-															SelectProps: {
-																native: true,
-															},
-															size: '',
-															type: '',
-															value: '',
-														}}
+														blankfield={
+															dummyblanktext
+														}
 														index={index}
 														push={push}
 														remove={remove}

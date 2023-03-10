@@ -212,7 +212,10 @@ function form(
 	}
 }
 
-function formbuilder(state = {zone: 'Test Form Builder', title: "Test Form Builder", fields: []}, action) {
+function formbuilder(
+	state = { id: '', zone: '', title: '', fields: [] },
+	action
+) {
 	switch (action.type) {
 		case 'LOAD_FORM_TO_EDIT':
 			return action.form

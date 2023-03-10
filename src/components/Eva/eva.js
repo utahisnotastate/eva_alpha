@@ -22,16 +22,26 @@ import Page from '../Page/page'
 import { getForms, getPatients } from '../../api/api'
 import { getAllPatients } from '../../api/patients.api'
 import Requests from '../Requests/Requests'
+import Appointment from '../Appointment/appointment'
 
 const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
 
+	const AppointmentPage = () => {
+		return (
+			<Page title={`Appointment`}>
+				<Appointment />
+			</Page>
+		)
+	}
+
 	React.useEffect(() => {
 		getForms()
 			.then((forms) => {
 				dispatch({ type: 'LOAD_FORMS', forms })
+				dispatch({ type: 'LOAD_FORM_TO_EDIT', form: forms[0] })
 			})
 			.catch((err) => {
 				console.log(err)
@@ -73,6 +83,13 @@ export default function Eva() {
 						<NavLink to={`/`}>
 							<ListItemButton>
 								<ListItemText primary={`Home`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
+						<NavLink to={`/appointment`}>
+							<ListItemButton>
+								<ListItemText primary={`Appointment`} />
 							</ListItemButton>
 						</NavLink>
 					</ListItem>
@@ -121,6 +138,8 @@ export default function Eva() {
 						path="/settings"
 						element={<Patient title={`Settings`} />}
 					/>
+					<Route path="/appointment" element={<AppointmentPage />} />
+
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />
 					<Route

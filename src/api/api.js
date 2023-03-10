@@ -7,6 +7,7 @@ export const getForms = async () => {
 
 
 export const updateForm = async (form) => {
+	console.log(form)
 	const result = await axios.put(`${API_URL}/forms/${form.id}/`, form)
 	return result.data
 }

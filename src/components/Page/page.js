@@ -31,8 +31,8 @@ function Page({ title, children, side_nav_items }) {
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>
 							<CardHeader
-								subheader="The information can be edited"
-								title="Registration Details"
+								subheader="Container Card Heading (Prop)"
+								title="container Card Description (Prop)"
 							/>
 							<Divider />
 							<CardContent>{children}</CardContent>
