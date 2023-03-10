@@ -28,10 +28,18 @@ const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
-
 	const AppointmentPage = () => {
 		return (
-			<Page title={`Appointment`}>
+			<Page
+				title={`Appointment`}
+				side_nav_items={[
+					'complaints',
+					'assessment',
+					'physical exam',
+					'review of systems',
+					'follow up',
+					'summary',
+				]}>
 				<Appointment />
 			</Page>
 		)
