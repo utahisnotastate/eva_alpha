@@ -65,13 +65,13 @@ export default function FormBuilder() {
 		setLoading(true)
 		actions.setSubmitting(true)
 		updateForm(values)
-		.then((form) => {
-			console.log(form)
-			dispatch({ type: 'LOAD_FORM_TO_EDIT', form })
-		})
-		.catch((err) => {
-			console.log(err)
-		})
+			.then((form) => {
+				console.log(form)
+				dispatch({ type: 'LOAD_FORM_TO_EDIT', form })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 		actions.setSubmitting(false)
 		setLoading(false)
 	}

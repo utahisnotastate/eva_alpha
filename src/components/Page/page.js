@@ -26,13 +26,13 @@ function Page({ title, children, side_nav_items }) {
 				</Typography>
 				<Grid container spacing={3}>
 					<Grid item lg={4} md={6} xs={12}>
-						<SideNav  />
+						<SideNav side_nav_items={side_nav_items} />
 					</Grid>
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>
 							<CardHeader
-								subheader="Container Card Heading (Prop)"
-								title="container Card Description (Prop)"
+								subheader=""
+								title=""
 							/>
 							<Divider />
 							<CardContent>{children}</CardContent>

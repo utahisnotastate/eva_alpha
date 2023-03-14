@@ -17,17 +17,9 @@ export default function Appointment() {
 	const appointment = useSelector((state) => state.appointment)
 
 	return (
-		<Card>
+		<>
 			<Button>Save</Button>
-			<CardHeader title="Appointment" color={'primary'} />
-			<CardContent>
-				<AppointmentStepper
-					activeStep={activeStep}
-					setActiveStep={setActiveStep}
-				/>
-				<br />
-				<CustomForm fields={fields} appointment={appointment} />
-			</CardContent>
+			<CardContent></CardContent>
 			<CardActionArea>
 				<CardActions>
 					<Button variant={`contained`}>Add</Button>
@@ -37,6 +29,6 @@ export default function Appointment() {
 					<Button>Save</Button>
 				</CardActions>
 			</CardActionArea>
-		</Card>
+		</>
 	)
 }

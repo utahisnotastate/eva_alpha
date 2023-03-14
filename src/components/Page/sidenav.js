@@ -48,22 +48,16 @@ const SideNav = (props) => (
 		</CardContent>
 		<Divider />
 		<ListGroup variant="flush" style={{ textAlign: 'center' }}>
-			{props.side_nav_items && props.side_nav_items > 0
+			{props.side_nav_items && props.side_nav_items.length > 0
 				? props.side_nav_items.map((item, index) => (
-						<ListGroup.Item>Registration</ListGroup.Item>
+						<ListGroup.Item
+							key={index}
+							onClick={() => console.log(item)}>
+							{item}
+						</ListGroup.Item>
 				  ))
 				: null}
 		</ListGroup>
 	</Card>
 )
-
-/*
-* <ListGroup.Item>Appointments</ListGroup.Item>
-			<ListGroup.Item>Insurance</ListGroup.Item>
-			<ListGroup.Item>Medications</ListGroup.Item>
-			<ListGroup.Item>Medical History</ListGroup.Item>
-			<ListGroup.Item>Requests</ListGroup.Item>
-			<ListGroup.Item>Diagnosis</ListGroup.Item>
-*
-* */
 export default React.memo(SideNav)
