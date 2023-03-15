@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button, Typography } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Patient from '../Patient/patient'
 import RequestModal from '../Requests/RequestModal'
 
 const useStyles = makeStyles((theme) => ({

@@ -64,15 +64,17 @@ export default function FormBuilder() {
 	const handleSubmit = (values, actions) => {
 		setLoading(true)
 		actions.setSubmitting(true)
+
 		updateForm(values)
-		.then((form) => {
-			console.log(form)
-			dispatch({ type: 'LOAD_FORM_TO_EDIT', form })
-		})
-		.catch((err) => {
-			console.log(err)
-		})
-		actions.setSubmitting(false)
+		/*updateForm(values)
+			.then((form) => {
+				console.log(form)
+				dispatch({ type: 'LOAD_FORM_TO_EDIT', form })
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+		actions.setSubmitting(false)*/
 		setLoading(false)
 	}
 	// when the component submits the form, the form should be replaced with a spinny loading circle indicitating it is saving. Once it has saved then it must reload the component with the latest updates
@@ -91,7 +93,12 @@ export default function FormBuilder() {
 						onClick={handleSubmit}>
 						Save Form
 					</Button>
-					<CardContent>
+					<CardContent
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-around',
+						}}>
 						{forms && forms.length > 0 ? (
 							forms.map((form, index) => (
 								<Button

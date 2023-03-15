@@ -14,13 +14,12 @@ import {
 import { useDispatch } from 'react-redux'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import Home from '../Home/home'
-import Patient from '../Patient/patient'
+import PatientPage from '../Patient/patient'
 import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
 import FormBuilder from '../FormBuilder/formbuilder'
 import Page from '../Page/page'
-import { getForms, getPatients } from '../../api/api'
-import { getAllPatients } from '../../api/patients.api'
+import { getAllData } from '../../api/api'
 import Requests from '../Requests/Requests'
 import Appointment from '../Appointment/appointment'
 
@@ -46,13 +45,22 @@ export default function Eva() {
 	}
 
 	React.useEffect(() => {
-		getForms()
-			.then((forms) => {
-				dispatch({ type: 'LOAD_FORMS', forms })
-				dispatch({ type: 'LOAD_FORM_TO_EDIT', form: forms[0] })
+		getAllData()
+			.then((data) => {
+				console.log('Forms:', data.forms)
+				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
+				console.log('Patients:', data.patients)
+				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
+				console.log('Appointments:', data.appointments)
+				dispatch({
+					type: 'LOAD_APPOINTMENTS',
+					appointments: data.appointments,
+				})
+				console.log('Requests:', data.requests)
+				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
 			})
-			.catch((err) => {
-				console.log(err)
+			.catch((error) => {
+				console.error('Error fetching data:', error)
 			})
 	}, [])
 
@@ -142,18 +150,12 @@ export default function Eva() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/formbuilder" element={<FormBuilder />} />
-					<Route
-						path="/settings"
-						element={<Patient title={`Settings`} />}
-					/>
+
 					<Route path="/appointment" element={<AppointmentPage />} />
 
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />
-					<Route
-						path="/patient/:id"
-						element={<Page title={`Patient`} />}
-					/>
+					<Route path="/patient/:id" element={<PatientPage />} />
 					<Route path="/schedule" element={<Schedule />} />
 				</Routes>
 			</Box>

@@ -11,9 +11,8 @@ import {
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import PatientMenu from './PatientMenu'
-import CustomForm from '../CustomForm/customform'
 
-export default function Patient({ title }) {
+function Patient({ title }) {
 	return (
 		<Box
 			component="main"
@@ -31,13 +30,10 @@ export default function Patient({ title }) {
 					</Grid>
 					<Grid item lg={8} md={6} xs={12}>
 						<Card>
-							<CardHeader
-								subheader="The information can be edited"
-								title="Registration Details"
-							/>
+							<CardHeader subheader="" title="" />
 							<Divider />
 							<CardContent>
-								<CustomForm />
+								<Typography>Stuff</Typography>
 							</CardContent>
 							<Divider />
 							<Box
@@ -57,3 +53,36 @@ export default function Patient({ title }) {
 		</Box>
 	)
 }
+export default Patient
+/*
+* <Grid container spacing={3}>
+			<Grid item xs={2}>
+				<SimpleSideBar routes={routes} />
+			</Grid>
+			<Grid item xs={10}>
+				<Formik
+					initialValues={patient}
+					enableReinitialize
+					onSubmit={(patient) => handleSave(patient)}>
+					<Form>
+						<Button
+							variant={`contained`}
+							onClick={() => handleSave(patient)}>
+							Save!
+						</Button>
+						<Switch>
+							{routes.map((route, index) => (
+								<Route
+									key={index}
+									exact
+									path={`${path}${route.path}`}
+									component={route.component}
+								/>
+							))}
+						</Switch>
+					</Form>
+				</Formik>
+			</Grid>
+		</Grid>
+*
+* */
