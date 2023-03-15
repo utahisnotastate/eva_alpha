@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import {
@@ -26,9 +28,8 @@ import AppointmentScheduleEvent from './Day/Appointment/appointmentscheduleevent
 import ScheduleAppointmentModal from './ScheduleAppointmentModal/scheduleappointmentmodal'
 import styles from '../basestyledcomponents/buttonStyle'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { getAllAppointments } from '../../api/appointment.api'
-
-var toDate = require('@fav/type.to-date')
+import toDate from "@fav/type.to-date";
+//var toDate = require('@fav/type.to-date')
 
 const localizer = momentLocalizer(moment)
 
@@ -57,43 +58,11 @@ export default function Scheduling() {
 	// handles create new patient form
 	const onSubmit = (data) => {
 		console.log(data)
-		const appointment = data
+
 		// this schedules appointment. I dont know why I don't have this in the appointment API.
 		//
-		console.log({
-			patient: parseInt(id),
-			provider: slottoschedule.resourceId,
-			details: blankclinicaldata,
-			type: appointment.type,
-			status: 'scheduled',
-			start: moment(appointment.start).toISOString(),
-			end: moment(appointment.end).toISOString(),
-		})
-		const newappointment = {
-			patient: parseInt(id),
-			provider: slottoschedule.resourceId,
-			details: blankclinicaldata,
-			type: appointment.type,
-			status: 'scheduled',
-			start: moment(appointment.start).toISOString(),
-			end: moment(appointment.end).toISOString(),
-		}
-		axios
-			.post(`${API_URL}/appointments/`, newappointment)
-			.then((response) => {
-				if (response.statusText === 'Created') {
-					console.log('It worked!!!')
-					hideModal()
-					getAllAppointments()
-						.then((data) => console.log(data))
-						.catch((error) => console.log(error))
-				}
-				//console.log(response);
-			})
-			.then(() => {
-				getAllAppointments()
-			})
-			.catch((error) => console.log(error))
+
+
 	}
 	// console.log(errors);
 	// resources are the providers

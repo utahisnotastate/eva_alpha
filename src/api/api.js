@@ -21,20 +21,28 @@ export const getRequests = async () => {
 	return result.data
 }
 
+export const getProviders = async () => {
+	const result = await axios(`${API_URL}/providers/`)
+	return result.data
+}
+
 export const getAllData = async () => {
 	try {
-		const [forms, patients, appointments, requests] = await Promise.all([
-			getForms(),
-			getPatients(),
-			getAppointments(),
-			getRequests(),
-		])
+		const [forms, patients, appointments, requests, providers] =
+			await Promise.all([
+				getForms(),
+				getPatients(),
+				getAppointments(),
+				getRequests(),
+				getProviders(),
+			])
 
 		return {
 			forms,
 			patients,
 			appointments,
 			requests,
+			providers,
 		}
 	} catch (error) {
 		console.error('Error fetching data:', error)

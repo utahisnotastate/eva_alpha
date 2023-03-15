@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import MetricsTracker from './MetricsTracker'
-import Schedule from '../Scheduling/Schedule'
+import Schedule from '../Scheduler/schedule'
 import Requests from '../Requests/Requests'
 
 function Metric({ label, value, feedback, col }) {
@@ -22,7 +22,13 @@ const Home = () => (
 			}}>
 			<Container maxWidth={false}>
 				<Grid container spacing={3}>
-					<Grid item lg={8} md={12} xl={9} xs={12}>
+					<Grid
+						item
+						lg={8}
+						md={12}
+						xl={9}
+						xs={12}
+						sx={{ bg: 'white' }}>
 						<Schedule />
 					</Grid>
 					<Grid item lg={4} md={6} xl={3} xs={12}>
