@@ -26,6 +26,16 @@ export const getProviders = async () => {
 	return result.data
 }
 
+const deleteProvider = async (id) => {
+	await axios.delete(`/api/providers/${id}/`)
+	getProviders()
+}
+
+const addProvider = async (provider) => {
+	await axios.post('/api/providers/', provider)
+	getProviders()
+}
+
 export const getAllData = async () => {
 	try {
 		const [forms, patients, appointments, requests, providers] =
