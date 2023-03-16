@@ -79,12 +79,14 @@ const ProviderTable = () => {
 					marginBottom: 16,
 				}}>
 				<h2>Providers</h2>
-				<Button onClick={handleAddNewProviderModalOpen}>Add New</Button>
+				<Button onClick={() => setAddNewProviderModalOpen(true)}>
+					Add New
+				</Button>
 				<AddNewProviderModal
-					provider={selectedProvider}
+
 					title="Add New Provider"
 					open={addNewProviderModalOpen}
-					handleClose={handleModalClose}
+					handleClose={setAddNewProviderModalOpen}
 				/>
 			</div>
 			<MUIDataTable

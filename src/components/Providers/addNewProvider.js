@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 import { Button, TextField, Box, Typography, Modal } from '@mui/material'
-import {  getProviders, addProvider } from '../../api/api'
+import { getProviders, addProvider } from '../../api/api'
 
 const validationSchema = Yup.object({
 	title: Yup.string().required('Required'),
@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
 	npi: Yup.string().required('Required'),
 })
 
-const AddNewProviderModal = ({ open, handleClose }) => {
+const AddNewProviderModal = ({ open, handleClose, title }) => {
 	const dispatch = useDispatch()
 	const formik = useFormik({
 		initialValues: {
@@ -30,7 +30,7 @@ const AddNewProviderModal = ({ open, handleClose }) => {
 							type: 'LOAD_PROVIDERS',
 							providers: providers,
 						})
-						handleClose()
+						handleClose(false)
 					})
 				})
 				.catch((error) => {
@@ -53,27 +53,28 @@ const AddNewProviderModal = ({ open, handleClose }) => {
 				}}>
 				<Typography variant="h6">Add New Provider</Typography>
 				<form onSubmit={formik.handleSubmit}>
-					{['title', 'first_name', 'last_name', 'npi'].map(
-						(field) => (
-							<TextField
-								key={field}
-								fullWidth
-								name={field}
-								label={field}
-								value={formik.values[field]}
-								onChange={formik.handleChange}
-								error={
-									formik.touched[field] &&
-									Boolean(formik.errors[field])
-								}
-								helperText={
-									formik.touched[field] &&
-									formik.errors[field]
-								}
-								margin="normal"
-							/>
-						)
-					)}
+					{[
+						{ name: 'title', label: 'Title' },
+						{ name: 'first_name', label: 'First Name' },
+						{ name: 'last_name', label: 'Last Name' },
+						{ name: 'npi', label: 'NPI' },
+					].map((field) => (
+						<TextField
+							key={field.name}
+							fullWidth
+							name={field.name}
+							label={field.label}
+							onChange={formik.handleChange}
+							error={
+								formik.touched[field] &&
+								Boolean(formik.errors[field])
+							}
+							helperText={
+								formik.touched[field] && formik.errors[field]
+							}
+							margin="normal"
+						/>
+					))}
 					<Box
 						sx={{
 							display: 'flex',
