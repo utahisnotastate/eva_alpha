@@ -26,6 +26,12 @@ export const getProviders = async () => {
 	return result.data
 }
 
+export const updateProvider = async (id, provider) => {
+	const result = await axios.put(`${API_URL}/providers/${id}/`, provider)
+	return result.data
+
+}
+
 export const deleteProvider = async (id) => {
 	await axios.delete(`/api/providers/${id}/`)
 	getProviders()

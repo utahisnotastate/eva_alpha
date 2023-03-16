@@ -43,22 +43,25 @@ const ProviderTable = () => {
 		},
 	]
 
+	const options = {
+		print: false,
+		download: false,
+		filter: false,
+		viewColumns: false,
+		selectableRows: 'none',
+	}
+
 	return (
 		<>
 			<MUIDataTable
 				title={'Providers'}
 				data={providers}
 				columns={columns}
+				options={options}
 			/>
 			{selectedProvider && (
 				<ProviderModal
 					provider={selectedProvider}
-					onUpdate={(id, updatedProvider) => {
-						console.log('Update provider', id, updatedProvider)
-					}}
-					onDelete={(id) => {
-						console.log('Delete provider', id)
-					}}
 					open={modalOpen}
 					handleClose={handleModalClose}
 				/>

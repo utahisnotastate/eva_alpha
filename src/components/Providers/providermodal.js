@@ -1,7 +1,9 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 import { Button, TextField, Box, Typography, Modal } from '@mui/material'
+import { updateProvider, getProviders } from '../../api/api'
 
 const validationSchema = Yup.object({
 	title: Yup.string().required('Required'),
@@ -10,20 +12,21 @@ const validationSchema = Yup.object({
 	npi: Yup.string().required('Required'),
 })
 
-const ProviderModal = ({ provider, onUpdate, onDelete, open, handleClose }) => {
+const ProviderModal = ({ provider, open, handleClose }) => {
+	const dispatch = useDispatch()
 	const formik = useFormik({
 		initialValues: provider,
 		validationSchema,
 		onSubmit: (values) => {
-			onUpdate(provider.id, values)
-			handleClose()
+			console.log(values)
+			updateProvider(values.id, values).then((response) => {
+				getProviders().then((providers) => {
+					dispatch({ type: 'LOAD_PROVIDERS', providers: providers })
+					handleClose()
+				})
+			})
 		},
 	})
-
-	const handleDelete = () => {
-		onDelete(provider.id)
-		handleClose()
-	}
 
 	return (
 		<Modal open={open} onClose={handleClose}>
@@ -70,12 +73,6 @@ const ProviderModal = ({ provider, onUpdate, onDelete, open, handleClose }) => {
 							justifyContent: 'space-between',
 							mt: 2,
 						}}>
-						<Button
-							variant="contained"
-							color="secondary"
-							onClick={handleDelete}>
-							Delete
-						</Button>
 						<Button
 							variant="contained"
 							color="primary"
