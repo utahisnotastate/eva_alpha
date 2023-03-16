@@ -29,17 +29,10 @@ export const getProviders = async () => {
 export const updateProvider = async (id, provider) => {
 	const result = await axios.put(`${API_URL}/providers/${id}/`, provider)
 	return result.data
-
 }
-
-export const deleteProvider = async (id) => {
-	await axios.delete(`/api/providers/${id}/`)
-	getProviders()
-}
-
 export const addProvider = async (provider) => {
-	await axios.post('/api/providers/', provider)
-	getProviders()
+	const result = await axios.post(`${API_URL}/providers/`, provider)
+	return result.data
 }
 
 export const getAllData = async () => {

@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
 import MUIDataTable from 'mui-datatables'
-import { Button } from '@mui/material'
+import { Button, Paper } from '@mui/material'
 import ProviderModal from './providermodal'
+import AddNewProviderModal from './addNewProvider'
 
 const ProviderTable = () => {
 	const providers = useSelector((state) => state.providers)
 	const [selectedProvider, setSelectedProvider] = useState(null)
 	const [modalOpen, setModalOpen] = useState(false)
+	const [addNewProviderModalOpen, setAddNewProviderModalOpen] =
+		useState(false)
 
 	const handleModalOpen = (provider) => {
 		setSelectedProvider(provider)
@@ -16,6 +20,10 @@ const ProviderTable = () => {
 
 	const handleModalClose = () => {
 		setModalOpen(false)
+	}
+
+	const handleAddNewProviderModalOpen = () => {
+		setAddNewProviderModalOpen(true)
 	}
 
 	const columns = [
@@ -50,11 +58,36 @@ const ProviderTable = () => {
 		viewColumns: false,
 		selectableRows: 'none',
 	}
+	const handleAddProvider = () => {
+		handleModalOpen({
+			id: null,
+			title: '',
+			first_name: '',
+			last_name: '',
+			npi: '',
+		})
+	}
 
 	return (
-		<>
+		<Paper>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginBottom: 16,
+				}}>
+				<h2>Providers</h2>
+				<Button onClick={handleAddNewProviderModalOpen}>Add New</Button>
+				<AddNewProviderModal
+					provider={selectedProvider}
+					title="Add New Provider"
+					open={addNewProviderModalOpen}
+					handleClose={handleModalClose}
+				/>
+			</div>
 			<MUIDataTable
-				title={'Providers'}
 				data={providers}
 				columns={columns}
 				options={options}
@@ -62,11 +95,12 @@ const ProviderTable = () => {
 			{selectedProvider && (
 				<ProviderModal
 					provider={selectedProvider}
+					title="Edit Provider"
 					open={modalOpen}
 					handleClose={handleModalClose}
 				/>
 			)}
-		</>
+		</Paper>
 	)
 }
 

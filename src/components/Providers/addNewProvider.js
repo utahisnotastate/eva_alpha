@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 import { Button, TextField, Box, Typography, Modal } from '@mui/material'
-import { updateProvider, getProviders } from '../../api/api'
+import {  getProviders, addProvider } from '../../api/api'
 
 const validationSchema = Yup.object({
 	title: Yup.string().required('Required'),
@@ -12,20 +12,33 @@ const validationSchema = Yup.object({
 	npi: Yup.string().required('Required'),
 })
 
-const ProviderModal = ({ provider, open, handleClose, title }) => {
+const AddNewProviderModal = ({ open, handleClose }) => {
 	const dispatch = useDispatch()
 	const formik = useFormik({
-		initialValues: provider,
+		initialValues: {
+			title: '',
+			first_name: '',
+			last_name: '',
+			npi: '',
+		},
 		validationSchema,
 		onSubmit: (values) => {
-			updateProvider(values.id, values).then(() => {
-				getProviders().then((providers) => {
-					dispatch({ type: 'LOAD_PROVIDERS', providers: providers })
-					handleClose()
+			addProvider(values)
+				.then(() => {
+					getProviders().then((providers) => {
+						dispatch({
+							type: 'LOAD_PROVIDERS',
+							providers: providers,
+						})
+						handleClose()
+					})
 				})
-			})
+				.catch((error) => {
+					console.log(error)
+				})
 		},
 	})
+
 	return (
 		<Modal open={open} onClose={handleClose}>
 			<Box
@@ -38,19 +51,15 @@ const ProviderModal = ({ provider, open, handleClose, title }) => {
 					boxShadow: 24,
 					p: 4,
 				}}>
-				<Typography variant="h6">Update Provider</Typography>
+				<Typography variant="h6">Add New Provider</Typography>
 				<form onSubmit={formik.handleSubmit}>
 					{['title', 'first_name', 'last_name', 'npi'].map(
 						(field) => (
 							<TextField
 								key={field}
 								fullWidth
-								id={field}
 								name={field}
-								label={
-									field.charAt(0).toUpperCase() +
-									field.slice(1).replace('_', ' ')
-								}
+								label={field}
 								value={formik.values[field]}
 								onChange={formik.handleChange}
 								error={
@@ -75,7 +84,7 @@ const ProviderModal = ({ provider, open, handleClose, title }) => {
 							variant="contained"
 							color="primary"
 							type="submit">
-							Update
+							Add New Provider
 						</Button>
 					</Box>
 				</form>
@@ -84,4 +93,4 @@ const ProviderModal = ({ provider, open, handleClose, title }) => {
 	)
 }
 
-export default ProviderModal
+export default AddNewProviderModal
