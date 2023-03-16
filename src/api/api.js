@@ -26,12 +26,12 @@ export const getProviders = async () => {
 	return result.data
 }
 
-const deleteProvider = async (id) => {
+export const deleteProvider = async (id) => {
 	await axios.delete(`/api/providers/${id}/`)
 	getProviders()
 }
 
-const addProvider = async (provider) => {
+export const addProvider = async (provider) => {
 	await axios.post('/api/providers/', provider)
 	getProviders()
 }
@@ -64,19 +64,4 @@ export const updateForm = async (form) => {
 	console.log(form)
 	//const result = await axios.put(`${API_URL}/forms/${form.id}/`, form)
 	//return result.data
-}
-
-export const getPatient = async (id) => {
-	const result = await axios(`${API_URL}/patients/${id}/`)
-	return result.data
-}
-
-export const getPatientRequests = async () => {
-	const result = await axios(`${API_URL}/patientrequests/`)
-	return result.data
-}
-
-export const getPatientRequest = async (id) => {
-	const result = await axios(`${API_URL}/patientrequests/${id}/`)
-	return result.data
 }

@@ -22,6 +22,7 @@ import Page from '../Page/page'
 import { getAllData } from '../../api/api'
 import Requests from '../Requests/Requests'
 import Appointment from '../Appointment/appointment'
+import Providers from '../Providers/providers'
 
 const drawerWidth = 240
 
@@ -69,21 +70,6 @@ export default function Eva() {
 
 	return (
 		<Box sx={{ display: 'flex' }}>
-			<AppBar
-				position="fixed"
-				sx={{
-					width: `calc(100% - ${drawerWidth}px)`,
-					ml: `${drawerWidth}px`,
-				}}>
-				<Toolbar>
-					<TextField
-						id="filled-basic"
-						sx={{ width: '100%', color: 'white' }}
-						label="Search Patients"
-						variant="standard"
-					/>
-				</Toolbar>
-			</AppBar>
 			<Drawer
 				sx={{
 					width: drawerWidth,
@@ -141,6 +127,13 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
+						<NavLink to={`/providers`}>
+							<ListItemButton>
+								<ListItemText primary={`Providers`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
 						<NavLink to={`/settings`}>
 							<ListItemButton>
 								<ListItemText primary={`Settings`} />
@@ -149,13 +142,18 @@ export default function Eva() {
 					</ListItem>
 				</List>
 			</Drawer>
-			<Box sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
+			<Box
+				sx={{
+					flexGrow: 1,
+					bgcolor: 'background.default',
+					p: 3,
+				}}>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/formbuilder" element={<FormBuilder />} />
 
 					<Route path="/appointment" element={<AppointmentPage />} />
-
+					<Route path="/providers" element={<Providers />} />
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />
 					<Route path="/patient/:id" element={<PatientPage />} />
