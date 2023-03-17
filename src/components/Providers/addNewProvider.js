@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
 	npi: Yup.string().required('Required'),
 })
 
-const AddNewProviderModal = ({ open, handleClose, title }) => {
+const AddNewProviderModal = ({ open, handleClose }) => {
 	const dispatch = useDispatch()
 	const formik = useFormik({
 		initialValues: {

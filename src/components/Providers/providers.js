@@ -80,11 +80,9 @@ const ProviderTable = () => {
 				}}>
 				<h2>Providers</h2>
 				<Button onClick={() => setAddNewProviderModalOpen(true)}>
-					Add New
+					Add New Provider
 				</Button>
 				<AddNewProviderModal
-
-					title="Add New Provider"
 					open={addNewProviderModalOpen}
 					handleClose={setAddNewProviderModalOpen}
 				/>

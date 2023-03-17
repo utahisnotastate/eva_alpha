@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Requests() {
 	const classes = useStyles()
+	const requests = useSelector((state) => state.requests)
+
 	const columns = [
 		{
 			name: 'id',
@@ -61,12 +63,21 @@ export default function Requests() {
 			},
 		},
 	]
-	const data = [
-		['Medication', 'Waiting on patient follow up', 'Herbert Hoover'],
-		['Insurance', 'Waiting on Insurance', 'Jiminy Cricket'],
-		['Scheduling', 'Awaiting Dr. response', 'Wordle Burdle'],
-		['Insurance', 'Patient Followup', 'John Stamos'],
-	]
 
-	return <MUIDataTable title="Requests" data={data} columns={columns} />
+	const options = {
+		print: false,
+		download: false,
+		filter: false,
+		viewColumns: false,
+		selectableRows: 'none',
+	}
+
+	return (
+		<MUIDataTable
+			title="Requests"
+			data={requests}
+			columns={columns}
+			options={options}
+		/>
+	)
 }
