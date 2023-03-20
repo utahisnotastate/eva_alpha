@@ -58,7 +58,6 @@ export default function Eva() {
 				})
 				console.log('Requests:', data.requests)
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-
 				console.log('Providers', data.providers)
 				dispatch({ type: 'LOAD_PROVIDERS', providers: data.providers })
 			})

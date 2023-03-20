@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Typography } from '@mui/material'
 import MUIDataTable from 'mui-datatables'
 import { Button, Paper } from '@mui/material'
 import ProviderModal from './providermodal'
