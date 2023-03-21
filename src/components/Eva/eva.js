@@ -27,22 +27,6 @@ const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
-	const AppointmentPage = () => {
-		return (
-			<Page
-				title={`Appointment`}
-				side_nav_items={[
-					'complaints',
-					'assessment',
-					'physical exam',
-					'review of systems',
-					'follow up',
-					'summary',
-				]}>
-				<Appointment />
-			</Page>
-		)
-	}
 
 	React.useEffect(() => {
 		getAllData()
@@ -150,7 +134,7 @@ export default function Eva() {
 					<Route path="/" element={<Home />} />
 					<Route path="/formbuilder" element={<FormBuilder />} />
 
-					<Route path="/appointment" element={<AppointmentPage />} />
+					<Route path="/appointment" element={<Appointment />} />
 					<Route path="/providers" element={<Providers />} />
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />

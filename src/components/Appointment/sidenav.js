@@ -50,8 +50,11 @@ const SideNav = (props) => (
 				? props.side_nav_items.map((item, index) => (
 						<ListGroup.Item
 							key={index}
-							onClick={() => props.setActiveZone(item)}>
-							{item}
+							onClick={() => {
+								console.log('item', item)
+								props.setActiveZone(item)
+							}}>
+							{item.label}
 						</ListGroup.Item>
 				  ))
 				: null}

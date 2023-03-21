@@ -4,7 +4,7 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepButton from '@mui/material/StepButton'
 
-export default function EVAStepper({ setActiveStep, sections, fields }) {
+export default function EVAStepper({ setActiveStep, sections }) {
 	const handleStepClick = (step) => {
 		setActiveStep(step)
 	}
