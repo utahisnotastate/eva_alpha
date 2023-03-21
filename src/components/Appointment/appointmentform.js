@@ -39,19 +39,7 @@ const AppointmentForm = ({ appointment }) => {
 			}}>
 			{({ values }) => (
 				<Form className={classes.form}>
-					<Tabs value={tabValue} onChange={handleTabChange}>
-						<Tab label="Complaints" />
-						<Tab label="Physical Exam" />
-						<Tab label="Assessments" />
-						<Tab label="Plans" />
-						<Tab label="Summary" />
-						<Tab label="Review of Systems" />
-					</Tabs>
-					<Typography variant="h6">Complaints</Typography>
 
-					<Button type="submit" variant="contained">
-						Submit
-					</Button>
 				</Form>
 			)}
 		</Formik>
