@@ -16,8 +16,8 @@ import Home from '../Home/home'
 import PatientPage from '../Patient/patient'
 import Patients from '../Patients/patients'
 import Schedule from '../Scheduling/Schedule'
-import FormBuilder from '../FormBuilder/formbuilder'
-import Page from '../Page/page'
+//import FormBuilder from '../FormBuilder/formbuilder'
+import FormEditor from '../FormEditor/formeditor'
 import { getAllData } from '../../api/api'
 import Requests from '../Requests/Requests'
 import Appointment from '../Appointment/appointment'
@@ -27,6 +27,19 @@ const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
+	const fields = [
+		{ label: 'Label 1', type: 'text', placeholder: '', helperText: '' },
+		{ label: 'Label 2', type: 'textarea', placeholder: '', helperText: '' },
+		{
+			label: 'Label 3',
+			type: 'select',
+			options: [
+				{ label: 'Option Label 1' },
+				{ label: 'Option Label 2' },
+				{ label: 'Option Label 3' },
+			],
+		},
+	]
 
 	React.useEffect(() => {
 		getAllData()
@@ -132,7 +145,12 @@ export default function Eva() {
 				}}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/formbuilder" element={<FormBuilder />} />
+					<Route
+						path="/formbuilder"
+						element={
+							<FormEditor title={`Test Exam`} fields={fields} />
+						}
+					/>
 
 					<Route path="/appointment" element={<Appointment />} />
 					<Route path="/providers" element={<Providers />} />

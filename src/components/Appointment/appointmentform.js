@@ -1,46 +1,120 @@
 import React from 'react'
-import { Formik, Form, Field, FieldArray } from 'formik'
-import { makeStyles } from '@mui/styles'
-import { Tab, Tabs, TextField, Button, Box, Typography } from '@mui/material'
+import { Grid, TextField, Button, IconButton } from '@material-ui/core'
+import { Formik, FieldArray } from 'formik'
+import { IoMdAddCircleOutline } from 'react-icons/io'
+import { FaTrash } from 'react-icons/fa'
 
-const useStyles = makeStyles((theme) => ({
-	form: {
-		display: 'flex',
-		flexDirection: 'column',
-		'& > *': {
-			marginBottom: theme.spacing(2),
-		},
-	},
-	addButton: {
-		alignSelf: 'flex-start',
-	},
-}))
-
-const AppointmentForm = ({ appointment }) => {
-	const classes = useStyles()
-	const [tabValue, setTabValue] = React.useState(0)
-
-	const handleTabChange = (event, newValue) => {
-		setTabValue(newValue)
+function AppointmentForm(props) {
+	const handleSubmit = (values) => {
+		console.log(values)
 	}
+
+	// Filter fields array to show only fields in active tab's zone
+	const filteredFields = props.fields.filter(
+		(field) => field.zone === props.zones[props.activeTab]
+	)
 
 	return (
 		<Formik
 			initialValues={{
-				complaints: [],
-				physical_exam: [],
-				assessments: [],
-				plans: [],
+				fields: filteredFields,
 				summary: '',
-				review_of_systems: [],
 			}}
-			onSubmit={(values) => {
-				// Submit the form data to the API
-			}}>
-			{({ values }) => (
-				<Form className={classes.form}>
-
-				</Form>
+			onSubmit={handleSubmit}>
+			{({ values, handleChange, handleBlur, handleSubmit }) => (
+				<form onSubmit={handleSubmit}>
+					{props.activeTab === 0 && (
+						<Grid container spacing={3}>
+							<FieldArray name="fields">
+								{({ push, remove }) => (
+									<>
+										{values.fields.map((field, index) => (
+											<Grid item xs={12} key={index}>
+												<Grid container spacing={2}>
+													<Grid item xs={10}>
+														<TextField
+															fullWidth
+															id={`fields.${index}.label`}
+															name={`fields.${index}.label`}
+															label={`${field.label}`}
+															value={
+																values.fields[
+																	index
+																].label
+															}
+															onChange={
+																handleChange
+															}
+															onBlur={handleBlur}
+															multiline
+														/>
+													</Grid>
+													<Grid
+														item
+														xs={2}
+														container
+														justify="flex-end"
+														alignItems="center">
+														{props.fields[index]
+															.addItem !==
+															false && (
+															<IconButton
+																aria-label="delete"
+																onClick={() =>
+																	remove(
+																		index
+																	)
+																}>
+																<FaTrash
+																	className={
+																		props
+																			.classes
+																			.deleteButton
+																	}
+																/>
+															</IconButton>
+														)}
+													</Grid>
+												</Grid>
+											</Grid>
+										))}
+										{props.fields[values.fields.length]
+											.addItem !== false && (
+											<Grid
+												item
+												xs={12}
+												container
+												justify="flex-end">
+												<Button
+													variant="contained"
+													color="primary"
+													startIcon={
+														<IoMdAddCircleOutline />
+													}
+													onClick={() =>
+														push({ label: '' })
+													}
+													className={
+														props.classes.addButton
+													}>
+													Add Item
+												</Button>
+											</Grid>
+										)}
+									</>
+								)}
+							</FieldArray>
+						</Grid>
+					)}
+					{/* Repeat the above code for the other tabs */}
+					<Button
+						type="submit"
+						variant="contained"
+						color="primary"
+						className={props.classes.saveButton}>
+						Save
+					</Button>
+				</form>
 			)}
 		</Formik>
 	)

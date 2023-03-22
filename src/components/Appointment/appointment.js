@@ -1,104 +1,117 @@
 import React, { useState } from 'react'
-import { Formik, Form, FieldArray, Field } from 'formik'
-import { Container, Grid, Button, IconButton } from '@material-ui/core'
-import { Add, Remove } from '@material-ui/icons'
-import { TextField } from 'formik-material-ui'
-import Stepper from 'react-stepper-horizontal'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+	Card,
+	CardContent,
+	CardActions,
+	Button,
+	Tabs,
+	Tab,
+} from '@material-ui/core'
+import { Typography } from '@mui/material'
+import { Formik, Form, FieldArray } from 'formik'
+import * as Yup from 'yup'
 
-const steps = [
-	{ label: 'Complaints', value: 'complaints' },
-	{ label: 'Assessment', value: 'assessment' },
-	{ label: 'Physical Exam', value: 'physical_exam' },
-	{ label: 'Plan', value: 'plan' },
-	{ label: 'Review of Systems', value: 'review_of_systems' },
-	{ label: 'Summary', value: 'summary' },
-]
+const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%',
+		backgroundColor: theme.palette.background.paper,
+	},
+	card: {
+		borderRadius: theme.spacing(1),
+		boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+	},
+	tabContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+	},
+	formContainer: {
+		paddingTop: theme.spacing(3),
+		paddingBottom: theme.spacing(3),
+	},
+	saveButton: {
+		marginLeft: 'auto',
+		marginRight: theme.spacing(2),
+	},
+	addButton: {
+		marginLeft: theme.spacing(1),
+	},
+	deleteButton: {
+		color: theme.palette.error.main,
+	},
+}))
 
 const initialValues = {
-	complaints: [{ name: '' }],
-	assessment: [{ name: '' }],
-	physical_exam: [{ name: '' }],
-	plan: [{ name: '' }],
-	review_of_systems: [{ name: '' }],
-	summary: '',
+	fields: [],
 }
 
-const renderFields = (values, activeZone, push, remove) => {
-	return (
-		<>
-			{values[activeZone].map((_, index) => (
-				<Grid container spacing={2} key={index}>
-					<Grid item xs={9}>
-						<Field
-							component={TextField}
-							name={`${activeZone}[${index}].name`}
-							label="Item Name"
-							fullWidth
-						/>
-					</Grid>
-					<Grid item xs={2}>
-						<IconButton onClick={() => remove(index)}>
-							<Remove />
-						</IconButton>
-					</Grid>
-				</Grid>
-			))}
-			<Grid container spacing={2} alignItems="center">
-				<Grid item xs={9}>
-					<Field
-						component={TextField}
-						name={`${activeZone}[${values[activeZone].length}].name`}
-						label="Item Name"
-						fullWidth
-					/>
-				</Grid>
-				<Grid item xs={2}>
-					<IconButton onClick={() => push({ name: '' })}>
-						<Add />
-					</IconButton>
-				</Grid>
-			</Grid>
-		</>
-	)
-}
+const validationSchema = Yup.object().shape({})
 
-const Appointment = () => {
-	const [activeStep, setActiveStep] = useState(0)
-	const [activeZone, setActiveZone] = useState(steps[0].value)
+function Appointment(props) {
+	const classes = useStyles()
+	const [activeTab, setActiveTab] = useState(0)
 
-	const handleStep = (step) => () => {
-		setActiveStep(step)
-		setActiveZone(steps[step].value)
+	const zones = [
+		'complaints',
+		'assessments',
+		'physical_exam',
+		'review_of_systems',
+		'plans',
+		'summary',
+	]
+
+	const handleChangeTab = (event, newTab) => {
+		setActiveTab(newTab)
+	}
+
+	const handleSubmit = (values, { setSubmitting }) => {
+		// Submit logic here
+		setSubmitting(false)
 	}
 
 	return (
-		<Container maxWidth="md">
-			<Stepper
-				steps={steps.map((step) => ({ title: step.label }))}
-				activeStep={activeStep}
-				circleFontSize={0}
-				onClick={handleStep}
-			/>
-			<Formik
-				initialValues={initialValues}
-				onSubmit={(values) => console.log(values)}>
-				{({ values, handleSubmit }) => (
-					<Form onSubmit={handleSubmit}>
-						<FieldArray name={activeZone}>
-							{({ push, remove }) =>
-								renderFields(values, activeZone, push, remove)
-							}
-						</FieldArray>
-						<Button
-							variant="contained"
-							color="primary"
-							type="submit">
-							Submit
-						</Button>
-					</Form>
-				)}
-			</Formik>
-		</Container>
+		<div className={classes.root}>
+			<Card className={classes.card}>
+				<CardContent>
+					<Tabs
+						value={activeTab}
+						onChange={handleChangeTab}
+						className={classes.tabContainer}>
+						<Tab label="Complaints" />
+						<Tab label="Assessments" />
+						<Tab label="Physical Exam" />
+						<Tab label="Review of Systems" />
+						<Tab label="Plans" />
+						<Tab label="Summary" />
+					</Tabs>
+					<div className={classes.formContainer}>
+						<Formik
+							initialValues={initialValues}
+							validationSchema={validationSchema}
+							onSubmit={handleSubmit}>
+							{({ values, setFieldValue }) => (
+								<Form>
+									<FieldArray name="fields">
+										{({ push, remove }) => (
+											<>{/* Field array form here */}</>
+										)}
+									</FieldArray>
+								</Form>
+							)}
+						</Formik>
+					</div>
+				</CardContent>
+				<CardActions>
+					<Button
+						variant="contained"
+						color="primary"
+						className={classes.saveButton}
+						onClick={() => console.log('save button clicked')}>
+						Save
+					</Button>
+				</CardActions>
+			</Card>
+		</div>
 	)
 }
 
