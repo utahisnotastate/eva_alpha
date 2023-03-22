@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import MetricsTracker from './MetricsTracker'
 import Schedule from '../Scheduler/schedule'
-import Requests from '../Requests/Requests'
+import Requests from '../Requests/requests'
 
 function Metric({ label, value, feedback, col }) {
 	return (

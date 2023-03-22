@@ -1,11 +1,6 @@
 import React from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography } from '@material-ui/core'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Patient from '../Patient/patient'
-import RequestModal from '../Requests/RequestModal'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -45,16 +40,6 @@ export default function Patients() {
 				sort: true,
 			},
 		},
-		{
-			name: 'view',
-			label: 'View',
-			options: {
-				customBodyRender: (value, tableMeta, updateValue) => {
-					const patientId = tableMeta.rowData[0]
-					return <RequestModal />
-				},
-			},
-		},
 	]
 	const data = [
 		['Joe James', '9/15/87'],
@@ -65,3 +50,16 @@ export default function Patients() {
 
 	return <MUIDataTable title="Patients" data={data} columns={columns} />
 }
+
+/*
+*
+* {
+			name: 'view',
+			label: 'View',
+			options: {
+				customBodyRender: (value, tableMeta, updateValue) => {
+					const patientId = tableMeta.rowData[0]
+					return <RequestModal />
+				},
+			},
+		} */
