@@ -44,12 +44,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const initialValues = {
-	fields: [{}],
+	fields: [],
 }
 
-const validationSchema = Yup.object().shape({})
-
-function Appointment(props) {
+function Appointment() {
 	const classes = useStyles()
 	const [activeTab, setActiveTab] = useState(0)
 	const [filter, setFilter] = useState('complaints')
@@ -80,8 +78,16 @@ function Appointment(props) {
 	]
 
 	const handleChangeTab = (event, newTab) => {
+		console.log(event)
 		console.log('newTab', newTab)
 		setActiveTab(newTab)
+		setFilter(zones[newTab].zone)
+	}
+
+	const handleTabClicked = (event, zone) => {
+		console.log(event)
+		console.log('zone', zone)
+		setFilter(zone)
 	}
 
 	const handleSubmit = (values, { setSubmitting }) => {
@@ -104,7 +110,7 @@ function Appointment(props) {
 							: null}
 					</Tabs>
 					<div className={classes.formContainer}>
-						<AppointmentFieldArray />
+						<AppointmentFieldArray filter={filter} />
 					</div>
 				</CardContent>
 				<CardActions>
