@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core'
 import { Typography } from '@mui/material'
 import { Formik, Form, FieldArray } from 'formik'
+import AppointmentFieldArray from './appointmentfieldarray'
+import EVAFieldArray from '../basestyledcomponents/Inputs/EVAFieldArray'
 import * as Yup from 'yup'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const initialValues = {
-	fields: [],
+	fields: [{}],
 }
 
 const validationSchema = Yup.object().shape({})
@@ -50,17 +52,35 @@ const validationSchema = Yup.object().shape({})
 function Appointment(props) {
 	const classes = useStyles()
 	const [activeTab, setActiveTab] = useState(0)
+	const [filter, setFilter] = useState('complaints')
 
 	const zones = [
-		'complaints',
-		'assessments',
-		'physical_exam',
-		'review_of_systems',
-		'plans',
-		'summary',
+		{
+			zone: 'complaints',
+			label: 'Complaints',
+			new_item: { label: 'New Complaint', type: 'text' },
+		},
+		{
+			zone: 'assessments',
+			label: 'Assessments',
+			new_item: { label: 'New Assessment', type: 'text' },
+		},
+		{ zone: 'physical_exam', label: 'Physical Exam', new_item: false },
+		{
+			zone: 'review_of_systems',
+			label: 'Review of Systems',
+			new_item: false,
+		},
+		{
+			zone: 'plans',
+			label: 'Plans',
+			new_item: { zone: 'plans', label: 'Plan Label', type: 'text' },
+		},
+		{ zone: 'summary', label: 'Summary', new_item: false },
 	]
 
 	const handleChangeTab = (event, newTab) => {
+		console.log('newTab', newTab)
 		setActiveTab(newTab)
 	}
 
@@ -77,28 +97,14 @@ function Appointment(props) {
 						value={activeTab}
 						onChange={handleChangeTab}
 						className={classes.tabContainer}>
-						<Tab label="Complaints" />
-						<Tab label="Assessments" />
-						<Tab label="Physical Exam" />
-						<Tab label="Review of Systems" />
-						<Tab label="Plans" />
-						<Tab label="Summary" />
+						{zones && zones.length > 0
+							? zones.map((zone, index) => (
+									<Tab key={index} label={zone.label} />
+							  ))
+							: null}
 					</Tabs>
 					<div className={classes.formContainer}>
-						<Formik
-							initialValues={initialValues}
-							validationSchema={validationSchema}
-							onSubmit={handleSubmit}>
-							{({ values, setFieldValue }) => (
-								<Form>
-									<FieldArray name="fields">
-										{({ push, remove }) => (
-											<>{/* Field array form here */}</>
-										)}
-									</FieldArray>
-								</Form>
-							)}
-						</Formik>
+						<AppointmentFieldArray />
 					</div>
 				</CardContent>
 				<CardActions>
@@ -116,3 +122,25 @@ function Appointment(props) {
 }
 
 export default Appointment
+/*
+* <Formik
+							initialValues={initialValues}
+							validationSchema={validationSchema}
+							onSubmit={handleSubmit}>
+							{({ values, setFieldValue }) => (
+								<Form>
+									<EVAFieldArray
+										name={`fields`}
+										items={values.fields}
+										blankobject={{
+											type: 'text',
+											label: 'Field Array',
+											zone: 'complaints ',
+										}}
+									/>
+								</Form>
+							)}
+						</Formik>
+*
+*
+* */
