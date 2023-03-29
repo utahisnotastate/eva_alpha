@@ -1,134 +1,120 @@
 import React, { useState } from 'react'
 import {
+	Box,
 	Card,
+	CardHeader,
 	CardContent,
 	CardActions,
 	Button,
-	Tabs,
+	Typography,
 	Tab,
-	TextField,
-	Box,
 } from '@mui/material'
-import { Formik, Form, FieldArray, Field } from 'formik'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
 
-const zones = [
-	{ zone: 'complaints', label: 'Complaints' },
-	{ zone: 'assessments', label: 'Assessments' },
-	{ zone: 'physical_exam', label: 'Physical Exam' },
-	{ zone: 'review_of_systems', label: 'Review of Systems' },
-	{ zone: 'plans', label: 'Plans' },
-	{ zone: 'summary', label: 'Summary' },
-]
+import { Formik, Form } from 'formik'
+import Complaints from './components/complaints'
+import Assessments from './components/assessments'
+import PhysicalExam from './components/physical_exam'
+import ReviewOfSystems from './components/review_of_systems'
+import Plans from './components/plans'
+import Summary from './components/summary'
 
-const initialValues = zones.reduce((acc, zone) => {
-	acc[zone.zone] = zone.zone === 'summary' ? '' : []
-	return acc
-}, {})
-
-const submitForm = async (values) => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			console.log('Form submitted:', values)
-			resolve({ success: true })
-		}, 1000)
-	})
+const initialValues = {
+	complaints: [],
+	assessments: [],
+	physical_exam: [],
+	review_of_systems: [],
+	plans: [],
+	summary: '',
 }
 
-function Appointment() {
-	const [activeTab, setActiveTab] = useState(0)
+const zones = [
+	{ zone: 'complaints', label: 'Complaints', component: Complaints },
+	{ zone: 'assessments', label: 'Assessments', component: Assessments },
+	{ zone: 'physical_exam', label: 'Physical Exam', component: PhysicalExam },
+	{
+		zone: 'review_of_systems',
+		label: 'Review of Systems',
+		component: ReviewOfSystems,
+	},
+	{ zone: 'plans', label: 'Plans', component: Plans },
+	{ zone: 'summary', label: 'Summary', component: Summary },
+]
 
-	const handleTabChange = (event, newValue) => {
-		setActiveTab(newValue)
-	}
+const Appointment = () => {
+	const [activeTab, setActiveTab] = useState('complaints')
 
-	const handleFormSubmit = async (values, { setSubmitting }) => {
-		const response = await submitForm(values)
-		if (response.success) {
-			console.log('Form submission successful')
-		} else {
-			console.log('Form submission failed')
-		}
-		setSubmitting(false)
+	const handleFormSubmit = (values) => {
+		console.log('Form data:', values)
 	}
 
 	return (
-		<Card>
-			<CardContent>
-				<Formik
-					initialValues={initialValues}
-					onSubmit={handleFormSubmit}>
-					{({ values, isSubmitting }) => (
-						<Form>
-							<Box sx={{ mb: 2 }}>
-								<Tabs
-									value={activeTab}
-									onChange={handleTabChange}>
-									{zones.map((zone, index) => (
-										<Tab key={index} label={zone.label} />
-									))}
-								</Tabs>
-							</Box>
-
-							{activeTab === zones.length - 1 ? (
-								<Field
-									component={TextField}
-									name="summary"
-									label="Summary"
-									variant="outlined"
-									multiline
-									rows={4}
-									fullWidth
-								/>
-							) : (
-								<FieldArray name={zones[activeTab].zone}>
-									{({ push, remove }) => (
-										<div>
-											{values[zones[activeTab].zone].map(
-												(_, index) => (
-													<div key={index}>
-														<Field
-															component={
-																TextField
-															}
-															name={`${zones[activeTab].zone}.${index}`}
-															label={`${
-																zones[activeTab]
-																	.label
-															} #${index + 1}`}
-															variant="outlined"
-															fullWidth
-														/>
-														<Button
-															onClick={() =>
-																remove(index)
-															}>
-															Remove
-														</Button>
-													</div>
-												)
-											)}
-											<Button onClick={() => push('')}>
-												Add Item
-											</Button>
-										</div>
-									)}
-								</FieldArray>
-							)}
-
-							<Box sx={{ mt: 2 }}>
-								<Button
-									type="submit"
-									variant="contained"
-									color="primary"
-									disabled={isSubmitting}>
-									Submit
-								</Button>
-							</Box>
-						</Form>
-					)}
-				</Formik>
-			</CardContent>
-		</Card>
+		<Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
+			{({ values }) => (
+				<Form>
+					<Card>
+						<CardHeader
+							title={
+								<Typography
+									variant="h5"
+									align="center"
+									color="primary">
+									Appointment
+								</Typography>
+							}
+							style={{
+								backgroundColor: '#3f51b5',
+								color: '#fff',
+							}}
+						/>
+						<CardContent>
+							<TabContext value={activeTab}>
+								<Box
+									sx={{
+										mb: 2,
+										borderBottom: 1,
+										borderColor: 'divider',
+									}}>
+									<TabList
+										onChange={(event, newValue) =>
+											setActiveTab(newValue)
+										}
+										sx={{
+											display: 'flex',
+											justifyContent: 'space-around',
+										}}>
+										{zones.map((zone) => (
+											<Tab
+												key={zone.zone}
+												label={zone.label}
+												value={zone.zone}
+												style={{
+													margin: '1rem',
+												}}
+											/>
+										))}
+									</TabList>
+								</Box>
+								{zones.map((zone) => (
+									<TabPanel key={zone.zone} value={zone.zone}>
+										<zone.component />
+									</TabPanel>
+								))}
+							</TabContext>
+						</CardContent>
+						<CardActions>
+							<Button
+								type="submit"
+								variant="contained"
+								color="primary"
+								fullWidth>
+								Save
+							</Button>
+						</CardActions>
+					</Card>
+				</Form>
+			)}
+		</Formik>
 	)
 }
 

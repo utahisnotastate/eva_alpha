@@ -1,156 +1,112 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import {
+	Box,
 	Card,
+	CardHeader,
 	CardContent,
-	CardActions,
-	Button,
 	Tabs,
 	Tab,
-} from '@material-ui/core'
-import { Typography } from '@mui/material'
-import { Formik, Form, FieldArray } from 'formik'
+	Button,
+	Typography,
+} from '@mui/material'
 import { TextField } from 'formik-mui'
-import AppointmentFieldArray from './appointmentfieldarray'
-import EVAFieldArray from '../basestyledcomponents/Inputs/EVAFieldArray'
-import * as Yup from 'yup'
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		width: '100%',
-		backgroundColor: theme.palette.background.paper,
-	},
-	card: {
-		borderRadius: theme.spacing(1),
-		boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-	},
-	tabContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-	},
-	formContainer: {
-		paddingTop: theme.spacing(3),
-		paddingBottom: theme.spacing(3),
-	},
-	saveButton: {
-		marginLeft: 'auto',
-		marginRight: theme.spacing(2),
-	},
-	addButton: {
-		marginLeft: theme.spacing(1),
-	},
-	deleteButton: {
-		color: theme.palette.error.main,
-	},
-}))
+import { Formik, Form, Field } from 'formik'
+import Complaints from './components/complaints'
+import Assessments from './components/assessments'
+import PhysicalExam from './components/physical_exam'
+import ReviewOfSystems from './components/review_of_systems'
+import Plans from './components/plans'
+import Summary from './components/summary'
 
 const initialValues = {
-	fields: [],
+	complaints: [],
+	assessments: [],
+	physical_exam: [],
+	review_of_systems: [],
+	plans: [],
+	summary: '',
 }
 
-function Appointment() {
-	const classes = useStyles()
+const zones = [
+	{ zone: 'complaints', label: 'Complaints', component: Complaints },
+	{ zone: 'assessments', label: 'Assessments', component: Assessments },
+	{ zone: 'physical_exam', label: 'Physical Exam', component: PhysicalExam },
+	{
+		zone: 'review_of_systems',
+		label: 'Review of Systems',
+		component: ReviewOfSystems,
+	},
+	{ zone: 'plans', label: 'Plans', component: Plans },
+	{ zone: 'summary', label: 'Summary', component: Summary },
+]
+
+const renderTabContent = (zone) => {
+	const ZoneComponent = zones.find((z) => z.zone === zone)?.component
+	return ZoneComponent ? <ZoneComponent /> : null
+}
+
+const Appointment = () => {
 	const [activeTab, setActiveTab] = useState(0)
-	const [filter, setFilter] = useState('complaints')
+	const currentZone = zones[activeTab].zone
 
-	const zones = [
-		{
-			zone: 'complaints',
-			label: 'Complaints',
-			new_item: { label: 'New Complaint', type: 'text' },
-		},
-		{
-			zone: 'assessments',
-			label: 'Assessments',
-			new_item: { label: 'New Assessment', type: 'text' },
-		},
-		{ zone: 'physical_exam', label: 'Physical Exam', new_item: false },
-		{
-			zone: 'review_of_systems',
-			label: 'Review of Systems',
-			new_item: false,
-		},
-		{
-			zone: 'plans',
-			label: 'Plans',
-			new_item: { zone: 'plans', label: 'Plan Label', type: 'text' },
-		},
-		{ zone: 'summary', label: 'Summary', new_item: false },
-	]
-
-	const handleChangeTab = (event, newTab) => {
-		setActiveTab(newTab)
-		setFilter(zones[newTab].zone)
-		console.log(filter)
+	const handleFormSubmit = (values) => {
+		console.log('Form data:', values)
 	}
 
-	const handleTabClicked = (event, zone) => {
-		console.log(event)
-		console.log('zone', zone)
-		setFilter(zone)
-	}
-
-	const handleSubmit = (values, { setSubmitting }) => {
-		// Submit logic here
-		setSubmitting(false)
+	const handleTabChange = (event, newValue) => {
+		setActiveTab(newValue)
 	}
 
 	return (
-		<div className={classes.root}>
-			<Card className={classes.card}>
-				<CardContent>
-					<Tabs
-						value={activeTab}
-						onChange={handleChangeTab}
-						className={classes.tabContainer}>
-						{zones && zones.length > 0
-							? zones.map((zone, index) => (
-								<Tab key={index} label={zone.label} />
-							))
-							: null}
-					</Tabs>
-					<div className={classes.formContainer}>
-						{filter === 'summary' ? (
-							<TextField name={`summary`} label={`Summary`} />
-						) : (
-							<AppointmentFieldArray filter={filter} />
-						)}
-					</div>
-				</CardContent>
-				<CardActions>
-					<Button
-						variant="contained"
-						color="primary"
-						className={classes.saveButton}
-						onClick={() => console.log('save button clicked')}>
-						Save
-					</Button>
-				</CardActions>
-			</Card>
-		</div>
+		<Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
+			{({ values }) => (
+				<Form>
+					<Card>
+						<CardHeader
+							title={
+								<Typography
+									variant="h5"
+									align="center"
+									color="primary">
+									Appointment
+								</Typography>
+							}
+						/>
+						<CardContent>
+							<Box sx={{ mb: 2 }}>
+								<Tabs
+									value={activeTab}
+									onChange={handleTabChange}
+									centered
+									indicatorColor="primary"
+									textColor="primary">
+									{zones.map((zone, index) => (
+										<Tab key={index} label={zone.label} />
+									))}
+								</Tabs>
+							</Box>
+
+							{renderTabContent(currentZone)}
+
+							<Box
+								sx={{
+									mt: 2,
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Button
+									type="submit"
+									variant="contained"
+									color="primary">
+									Submit
+								</Button>
+							</Box>
+						</CardContent>
+					</Card>
+				</Form>
+			)}
+		</Formik>
 	)
 }
 
 export default Appointment
-/*
-* <Formik
-							initialValues={initialValues}
-							validationSchema={validationSchema}
-							onSubmit={handleSubmit}>
-							{({ values, setFieldValue }) => (
-								<Form>
-									<EVAFieldArray
-										name={`fields`}
-										items={values.fields}
-										blankobject={{
-											type: 'text',
-											label: 'Field Array',
-											zone: 'complaints ',
-										}}
-									/>
-								</Form>
-							)}
-						</Formik>
-*
-*
-* */
