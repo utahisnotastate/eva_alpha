@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import {
 	Card,
 	CardContent,
@@ -7,146 +6,130 @@ import {
 	Button,
 	Tabs,
 	Tab,
-} from '@material-ui/core'
-import { Typography } from '@mui/material'
-import { Formik, Form, FieldArray } from 'formik'
-import AppointmentFieldArray from './appointmentfieldarray'
-import EVAFieldArray from '../basestyledcomponents/Inputs/EVAFieldArray'
-import * as Yup from 'yup'
+	TextField,
+	Box,
+} from '@mui/material'
+import { Formik, Form, FieldArray, Field } from 'formik'
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		width: '100%',
-		backgroundColor: theme.palette.background.paper,
-	},
-	card: {
-		borderRadius: theme.spacing(1),
-		boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-	},
-	tabContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-	},
-	formContainer: {
-		paddingTop: theme.spacing(3),
-		paddingBottom: theme.spacing(3),
-	},
-	saveButton: {
-		marginLeft: 'auto',
-		marginRight: theme.spacing(2),
-	},
-	addButton: {
-		marginLeft: theme.spacing(1),
-	},
-	deleteButton: {
-		color: theme.palette.error.main,
-	},
-}))
+const zones = [
+	{ zone: 'complaints', label: 'Complaints' },
+	{ zone: 'assessments', label: 'Assessments' },
+	{ zone: 'physical_exam', label: 'Physical Exam' },
+	{ zone: 'review_of_systems', label: 'Review of Systems' },
+	{ zone: 'plans', label: 'Plans' },
+	{ zone: 'summary', label: 'Summary' },
+]
 
-const initialValues = {
-	fields: [],
+const initialValues = zones.reduce((acc, zone) => {
+	acc[zone.zone] = zone.zone === 'summary' ? '' : []
+	return acc
+}, {})
+
+const submitForm = async (values) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			console.log('Form submitted:', values)
+			resolve({ success: true })
+		}, 1000)
+	})
 }
 
 function Appointment() {
-	const classes = useStyles()
 	const [activeTab, setActiveTab] = useState(0)
-	const [filter, setFilter] = useState('complaints')
 
-	const zones = [
-		{
-			zone: 'complaints',
-			label: 'Complaints',
-			new_item: { label: 'New Complaint', type: 'text' },
-		},
-		{
-			zone: 'assessments',
-			label: 'Assessments',
-			new_item: { label: 'New Assessment', type: 'text' },
-		},
-		{ zone: 'physical_exam', label: 'Physical Exam', new_item: false },
-		{
-			zone: 'review_of_systems',
-			label: 'Review of Systems',
-			new_item: false,
-		},
-		{
-			zone: 'plans',
-			label: 'Plans',
-			new_item: { zone: 'plans', label: 'Plan Label', type: 'text' },
-		},
-		{ zone: 'summary', label: 'Summary', new_item: false },
-	]
-
-	const handleChangeTab = (event, newTab) => {
-		console.log(event)
-		console.log('newTab', newTab)
-		setActiveTab(newTab)
-		setFilter(zones[newTab].zone)
+	const handleTabChange = (event, newValue) => {
+		setActiveTab(newValue)
 	}
 
-	const handleTabClicked = (event, zone) => {
-		console.log(event)
-		console.log('zone', zone)
-		setFilter(zone)
-	}
-
-	const handleSubmit = (values, { setSubmitting }) => {
-		// Submit logic here
+	const handleFormSubmit = async (values, { setSubmitting }) => {
+		const response = await submitForm(values)
+		if (response.success) {
+			console.log('Form submission successful')
+		} else {
+			console.log('Form submission failed')
+		}
 		setSubmitting(false)
 	}
 
 	return (
-		<div className={classes.root}>
-			<Card className={classes.card}>
-				<CardContent>
-					<Tabs
-						value={activeTab}
-						onChange={handleChangeTab}
-						className={classes.tabContainer}>
-						{zones && zones.length > 0
-							? zones.map((zone, index) => (
-									<Tab key={index} label={zone.label} />
-							  ))
-							: null}
-					</Tabs>
-					<div className={classes.formContainer}>
-						<AppointmentFieldArray filter={filter} />
-					</div>
-				</CardContent>
-				<CardActions>
-					<Button
-						variant="contained"
-						color="primary"
-						className={classes.saveButton}
-						onClick={() => console.log('save button clicked')}>
-						Save
-					</Button>
-				</CardActions>
-			</Card>
-		</div>
+		<Card>
+			<CardContent>
+				<Formik
+					initialValues={initialValues}
+					onSubmit={handleFormSubmit}>
+					{({ values, isSubmitting }) => (
+						<Form>
+							<Box sx={{ mb: 2 }}>
+								<Tabs
+									value={activeTab}
+									onChange={handleTabChange}>
+									{zones.map((zone, index) => (
+										<Tab key={index} label={zone.label} />
+									))}
+								</Tabs>
+							</Box>
+
+							{activeTab === zones.length - 1 ? (
+								<Field
+									component={TextField}
+									name="summary"
+									label="Summary"
+									variant="outlined"
+									multiline
+									rows={4}
+									fullWidth
+								/>
+							) : (
+								<FieldArray name={zones[activeTab].zone}>
+									{({ push, remove }) => (
+										<div>
+											{values[zones[activeTab].zone].map(
+												(_, index) => (
+													<div key={index}>
+														<Field
+															component={
+																TextField
+															}
+															name={`${zones[activeTab].zone}.${index}`}
+															label={`${
+																zones[activeTab]
+																	.label
+															} #${index + 1}`}
+															variant="outlined"
+															fullWidth
+														/>
+														<Button
+															onClick={() =>
+																remove(index)
+															}>
+															Remove
+														</Button>
+													</div>
+												)
+											)}
+											<Button onClick={() => push('')}>
+												Add Item
+											</Button>
+										</div>
+									)}
+								</FieldArray>
+							)}
+
+							<Box sx={{ mt: 2 }}>
+								<Button
+									type="submit"
+									variant="contained"
+									color="primary"
+									disabled={isSubmitting}>
+									Submit
+								</Button>
+							</Box>
+						</Form>
+					)}
+				</Formik>
+			</CardContent>
+		</Card>
 	)
 }
 
 export default Appointment
-/*
-* <Formik
-							initialValues={initialValues}
-							validationSchema={validationSchema}
-							onSubmit={handleSubmit}>
-							{({ values, setFieldValue }) => (
-								<Form>
-									<EVAFieldArray
-										name={`fields`}
-										items={values.fields}
-										blankobject={{
-											type: 'text',
-											label: 'Field Array',
-											zone: 'complaints ',
-										}}
-									/>
-								</Form>
-							)}
-						</Formik>
-*
-*
-* */

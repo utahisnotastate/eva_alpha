@@ -1,126 +1,156 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepLabel from '@mui/material/StepLabel'
-import Card from '../../components/ui/Card/Card'
-import CardHeader from '../../components/ui/Card/CardHeader'
-import CardFooter from '../../components/ui/Card/CardFooter'
-import { FormikWizard } from 'formik-wizard-form'
-import Assessments from './inprogress/assessments/assessments'
-import PhysicalExam from './inprogress/physicalexam/physicalexam'
-import ReviewOfSystems from './inprogress/reviewofsystems/reviewofsystems'
-import Summary from './inprogress/summary/summary'
-import Finalize from './inprogress/finalize/finalize'
-import FollowUp from './inprogress/followup/followup'
-import CardBody from '../../components/ui/Card/CardBody'
-import Complaints from './inprogress/complaints/complaints'
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+	Card,
+	CardContent,
+	CardActions,
+	Button,
+	Tabs,
+	Tab,
+} from '@material-ui/core'
+import { Typography } from '@mui/material'
+import { Formik, Form, FieldArray } from 'formik'
+import { TextField } from 'formik-mui'
+import AppointmentFieldArray from './appointmentfieldarray'
+import EVAFieldArray from '../basestyledcomponents/Inputs/EVAFieldArray'
+import * as Yup from 'yup'
 
-export default function Appointment() {
-	const [finalValues, setFinalValues] = React.useState({})
-	const [finished, setFinished] = React.useState(false)
+const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%',
+		backgroundColor: theme.palette.background.paper,
+	},
+	card: {
+		borderRadius: theme.spacing(1),
+		boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+	},
+	tabContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+	},
+	formContainer: {
+		paddingTop: theme.spacing(3),
+		paddingBottom: theme.spacing(3),
+	},
+	saveButton: {
+		marginLeft: 'auto',
+		marginRight: theme.spacing(2),
+	},
+	addButton: {
+		marginLeft: theme.spacing(1),
+	},
+	deleteButton: {
+		color: theme.palette.error.main,
+	},
+}))
+
+const initialValues = {
+	fields: [],
+}
+
+function Appointment() {
+	const classes = useStyles()
+	const [activeTab, setActiveTab] = useState(0)
+	const [filter, setFilter] = useState('complaints')
+
+	const zones = [
+		{
+			zone: 'complaints',
+			label: 'Complaints',
+			new_item: { label: 'New Complaint', type: 'text' },
+		},
+		{
+			zone: 'assessments',
+			label: 'Assessments',
+			new_item: { label: 'New Assessment', type: 'text' },
+		},
+		{ zone: 'physical_exam', label: 'Physical Exam', new_item: false },
+		{
+			zone: 'review_of_systems',
+			label: 'Review of Systems',
+			new_item: false,
+		},
+		{
+			zone: 'plans',
+			label: 'Plans',
+			new_item: { zone: 'plans', label: 'Plan Label', type: 'text' },
+		},
+		{ zone: 'summary', label: 'Summary', new_item: false },
+	]
+
+	const handleChangeTab = (event, newTab) => {
+		setActiveTab(newTab)
+		setFilter(zones[newTab].zone)
+		console.log(filter)
+	}
+
+	const handleTabClicked = (event, zone) => {
+		console.log(event)
+		console.log('zone', zone)
+		setFilter(zone)
+	}
+
+	const handleSubmit = (values, { setSubmitting }) => {
+		// Submit logic here
+		setSubmitting(false)
+	}
+
 	return (
-		<div className="App">
-			<Card>
-				<FormikWizard
-					activeStepIndex={0}
-					initialValues={{
-						fields: []
-					}}
-					onSubmit={(values) => {
-						setFinalValues(values)
-						setFinished(true)
-					}}
-					steps={[
-						{
-							component: Complaints,
-						},
-						{
-							component: PhysicalExam,
-						},
-						{
-							component: ReviewOfSystems,
-						},
-						{
-							component: Assessments,
-						},
-						{
-							component: FollowUp,
-						},
-						{
-							component: Summary,
-						},
-						{
-							component: Finalize,
-						},
-					]}
-					validateOnNext
-				>
-					{({
-						currentStepIndex,
-						renderComponent,
-						handlePrev,
-						handleNext,
-						isNextDisabled,
-						isPrevDisabled,
-					}) => (
-						<>
-							<CardHeader
-								color="primary"
-								sx={{ width: '100%', my: '1rem', color: 'white' }}
-							>
-								<Stepper activeStep={currentStepIndex}>
-									<Step completed={currentStepIndex > 0}>
-										<StepLabel>Complaints</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 1}>
-										<StepLabel>Physical Exam</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 2}>
-										<StepLabel>Review of Systems</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 3}>
-										<StepLabel>Assessment</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 4}>
-										<StepLabel>Follow Up</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 5}>
-										<StepLabel>Summary</StepLabel>
-									</Step>
-									<Step completed={currentStepIndex > 6}>
-										<StepLabel>Finalize</StepLabel>
-									</Step>
-								</Stepper>
-							</CardHeader>
-							<CardBody my="2rem">{renderComponent()}</CardBody>
-							<CardFooter display="flex" justifyContent="space-between">
-								<Button
-									disabled={isPrevDisabled}
-									onClick={handlePrev}
-									type="primary"
-									variant="contained"
-								>
-									Previous
-								</Button>
-								<Button
-									disabled={isNextDisabled}
-									onClick={handleNext}
-									type="primary"
-									variant="contained"
-								>
-									Next
-									{!!currentStepIndex === 2 && 'Finish'}
-								</Button>
-							</CardFooter>
-							<Box>
-								<pre>{JSON.stringify(finalValues, null, 2)}</pre>
-							</Box>
-						</>
-					)}
-				</FormikWizard>
+		<div className={classes.root}>
+			<Card className={classes.card}>
+				<CardContent>
+					<Tabs
+						value={activeTab}
+						onChange={handleChangeTab}
+						className={classes.tabContainer}>
+						{zones && zones.length > 0
+							? zones.map((zone, index) => (
+								<Tab key={index} label={zone.label} />
+							))
+							: null}
+					</Tabs>
+					<div className={classes.formContainer}>
+						{filter === 'summary' ? (
+							<TextField name={`summary`} label={`Summary`} />
+						) : (
+							<AppointmentFieldArray filter={filter} />
+						)}
+					</div>
+				</CardContent>
+				<CardActions>
+					<Button
+						variant="contained"
+						color="primary"
+						className={classes.saveButton}
+						onClick={() => console.log('save button clicked')}>
+						Save
+					</Button>
+				</CardActions>
 			</Card>
 		</div>
 	)
 }
+
+export default Appointment
+/*
+* <Formik
+							initialValues={initialValues}
+							validationSchema={validationSchema}
+							onSubmit={handleSubmit}>
+							{({ values, setFieldValue }) => (
+								<Form>
+									<EVAFieldArray
+										name={`fields`}
+										items={values.fields}
+										blankobject={{
+											type: 'text',
+											label: 'Field Array',
+											zone: 'complaints ',
+										}}
+									/>
+								</Form>
+							)}
+						</Formik>
+*
+*
+* */
