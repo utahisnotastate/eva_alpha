@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'react-final-form'
 import { FieldArray } from 'react-final-form-arrays'
 
-export default function EVAFieldArray({ name }) {
+export default function EVAFieldArray({ name, items }) {
 	return (
 		<FieldArray name={name}>
 			{({ fields }) =>

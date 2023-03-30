@@ -88,7 +88,9 @@
     "rjsf-material-ui": "^0.3.9",
     "tss-react": "^3.5.2",
     "uuid": "^9.0.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-async-script-loader": "0.3.0",
+    "react-script-loader-hoc": "0.3.1"
   },
   "main": "public/electron.js",
   "scripts": {

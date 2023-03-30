@@ -30,86 +30,68 @@ const useStyles = makeStyles({
 })
 
 export default function Allergies() {
-	let { id } = useParams()
-	const classes = useStyles()
-	const dispatch = useDispatch()
 	const { values } = useFormikContext()
 
 	return (
-		<div style={{ margin: '20px' }}>
-			<Card>
-				<CardHeader color="primary">
-					<h4 className={classes.cardTitleWhite}>
-						<AssignmentIcon /> Allergies
-					</h4>
-				</CardHeader>
-				<CardBody>
-					<FieldArray name="details.allergies">
-						{({ remove, push }) => (
-							<div>
-								{values.details.allergies &&
-								values.details.allergies.length > 0
-									? values.details.allergies.map(
-											(allergy, index) => (
-												<div
-													key={index}
-													style={{
-														display: 'flex',
-														flexDirection: 'row',
-													}}>
-													<Field
-														style={{
-															margin: '15px',
-														}}
-														InputLabelProps={{
-															shrink: true,
-														}}
-														name={`details.allergies[${index}].allergy`}
-														label={`Allergy`}
-														type={`text`}
-														variant="standard"
-														component={TextField}
-														fullWidth
-													/>
-													<Field
-														style={{
-															margin: '15px',
-														}}
-														InputLabelProps={{
-															shrink: true,
-														}}
-														name={`details.allergies[${index}].notes`}
-														label={`Notes`}
-														type={`text`}
-														variant="standard"
-														component={TextField}
-														fullWidth
-													/>
-													<Button
-														color={`error`}
-														variant={`contained`}
-														onClick={() =>
-															remove(index)
-														}>
-														-
-													</Button>
-												</div>
-											)
-									  )
-									: null}
-								<Button
-									color="primary"
-									onClick={() => {
-										push({ allergy: '', notes: '' })
+		<FieldArray name="allergies">
+			{({ remove, push }) => (
+				<div>
+					{values.allergies && values.allergies.length > 0
+						? values.allergies.map((allergy, index) => (
+								<div
+									key={index}
+									style={{
+										display: 'flex',
+										flexDirection: 'row',
 									}}>
-									Add New Allergy
-								</Button>
-							</div>
-						)}
-					</FieldArray>
-				</CardBody>
-			</Card>
-		</div>
+									<Field
+										style={{
+											margin: '15px',
+										}}
+										InputLabelProps={{
+											shrink: true,
+										}}
+										name={`allergies[${index}].allergy`}
+										label={`Allergy`}
+										type={`text`}
+										variant="standard"
+										component={TextField}
+										fullWidth
+									/>
+									<Field
+										style={{
+											margin: '15px',
+										}}
+										InputLabelProps={{
+											shrink: true,
+										}}
+										name={`allergies[${index}].notes`}
+										label={`Notes`}
+										type={`textarea`}
+										rows={4}
+										variant="standard"
+										component={TextField}
+										fullWidth
+									/>
+									<Button
+										color={`error`}
+										variant={`contained`}
+										onClick={() => remove(index)}>
+										-
+									</Button>
+								</div>
+						  ))
+						: null}
+					<Button
+						color="primary"
+						onClick={() => {
+							push({ allergy: '', notes: '' })
+						}}>
+						Add New Allergy
+					</Button>
+				</div>
+			)}
+		</FieldArray>
 	)
 }
 
