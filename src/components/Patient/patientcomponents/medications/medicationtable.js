@@ -7,7 +7,6 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-	Paper,
 	Collapse,
 	Box,
 	Typography,
@@ -15,7 +14,6 @@ import {
 
 const useStyles = makeStyles((theme) => ({
 	tableContainer: {
-		maxWidth: 800,
 		margin: 'auto',
 	},
 	tableHeadCell: {
@@ -25,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	prescriptionHistoryTitle: {
 		fontWeight: 'bold',
-		borderBottom: '1px solid rgba(224, 224, 224, 1)',
 	},
 }))
 
@@ -38,7 +35,7 @@ const MedicationTable = ({ medications }) => {
 	}
 
 	return (
-		<TableContainer component={Paper} className={classes.tableContainer}>
+		<TableContainer className={classes.tableContainer}>
 			<Table aria-label="medications table">
 				<TableHead>
 					<TableRow>

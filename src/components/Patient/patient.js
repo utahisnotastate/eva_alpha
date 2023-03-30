@@ -10,13 +10,12 @@ import {
 	Typography,
 } from '@mui/material'
 import Button from '@mui/material/Button'
-import PatientMenu from './PatientMenu'
 import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
 import { FieldArray, Form, Formik } from 'formik'
 import Allergies from './patientcomponents/allergies/allergies'
 import Insurance from './patientcomponents/insurance/insurance'
-import MedicationTable from './patientcomponents/medications/medicationtable'
+import Medications from './patientcomponents/medications/medications'
 
 const CustomFieldArray = ({ name, items, render }) => (
 	<FieldArray name={name}>{() => <div>{items}</div>}</FieldArray>
@@ -48,7 +47,7 @@ function Patient({ title }) {
 			tabName: 'Medications',
 			tabIcon: LocalLibraryIcon,
 			tabContent: (
-				<MedicationTable
+				<Medications
 					medications={[
 						{
 							name: 'Advil',
