@@ -11,6 +11,7 @@ import {
 	Box,
 	Typography,
 } from '@material-ui/core'
+import { FieldArray, useFormikContext } from 'formik'
 
 const useStyles = makeStyles((theme) => ({
 	tableContainer: {
@@ -26,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const MedicationTable = ({ medications }) => {
+const MedicationTable = () => {
 	const [open, setOpen] = useState({})
 	const classes = useStyles()
+	const { values } = useFormikContext()
 
 	const handleRowClick = (id) => {
 		setOpen((prevOpen) => ({ ...prevOpen, [id]: !prevOpen[id] }))
@@ -65,7 +67,96 @@ const MedicationTable = ({ medications }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{medications.map((medication, index) => (
+					<FieldArray name={`medications`}>
+						{({ push, remove }) => (
+							<div>
+								{values.medications.map((medication, index) => (
+									<React.Fragment key={index}>
+										<TableRow
+											onClick={() =>
+												handleRowClick(index)
+											}>
+											<TableCell
+												component="th"
+												scope="row">
+												{medication.name}
+											</TableCell>
+											<TableCell align="right">
+												{medication.dosage}
+											</TableCell>
+											<TableCell align="right">
+												{medication.status}
+											</TableCell>
+											<TableCell align="right">
+												{medication.lastRefill}
+											</TableCell>
+											<TableCell align="right">
+												{medication.nextRefill}
+											</TableCell>
+										</TableRow>
+										<TableRow>
+											<TableCell
+												style={{
+													paddingBottom: 0,
+													paddingTop: 0,
+												}}
+												colSpan={5}>
+												<Collapse
+													in={open[index]}
+													timeout="auto"
+													unmountOnExit>
+													<Box margin={1}>
+														<Typography
+															variant="h6"
+															gutterBottom
+															component="div"
+															className={
+																classes.prescriptionHistoryTitle
+															}>
+															Prescription History
+														</Typography>
+														<Table
+															size="small"
+															aria-label="prescription history">
+															<TableHead>
+																<TableRow>
+																	<TableCell>
+																		Name
+																	</TableCell>
+																	<TableCell>
+																		Dosage
+																	</TableCell>
+																	<TableCell>
+																		Date
+																		Written
+																	</TableCell>
+																	<TableCell>
+																		Notes
+																	</TableCell>
+																</TableRow>
+															</TableHead>
+															<TableBody></TableBody>
+														</Table>
+													</Box>
+												</Collapse>
+											</TableCell>
+										</TableRow>
+									</React.Fragment>
+								))}
+							</div>
+						)}
+					</FieldArray>
+				</TableBody>
+			</Table>
+		</TableContainer>
+	)
+}
+
+export default MedicationTable
+
+/*
+* <TableBody>
+					{values.medications.map((medication, index) => (
 						<React.Fragment key={index}>
 							<TableRow onClick={() => handleRowClick(index)}>
 								<TableCell component="th" scope="row">
@@ -156,10 +247,7 @@ const MedicationTable = ({ medications }) => {
 							</TableRow>
 						</React.Fragment>
 					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
-	)
-}
-
-export default MedicationTable
+				</TableBody>v
+*
+*
+* */
