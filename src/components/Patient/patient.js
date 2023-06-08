@@ -1,167 +1,128 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
-import { Formik, Form } from 'formik'
-import Paper from '@material-ui/core/Paper'
+import * as React from 'react'
 import {
-	useParams,
-	useRouteMatch,
-	Link,
-	Switch,
-	Route,
-	NavLink,
-} from 'react-router-dom'
-import { Typography } from '@material-ui/core'
-import SimpleSideBar from './patientcomponents/simplesidebar/simplesidebar'
-import routes from './routes'
-import blankpatient from './patient.mock'
+	Box,
+	Card,
+	CardContent,
+	CardHeader,
+	Container,
+	Divider,
+	Grid,
+	Typography,
+} from '@mui/material'
+import Button from '@mui/material/Button'
+import CustomTabs from '../basestyledcomponents/CustomTabs/CustomTabs'
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
+import { FieldArray, Form, Formik } from 'formik'
+import Allergies from './patientcomponents/allergies/allergies'
+import Insurance from './patientcomponents/insurance/insurance'
+import Medications from './patientcomponents/medications/medications'
 
-const useStyles = makeStyles((theme) => ({
-	list: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'flex-start',
-		backgroundColor: '#BADDFF',
-		minHeight: '100vh',
-		boxShadow: '0 2px 4px rgba(0,0,0,.15)',
-	},
-	listitem: {
-		display: 'flex',
-		justifyContent: 'flex-start',
-	},
-	sideitem: {
-		color: '#414141',
-	},
-}))
+const CustomFieldArray = ({ name, items, render }) => (
+	<FieldArray name={name}>{() => <div>{items}</div>}</FieldArray>
+)
 
-export default function Patient() {
-	let { path, url } = useRouteMatch()
-	const classes = useStyles()
-	let { id } = useParams()
-	const [patient, setPatient] = useState(blankpatient)
+function Patient({ title }) {
+	const [tabs, setTabs] = React.useState([
+		{
+			tabName: 'Demographics',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Typography>Demographics</Typography>,
+		},
+		{
+			tabName: 'Allergies',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Allergies />,
+		},
+		{
+			tabName: 'Appointments',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Typography>Appointments</Typography>,
+		},
+		{
+			tabName: 'Insurance',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Insurance />,
+		},
+		{
+			tabName: 'Medications',
+			tabIcon: LocalLibraryIcon,
+			tabContent: (
+				<Medications
+					medications={[
+						{
+							name: 'Advil',
+							dosage: '200mg',
+							status: 'active',
+							lastRefill: '',
+							nextRefill: '',
+							history: [
+								{
+									name: 'advil',
+									dosage: '200mg',
+									date_written: '',
+									notes: 'OTC so who cares',
+								},
+							],
+						},
+					]}
+				/>
+			),
+		},
+		{
+			tabName: 'Medical History',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Typography>Medical History</Typography>,
+		},
+		{
+			tabName: 'Surgical History',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Typography>Surgical History</Typography>,
+		},
+		{
+			tabName: 'Diagnoses',
+			tabIcon: LocalLibraryIcon,
+			tabContent: <Typography>Diagnoses</Typography>,
+		},
+	])
 
-	const dispatch = useDispatch()
-
-	const handleSave = (patient) => {
-		console.log(patient)
-	}
-	useEffect(() => {
-		console.log('lol')
-	}, [id])
 	return (
-		<Grid container>
-			<Grid item xs={2}>
-				<SimpleSideBar routes={routes} />
-			</Grid>
-			<Grid item xs={10}>
-				<Paper>
-					<Formik
-						initialValues={patient}
-						enableReinitialize
-						onSubmit={(patient) => handleSave(patient)}>
-						<Form>
-							<Switch>
-								<Route exact path={path}>
-									<Typography variant="body1">
-										Content
-									</Typography>
-								</Route>
-								{routes.map((route) => (
-									<Route
-										key={route.path}
-										exact
-										path={`${path}${route.path}`}
-										component={route.component}
-									/>
-								))}
-							</Switch>
-						</Form>
-					</Formik>
-				</Paper>
-			</Grid>
-		</Grid>
+		<Formik
+			initialValues={{
+				demographics: [],
+				allergies: [],
+				appointments: [],
+				insurances: [],
+				medications: [],
+				medical_history: [],
+				surgical_history: [],
+				diagnoses: [],
+			}}
+			onSubmit={(values) => {
+				console.log(values)
+			}}>
+			{({ values }) => (
+				<Form>
+					<CustomTabs
+						title="Patient Details"
+						headerColor="primary"
+						tabs={tabs.map((tab) => ({
+							...tab,
+							tabContent: (
+								<CustomFieldArray
+									name={tab.tabName
+										.toLowerCase()
+										.replace(/ /g, '_')}
+									items={tab.tabContent}
+								/>
+							),
+						}))}
+					/>
+					<Button type="submit" variant="contained" color="primary">
+						Submit
+					</Button>
+				</Form>
+			)}
+		</Formik>
 	)
 }
-
-/*
-* <Grid item xs={10}>
-				<Switch>
-					<Route exact path={path}>
-						<Typography variant="body1">Content</Typography>
-					</Route>
-					{routes.map((route) => (
-						<Route
-							key={route.path}
-							exact
-							path={`${path}${route.path}`}
-							component={route.component}
-						/>
-					))}
-				</Switch>
-			</Grid>
-*
-*
-* */
-/*
-				<List className={classes.list}>
-					{routes.map((route) => (
-						<ListItem className={classes.listitem} key={route.path}>
-							<NavLink
-								activeStyle={{ color: '#0232b2' }}
-								to={`${url}${route.path}`}>
-								<ListItemText
-									primary={
-										<Typography
-											className={classes.sideitem}
-											variant="body1">
-											{route.label}
-										</Typography>
-									}
-								/>
-							</NavLink>
-						</ListItem>
-					))}
-				</List>
-
-
-  useEffect(() => {
-    apifetch(getFullPatientInformation, id).then((fullpatientinformation) => {
-      handleDemographicsAddressContactMethodsReduxLoad(fullpatientinformation);
-    });
-  }, [id]);
-if (patient.address === null || patient.demographics === null) {
-      // set address to its default blank values
-      dispatch({ type: "address_is_null" });
-      // set demographics to its default blank values
-      dispatch({ type: "demographics_is_null" });
-      // set patient contact methods to values in DB
-      // handlePatientContactMethods(patient.patient_contact_methods);
-
-      dispatch({
-        type: "load_patient_contact_methods",
-        patient_contact_methods: patient.patient_contact_methods,
-      });
-    } else {
-      // load the address into the redux store
-      dispatch({ type: "load_address", address: patient.address });
-      //load the demographics into the store
-      dispatch({ type: "load_demographics", address: patient.demographics });
-      // handlePatientContactMethods(patient.patient_contact_methods);
-
-      // set patient contact methods to values in DB
-      dispatch({
-        type: "load_patient_contact_methods",
-        patient_contact_methods: patient.patient_contact_methods,
-      });
-    }
-
-useEffect(() => {
-  const fetchData = async () => {
-    const result = await getFullPatientInformation(id);
-    //const result = await axios(`http://127.0.0.1:8000/api/patients/${id}/demographics/`);
-    console.log(result);
-  };
-  fetchData();
-}, [id]);
- */
+export default Patient

@@ -1,58 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import MUIDataTable from 'mui-datatables'
 import { makeStyles } from '@material-ui/core/styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllPatients } from '../../api/patients.api'
-import columns from './patients.columns'
-import options from './patient.table.options'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		marginTop: 20,
-	},
-	table: {
-		height: '100vh',
-	},
-	textfield: {
-		marginRight: 10,
-		marginLeft: 10,
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+		margin: 'auto',
+		width: '50%',
 	},
 }))
 
 export default function Patients() {
 	const classes = useStyles()
-	const dispatch = useDispatch()
-	const patients = useSelector((state) => state.patients)
+	const columns = [
+		{
+			name: 'id',
+			label: 'ID',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'name',
+			label: 'Name',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: 'dob',
+			label: 'Date of Birth',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+	]
+	const data = [
+		['Joe James', '9/15/87'],
+		['John Walsh', '6/13/22'],
+		['Bob Herm', '3/18/97'],
+		['James Houston', '4/16/88'],
+	]
 
-	useEffect(() => {
-		const fetchPatients = async () => {
-			const response = await getAllPatients()
-			return response.data
-		}
-		fetchPatients()
-			.then((patients) => {
-				return dispatch({
-					type: 'LOAD_PATIENTS',
-					patients: patients,
-				})
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-	}, [])
-
-	return (
-		<div className={classes.root}>
-			<MUIDataTable
-				title="Patients"
-				data={patients}
-				columns={columns}
-				options={options}
-				className={classes.table}
-			/>
-		</div>
-	)
+	return <MUIDataTable title="Patients" data={data} columns={columns} />
 }
-/*
 
- */
+/*
+*
+* {
+			name: 'view',
+			label: 'View',
+			options: {
+				customBodyRender: (value, tableMeta, updateValue) => {
+					const patientId = tableMeta.rowData[0]
+					return <RequestModal />
+				},
+			},
+		} */

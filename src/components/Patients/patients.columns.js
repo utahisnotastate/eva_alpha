@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import Button from '../basestyledcomponents/Button'
 import React from 'react'
+import moment from 'moment'
 
 function actionsColumn(tableMeta) {
 	// console.log(tableMeta);
@@ -10,6 +11,7 @@ function actionsColumn(tableMeta) {
 		</NavLink>
 	)
 }
+
 const columns = [
 	{
 		name: 'id',
@@ -17,18 +19,11 @@ const columns = [
 		options: {
 			filter: true,
 			sort: true,
+			display: false,
 		},
 	},
 	{
-		name: 'details.demographics.date_of_birth',
-		label: 'First Name',
-		options: {
-			filter: true,
-			sort: true,
-		},
-	},
-	{
-		name: 'details.demographics.name.last',
+		name: 'details.last_name',
 		label: 'Last Name',
 		options: {
 			filter: true,
@@ -36,15 +31,26 @@ const columns = [
 		},
 	},
 	{
-		name: 'details.demographics.date_of_birth',
-		label: 'Date of Birth',
+		name: 'details.first_name',
+		label: 'First Name',
 		options: {
 			filter: true,
 			sort: true,
 		},
 	},
 	{
-		name: 'gender',
+		name: 'details.date_of_birth',
+		label: 'Date of Birth',
+		options: {
+			filter: true,
+			sort: true,
+			customBodyRender: (value, tableMeta, updateValue) => {
+				return moment(value).format('MM-DD-YYYY')
+			},
+		},
+	},
+	{
+		name: 'details.gender',
 		label: 'Gender',
 		options: {
 			filter: true,

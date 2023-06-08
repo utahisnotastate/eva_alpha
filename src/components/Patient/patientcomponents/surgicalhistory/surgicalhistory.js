@@ -1,18 +1,14 @@
-import React, { Component } from 'react'
-// import { Input } from 'react-formik-ui';
+import React from 'react'
 import GridContainer from '../../../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../../../basestyledcomponents/Grid/GridItem'
 import Card from '../../../basestyledcomponents/Card/Card'
-import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import axios from 'axios'
-import Autosuggest from 'react-autosuggest'
 import './surgicalhistory.css'
 import { Typography } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import CardHeader from '../../../basestyledcomponents/Card/CardHeader'
 import CardBody from '../../../basestyledcomponents/Card/CardBody'
-import UpdateSurgicalHistoryItem from '../../../Forms/Clinical/Patient/updatesurgicalhistoryitem'
+import { Field, FieldArray, useFormikContext } from 'formik'
+import { TextField } from 'formik-mui'
 
 const API_URL =
 	'https://clinicaltables.nlm.nih.gov/api/procedures/v3/search?terms='
@@ -24,9 +20,11 @@ function getSuggestionValue(suggestion) {
 function renderSuggestion(suggestion) {
 	return <span>{suggestion}</span>
 }
+
 const classes = {
 	root: {
 		margin: 20,
+		minHeight: '100vh',
 	},
 	banner: {
 		marginBottom: 10,
@@ -56,7 +54,166 @@ const classes = {
 		backgroundColor: '#ffffff',
 	},
 }
-class SurgicalHistory extends Component {
+
+export default function SurgicalHistory() {
+	const { values } = useFormikContext()
+	const [suggestions, setSuggestions] = React.useState([])
+	const [value, setValue] = React.useState(null)
+
+	/*
+const onChange = (event, { newValue, method }) => {
+		setValue(newValue)
+	}
+const onSuggestionsFetchRequested = ({ value }) => {
+		fetch(`${API_URL}${value}`)
+			.then((response) => response.json())
+			.then((data) => setSuggestions(data[3]))
+			.catch((error) => console.log(error))
+	}
+
+	const onSuggestionsClearRequested = () => {
+		setSuggestions([])
+	}
+	const inputProps = {
+		placeholder: 'Search Medical Procedures',
+		value,
+		onChange: onChange,
+	}
+	function getSuggestionValue(suggestion) {
+		return suggestion[0]
+	}*/
+
+	return (
+		<Card>
+			<CardHeader color="primary">
+				<Typography variant="h4">Surgical History</Typography>
+			</CardHeader>
+			<CardBody>
+				<GridContainer>
+					<GridItem xs={12} sm={12} md={12}>
+						<FieldArray name="details.surgicalhistory">
+							{({ insert, remove, push }) => (
+								<div>
+									{values.details.surgicalhistory &&
+									values.details.surgicalhistory.length > 0
+										? values.details.surgicalhistory.map(
+												(allergy, index) => (
+													<div
+														key={index}
+														style={{
+															display: 'flex',
+															flexDirection:
+																'row',
+														}}>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].ICD10procedurecode`}
+															label={`ICD10 Procedure Code`}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].performed_by`}
+															label={`Performed By`}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].date`}
+															label={`Date`}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Field
+															style={{
+																margin: '15px',
+															}}
+															InputLabelProps={{
+																shrink: true,
+															}}
+															name={`details.surgicalhistory[${index}].additional_information`}
+															label={`Additional Information`}
+															rows={4}
+															type={`text`}
+															variant="standard"
+															component={
+																TextField
+															}
+															fullWidth
+														/>
+														<Button
+															className="secondary"
+															variant="contained"
+															color={`secondary`}
+															onClick={() =>
+																remove(index)
+															}>
+															X
+														</Button>
+													</div>
+												)
+										  )
+										: null}
+									<div
+										style={{
+											display: 'flex',
+											flexDirection: 'row',
+										}}>
+										<Button
+											variant={`contained`}
+											color={`primary`}
+											onClick={() =>
+												push({
+													ICD10procedurecode: '',
+													performed_by: '',
+													date: '',
+													additional_information: '',
+												})
+											}>
+											Add Surgery/Procedure
+										</Button>
+									</div>
+								</div>
+							)}
+						</FieldArray>
+					</GridItem>
+				</GridContainer>
+			</CardBody>
+		</Card>
+	)
+}
+
+/*
+class SurgicalHistoryOld extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -66,13 +223,11 @@ class SurgicalHistory extends Component {
 			suggestions: [],
 		}
 	}
-
 	async componentDidMount() {
 		console.log(this.props)
 		const result = await axios(
 			`http://127.0.0.1:8000/api/patients/${this.props.match.params.id}/surgicalhistory/`
 		)
-		console.log(result)
 		this.setState({ history: result.data })
 		this.props.loadSurgicalHistory(result.data)
 		console.log(this.state.history)
@@ -184,13 +339,6 @@ class SurgicalHistory extends Component {
 									</GridItem>
 								</Card>
 							</GridItem>
-							<div>
-								{surgicalhistory.map((surgery, index) => (
-									<UpdateSurgicalHistoryItem
-										surgery={surgery}
-									/>
-								))}
-							</div>
 						</div>
 					)}
 				</GridContainer>
@@ -228,24 +376,4 @@ class SurgicalHistory extends Component {
 		)
 	}
 }
-
-const mapStateToProps = (state) => {
-	return {
-		surgicalhistory: state.patient.surgicalhistory,
-	}
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	loadSurgicalHistory: (surgicalhistory) =>
-		dispatch({
-			type: 'load_surgical_history',
-			surgicalhistory: surgicalhistory,
-		}),
-	updateSurgicalHistory: (surgicalhistory) =>
-		dispatch({
-			type: 'update_surgical_history',
-			surgicalhistory: surgicalhistory,
-		}),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SurgicalHistory)
+*/

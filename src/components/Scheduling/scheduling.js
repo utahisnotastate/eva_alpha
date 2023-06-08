@@ -1,6 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import axios from 'axios'
-import { useParams, useRouteMatch, NavLink, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
 	Calendar as BigCalendar,
 	momentLocalizer,
@@ -9,15 +11,13 @@ import {
 import moment from 'moment'
 import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
-	Typography,
-	Fab,
-} from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Fab from '@mui/material/Fab'
 import GridContainer from '../basestyledcomponents/Grid/GridContainer'
 import GridItem from '../basestyledcomponents/Grid/GridItem'
 import { useModal } from 'react-modal-hook'
@@ -25,11 +25,11 @@ import API_URL from '../../api/api_url'
 import Card from '../basestyledcomponents/Card/Card'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import AppointmentScheduleEvent from './Day/Appointment/appointmentscheduleevent'
-import WaitListCountCard from './WaitList/waitlistcountcard'
-import ReferralsToSchedule from './ReferralsToSchedule/referralstoschedule'
 import ScheduleAppointmentModal from './ScheduleAppointmentModal/scheduleappointmentmodal'
 import styles from '../basestyledcomponents/buttonStyle'
-var toDate = require('@fav/type.to-date')
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import toDate from "@fav/type.to-date";
+//var toDate = require('@fav/type.to-date')
 
 const localizer = momentLocalizer(moment)
 
@@ -46,73 +46,32 @@ const blankclinicaldata = {
 }
 
 export default function Scheduling() {
-	let { path, url } = useRouteMatch()
+	const dispatch = useDispatch()
 	let { id } = useParams()
+	const appointments = useSelector((state) => state.appointments)
+
 	// const [appointmentcreated, setAppointmentCreated] = useState(false);
 	const { register, handleSubmit, control, errors } = useForm()
 
 	// gets new appointments after appointment has been scheduled
-	async function getNewAppointments() {
-		const result = await axios(`${API_URL}/appointments`)
-		// console.log(result.data);
-		let appointments = result.data
-		let convertedappointments = []
-		appointments.forEach((appointment) => {
-			let newstart = toDate.RFC3339(appointment.start)
-			let newend = toDate.RFC3339(appointment.end)
-			let resourceId = appointment.provider
-			// console.log(appointment.provider);
-			// console.log({...appointment, ...{start: newstart, end: newend, resourceId: resourceId}})
-			convertedappointments.push({
-				...appointment,
-				...{ start: newstart, end: newend, resourceId: resourceId },
-			})
-		})
-		setAppointments(convertedappointments)
-		console.log(appointments)
-	}
+
 	// handles create new patient form
 	const onSubmit = (data) => {
+		console.log(data)
+
 		// this schedules appointment. I dont know why I don't have this in the appointment API.
 		//
-		console.log({
-			patient: parseInt(id),
-			provider: slottoschedule.resourceId,
-			clinical_data: blankclinicaldata,
-			type: data.type,
-			status: 'scheduled',
-			start: moment(data.start).toISOString(),
-			end: moment(data.end).toISOString(),
-		})
-		axios
-			.post('http://127.0.0.1:8000/api/appointments/', {
-				patient: parseInt(id),
-				provider: slottoschedule.resourceId,
-				clinical_data: blankclinicaldata,
-				type: data.type,
-				status: 'scheduled',
-				start: moment(data.start).toISOString(),
-				end: moment(data.end).toISOString(),
-			})
-			.then((response) => {
-				if (response.statusText === 'Created') {
-					console.log('It worked!!!')
-					hideModal()
-					getNewAppointments().catch((error) => console.log(error))
-				}
-				//console.log(response);
-			})
-			.catch((error) => console.log(error))
+
+
 	}
 	// console.log(errors);
 	// resources are the providers
 	const [resources, setResources] = useState([])
-	const [appointments, setAppointments] = useState([])
+	//const [appointments, setAppointments] = useState([])
 	// holds the values of the appointment information for the form to have
 	const [slottoschedule, setSlotToSchedule] = useState()
 	const [showModal, hideModal] = useModal(
 		({ in: open, onExited }) => {
-			console.log(slottoschedule)
 			return (
 				<div>
 					<form onSubmit={handleSubmit(onSubmit)}>
@@ -157,10 +116,10 @@ export default function Scheduling() {
 		const fetchData = async () => {
 			const result = await axios(`${API_URL}/providers/`)
 			console.log(result)
-			setResources([...result.data])
+			setResources(result.data)
 		}
-		fetchData()
-	}, [])
+		fetchData().catch((err) => console.log(err))
+	})
 
 	useEffect(() => {
 		//gets appointments on mount
@@ -180,11 +139,13 @@ export default function Scheduling() {
 					...{ start: newstart, end: newend, resourceId: resourceId },
 				})
 			})
-			setAppointments(convertedappointments)
-			// console.log(appointments);
 		}
 		fetchData()
-	}, [])
+			.then((appointments) => {
+				dispatch({ type: 'LOAD_APPOINTMENTS', appointments })
+			})
+			.catch((err) => console.log(err))
+	})
 	const handleSelect = ({ start, end, resourceId }) => {
 		if (start === end) {
 			return false
@@ -224,22 +185,8 @@ export default function Scheduling() {
 		<div>
 			<GridContainer justify="center">
 				<GridItem xs={12} sm={12} md={10}>
-					<GridContainer>
-						<GridItem xs={4}>
-							<NavLink to="/waitlist">
-								<WaitListCountCard />
-							</NavLink>
-						</GridItem>
-						<GridItem xs={4}>
-							<NavLink to="/referralstoschedule">
-								<ReferralsToSchedule />
-							</NavLink>
-						</GridItem>
-					</GridContainer>
-				</GridItem>
-				<GridItem xs={12} sm={12} md={10}>
 					<Card>
-						<CardBody calendar>
+						<CardBody calendar={false}>
 							<BigCalendar
 								selectable
 								localizer={localizer}
@@ -253,7 +200,7 @@ export default function Scheduling() {
 								onSelectSlot={handleSelect}
 								eventPropGetter={eventColors}
 								resources={resources}
-								resourceTitleAccessor="display_name"
+								resourceTitleAccessor="last_name"
 								resourceIdAccessor={(resource) => {
 									return resource.id
 								}}
@@ -273,6 +220,48 @@ export default function Scheduling() {
 	)
 }
 /*
+
+async function getNewAppointments() {
+		const result = await axios(`${API_URL}/appointments`)
+		// console.log(result.data);
+		let appointments = result.data
+		let convertedappointments = []
+		appointments.forEach((appointment) => {
+			let newstart = toDate.RFC3339(appointment.start)
+			let newend = toDate.RFC3339(appointment.end)
+			let resourceId = appointment.provider
+			// console.log(appointment.provider);
+			// console.log({...appointment, ...{start: newstart, end: newend, resourceId: resourceId}})
+			convertedappointments.push({
+				...appointment,
+				...{ start: newstart, end: newend, resourceId: resourceId },
+			})
+		})
+
+		console.log(appointments)
+	}
+
+axios
+			.post(`${API_URL}/appointments/`, {
+				patient: parseInt(id),
+				provider: slottoschedule.resourceId,
+				details: blankclinicaldata,
+				type: appointment.type,
+				status: 'scheduled',
+				start: moment(appointment.start).toISOString(),
+				end: moment(appointment.end).toISOString(),
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					console.log('It worked!!!')
+					hideModal()
+					getNewAppointments
+						.then((data) => console.log(data))
+						.catch((error) => console.log(error))
+				}
+				//console.log(response);
+			})
+			.catch((error) => console.log(error))
 start: moment(slottoschedule.start).toISOString(),
         end: moment(slottoschedule.end).toISOString()
  */

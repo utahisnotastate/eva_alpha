@@ -1,17 +1,14 @@
 {
   "type": "VerticalLayout",
   "elements": [
-
     {
       "type": "Control",
       "scope": "#/properties/name/first"
     },
-
     {
       "type": "Control",
       "scope": "#/properties/name/last"
     },
-
     {
       "type": "Control",
       "scope": "#/properties/name/middle"

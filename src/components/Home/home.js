@@ -1,88 +1,71 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridContainer from "../basestyledcomponents/Grid/GridContainer";
-import GridItem from "../basestyledcomponents/Grid/GridItem";
-import Container from "@material-ui/core/Container";
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Card from "../basestyledcomponents/Card/Card";
-import CardBody from "../basestyledcomponents/Card/CardBody";
-import CardHeader from "../basestyledcomponents/Card/CardHeader";
-import CardIcon from "../basestyledcomponents/Card/CardIcon";
-import CardText from "../basestyledcomponents/Card/CardText";
-import LanguageIcon from '@material-ui/icons/Language';
-import PatientSearch from "./PatientSearch/patientsearch";
-import 'react-bootstrap-typeahead/css/Typeahead.css';
+import * as React from 'react'
+import { Box, Container, Grid } from '@mui/material'
+import MetricsTracker from './MetricsTracker'
+import Schedule from '../Scheduler/schedule'
+import Requests from '../Requests/requests'
 
-const styles = {
-    cardTitle: {
-        marginTop: "0",
-        minHeight: "auto",
-        fontWeight: "300",
-        fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-        marginBottom: "3px",
-        textDecoration: "none"
-    }
-};
-const useStyles = makeStyles(styles);
-
-function Home() {
-    const classes = useStyles();
-    return (
-        <div>
-            <GridContainer direction="column" alignContent="center">
-                <GridItem xs={12} sm={12} md={4}>
-                    <PatientSearch />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card>
-                        <CardHeader icon>
-                            <CardIcon  color="primary">
-                                <LanguageIcon />
-                            </CardIcon>
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Practice News</h4>
-                            The place is close to Barceloneta Beach and bus stop just 2 min by
-                            walk and near to "Naviglio" where you can enjoy the main night
-                            life in Barcelona...
-                        </CardBody>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card>
-                        <CardHeader icon>
-                            <CardIcon color="primary">
-                                <LanguageIcon />
-                            </CardIcon>
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Patient Requests I'm assigned too</h4>
-                            The place is close to Barceloneta Beach and bus stop just 2 min by
-                            walk and near to "Naviglio" where you can enjoy the main night
-                            life in Barcelona...
-                        </CardBody>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card>
-                        <CardHeader icon>
-                            <CardIcon color="success">
-                                <LanguageIcon />
-                            </CardIcon>
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>My Schedule</h4>
-                            The place is close to Barceloneta Beach and bus stop just 2 min by
-                            walk and near to "Naviglio" where you can enjoy the main night
-                            life in Barcelona...
-                        </CardBody>
-                    </Card>
-                </GridItem>
-            </GridContainer>
-        </div>
-
-    );
+function Metric({ label, value, feedback, col }) {
+	return (
+		<Grid item lg={col.lg} sm={col.sm} xl={col.xl} xs={col.xs}>
+			<MetricsTracker label={label} value={value} feedback={feedback} />
+		</Grid>
+	)
 }
 
-export default Home;
+const Home = () => (
+	<>
+		<Box
+			component="main"
+			sx={{
+				flexGrow: 1,
+				py: 8,
+			}}>
+			<Container maxWidth={false}>
+				<Grid container spacing={3}>
+					<Grid
+						item
+						lg={8}
+						md={12}
+						xl={9}
+						xs={12}
+						sx={{ bg: 'white' }}>
+						<Schedule />
+					</Grid>
+					<Grid item lg={4} md={6} xl={3} xs={12}>
+						<Requests />
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
+	</>
+)
+
+export default Home
+
+/*
+
+<Grid
+            item
+            xl={3}
+            lg={3}
+            sm={6}
+            xs={12}
+          >
+            <TasksProgress/>
+          </Grid>
+
+
+* <Grid
+            item
+            xl={3}
+            lg={3}
+            sm={6}
+            xs={12}
+          >
+            <TotalCustomers/>
+          </Grid>
+*
+*
+*
+*
+* */
