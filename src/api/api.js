@@ -6,6 +6,11 @@ export const getForms = async () => {
 	return result.data
 }
 
+// post a new form
+export const addForm = async (form) => {
+	const result = await axios.post(`${API_URL}/forms/`, form)
+	return result.data
+}
 export const getPatients = async () => {
 	const result = await axios(`${API_URL}/patients/`)
 	return result.data

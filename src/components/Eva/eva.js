@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-	AppBar,
 	Box,
 	Divider,
 	Drawer,
@@ -21,6 +20,7 @@ import { getAllData } from '../../api/api'
 import Requests from '../Requests/requests'
 import Appointment from '../Appointment/appointment'
 import Providers from '../Providers/providers'
+//import FormBuild from '../FormBuilder/formbuilder'
 
 const drawerWidth = 240
 
@@ -144,12 +144,7 @@ export default function Eva() {
 				}}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route
-						path="/formbuilder"
-						element={
-							<FormEditor title={`Test Exam`} fields={fields} />
-						}
-					/>
+					<Route path="/formbuilder" element={<FormEditor />} />
 
 					<Route path="/appointment" element={<Appointment />} />
 					<Route path="/providers" element={<Providers />} />
