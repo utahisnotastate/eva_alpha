@@ -20,6 +20,7 @@ import { getAllData } from '../../api/api'
 import Requests from '../Requests/requests'
 import Appointment from '../Appointment/appointment'
 import Providers from '../Providers/providers'
+import Settings from '../Settings/settings'
 //import FormBuild from '../FormBuilder/formbuilder'
 
 const drawerWidth = 240
@@ -93,13 +94,6 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
-						<NavLink to={`/formbuilder`}>
-							<ListItemButton>
-								<ListItemText primary={`Form Builder`} />
-							</ListItemButton>
-						</NavLink>
-					</ListItem>
-					<ListItem disablePadding>
 						<NavLink to={`/patients`}>
 							<ListItemButton>
 								<ListItemText primary={`Patients`} />
@@ -152,6 +146,7 @@ export default function Eva() {
 					<Route path="/patients" element={<Patients />} />
 					<Route path="/patient/:id" element={<PatientPage />} />
 					<Route path="/schedule" element={<Schedule />} />
+					<Route path="/settings" element={<Settings />} />
 				</Routes>
 			</Box>
 		</Box>
