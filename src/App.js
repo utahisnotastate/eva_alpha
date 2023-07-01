@@ -1,31 +1,20 @@
-import React from 'react'
-import { ThemeProvider } from '@mui/material/styles'
-import { CssBaseline } from '@mui/material'
-import theme from './styles/theme'
-import { Provider } from 'react-redux'
-import { ModalProvider } from 'react-modal-hook'
-import store from './store/store'
-import Eva from './components/Eva/eva'
-import { BrowserRouter } from 'react-router-dom'
+import React from 'react';
+import './styles/App.css';
+import FormBuilder from './components/FormBuilder';
+import EMRForm from './components/EMRForm';
 
-export default function App() {
-	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline enableColorScheme />
-			<Provider store={store}>
-				<BrowserRouter>
-					<ModalProvider>
-						<Eva />
-					</ModalProvider>
-				</BrowserRouter>
-			</Provider>
-		</ThemeProvider>
-	)
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Electronic Medical Record App</h1>
+        </header>
+        <FormBuilder />
+        <EMRForm />
+      </div>
+    );
+  }
 }
 
-/*
-* <ModalProvider>
-						<Eva />
-					</ModalProvider>
-*
-* */
+export default App;
