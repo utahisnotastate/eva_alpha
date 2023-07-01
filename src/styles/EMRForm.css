@@ -1,0 +1,50 @@
+#emr-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+#emr-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#emr-form input,
+#emr-form select,
+#emr-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#emr-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+#emr-form button:hover {
+    background-color: #45a049;
+}
+
+#emr-form .formSubmissionSuccess {
+    color: green;
+    margin-top: 10px;
+}
+
+#emr-form .formSubmissionError {
+    color: red;
+    margin-top: 10px;
+}
