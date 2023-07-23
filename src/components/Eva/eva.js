@@ -21,6 +21,7 @@ import Requests from '../Requests/requests'
 import Appointment from '../Appointment/appointment'
 import Providers from '../Providers/providers'
 import Settings from '../Settings/settings'
+import AIAppointment from '../Appointment/AIAppointment/aiappointment'
 //import FormBuild from '../FormBuilder/formbuilder'
 
 const drawerWidth = 240
@@ -89,7 +90,7 @@ export default function Eva() {
 					<ListItem disablePadding>
 						<NavLink to={`/appointment`}>
 							<ListItemButton>
-								<ListItemText primary={`Appointment`} />
+								<ListItemText primary={`AI Appointment`} />
 							</ListItemButton>
 						</NavLink>
 					</ListItem>
@@ -140,7 +141,7 @@ export default function Eva() {
 					<Route path="/" element={<Home />} />
 					<Route path="/formbuilder" element={<FormEditor />} />
 
-					<Route path="/appointment" element={<Appointment />} />
+					<Route path="/appointment" element={<AIAppointment />} />
 					<Route path="/providers" element={<Providers />} />
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button'
 import SideNav from './sidenav'
 import { FormBuilder } from 'cb-react-forms'
 
-function Settings({ title, children, side_nav_items }) {
+function Settings({ title }) {
 	const [forms, setForms] = React.useState([
 		{ name: 'Edit Demographics' },
 		{ name: 'Edit Physical Exam Form' },
@@ -66,35 +66,3 @@ function Settings({ title, children, side_nav_items }) {
 	)
 }
 export default Settings
-/*
-* <Grid container spacing={3}>
-			<Grid item xs={2}>
-				<SimpleSideBar routes={routes} />
-			</Grid>
-			<Grid item xs={10}>
-				<Formik
-					initialValues={patient}
-					enableReinitialize
-					onSubmit={(patient) => handleSave(patient)}>
-					<Form>
-						<Button
-							variant={`contained`}
-							onClick={() => handleSave(patient)}>
-							Save!
-						</Button>
-						<Switch>
-							{routes.map((route, index) => (
-								<Route
-									key={index}
-									exact
-									path={`${path}${route.path}`}
-									component={route.component}
-								/>
-							))}
-						</Switch>
-					</Form>
-				</Formik>
-			</Grid>
-		</Grid>
-*
-* */
