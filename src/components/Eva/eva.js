@@ -18,11 +18,10 @@ import Schedule from '../Scheduling/Schedule'
 import FormEditor from '../FormEditor/formeditor'
 import { getAllData } from '../../api/api'
 import Requests from '../Requests/requests'
-import Appointment from '../Appointment/appointment'
 import Providers from '../Providers/providers'
 import Settings from '../Settings/settings'
 import AIAppointment from '../Appointment/AIAppointment/aiappointment'
-//import FormBuild from '../FormBuilder/formbuilder'
+import SpeechToText from '../EMRAutoAppointment/emrautoappointment'
 
 const drawerWidth = 240
 
@@ -123,6 +122,13 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
+						<NavLink to={`/speechtotext`}>
+							<ListItemButton>
+								<ListItemText primary={`Speech To Text`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
 						<NavLink to={`/settings`}>
 							<ListItemButton>
 								<ListItemText primary={`Settings`} />
@@ -140,7 +146,7 @@ export default function Eva() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/formbuilder" element={<FormEditor />} />
-
+					<Route path="/speechtotext" element={<SpeechToText />} />
 					<Route path="/appointment" element={<AIAppointment />} />
 					<Route path="/providers" element={<Providers />} />
 					<Route path="/requests" element={<Requests />} />

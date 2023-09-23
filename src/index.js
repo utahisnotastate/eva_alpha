@@ -4,7 +4,6 @@ import './index.css'
 import './styles/w3.css'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import App from './App'
-//import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

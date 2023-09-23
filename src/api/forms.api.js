@@ -18,6 +18,6 @@ export const fetchForm = async (formId) => {
 }
 
 export const updateForm = async (form) => {
-	const result = await axios.put(`${API_URL}/forms/${form.id}/`, form)
+	const result = await axios.put(`B${API_URL}/forms/${form.id}/`, form)
 	return result.data
 }
