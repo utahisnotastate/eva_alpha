@@ -34,16 +34,6 @@ const localizer = momentLocalizer(moment)
 
 const useStyles = makeStyles(styles)
 
-const blankclinicaldata = {
-	complaints: [],
-	clinical_forms: [],
-	review_of_systems: [],
-	physical_exam: [],
-	assessments: [],
-	plans: [],
-	summary: '',
-}
-
 export default function Scheduling() {
 	const dispatch = useDispatch()
 	let { id } = useParams()

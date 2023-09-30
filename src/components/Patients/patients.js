@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import MUIDataTable from 'mui-datatables'
-import { makeStyles } from '@material-ui/core/styles'
+import { Formik, Form, Field } from 'formik'
+import {
+	makeStyles,
+	Button,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogActions,
+} from '@material-ui/core'
+import { TextField } from 'formik-material-ui'
+
+import { getAllPatients, addNewPatient } from '../../api/patients.api'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -14,8 +25,100 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+/*
+* {
+    "details": {
+        "demographics": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "address": "123 Main St.",
+            "city": "Springfield",
+            "state": "IL",
+            "zip_code": "12345",
+            "phone": "123-456-7890",
+            "email": "john.doe@example.com",
+            "date_of_birth": "1980-01-01"
+        },
+        "allergies": ["Penicillin", "Peanuts"],
+        "insurance": [
+            {
+                "provider": "HealthInsuranceCo",
+                "policy_number": "ABC1234567"
+            }
+        ],
+        "medications": ["Aspirin", "Tylenol"],
+        "medical_history": ["Asthma", "High blood pressure"],
+        "surgical_history": ["Appendectomy", "Tonsillectomy"]
+    },
+    "ssn": 123456789,
+    "fields": [
+        {
+            "name": "additional_info_1",
+            "value": "Some additional information"
+        },
+        {
+            "name": "additional_info_2",
+            "value": "Some more additional information"
+        }
+    ]
+}
+*
+*
+* */
+
 export default function Patients() {
 	const classes = useStyles()
+
+	const [patients, setPatients] = useState([])
+	const [dialogOpen, setDialogOpen] = useState(false)
+
+	useEffect(() => {
+		const fetchPatients = async () => {
+			try {
+				const data = await getAllPatients()
+				setPatients(data)
+			} catch (error) {
+				alert('Error fetching patients.')
+			}
+		}
+
+		fetchPatients()
+	}, [])
+
+	const handleFormSubmit = async (values) => {
+		const defaultPatient = {
+			details: {
+				demographics: {
+					first_name: values.first_name,
+					last_name: values.last_name,
+					address: '',
+					city: '',
+					state: '',
+					zip_code: '',
+					phone: '',
+					email: '',
+					date_of_birth: '',
+				},
+				allergies: [],
+				insurance: [],
+				medications: [],
+				medical_history: [],
+				surgical_history: [],
+			},
+			ssn: values.ssn,
+			fields: [],
+		}
+
+		try {
+			const addedPatient = await addNewPatient(defaultPatient)
+			setPatients([...patients, addedPatient])
+			setDialogOpen(false)
+			alert('Patient added successfully.')
+		} catch (error) {
+			alert('Error adding patient.')
+		}
+	}
+
 	const columns = [
 		{
 			name: 'id',
@@ -25,15 +128,23 @@ export default function Patients() {
 			},
 		},
 		{
-			name: 'name',
-			label: 'Name',
+			name: 'first_name',
+			label: 'First Name',
 			options: {
 				filter: true,
 				sort: true,
 			},
 		},
 		{
-			name: 'dob',
+			name: 'last_name',
+			label: 'Last Name',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: 'demographics.date_of_birth',
 			label: 'Date of Birth',
 			options: {
 				filter: true,
@@ -41,14 +152,79 @@ export default function Patients() {
 			},
 		},
 	]
-	const data = [
-		['Joe James', '9/15/87'],
-		['John Walsh', '6/13/22'],
-		['Bob Herm', '3/18/97'],
-		['James Houston', '4/16/88'],
-	]
 
-	return <MUIDataTable title="Patients" data={data} columns={columns} />
+	return (
+		<div className={classes.root}>
+			<MUIDataTable
+				title="Patients"
+				data={patients.map((patient) => [
+					patient.details.demographics.first_name +
+						' ' +
+						patient.details.demographics.last_name,
+					patient.details.demographics.date_of_birth,
+					patient.ssn,
+				])} // assuming that's how you want to format the data
+				columns={columns}
+				options={{
+					customToolbar: () => {
+						return (
+							<Button
+								color="primary"
+								variant="contained"
+								onClick={() => setDialogOpen(true)}>
+								Add Patient
+							</Button>
+						)
+					},
+				}}
+			/>
+			<Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+				<DialogTitle>Add New Patient</DialogTitle>
+				<DialogContent>
+					<Formik
+						initialValues={{
+							first_name: '',
+							last_name: '',
+							ssn: '',
+						}}
+						onSubmit={handleFormSubmit}>
+						{({ handleSubmit }) => (
+							<Form onSubmit={handleSubmit}>
+								<Field
+									component={TextField}
+									fullWidth
+									label="First Name"
+									name="first_name"
+								/>
+								<Field
+									component={TextField}
+									fullWidth
+									label="Last Name"
+									name="last_name"
+								/>
+								<Field
+									component={TextField}
+									fullWidth
+									label="SSN"
+									name="ssn"
+								/>
+								<DialogActions>
+									<Button
+										onClick={() => setDialogOpen(false)}
+										color="secondary">
+										Cancel
+									</Button>
+									<Button type="submit" color="primary">
+										Add
+									</Button>
+								</DialogActions>
+							</Form>
+						)}
+					</Formik>
+				</DialogContent>
+			</Dialog>
+		</div>
+	)
 }
 
 /*
