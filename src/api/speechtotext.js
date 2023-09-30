@@ -8,6 +8,9 @@ import {
 	Box,
 	TextField,
 } from '@mui/material'
+import API_URL from '../api/api_url'
+import { saveArtificlAIAppointment } from '../api/artificalaiappointment'
+import handleSubmitToGPT3 from '../api/openai.api'
 
 const SpeechToText = () => {
 	const [isListening, setIsListening] = useState(false)
@@ -43,7 +46,6 @@ const SpeechToText = () => {
 
 	const handleSubmitToGPT3 = async () => {
 		const OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
-
 		const requestBody = {
 			model: 'gpt-3.5-turbo',
 			messages: [
@@ -63,7 +65,6 @@ const SpeechToText = () => {
 			frequency_penalty: -0.5,
 			presence_penalty: 0.5,
 		}
-
 		try {
 			let response = await fetch(OPENAI_ENDPOINT, {
 				method: 'POST',
@@ -84,6 +85,14 @@ const SpeechToText = () => {
 		} catch (error) {
 			console.error('Error calling GPT-3', error)
 		}
+	}
+
+	const saveAppointment = async () => {
+		const result = await axios.post(
+			`${API_URL}/artificalaiappointment/`,
+			transcript
+		)
+		return result.data
 	}
 
 	return (
@@ -112,6 +121,9 @@ const SpeechToText = () => {
 				</Button>
 				<Button variant={`contained`} onClick={handleSubmitToGPT3}>
 					Generate Medical Office Note
+				</Button>
+				<Button variant={`contained`} onClick={saveAppointment}>
+					Save
 				</Button>
 			</Box>
 			<Paper

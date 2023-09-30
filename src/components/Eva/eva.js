@@ -129,6 +129,13 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
+						<NavLink to={`/schedule`}>
+							<ListItemButton>
+								<ListItemText primary={`Schedule`} />
+							</ListItemButton>
+						</NavLink>
+					</ListItem>
+					<ListItem disablePadding>
 						<NavLink to={`/settings`}>
 							<ListItemButton>
 								<ListItemText primary={`Settings`} />

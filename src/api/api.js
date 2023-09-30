@@ -6,18 +6,13 @@ export const getForms = async () => {
 	return result.data
 }
 
-// post a new form
 export const addForm = async (form) => {
 	const result = await axios.post(`${API_URL}/forms/`, form)
 	return result.data
 }
+
 export const getPatients = async () => {
 	const result = await axios(`${API_URL}/patients/`)
-	return result.data
-}
-
-export const getAppointments = async () => {
-	const result = await axios(`${API_URL}/appointments/`)
 	return result.data
 }
 
@@ -35,8 +30,34 @@ export const updateProvider = async (id, provider) => {
 	const result = await axios.put(`${API_URL}/providers/${id}/`, provider)
 	return result.data
 }
+
 export const addProvider = async (provider) => {
 	const result = await axios.post(`${API_URL}/providers/`, provider)
+	return result.data
+}
+
+export const getAppointments = async () => {
+	const result = await axios(`${API_URL}/appointments/`)
+	return result.data
+}
+
+export const getArtificlaAIAppointments = async () => {
+	const result = await axios(`${API_URL}/artificalaiappointment/`)
+	return result.data
+}
+export const saveArtificlAIAppointment = async (appointment) => {
+	const result = await axios(
+		`${API_URL}/artificalaiappointment/`,
+		appointment
+	)
+	return result.data
+}
+
+export const saveAppointment = async (id, appointment) => {
+	const result = await axios.post(
+		`${API_URL}/appointments/${id}/`,
+		appointment
+	)
 	return result.data
 }
 

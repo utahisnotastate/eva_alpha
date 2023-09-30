@@ -112,7 +112,6 @@ const SpeechToText = () => {
 			<Button variant={`contained`} onClick={handleSubmitToGPT3}>
 				Generate Medical Office Note
 			</Button>
-
 			<Paper
 				elevation={3}
 				style={{
