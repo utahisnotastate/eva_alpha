@@ -14,7 +14,7 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import Home from '../Home/home'
 import PatientPage from '../Patient/patient'
 import Patients from '../Patients/patients'
-import Schedule from '../Scheduling/Schedule'
+import Scheduling from '../Scheduling/scheduling'
 import FormEditor from '../FormEditor/formeditor'
 import { getAllData } from '../../api/api'
 import Requests from '../Requests/requests'
@@ -27,20 +27,6 @@ const drawerWidth = 240
 
 export default function Eva() {
 	const dispatch = useDispatch()
-	const fields = [
-		{ label: 'Label 1', type: 'text', placeholder: '', helperText: '' },
-		{ label: 'Label 2', type: 'textarea', placeholder: '', helperText: '' },
-		{
-			label: 'Label 3',
-			type: 'select',
-			options: [
-				{ label: 'Option Label 1' },
-				{ label: 'Option Label 2' },
-				{ label: 'Option Label 3' },
-			],
-		},
-	]
-
 	React.useEffect(() => {
 		getAllData()
 			.then((data) => {
@@ -129,9 +115,9 @@ export default function Eva() {
 						</NavLink>
 					</ListItem>
 					<ListItem disablePadding>
-						<NavLink to={`/schedule`}>
+						<NavLink to={`/scheduling`}>
 							<ListItemButton>
-								<ListItemText primary={`Schedule`} />
+								<ListItemText primary={`Scheduling`} />
 							</ListItemButton>
 						</NavLink>
 					</ListItem>
@@ -159,7 +145,7 @@ export default function Eva() {
 					<Route path="/requests" element={<Requests />} />
 					<Route path="/patients" element={<Patients />} />
 					<Route path="/patient/:id" element={<PatientPage />} />
-					<Route path="/schedule" element={<Schedule />} />
+					<Route path="/scheduling" element={<Scheduling />} />
 					<Route path="/settings" element={<Settings />} />
 				</Routes>
 			</Box>

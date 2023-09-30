@@ -1,3 +1,5 @@
+//DO NOT USE THIS USE THE SCHEDULING IN THE SCHEDUING COMPONENT FOLDER
+
 import React from 'react'
 import {
 	Scheduler,

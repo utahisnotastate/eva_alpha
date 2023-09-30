@@ -4,31 +4,12 @@ import moment from 'moment'
 import { Controller } from 'react-hook-form'
 import TextField from '@material-ui/core/TextField'
 import { Typography } from '@material-ui/core'
-import PatientsearchOld from '../../Home/PatientSearch/patientsearch.old'
-
-function PatientSearchContainer() {
-	return (
-		<Grid container>
-			<Grid item xs={12}>
-				<Typography>
-					No patient selected, please search for a patient below.{' '}
-				</Typography>
-			</Grid>
-			<Grid item xs={12}>
-				<PatientsearchOld />
-			</Grid>
-		</Grid>
-	)
-}
 
 export default function ScheduleAppointmentModal(props) {
 	console.log(props.slottoschedule)
 	console.log('Start: ' + moment(props.slottoschedule.start).toISOString())
 	return (
 		<Grid container>
-			<Grid item xs={12}>
-				{props.patient ? null : <PatientSearchContainer />}
-			</Grid>
 			<Grid item xs={12}>
 				<Grid container>
 					<Grid item xs={4}>

@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import CheckInForm from '../../../../../old/Forms/Administrative/Scheduling/CheckIn/checkin'
 import Card from '../../../../../basestyledcomponents/Card/Card'
 import CardHeader from '../../../../../basestyledcomponents/Card/CardHeader'
 import { Typography } from '@material-ui/core'
@@ -24,13 +23,7 @@ export default function AppointmentScheduleEventCard(props) {
 						</Typography>
 					</NavLink>
 				</ListItem>
-				<ListItem>
-					<Modal
-						buttontext="Check In"
-						modaltitle={`Patient Check In`}
-						form={CheckInForm}
-					/>
-				</ListItem>
+
 				<ListItem>
 					<Modal buttontext="Verify Insurance" />
 				</ListItem>
@@ -41,3 +34,14 @@ export default function AppointmentScheduleEventCard(props) {
 		</Card>
 	)
 }
+
+/*
+* <ListItem>
+					<Modal
+						buttontext="Check In"
+						modaltitle={`Patient Check In`}
+						form={CheckInForm}
+					/>
+				</ListItem>
+*
+* */

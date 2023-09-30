@@ -5,11 +5,10 @@ import Slide from '@material-ui/core/Slide'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
+import Typography from '@material-ui/core/Typography'
 import Close from '@material-ui/icons/Close'
 import Button from '../Button'
 import styles from './modalStyle'
-import CheckInForm from '../../old/Forms/Administrative/Scheduling/CheckIn/checkin'
-
 const useStyles = makeStyles(styles)
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -56,18 +55,7 @@ export default function Modal(props) {
 				<DialogContent
 					id="modal-slide-description"
 					className={classes.modalBody}>
-					{props.form ? (
-						<props.form
-							setModal={setModal}
-							formprops={props.formprops}
-						/>
-					) : (
-						<CheckInForm
-							setModal={setModal}
-							appointment={props.appointment}
-							update={props.update}
-						/>
-					)}
+					<Typography>Check In Form</Typography>
 				</DialogContent>
 			</Dialog>
 		</div>

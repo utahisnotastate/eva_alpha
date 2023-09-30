@@ -18,8 +18,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Fab from '@mui/material/Fab'
-import GridContainer from '../basestyledcomponents/Grid/GridContainer'
-import GridItem from '../basestyledcomponents/Grid/GridItem'
+import Grid from '@mui/material/Grid'
 import { useModal } from 'react-modal-hook'
 import API_URL from '../../api/api_url'
 import Card from '../basestyledcomponents/Card/Card'
@@ -28,7 +27,7 @@ import AppointmentScheduleEvent from './Day/Appointment/appointmentscheduleevent
 import ScheduleAppointmentModal from './ScheduleAppointmentModal/scheduleappointmentmodal'
 import styles from '../basestyledcomponents/buttonStyle'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import toDate from "@fav/type.to-date";
+import toDate from '@fav/type.to-date'
 //var toDate = require('@fav/type.to-date')
 
 const localizer = momentLocalizer(moment)
@@ -61,8 +60,6 @@ export default function Scheduling() {
 
 		// this schedules appointment. I dont know why I don't have this in the appointment API.
 		//
-
-
 	}
 	// console.log(errors);
 	// resources are the providers
@@ -182,86 +179,36 @@ export default function Scheduling() {
 		return date
 	}
 	return (
-		<div>
-			<GridContainer justify="center">
-				<GridItem xs={12} sm={12} md={10}>
-					<Card>
-						<CardBody calendar={false}>
-							<BigCalendar
-								selectable
-								localizer={localizer}
-								drilldownView="day"
-								events={appointments}
-								defaultView={Views.DAY}
-								views={['month', 'work_week', 'day']}
-								scrollToTime={new Date(1970, 1, 1, 6)}
-								defaultDate={new Date()}
-								onSelectEvent={(event) => console.log(event)}
-								onSelectSlot={handleSelect}
-								eventPropGetter={eventColors}
-								resources={resources}
-								resourceTitleAccessor="last_name"
-								resourceIdAccessor={(resource) => {
-									return resource.id
-								}}
-								titleAccessor="type"
-								min={opentime()}
-								max={closetime()}
-								onView={(view) =>
-									console.log('View is ' + view)
-								}
-								components={calendercomponents}
-							/>
-						</CardBody>
-					</Card>
-				</GridItem>
-			</GridContainer>
-		</div>
+		<Grid container justifyContent={`center`}>
+			<Grid item xs={12} sm={12} md={10}>
+				<Card>
+					<CardBody calendar={false}>
+						<BigCalendar
+							selectable
+							localizer={localizer}
+							drilldownView="day"
+							events={appointments}
+							defaultView={Views.DAY}
+							views={['month', 'work_week', 'day']}
+							scrollToTime={new Date(1970, 1, 1, 6)}
+							defaultDate={new Date()}
+							onSelectEvent={(event) => console.log(event)}
+							onSelectSlot={handleSelect}
+							eventPropGetter={eventColors}
+							resources={resources}
+							resourceTitleAccessor="last_name"
+							resourceIdAccessor={(resource) => {
+								return resource.id
+							}}
+							titleAccessor="type"
+							min={opentime()}
+							max={closetime()}
+							onView={(view) => console.log('View is ' + view)}
+							components={calendercomponents}
+						/>
+					</CardBody>
+				</Card>
+			</Grid>
+		</Grid>
 	)
 }
-/*
-
-async function getNewAppointments() {
-		const result = await axios(`${API_URL}/appointments`)
-		// console.log(result.data);
-		let appointments = result.data
-		let convertedappointments = []
-		appointments.forEach((appointment) => {
-			let newstart = toDate.RFC3339(appointment.start)
-			let newend = toDate.RFC3339(appointment.end)
-			let resourceId = appointment.provider
-			// console.log(appointment.provider);
-			// console.log({...appointment, ...{start: newstart, end: newend, resourceId: resourceId}})
-			convertedappointments.push({
-				...appointment,
-				...{ start: newstart, end: newend, resourceId: resourceId },
-			})
-		})
-
-		console.log(appointments)
-	}
-
-axios
-			.post(`${API_URL}/appointments/`, {
-				patient: parseInt(id),
-				provider: slottoschedule.resourceId,
-				details: blankclinicaldata,
-				type: appointment.type,
-				status: 'scheduled',
-				start: moment(appointment.start).toISOString(),
-				end: moment(appointment.end).toISOString(),
-			})
-			.then((response) => {
-				if (response.statusText === 'Created') {
-					console.log('It worked!!!')
-					hideModal()
-					getNewAppointments
-						.then((data) => console.log(data))
-						.catch((error) => console.log(error))
-				}
-				//console.log(response);
-			})
-			.catch((error) => console.log(error))
-start: moment(slottoschedule.start).toISOString(),
-        end: moment(slottoschedule.end).toISOString()
- */
