@@ -9,26 +9,18 @@ import {
 	Views,
 } from 'react-big-calendar'
 import moment from 'moment'
-import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import Fab from '@mui/material/Fab'
 import Grid from '@mui/material/Grid'
 import { useModal } from 'react-modal-hook'
 import API_URL from '../../api/api_url'
 import Card from '../basestyledcomponents/Card/Card'
 import CardBody from '../basestyledcomponents/Card/CardBody'
 import AppointmentScheduleEvent from './Day/Appointment/appointmentscheduleevent'
-import ScheduleAppointmentModal from './ScheduleAppointmentModal/scheduleappointmentmodal'
 import styles from '../basestyledcomponents/buttonStyle'
+import SchedulingForm from './schedulingform'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import toDate from '@fav/type.to-date'
-//var toDate = require('@fav/type.to-date')
 
 const localizer = momentLocalizer(moment)
 
@@ -39,60 +31,21 @@ export default function Scheduling() {
 	let { id } = useParams()
 	const appointments = useSelector((state) => state.appointments)
 
-	// const [appointmentcreated, setAppointmentCreated] = useState(false);
-	const { register, handleSubmit, control, errors } = useForm()
-
-	// gets new appointments after appointment has been scheduled
-
-	// handles create new patient form
 	const onSubmit = (data) => {
 		console.log(data)
-
-		// this schedules appointment. I dont know why I don't have this in the appointment API.
-		//
 	}
-	// console.log(errors);
-	// resources are the providers
+
 	const [resources, setResources] = useState([])
-	//const [appointments, setAppointments] = useState([])
-	// holds the values of the appointment information for the form to have
 	const [slottoschedule, setSlotToSchedule] = useState()
 	const [showModal, hideModal] = useModal(
 		({ in: open, onExited }) => {
 			return (
-				<div>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<Dialog
-							disableBackdropClick={true}
-							open={true}
-							onExited={onExited}
-							onClose={hideModal}>
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'flex-end',
-								}}>
-								<Fab color="primary" onClick={hideModal}>
-									X
-								</Fab>
-							</div>
-							<DialogTitle>Schedule appointment</DialogTitle>
-							<DialogContent>
-								<ScheduleAppointmentModal
-									slottoschedule={slottoschedule}
-									patient={id}
-									register={register}
-									control={control}
-								/>
-							</DialogContent>
-							<DialogActions>
-								<Button onClick={handleSubmit(onSubmit)}>
-									Schedule
-								</Button>
-							</DialogActions>
-						</Dialog>
-					</form>
-				</div>
+				<SchedulingForm
+					slottoschedule={slottoschedule}
+					id={id}
+					hideModal={hideModal}
+					onExited={onExited}
+				/>
 			)
 		},
 		[slottoschedule]
@@ -102,7 +55,7 @@ export default function Scheduling() {
 		// gets providers
 		const fetchData = async () => {
 			const result = await axios(`${API_URL}/providers/`)
-			console.log(result)
+
 			setResources(result.data)
 		}
 		fetchData().catch((err) => console.log(err))
@@ -202,3 +155,38 @@ export default function Scheduling() {
 		</Grid>
 	)
 }
+
+/*
+* <form onSubmit={handleSubmit(onSubmit)}>
+						<Dialog
+							disableBackdropClick={true}
+							open={true}
+							onExited={onExited}
+							onClose={hideModal}>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'flex-end',
+								}}>
+								<Fab color="primary" onClick={hideModal}>
+									X
+								</Fab>
+							</div>
+							<DialogTitle>Schedule appointment</DialogTitle>
+							<DialogContent>
+								<ScheduleAppointmentModal
+									slottoschedule={slottoschedule}
+									patient={id}
+									register={register}
+									control={control}
+								/>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleSubmit(onSubmit)}>
+									Schedule
+								</Button>
+							</DialogActions>
+						</Dialog>
+					</form>
+*
+* */

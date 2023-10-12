@@ -30,18 +30,13 @@ export default function Eva() {
 	React.useEffect(() => {
 		getAllData()
 			.then((data) => {
-				console.log('Forms:', data.forms)
-				dispatch({ type: 'LOAD_FORMS', forms: data.forms })
-				console.log('Patients:', data.patients)
+				console.log(data)
 				dispatch({ type: 'LOAD_PATIENTS', patients: data.patients })
-				console.log('Appointments:', data.appointments)
 				dispatch({
 					type: 'LOAD_APPOINTMENTS',
 					appointments: data.appointments,
 				})
-				console.log('Requests:', data.requests)
 				dispatch({ type: 'LOAD_REQUESTS', requests: data.requests })
-				console.log('Providers', data.providers)
 				dispatch({ type: 'LOAD_PROVIDERS', providers: data.providers })
 			})
 			.catch((error) => {

@@ -10,6 +10,7 @@ import {
 	DialogActions,
 } from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
+import { DatePicker } from 'formik-mui-lab'
 
 import { getAllPatients, addNewPatient } from '../../api/patients.api'
 
@@ -97,7 +98,7 @@ export default function Patients() {
 					zip_code: '',
 					phone: '',
 					email: '',
-					date_of_birth: '',
+					date_of_birth: values.date_of_birth,
 				},
 				allergies: [],
 				insurance: [],
@@ -144,7 +145,7 @@ export default function Patients() {
 			},
 		},
 		{
-			name: 'demographics.date_of_birth',
+			name: 'date_of_birth',
 			label: 'Date of Birth',
 			options: {
 				filter: true,
@@ -157,13 +158,12 @@ export default function Patients() {
 		<div className={classes.root}>
 			<MUIDataTable
 				title="Patients"
-				data={patients.map((patient) => [
-					patient.details.demographics.first_name +
-						' ' +
-						patient.details.demographics.last_name,
-					patient.details.demographics.date_of_birth,
-					patient.ssn,
-				])} // assuming that's how you want to format the data
+				data={patients.map((patient) => ({
+					id: patient.id, // Assuming your patient object has an 'id' property
+					first_name: patient.details.demographics.first_name,
+					last_name: patient.details.demographics.last_name,
+					date_of_birth: patient.details.demographics.date_of_birth,
+				}))} // assuming that's how you want to format the data
 				columns={columns}
 				options={{
 					customToolbar: () => {
@@ -185,6 +185,7 @@ export default function Patients() {
 						initialValues={{
 							first_name: '',
 							last_name: '',
+							date_of_birth: '',
 							ssn: '',
 						}}
 						onSubmit={handleFormSubmit}>
@@ -201,6 +202,14 @@ export default function Patients() {
 									fullWidth
 									label="Last Name"
 									name="last_name"
+								/>
+								<Field
+									component={DatePicker}
+									fullWidth
+									label="Date of Birth"
+									name="date_of_birth"
+									format="yyyy-MM-dd"
+									views={['year', 'month', 'date']}
 								/>
 								<Field
 									component={TextField}
